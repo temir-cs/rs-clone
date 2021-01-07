@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "removeComments": true,
+
+  },
+  "include": [
+    "src/js/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
