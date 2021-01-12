@@ -18,9 +18,14 @@
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "no-restricted-syntax": ["error", "never"],
     "no-console": "off",
-    "no-magic-numbers": ["error", { "ignore": [1] }],
-    "no-inline-comments": "error"
     // "no-console": "error"
+    // "no-magic-numbers": ["error", { "ignore": [0, 1] }],
+    "no-inline-comments": "error",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      {"exceptAfterSingleLine": true}
+    ]
   },
   "settings": {
       "react": {
