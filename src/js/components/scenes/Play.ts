@@ -1,11 +1,14 @@
 import * as Phaser from 'phaser';
+import Player from '../entities/Player';
 
 class Play extends Phaser.Scene {
   config: Phaser.Types.Core.GameConfig;
-
+  cursors: any;
+  playerSpeed: number;
   map: Phaser.Tilemaps.Tilemap = null;
 
-  player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody = null;
+  // player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody = null;
+  player: any;
 
   layers: {
     environmentTop: Phaser.Tilemaps.TilemapLayer,
@@ -27,9 +30,13 @@ class Play extends Phaser.Scene {
   create() {
     this.createMap();
     this.createLayers();
-    this.createPlayer();
 
-    this.physics.add.collider(this.player, this.layers.platformColliders);
+    const player = this.createPlayer();
+    this.physics.add.collider(player, this.layers.platformColliders);
+    // this.player = this.createPlayer();
+    // this.playerSpeed = 200;
+    // this.physics.add.collider(this.player, this.layers.platformColliders);
+    // this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   createMap() {
@@ -50,10 +57,29 @@ class Play extends Phaser.Scene {
   }
 
   createPlayer() {
-    this.player = this.physics.add.sprite(100, 200, 'player');
-    this.player.body.setGravityY(500);
-    this.player.setCollideWorldBounds(true);
+    // this.player = this.physics.add.sprite(100, 200, 'player');
+    // this.player.body.setGravityY(500);
+    // this.player.setCollideWorldBounds(true);
+
+    // const player = new Player(this, 100, 250);
+    // player.setGravityY(500);
+    // player.setCollideWorldBounds(true);
+    // return player;
+
+    return new Player(this, 100, 250);
   }
+
+  // update() {
+  //     const { left, right } = this.cursors;
+
+  //     if (left.isDown) {
+  //       this.player.setVelocityX(-this.playerSpeed);
+  //     } else if (right.isDown) {
+  //       this.player.setVelocityX(this.playerSpeed);
+  //     } else {
+  //       this.player.setVelocityX(0);
+  //     }
+  // }
 }
 
 export default Play;
