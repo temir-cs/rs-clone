@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
 
-import initAnimations from './playerAnims';
+import initAnimations from '../animations/playerAnims';
 
 import collidable from '../mixins/collidable';
 
@@ -12,8 +12,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   jumpCount: number;
   consecutiveJumps: number;
+  hasBeenHit: boolean;
+  bounceVelocity: number;
 
-  constructor(scene, x:number, y:number) {
+  constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'player');
 
     scene.add.existing(this);
@@ -42,8 +44,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     initAnimations(this.scene.anims);
   }
 
-  initEvents():void {
+  initEvents(): void {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
+  }
+
+  playDamageTween() {
+    return this.scene.tweens.add({
+      targets: this,
+      duration: 100,
+      repeat: -1,
+      tint: 0xffffff,
+    });
   }
 
   update():void {
@@ -80,13 +91,35 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     } else {
       this.play('jump', true);
     }
-
-    // this.play('run', true);
   }
 
-  // addCollider(otherGameobject) {
-  //   this.scene.physics.add.collider(this, otherGameobject, null);
-  // }
+  bounceOff():void {
+    const rightTouch = this.body.touching.right;
+    // eslint-disable-next-line no-unused-expressions
+    rightTouch
+      ? this.setVelocityX(-this.bounceVelocity)
+      : this.setVelocityX(this.bounceVelocity);
+
+    setTimeout(() => this.setVelocityY(-this.bounceVelocity));
+  }
+
+  takesHit(initiator):void {
+    if (this.hasBeenHit) {
+      return;
+    }
+    this.hasBeenHit = true;
+    this.bounceOff();
+    const damageAnim = this.playDamageTween();
+    this.scene.time.addEvent({
+      delay: 1000,
+      callback: () => {
+        this.hasBeenHit = false;
+        damageAnim.stop();
+        this.clearTint();
+      },
+      loop: false,
+    });
+  }
 }
 
 export default Player;

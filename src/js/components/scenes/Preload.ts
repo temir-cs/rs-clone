@@ -14,6 +14,10 @@ class Preload extends Phaser.Scene {
       // frameWidth: 73, frameHeight: 81,
       frameWidth: 65.2, frameHeight: 81,
     });
+    this.load.spritesheet('troll', 'src/assets/img/enemies/goblin_idle_walk.png', {
+      // frameWidth: 73, frameHeight: 81,
+      frameWidth: 56, frameHeight: 128, spacing: 72
+    });
   }
 
   create() {
