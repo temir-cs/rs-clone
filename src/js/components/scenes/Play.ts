@@ -13,11 +13,13 @@ class Play extends Phaser.Scene {
     platformColliders: Phaser.Tilemaps.TilemapLayer,
     environmentBottom: Phaser.Tilemaps.TilemapLayer,
     platforms: Phaser.Tilemaps.TilemapLayer,
+    playerZones: Phaser.Tilemaps.ObjectLayer,
   } = {
     platformColliders: null,
     environmentTop: null,
     environmentBottom: null,
     platforms: null,
+    playerZones: null,
   };
 
   constructor(config) {
@@ -32,8 +34,8 @@ class Play extends Phaser.Scene {
   create() {
     this.createMap();
     this.createLayers();
-
-    const player = this.createPlayer();
+    const playerZones = this.getPlayerZones();
+    const player = this.createPlayer(playerZones.start);
 
     // player.addCollider(this.layers.platformColliders);
     this.createPlayerColliders(player, {
@@ -41,7 +43,7 @@ class Play extends Phaser.Scene {
       platformColliders: this.layers.platformColliders
       }
     });
-
+    this.createEndOfLevel(playerZones.end, player);
     this.setupFollowupCameraOn(player);
   }
 
@@ -60,10 +62,11 @@ class Play extends Phaser.Scene {
     this.layers.environmentBottom = this.map.createLayer('environment_bottom', tileset2);
     this.layers.platforms = this.map.createLayer('platforms', tileset1);
     this.layers.environmentTop = this.map.createLayer('environment_top', tileset2);
+    this.layers.playerZones = this.map.getObjectLayer('player_zones');
   }
 
-  createPlayer():Phaser.Physics.Arcade.Sprite {
-    return new Player(this, 100, 250);
+  createPlayer(start):Phaser.Physics.Arcade.Sprite {
+    return new Player(this, start.x, start.y);
   }
 
   createPlayerColliders(player, { colliders }):void {
@@ -77,6 +80,26 @@ class Play extends Phaser.Scene {
     this.physics.world.setBounds(0, -200, width + mapOffset, height + heightOffset + 400);
     this.cameras.main.setBounds(0, 0, width + mapOffset, height + heightOffset).setZoom(zoomFactor);
     this.cameras.main.startFollow(player);
+  }
+
+  getPlayerZones() {
+    const zones = this.layers.playerZones.objects;
+    return {
+      start: zones[0],
+      end: zones[1],
+    };
+  }
+
+  createEndOfLevel(end, player) {
+    const endOfLevel = this.physics.add.sprite(end.x, end.y, 'end')
+      .setAlpha(0)
+      .setOrigin(0.5, 1)
+      .setSize(5, 100);
+
+    const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
+      eolOverlap.active = false;
+      console.log('You Won!!');
+    });
   }
 }
 
