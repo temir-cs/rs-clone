@@ -24,14 +24,6 @@ const SHARED_CONFIG: {
   // zoomFactor: ZOOM_FACTOR
 };
 
-// const SHARED_CONFIG = {
-//   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
-//   heightOffset: MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0,
-//   width: WIDTH,
-//   height: HEIGHT,
-//   zoomFactor: ZOOM_FACTOR
-// };
-
 const Scenes = [PreloadScene, PlayScene];
 const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
 const iniScenes = () => Scenes.map(createScene);

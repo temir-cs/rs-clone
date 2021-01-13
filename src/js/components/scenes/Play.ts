@@ -37,7 +37,6 @@ class Play extends Phaser.Scene {
     this.createLayers();
 
     const player = this.createPlayer();
-    // this.createPlayer();
 
     // player.addCollider(this.layers.platformColliders);
     this.createPlayerColliders(player, {
@@ -47,11 +46,6 @@ class Play extends Phaser.Scene {
     });
 
     this.setupFollowupCameraOn(player);
-    // this.physics.add.collider(player, this.layers.platformColliders);
-    // this.player = this.createPlayer();
-    // this.playerSpeed = 200;
-    // this.physics.add.collider(this.player, this.layers.platformColliders);
-    // this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   createMap() {
