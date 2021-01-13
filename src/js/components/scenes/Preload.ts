@@ -9,7 +9,11 @@ class Preload extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', '../../../assets/json/01_forest_map.json');
     this.load.image('tiles-1', '../../../assets/img/01_forest_platforms.png');
     this.load.image('tiles-2', '../../../assets/img/01_forest_env.png');
-    this.load.image('player', '../../../assets/img/player01/idle01.png');
+
+    this.load.spritesheet('player', '../../../assets/img/player01/knight-all-moves.png', {
+      // frameWidth: 73, frameHeight: 81,
+      frameWidth: 65.2, frameHeight: 81,
+    });
   }
 
   create() {

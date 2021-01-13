@@ -2,12 +2,12 @@
   "compilerOptions": {
     "target": "es5",
     "removeComments": true,
-
+    "noImplicitAny": false
   },
   "include": [
     "src/js/*"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }
