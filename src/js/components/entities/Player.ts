@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+
 import initAnimations from './playerAnims';
 
 import collidable from '../mixins/collidable';
@@ -6,11 +7,13 @@ import collidable from '../mixins/collidable';
 class Player extends Phaser.Physics.Arcade.Sprite {
   body: Phaser.Physics.Arcade.Body;
   playerSpeed: number;
+  jumpHeight: number;
   gravity: number;
-  cursors: any;
+  cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   jumpCount: number;
   consecutiveJumps: number;
-  constructor(scene, x, y) {
+
+  constructor(scene, x:number, y:number) {
     super(scene, x, y, 'player');
 
     scene.add.existing(this);
@@ -25,8 +28,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   init() {
     this.gravity = 500;
     this.playerSpeed = 200;
+
+    this.jumpHeight = 300;
     this.jumpCount = 0;
     this.consecutiveJumps = 1;
+
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
     this.setGravityY(this.gravity);
@@ -35,13 +41,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     initAnimations(this.scene.anims);
   }
 
-  initEvents() {
+  initEvents():void {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
   }
 
-  update() {
-    // super.preUpdate(time, delta);
-    const { left, right, space } = this.cursors;
+  update():void {
+    const { left, right, space, up } = this.cursors;
+    const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
     const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
     const onFloor = this.body.onFloor();
 
@@ -55,9 +61,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityX(0);
     }
 
-    if (isSpaceJustDown && (onFloor || this.jumpCount < this.consecutiveJumps)) {
-      this.setVelocityY(-this.playerSpeed * 1.5);
+    if ((isSpaceJustDown || isUpJustDown) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
+      this.setVelocityY(-this.jumpHeight);
       this.jumpCount += 1;
+      console.log("jump",this.jumpCount)
     }
 
     if (onFloor) {

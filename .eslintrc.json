@@ -1,0 +1,74 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    //"@typescript-eslint/rule-name": "error",
+    "func-names": [
+      "error",
+      "never"
+    ],
+    "comma-dangle": 0,
+    "prefer-arrow-callback": 0,
+    "arrow-body-style": 0,
+    "no-lonely-if": 0,
+    "eqeqeq": 0,
+    "max-len": [
+      "error",
+      {
+        "code": 140
+      }
+    ],
+    "object-curly-newline": 0,
+    "linebreak-style": 0,
+    "indent": 0,
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      "never"
+    ],
+    "no-console": "off",
+    // "no-console": "error"
+    // "no-magic-numbers": ["error", { "ignore": [0, 1] }],
+    "no-inline-comments": "error",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ],
+    "import/extensions": [
+      "off",
+      "never"
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "999.999.999"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  }
+}

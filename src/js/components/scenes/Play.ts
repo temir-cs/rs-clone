@@ -3,13 +3,10 @@ import Player from '../entities/Player';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
-  config: Phaser.Types.Core.GameConfig;
-  cursors: any;
-  playerSpeed: number;
+  config: any;
   map: Phaser.Tilemaps.Tilemap = null;
-
   // player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody = null;
-  player: any;
+  player: Phaser.Physics.Arcade.Sprite;
 
   layers: {
     environmentTop: Phaser.Tilemaps.TilemapLayer,
@@ -23,7 +20,7 @@ class Play extends Phaser.Scene {
     platforms: null,
   };
 
-  constructor(config: Phaser.Types.Core.GameConfig) {
+  constructor(config) {
     super('PlayScene');
     this.config = config;
   }
@@ -48,13 +45,13 @@ class Play extends Phaser.Scene {
     this.setupFollowupCameraOn(player);
   }
 
-  createMap() {
+  createMap():void {
     this.map = this.make.tilemap({ key: 'map' });
     this.map.addTilesetImage('01_forest_platforms', 'tiles-1');
     this.map.addTilesetImage('01_forest_env', 'tiles-2');
   }
 
-  createLayers() {
+  createLayers():void {
     const tileset1 = this.map.getTileset('01_forest_platforms');
     const tileset2 = this.map.getTileset('01_forest_env');
     this.layers.platformColliders = this.map.createLayer('platform_colliders', tileset1);
@@ -65,28 +62,20 @@ class Play extends Phaser.Scene {
     this.layers.environmentTop = this.map.createLayer('environment_top', tileset2);
   }
 
-  createPlayer() {
+  createPlayer():Phaser.Physics.Arcade.Sprite {
     return new Player(this, 100, 250);
   }
 
-  createPlayerColliders(player, { colliders }) {
+  createPlayerColliders(player, { colliders }):void {
     console.log(this);
     player.addCollider(colliders.platformColliders);
   }
 
-  setupFollowupCameraOn(player) {
-    const MAP_WIDTH: number = 3200;
-    const MAP_HEIGHT: number = 1280;
-    const WIDTH: number = document.body.offsetWidth;
-    const HEIGHT: number = document.body.offsetHeight;
+  setupFollowupCameraOn(player):void {
+    const { height, width, mapOffset, heightOffset, zoomFactor } = this.config;
 
-    const mapOffset = MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0;
-    const heightOffset = MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0;
-    const width = WIDTH;
-    const height = HEIGHT;
-    // const { width, height, mapOffset, heightOffset } = this.config;
-    this.physics.world.setBounds(0, 0, width + mapOffset, height + heightOffset);
-    this.cameras.main.setBounds(0, 0, width + mapOffset, height + heightOffset);
+    this.physics.world.setBounds(0, -200, width + mapOffset, height + heightOffset + 400);
+    this.cameras.main.setBounds(0, 0, width + mapOffset, height + heightOffset).setZoom(zoomFactor);
     this.cameras.main.startFollow(player);
   }
 }
