@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import Player from '../entities/Player';
 
+// type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
   config: Phaser.Types.Core.GameConfig;
   cursors: any;
@@ -26,13 +27,27 @@ class Play extends Phaser.Scene {
     super('PlayScene');
     this.config = config;
   }
+  // constructor(config) {
+  //   super('PlayScene');
+  //   this.config = config;
+  // }
 
   create() {
     this.createMap();
     this.createLayers();
 
     const player = this.createPlayer();
-    this.physics.add.collider(player, this.layers.platformColliders);
+    // this.createPlayer();
+
+    // player.addCollider(this.layers.platformColliders);
+    this.createPlayerColliders(player, {
+      colliders: {
+      platformColliders: this.layers.platformColliders
+      }
+    });
+
+    this.setupFollowupCameraOn(player);
+    // this.physics.add.collider(player, this.layers.platformColliders);
     // this.player = this.createPlayer();
     // this.playerSpeed = 200;
     // this.physics.add.collider(this.player, this.layers.platformColliders);
@@ -57,29 +72,29 @@ class Play extends Phaser.Scene {
   }
 
   createPlayer() {
-    // this.player = this.physics.add.sprite(100, 200, 'player');
-    // this.player.body.setGravityY(500);
-    // this.player.setCollideWorldBounds(true);
-
-    // const player = new Player(this, 100, 250);
-    // player.setGravityY(500);
-    // player.setCollideWorldBounds(true);
-    // return player;
-
     return new Player(this, 100, 250);
   }
 
-  // update() {
-  //     const { left, right } = this.cursors;
+  createPlayerColliders(player, { colliders }) {
+    console.log(this);
+    player.addCollider(colliders.platformColliders);
+  }
 
-  //     if (left.isDown) {
-  //       this.player.setVelocityX(-this.playerSpeed);
-  //     } else if (right.isDown) {
-  //       this.player.setVelocityX(this.playerSpeed);
-  //     } else {
-  //       this.player.setVelocityX(0);
-  //     }
-  // }
+  setupFollowupCameraOn(player) {
+    const MAP_WIDTH: number = 3200;
+    const MAP_HEIGHT: number = 1280;
+    const WIDTH: number = document.body.offsetWidth;
+    const HEIGHT: number = document.body.offsetHeight;
+
+    const mapOffset = MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0;
+    const heightOffset = MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0;
+    const width = WIDTH;
+    const height = HEIGHT;
+    // const { width, height, mapOffset, heightOffset } = this.config;
+    this.physics.world.setBounds(0, 0, width + mapOffset, height + heightOffset);
+    this.cameras.main.setBounds(0, 0, width + mapOffset, height + heightOffset);
+    this.cameras.main.startFollow(player);
+  }
 }
 
 export default Play;

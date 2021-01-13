@@ -17,7 +17,7 @@ class Preload extends Phaser.Scene {
 
     this.load.spritesheet('player', '../../../assets/img/player01/knight-all-moves.png', {
       // frameWidth: 73, frameHeight: 81,
-      frameWidth: 65, frameHeight: 81,
+      frameWidth: 65.2, frameHeight: 81,
     });
   }
 
