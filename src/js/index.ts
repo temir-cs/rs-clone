@@ -4,11 +4,11 @@ import PlayScene from './components/scenes/Play';
 import PreloadScene from './components/scenes/Preload';
 
 const MAP_WIDTH: number = 3200;
-const MAP_HEIGHT: number = 1280;
+const MAP_HEIGHT: number = 1080;
 const WIDTH: number = document.body.offsetWidth;
-const HEIGHT: number = 1000;
+const HEIGHT: number = 800;
 // const HEIGHT: number = document.body.offsetHeight;
- const ZOOM_FACTOR: number = 1;
+const ZOOM_FACTOR: number = 1;
 
 const SHARED_CONFIG: {
     mapOffset: number,

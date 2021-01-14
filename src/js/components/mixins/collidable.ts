@@ -41,7 +41,6 @@ export default {
 
     const hits = this.collidersLayer.getTilesWithinShape(line);
     if (hits.length > 0) {
-      debugger
       hasHit = hits.some((hit) => hit.index !== -1);
       this.prevHasHit = hasHit;
     }

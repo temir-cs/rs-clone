@@ -42,19 +42,19 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setVelocityX(this.speed);
   }
 
-  initEvents() {
+  initEvents():void {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
   }
 
-  update(time, delta) {
+  update(time:number, delta:number):void {
     this.patrol(time);
   }
 
-  patrol(time) {
+  patrol(time:number):void {
     if (!this.body || !this.body.onFloor()) {
       return;
     }
-    const { ray, hasHit } = this.raycast(this.body, 60, 0, 0.3);
+    const { ray, hasHit } = this.raycast(this.body, 70, 0, 0.9);
     this.currentPatrolDistance += Math.abs(this.body.deltaX());
 
     const raycastThreshold = 200;
@@ -72,7 +72,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  setColliders(collidersLayer):void {
+  setColliders(collidersLayer:Phaser.Tilemaps.Tilemap):void {
     this.collidersLayer = collidersLayer;
   }
 }
