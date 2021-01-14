@@ -6,12 +6,12 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
   config: any;
   body: Phaser.Physics.Arcade.Body;
   raycast: any;
- gravity: number;
- timeFromLastTurn: number;
- speed: number;
- maxPatrolDistance: number;
- currentPatrolDistance: number;
- rayGraphics: Phaser.GameObjects.Graphics;
+  gravity: number;
+  timeFromLastTurn: number;
+  speed: number;
+  maxPatrolDistance: number;
+  currentPatrolDistance: number;
+  rayGraphics: Phaser.GameObjects.Graphics;
   collidersLayer: any;
   constructor(scene:any, x:number, y:number, key:string) {
     super(scene, x, y, key);
@@ -27,7 +27,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
   init() {
     this.gravity = 500;
-    this.speed = 50;
+    this.speed = 150;
     this.timeFromLastTurn = 0;
     this.maxPatrolDistance = 400;
     this.currentPatrolDistance = 0;
@@ -37,8 +37,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setCollideWorldBounds(true);
     this.setImmovable(true);
     this.setOrigin(0.5, 1);
-    this.setSize(56, 45);
-    this.setOffset(0, 82);
+    this.setSize(56, 56);
+    this.setOffset(0, 72);
+    this.setVelocityX(this.speed);
   }
 
   initEvents() {
@@ -53,7 +54,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (!this.body || !this.body.onFloor()) {
       return;
     }
-    const { ray, hasHit } = this.raycast(this.body, 30, 0, 1);
+    const { ray, hasHit } = this.raycast(this.body, 60, 0, 0.3);
     this.currentPatrolDistance += Math.abs(this.body.deltaX());
 
     const raycastThreshold = 200;
@@ -65,7 +66,6 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.timeFromLastTurn = time;
       this.currentPatrolDistance = 0;
     }
-
     if (this.config.debug && ray) {
       this.rayGraphics.clear();
       this.rayGraphics.strokeLineShape(ray);

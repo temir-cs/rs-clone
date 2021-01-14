@@ -1,4 +1,4 @@
-import Enemy from './enemy';
+import Enemy from './Enemy';
 
 import initAnims from '../animations/trollAnim';
 

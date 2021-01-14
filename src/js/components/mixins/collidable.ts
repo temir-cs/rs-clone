@@ -21,9 +21,9 @@ export default {
         hasHit: this.prevHasHit
       };
     }
+
     const line = new Phaser.Geom.Line();
     let hasHit = false;
-
     switch (body.facing) {
       case Phaser.Physics.Arcade.FACING_RIGHT:
         line.x1 = x + width;
@@ -37,17 +37,15 @@ export default {
         line.x2 = line.x1 - rayLength * steepness;
         line.y2 = line.y1 + rayLength;
         break;
-      default:
-        break;
     }
 
     const hits = this.collidersLayer.getTilesWithinShape(line);
-    console.log(hits.length)
     if (hits.length > 0) {
+      debugger
       hasHit = hits.some((hit) => hit.index !== -1);
       this.prevHasHit = hasHit;
     }
-
+    console.log(hasHit)
     this.prevRay = line;
     this.bodyPositionDifferenceX = 0;
     return { ray: line, hasHit };

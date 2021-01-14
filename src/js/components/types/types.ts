@@ -1,4 +1,4 @@
-import Troll from '../entities/troll';
+import Troll from '../entities/Troll';
 
 export default {
   Troll

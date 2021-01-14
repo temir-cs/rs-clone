@@ -30,7 +30,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   init() {
     this.gravity = 600;
     this.playerSpeed = 300;
-
+    this.bounceVelocity = 200;
     this.jumpHeight = 400;
     this.jumpCount = 0;
     this.consecutiveJumps = 1;
