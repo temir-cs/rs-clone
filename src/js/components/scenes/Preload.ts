@@ -12,6 +12,15 @@ class Preload extends Phaser.Scene {
     this.load.image('tiles-2', '../../../assets/img/01_forest_env.png');
     this.load.image('fireball', '../../../assets/img/weapons/fire4.png');
 
+    // Forest Level Background
+    this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
+    this.load.image('bg-forest-trees', '../../../assets/img/levels/forest/trees.png');
+    this.load.image('bg-forest-mountains', '../../../assets/img/levels/forest/mountains.png');
+    this.load.image('bg-forest-clouds-1', '../../../assets/img/levels/forest/clouds_back_layer1.png');
+    this.load.image('bg-forest-clouds-2', '../../../assets/img/levels/forest/clouds_back_layer2.png');
+    this.load.image('bg-forest-clouds-small', '../../../assets/img/levels/forest/coluds_small.png');
+    this.load.image('bg-forest-tileset', '../../../assets/img/levels/forest/green-tile.png');
+
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
     this.load.addFile(new WebFontFile(this.load, 'Press Start 2P'));

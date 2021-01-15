@@ -28,25 +28,25 @@ class BaseScene extends Phaser.Scene {
 
   create() {
     this.add.image(0, 0, 'menu-bg')
-      .setScale(1.7)  
+      .setScale(1.7)
       .setOrigin(0, 0.2);
 
     if (this.config.canGoBack) {
       const backButton = this.add.image(this.config.width - 20, this.config.height - 20, 'back')
         .setInteractive()
         .setOrigin(1, 1);
-      
+
         backButton.on('pointerup', () => {
           this.scene.start('MenuScene');
-        })
+        });
 
         backButton.on('pointerover', () => {
-          backButton.setTint(0x0FFF00 );
-        })
+          backButton.setTint(0x0FFF00);
+        });
 
         backButton.on('pointerout', () => {
           backButton.clearTint();
-        })
+        });
     }
   }
 
