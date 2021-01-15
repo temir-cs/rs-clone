@@ -9,15 +9,13 @@ class Preload extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', '../../../assets/json/01_forest_map.json');
     this.load.image('tiles-1', '../../../assets/img/01_forest_platforms.png');
     this.load.image('tiles-2', '../../../assets/img/01_forest_env.png');
+    this.load.image('fireball', '../../../assets/img/weapons/fire4.png');
 
-    this.load.spritesheet('player', '../../../assets/img/player01/knight-all-moves.png', {
-      // frameWidth: 73, frameHeight: 81,
-      frameWidth: 65.2, frameHeight: 81,
-    });
-    this.load.spritesheet('troll', 'src/assets/img/enemies/goblin_idle_walk.png', {
-      // frameWidth: 73, frameHeight: 81,
-      frameWidth: 56, frameHeight: 128, spacing: 72
-    });
+    // Menu items
+    this.load.image('menu-bg', '../../../assets/img/menu-bg.jpg');
+
+    this.load.multiatlas('knight', '../../../assets/json/heroes/knightSprite.json', '../../../assets/img/heroes');
+    this.load.multiatlas('troll', '../../../assets/json/enemies/enemyGoblinSprite.json', '../../../assets/img/enemies');
   }
 
   create() {

@@ -2,6 +2,7 @@ import * as Phaser from 'phaser';
 
 import PlayScene from './components/scenes/Play';
 import PreloadScene from './components/scenes/Preload';
+import MenuScene from './components/scenes/Menu';
 
 const MAP_WIDTH: number = 3200;
 const MAP_HEIGHT: number = 1080;
@@ -36,9 +37,9 @@ const SHARED_CONFIG: {
   }
 };
 
-const Scenes = [PreloadScene, PlayScene];
+const Scenes = [PreloadScene, MenuScene, PlayScene];
 const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
-const iniScenes = () => Scenes.map(createScene);
+const initScenes = () => Scenes.map(createScene);
 
 const config: Phaser.Types.Core.GameConfig = {
   title: 'Game',
@@ -53,7 +54,7 @@ const config: Phaser.Types.Core.GameConfig = {
        debug: SHARED_CONFIG.debug,
     }
   },
-  scene: iniScenes(),
+  scene: initScenes(),
   parent: 'game',
 };
 
