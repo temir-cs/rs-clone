@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import WebFontFile from '../loaders/WebFontLoader';
 
 class Preload extends Phaser.Scene {
   constructor() {
@@ -12,14 +13,16 @@ class Preload extends Phaser.Scene {
     this.load.image('fireball', '../../../assets/img/weapons/fire4.png');
 
     // Menu items
-    this.load.image('menu-bg', '../../../assets/img/menu-bg.jpg');
+    this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
+    this.load.addFile(new WebFontFile(this.load, 'Press Start 2P'));
+    this.load.image('back', '../../../assets/img/menu/backward_button.png');
 
     this.load.multiatlas('knight', '../../../assets/json/heroes/knightSprite.json', '../../../assets/img/heroes');
     this.load.multiatlas('troll', '../../../assets/json/enemies/enemyGoblinSprite.json', '../../../assets/img/enemies');
   }
 
   create() {
-    this.scene.start('PlayScene');
+    this.scene.start('MenuScene');
   }
 }
 

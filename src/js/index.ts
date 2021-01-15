@@ -3,6 +3,7 @@ import * as Phaser from 'phaser';
 import PlayScene from './components/scenes/Play';
 import PreloadScene from './components/scenes/Preload';
 import MenuScene from './components/scenes/Menu';
+import LevelsScene from './components/scenes/LevelsScene';
 
 const MAP_WIDTH: number = 3200;
 const MAP_HEIGHT: number = 1080;
@@ -37,7 +38,7 @@ const SHARED_CONFIG: {
   }
 };
 
-const Scenes = [PreloadScene, MenuScene, PlayScene];
+const Scenes = [PreloadScene, MenuScene, LevelsScene, PlayScene];
 const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
 const initScenes = () => Scenes.map(createScene);
 

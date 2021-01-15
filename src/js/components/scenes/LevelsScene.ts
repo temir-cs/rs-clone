@@ -1,16 +1,13 @@
 import BaseScene from './BaseScene';
 
-class MenuScene extends BaseScene {
-
+class LevelsScene extends BaseScene {
   menu: any;
-  
   constructor(config) {
-    super('MenuScene', config);
+    super('LevelsScene', { ...config, canGoBack: true });
 
     this.menu = [
-      { scene: 'PlayScene', text: 'Play'},
-      { scene: 'LevelsScene', text: 'Levels'},
-      { scene: null, text: 'Exit'}
+      { scene: 'PlayScene', text: 'Level 1' },
+      { scene: 'PlayScene', text: 'Level 2' },
     ];
   }
 
@@ -21,7 +18,7 @@ class MenuScene extends BaseScene {
   }
 
   setupMenuEvents(menuItem) {
-    const textGameObject = menuItem.textGameObject;
+    const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 
     textGameObject.on('pointerover', () => {
@@ -30,16 +27,18 @@ class MenuScene extends BaseScene {
 
     textGameObject.on('pointerout', () => {
       textGameObject.setStyle({ fill: '#fff' });
-    })
+    });
 
     textGameObject.on('pointerup', () => {
-      menuItem.scene && this.scene.start(menuItem.scene);
+      if (menuItem.scene) {
+        this.scene.start(menuItem.scene);
+      }
 
       if (menuItem.text === 'Exit') {
         this.game.destroy(true);
       }
-    })
+    });
   }
 }
 
-export default MenuScene;
+export default LevelsScene;

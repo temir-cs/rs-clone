@@ -8,30 +8,44 @@ class BaseScene extends Phaser.Scene {
   fontStyle: string;
   lineHeight: number;
   fontOptions: object;
+  fontFamily: string;
 
   constructor(key, config) {
     super(key);
     this.config = config;
     this.screenCenter = [config.width / 2, config.height / 2];
-    this.fontSize = 34;
+    this.fontSize = 52;
     this.fontStyle = 'bold';
-    this.lineHeight = 42;
-    this.fontOptions = { fontSize: `${this.fontSize}px`, fontStyle: this.fontStyle, fill: '#fff' }    
+    this.fontFamily = '"Press Start 2P"';
+    this.lineHeight = 82;
+    this.fontOptions = {
+      fontSize: `${this.fontSize}px`,
+      fontStyle: this.fontStyle,
+      fontFamily: this.fontFamily,
+      fill: '#fff',
+    };  
   }
 
   create() {
     this.add.image(0, 0, 'menu-bg')
-      .setScale(1.55)  
-      .setOrigin(0, 0);
+      .setScale(1.7)  
+      .setOrigin(0, 0.2);
 
     if (this.config.canGoBack) {
-      const backButton = this.add.image(this.config.width - 10, this.config.height - 10, 'back')
+      const backButton = this.add.image(this.config.width - 20, this.config.height - 20, 'back')
         .setInteractive()
-        .setScale(2)
         .setOrigin(1, 1);
       
         backButton.on('pointerup', () => {
           this.scene.start('MenuScene');
+        })
+
+        backButton.on('pointerover', () => {
+          backButton.setTint(0x0FFF00 );
+        })
+
+        backButton.on('pointerout', () => {
+          backButton.clearTint();
         })
     }
   }
