@@ -15,15 +15,25 @@ const SHARED_CONFIG: {
     heightOffset: number,
     width: number,
     height: number,
-    zoomFactor: number
-  debug: boolean
+    zoomFactor: number,
+    debug: boolean,
+    leftTopCorner: any,
+    rightTopCorner: any
   } = {
   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
   heightOffset: MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0,
   width: WIDTH,
   height: HEIGHT,
   zoomFactor: ZOOM_FACTOR,
-  debug: true
+  debug: true,
+  leftTopCorner: {
+    x: (WIDTH - (WIDTH / ZOOM_FACTOR)) / 2,
+    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
+  },
+  rightTopCorner: {
+    x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / 2)),
+    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
+  }
 };
 
 const Scenes = [PreloadScene, PlayScene];
