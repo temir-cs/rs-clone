@@ -1,16 +1,14 @@
 import BaseScene from './BaseScene';
 
 class MenuScene extends BaseScene {
-
   menu: any;
-  
   constructor(config) {
     super('MenuScene', config);
 
     this.menu = [
-      { scene: 'PlayScene', text: 'Play'},
-      { scene: 'LevelsScene', text: 'Levels'},
-      { scene: null, text: 'Exit'}
+      { scene: 'PlayScene', text: 'Play' },
+      { scene: 'LevelsScene', text: 'Levels' },
+      { scene: null, text: 'Exit' }
     ];
   }
 

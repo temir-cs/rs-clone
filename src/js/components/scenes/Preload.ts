@@ -16,6 +16,7 @@ class Preload extends Phaser.Scene {
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
     this.load.addFile(new WebFontFile(this.load, 'Press Start 2P'));
     this.load.image('back', '../../../assets/img/menu/backward_button.png');
+    this.load.image('home', '../../../assets/img/menu/home_button.png');
 
     this.load.multiatlas('knight', '../../../assets/json/heroes/knightSprite.json', '../../../assets/img/heroes');
     this.load.multiatlas('troll', '../../../assets/json/enemies/enemyGoblinSprite.json', '../../../assets/img/enemies');

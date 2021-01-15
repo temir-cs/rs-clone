@@ -19,8 +19,9 @@ const SHARED_CONFIG: {
     height: number,
     zoomFactor: number,
     debug: boolean,
-    leftTopCorner: any,
-    rightTopCorner: any
+    leftTopCorner: object,
+    rightTopCorner: object,
+    rightBottomCorner: object,
   } = {
   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
   heightOffset: MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0,
@@ -35,7 +36,11 @@ const SHARED_CONFIG: {
   rightTopCorner: {
     x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / 2)),
     y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
-  }
+  },
+  rightBottomCorner: {
+    x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / 2)),
+    y: ((HEIGHT / ZOOM_FACTOR) + ((HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2)),
+  },
 };
 
 const Scenes = [PreloadScene, MenuScene, LevelsScene, PlayScene];

@@ -4,6 +4,8 @@ import Player from '../entities/Player';
 
 import Enemies from '../groups/Enemies';
 
+import EventEmitter from '../events/Emitter';
+
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
   config: any;
@@ -37,7 +39,7 @@ class Play extends Phaser.Scene {
     this.config = config;
   }
 
-  create() {
+  create({ gameStatus }) {
     this.createMap();
     this.createLayers();
     const playerZones = this.getPlayerZones();
@@ -56,7 +58,11 @@ class Play extends Phaser.Scene {
       }
     });
     this.createEndOfLevel(playerZones.end, player);
+    this.createBackButton();
     this.setupFollowupCameraOn(player);
+
+    if (gameStatus === 'PLAYER_LOSE') return;
+    this.createGameEvents();
   }
 
   stopDrawing(pointer) {
@@ -94,6 +100,12 @@ class Play extends Phaser.Scene {
     this.layers.environmentTop = this.map.createLayer('environment_top', tileset2);
     this.layers.playerZones = this.map.getObjectLayer('player_zones');
     this.layers.enemySpawns = this.map.getObjectLayer('enemy_spawns');
+  }
+
+  createGameEvents() {
+    EventEmitter.on('PLAYER_LOSE', () => {
+      this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
+    });
   }
 
   createPlayer(start):Phaser.Physics.Arcade.Sprite {
@@ -156,6 +168,18 @@ class Play extends Phaser.Scene {
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
       eolOverlap.active = false;
       console.log('You Won!!');
+    });
+  }
+
+  createBackButton() {
+    const menuButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 10, 'home')
+      .setOrigin(1, 1)
+      .setScrollFactor(0)
+      .setScale(1)
+      .setInteractive();
+
+    menuButton.on('pointerup', () => {
+      this.scene.start('MenuScene');
     });
   }
 }
