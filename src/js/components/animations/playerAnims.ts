@@ -46,5 +46,41 @@ export default (anims, hero) => {
     frameRate: 8,
     repeat: 0
   });
+
+  anims.create({
+    key: 'attack',
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 0, 
+      end: 4,
+      prefix: 'Attack/attack',
+      suffix: '.png'
+    }),
+    frameRate: 8,
+    repeat: 0
+  });
+
+  anims.create({
+    key: 'run-attack',
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 1, 
+      end: 8,
+      prefix: 'Run_Attack/run_attack',
+      suffix: '.png'
+    }),
+    frameRate: 10,
+    repeat: 0
+  });
+
+  anims.create({
+    key: 'death',
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 1, 
+      end: 10,
+      prefix: 'Death/death',
+      suffix: '.png'
+    }),
+    frameRate: 8,
+    repeat: 0
+  });
 };
 
