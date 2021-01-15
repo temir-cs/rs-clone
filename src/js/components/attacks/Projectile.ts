@@ -6,6 +6,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
   x: number;
   y: number;
   key: any;
+  damage: number;
   traveledDistance: number;
   maxDistance: number;
   cooldown: number;
@@ -19,6 +20,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     this.maxDistance = 300;
     this.traveledDistance = 0;
 
+    this.damage = 10;
     this.cooldown = 500;
   }
 
