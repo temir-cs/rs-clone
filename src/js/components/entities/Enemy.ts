@@ -13,6 +13,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
   currentPatrolDistance: number;
   rayGraphics: Phaser.GameObjects.Graphics;
   collidersLayer: any;
+  damage: number;
   constructor(scene:any, x:number, y:number, key:string) {
     super(scene, x, y, key);
     scene.add.existing(this);
@@ -31,6 +32,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.timeFromLastTurn = 0;
     this.maxPatrolDistance = 400;
     this.currentPatrolDistance = 0;
+
+    this.damage = 10;
+
     this.rayGraphics = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
 
     this.setGravityY(this.gravity);

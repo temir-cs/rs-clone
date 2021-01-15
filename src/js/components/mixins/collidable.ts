@@ -44,7 +44,7 @@ export default {
       hasHit = hits.some((hit) => hit.index !== -1);
       this.prevHasHit = hasHit;
     }
-    console.log(hasHit)
+    // console.log(hasHit)
     this.prevRay = line;
     this.bodyPositionDifferenceX = 0;
     return { ray: line, hasHit };
