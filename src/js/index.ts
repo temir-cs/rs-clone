@@ -38,7 +38,7 @@ const SHARED_CONFIG: {
 
 const Scenes = [PreloadScene, PlayScene];
 const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
-const iniScenes = () => Scenes.map(createScene);
+const initScenes = () => Scenes.map(createScene);
 
 const config: Phaser.Types.Core.GameConfig = {
   title: 'Game',
@@ -53,7 +53,7 @@ const config: Phaser.Types.Core.GameConfig = {
        debug: SHARED_CONFIG.debug,
     }
   },
-  scene: iniScenes(),
+  scene: initScenes(),
   parent: 'game',
 };
 

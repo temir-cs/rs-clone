@@ -8,6 +8,7 @@ import Projectiles from '../attacks/Projectiles';
 class Player extends Phaser.Physics.Arcade.Sprite {
   scene: any;
   body: Phaser.Physics.Arcade.Body;
+  hero: string;
   playerSpeed: number;
   jumpHeight: number;
   gravity: number;
@@ -35,6 +36,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   init() {
+    this.hero = 'knight';
     this.gravity = 600;
     this.playerSpeed = 300;
     this.bounceVelocity = 200;
@@ -57,9 +59,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.setGravityY(this.gravity);
     this.setCollideWorldBounds(true);
+    this.setBodySize(60, 60, true);
     this.setOrigin(0.5, 1);
+    this.setOffset(15, 50);
 
-    initAnimations(this.scene.anims);
+    initAnimations(this.scene.anims, this.hero);
 
     this.scene.input.keyboard.on('keydown-Q', () => {
       console.log('pressing Q');
@@ -114,7 +118,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.play('idle', true);
       }
     } else {
-      this.play('jump', true);
+      if (this.jumpCount === 0) {
+        this.play('jump', true);
+      } else {
+        this.play('midjump', true);
+      }
     }
   }
 

@@ -6,6 +6,7 @@ class Troll extends Enemy {
   constructor(scene, x:number, y:number) {
     super(scene, x, y, 'troll');
 
+    this.setOffset(30, 35);
     initAnims(this.scene.anims);
   }
 

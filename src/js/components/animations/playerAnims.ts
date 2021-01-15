@@ -1,22 +1,50 @@
-export default (anims) => {
+export default (anims, hero) => {
   anims.create({
     key: 'idle',
-    frames: anims.generateFrameNumbers('player', { start: 0, end: 5 }),
-    frameRate: 8,
-    repeat: -1
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 1, 
+      end: 12,
+      prefix: 'Idle/idle',
+      suffix: '.png'
+    }),
+    frameRate: 5,
+    repeat: 1,
   });
 
   anims.create({
     key: 'run',
-    frames: anims.generateFrameNumbers('player', { start: 8, end: 14 }),
-    frameRate: 5,
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 1, 
+      end: 8,
+      prefix: 'Run/run',
+      suffix: '.png'
+    }),
+    frameRate: 10,
     repeat: -1
   });
 
   anims.create({
     key: 'jump',
-    frames: anims.generateFrameNumbers('player', { start: 15, end: 21 }),
-    frameRate: 1,
-    repeat: 1
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 1, 
+      end: 7,
+      prefix: 'Jump/jump',
+      suffix: '.png'
+    }),
+    frameRate: 5,
+    repeat: 0
+  });
+
+  anims.create({
+    key: 'midjump',
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 5, 
+      end: 10,
+      prefix: 'High_Jump/high_jump',
+      suffix: '.png'
+    }),
+    frameRate: 8,
+    repeat: 0
   });
 };
+
