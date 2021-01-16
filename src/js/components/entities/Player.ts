@@ -5,6 +5,7 @@ import collidable from '../mixins/collidable';
 import anims from '../mixins/anims';
 import Projectile from '../attacks/Projectile';
 import Projectiles from '../attacks/Projectiles';
+import EventEmitter from '../events/Emitter';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
   scene: any;
@@ -36,6 +37,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.init();
     this.initEvents();
+    this.update = this.update.bind(this);
   }
 
   init() {
@@ -51,7 +53,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     this.projectiles = new Projectiles(this.scene);
 
-    this.health = 100;
+    this.health = 60;
     this.hp = new HealthBar(
       this.scene,
       this.scene.config.leftTopCorner.x + 10,
@@ -79,15 +81,23 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   playDamageTween() {
+    this.play('hurt');
     return this.scene.tweens.add({
       targets: this,
-      duration: 100,
+      duration: 80,
       repeat: -1,
       tint: 0xffffff,
     });
   }
 
   update():void {
+    if (this.hasBeenHit || !this.body) return;
+
+    if (this.getBounds().top > this.scene.config.height + 250) {
+      EventEmitter.emit('PLAYER_LOSE');
+      return;
+    }
+
     const { left, right, space, up } = this.cursors;
     const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
     const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
@@ -144,14 +154,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   takesHit(initiator):void {
-    if (this.hasBeenHit) {
+    if (this.hasBeenHit) return;
+
+    this.health -= initiator.damage;
+    // TEMIR - ADDED FUNCTIONALITY FOR SCENE CHANGE
+    if (this.health <= 0) {
+      EventEmitter.emit('PLAYER_LOSE');
       return;
     }
+
     this.hasBeenHit = true;
     this.bounceOff();
     const damageAnim = this.playDamageTween();
 
-    this.health -= initiator.damage;
     this.hp.decrease(this.health);
 
     this.scene.time.addEvent({

@@ -72,6 +72,18 @@ export default (anims, hero) => {
   });
 
   anims.create({
+    key: 'hurt',
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 1,
+      end: 4,
+      prefix: 'Hurt/hurt',
+      suffix: '.png'
+    }),
+    frameRate: 10,
+    repeat: -1
+  });
+
+  anims.create({
     key: 'death',
     frames: anims.generateFrameNames(`${hero}`, {
       start: 1,

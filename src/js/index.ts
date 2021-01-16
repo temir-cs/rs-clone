@@ -3,6 +3,7 @@ import * as Phaser from 'phaser';
 import PlayScene from './components/scenes/Play';
 import PreloadScene from './components/scenes/Preload';
 import MenuScene from './components/scenes/Menu';
+import LevelsScene from './components/scenes/LevelsScene';
 
 const MAP_WIDTH: number = 3200;
 const MAP_HEIGHT: number = 1080;
@@ -18,8 +19,9 @@ const SHARED_CONFIG: {
     height: number,
     zoomFactor: number,
     debug: boolean,
-    leftTopCorner: any,
-    rightTopCorner: any
+    leftTopCorner: object,
+    rightTopCorner: object,
+    rightBottomCorner: object,
   } = {
   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
   heightOffset: MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0,
@@ -34,10 +36,14 @@ const SHARED_CONFIG: {
   rightTopCorner: {
     x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / 2)),
     y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
-  }
+  },
+  rightBottomCorner: {
+    x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / 2)),
+    y: ((HEIGHT / ZOOM_FACTOR) + ((HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2)),
+  },
 };
 
-const Scenes = [PreloadScene, MenuScene, PlayScene];
+const Scenes = [PreloadScene, MenuScene, LevelsScene, PlayScene];
 const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
 const initScenes = () => Scenes.map(createScene);
 

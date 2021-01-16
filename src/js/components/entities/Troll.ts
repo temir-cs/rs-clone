@@ -12,6 +12,7 @@ class Troll extends Enemy {
 
   update(time:number, delta:number):void {
     super.update(time, delta);
+    if (!this.active) return;
     this.play('troll-idle', true);
   }
 }

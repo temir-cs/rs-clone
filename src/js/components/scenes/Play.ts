@@ -4,6 +4,8 @@ import Player from '../entities/Player';
 
 import Enemies from '../groups/Enemies';
 
+import EventEmitter from '../events/Emitter';
+
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
   config: any;
@@ -31,18 +33,24 @@ class Play extends Phaser.Scene {
   private graphics: Phaser.GameObjects.Graphics;
   private line: Phaser.Geom.Line;
   private tileHits: any;
+  private treesImg: any;
+  private cloudsImg: any;
+  private mountainsImg: any;
 
   constructor(config) {
     super('PlayScene');
     this.config = config;
   }
 
-  create() {
+  create({ gameStatus }):void {
+    this.playBgMusic();
     this.createMap();
     this.createLayers();
     const playerZones = this.getPlayerZones();
     const player = this.createPlayer(playerZones.start);
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.platformColliders);
+
+    this.createBg();
 
     this.createEnemyColliders(enemies, {
       colliders: {
@@ -56,7 +64,11 @@ class Play extends Phaser.Scene {
       }
     });
     this.createEndOfLevel(playerZones.end, player);
+    this.createBackButton();
     this.setupFollowupCameraOn(player);
+
+    if (gameStatus === 'PLAYER_LOSE') return;
+    this.createGameEvents();
   }
 
   stopDrawing(pointer) {
@@ -70,22 +82,34 @@ class Play extends Phaser.Scene {
 
     if (this.tileHits && this.tileHits.length > 0) {
       this.tileHits.forEach((tile) => {
-        tile.index !== -1 && tile.setCollision(true);
+        if (tile.index !== -1) tile.setCollision(true);
       });
     }
 
     this.plotting = false;
   }
 
+  playBgMusic():void {
+    if (this.sound.get('forest-theme')) return;
+    this.sound.add('forest-theme', { loop: true, volume: 0.02 })
+      .play();
+  }
+
   createMap():void {
     this.map = this.make.tilemap({ key: 'map' });
     this.map.addTilesetImage('01_forest_platforms', 'tiles-1');
     this.map.addTilesetImage('01_forest_env', 'tiles-2');
+    this.map.addTilesetImage('green-tile', 'bg-forest-tileset');
   }
 
   createLayers():void {
     const tileset1 = this.map.getTileset('01_forest_platforms');
     const tileset2 = this.map.getTileset('01_forest_env');
+    const tilesetBg = this.map.getTileset('green-tile');
+    console.log(tilesetBg);
+
+    this.map.createLayer('distance', tilesetBg);
+
     this.layers.platformColliders = this.map.createLayer('platform_colliders', tileset1);
     this.layers.platformColliders.setCollisionByProperty({ collides: true });
     this.layers.platformColliders.setAlpha(0);
@@ -94,6 +118,51 @@ class Play extends Phaser.Scene {
     this.layers.environmentTop = this.map.createLayer('environment_top', tileset2);
     this.layers.playerZones = this.map.getObjectLayer('player_zones');
     this.layers.enemySpawns = this.map.getObjectLayer('enemy_spawns');
+  }
+
+  createBg() {
+    const bgObject = this.map.getObjectLayer('distance_bg').objects[0];
+    this.treesImg = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-trees')
+      .setOrigin(0, 1)
+      .setDepth(-10)
+      .setScale(1.5)
+      .setScrollFactor(0, 1);
+
+    this.mountainsImg = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-mountains')
+      .setOrigin(0, 1)
+      .setDepth(-11)
+      .setScale(1.5)
+      .setScrollFactor(0, 1);
+
+    this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-1')
+      .setOrigin(0, 1)
+      .setDepth(-12)
+      .setScale(1.5)
+      .setScrollFactor(0, 1);
+
+    this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-2')
+      .setOrigin(0, 1)
+      .setDepth(-13)
+      .setScale(1.5)
+      .setScrollFactor(0, 1);
+
+    this.cloudsImg = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-small')
+      .setOrigin(0, 1)
+      .setDepth(-10)
+      .setScale(1.5)
+      .setScrollFactor(0, 1);
+
+    this.add.tileSprite(0, 0, this.config.width, bgObject.height, 'bg-forest-sky')
+      .setOrigin(0, 0)
+      .setDepth(-14)
+      .setScale(1.2)
+      .setScrollFactor(0, 1);
+  }
+
+  createGameEvents() {
+    EventEmitter.on('PLAYER_LOSE', () => {
+      this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
+    });
   }
 
   createPlayer(start):Phaser.Physics.Arcade.Sprite {
@@ -157,6 +226,32 @@ class Play extends Phaser.Scene {
       eolOverlap.active = false;
       console.log('You Won!!');
     });
+  }
+
+  createBackButton():void {
+    const menuButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 10, 'home')
+      .setOrigin(1, 1)
+      .setScrollFactor(0)
+      .setScale(1)
+      .setInteractive();
+
+    menuButton.on('pointerup', () => {
+      this.scene.start('MenuScene');
+    });
+
+    menuButton.on('pointerover', () => {
+      menuButton.setTint(0x0FFF00);
+    });
+
+    menuButton.on('pointerout', () => {
+      menuButton.clearTint();
+    });
+  }
+
+  update():void {
+    this.treesImg.tilePositionX = this.cameras.main.scrollX * 0.2;
+    this.mountainsImg.tilePositionX = this.cameras.main.scrollX * 0.15;
+    this.cloudsImg.tilePositionX = this.cameras.main.scrollX * 0.1;
   }
 }
 
