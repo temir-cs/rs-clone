@@ -11,7 +11,7 @@ export default {
   prevHasHit: null,
 
   raycast(body, rayLength = 30, precision = 0, steepness = 1) {
-    const { x, y, width, halfHeight } = body;
+    const { x, y, width, height } = body;
 
     this.bodyPositionDifferenceX += body.x - body.prev.x;
 
@@ -27,18 +27,20 @@ export default {
     switch (body.facing) {
       case Phaser.Physics.Arcade.FACING_RIGHT:
         line.x1 = x + width;
-        line.y1 = y + halfHeight;
+        line.y1 = y + height;
         line.x2 = line.x1 + rayLength * steepness;
         line.y2 = line.y1 + rayLength;
         break;
       case Phaser.Physics.Arcade.FACING_LEFT:
         line.x1 = x;
-        line.y1 = y + halfHeight;
+        line.y1 = y + height;
         line.x2 = line.x1 - rayLength * steepness;
         line.y2 = line.y1 + rayLength;
         break;
     }
 
+    console.log(this.collidersLayer);
+    debugger
     const hits = this.collidersLayer.getTilesWithinShape(line);
     if (hits.length > 0) {
       hasHit = hits.some((hit) => hit.index !== -1);

@@ -60,7 +60,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (!this.body || !this.body.onFloor()) {
       return;
     }
-    const { ray, hasHit } = this.raycast(this.body, 70, 0, 0.9);
+    const { ray, hasHit } = this.raycast(this.body, 70, 0, 0.5);
     this.currentPatrolDistance += Math.abs(this.body.deltaX());
 
     const raycastThreshold = 200;
