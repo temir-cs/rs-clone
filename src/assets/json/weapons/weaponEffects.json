@@ -1,0 +1,670 @@
+{
+	"textures": [
+		{
+			"image": "weaponEffects.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 126,
+				"h": 362
+			},
+			"scale": 0.5,
+			"frames": [
+				{
+					"filename": "Explosion4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 29,
+						"w": 80,
+						"h": 70
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 80,
+						"h": 70
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Explosion3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 29,
+						"w": 74,
+						"h": 68
+					},
+					"frame": {
+						"x": 1,
+						"y": 73,
+						"w": 74,
+						"h": 68
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Explosion7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 42,
+						"y": 45,
+						"w": 42,
+						"h": 40
+					},
+					"frame": {
+						"x": 83,
+						"y": 1,
+						"w": 42,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Explosion5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 36,
+						"y": 44,
+						"w": 55,
+						"h": 45
+					},
+					"frame": {
+						"x": 1,
+						"y": 143,
+						"w": 55,
+						"h": 45
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fire10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 3,
+						"w": 45,
+						"h": 51
+					},
+					"frame": {
+						"x": 1,
+						"y": 190,
+						"w": 45,
+						"h": 51
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "Sun_strike4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 39,
+						"y": 42,
+						"w": 48,
+						"h": 44
+					},
+					"frame": {
+						"x": 77,
+						"y": 73,
+						"w": 48,
+						"h": 44
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fire9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 4,
+						"w": 43,
+						"h": 50
+					},
+					"frame": {
+						"x": 1,
+						"y": 243,
+						"w": 43,
+						"h": 50
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "Explosion8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 41,
+						"y": 43,
+						"w": 43,
+						"h": 43
+					},
+					"frame": {
+						"x": 1,
+						"y": 295,
+						"w": 43,
+						"h": 43
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Explosion9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 41,
+						"y": 44,
+						"w": 43,
+						"h": 42
+					},
+					"frame": {
+						"x": 77,
+						"y": 119,
+						"w": 43,
+						"h": 42
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fire4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 30,
+						"w": 37,
+						"h": 22
+					},
+					"frame": {
+						"x": 83,
+						"y": 43,
+						"w": 37,
+						"h": 22
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "fire5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 31,
+						"w": 38,
+						"h": 21
+					},
+					"frame": {
+						"x": 1,
+						"y": 340,
+						"w": 38,
+						"h": 21
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "fire8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 11,
+						"w": 36,
+						"h": 43
+					},
+					"frame": {
+						"x": 48,
+						"y": 190,
+						"w": 36,
+						"h": 43
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "Sun_strike7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 46,
+						"y": 45,
+						"w": 34,
+						"h": 38
+					},
+					"frame": {
+						"x": 86,
+						"y": 163,
+						"w": 34,
+						"h": 38
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Sun_strike3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 45,
+						"y": 49,
+						"w": 36,
+						"h": 30
+					},
+					"frame": {
+						"x": 86,
+						"y": 203,
+						"w": 36,
+						"h": 30
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Explosion2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 50,
+						"y": 55,
+						"w": 26,
+						"h": 20
+					},
+					"frame": {
+						"x": 58,
+						"y": 163,
+						"w": 26,
+						"h": 20
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Sun_strike5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 41,
+						"y": 44,
+						"w": 43,
+						"h": 41
+					},
+					"frame": {
+						"x": 48,
+						"y": 235,
+						"w": 43,
+						"h": 41
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Sun_strike6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 42,
+						"y": 44,
+						"w": 41,
+						"h": 40
+					},
+					"frame": {
+						"x": 46,
+						"y": 278,
+						"w": 41,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fire7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 22,
+						"w": 28,
+						"h": 31
+					},
+					"frame": {
+						"x": 93,
+						"y": 235,
+						"w": 28,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "Explosion6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 44,
+						"y": 46,
+						"w": 40,
+						"h": 37
+					},
+					"frame": {
+						"x": 46,
+						"y": 320,
+						"w": 40,
+						"h": 37
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fire6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 31,
+						"w": 36,
+						"h": 20
+					},
+					"frame": {
+						"x": 89,
+						"y": 278,
+						"w": 36,
+						"h": 20
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "fire3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 18,
+						"y": 32,
+						"w": 27,
+						"h": 20
+					},
+					"frame": {
+						"x": 89,
+						"y": 300,
+						"w": 27,
+						"h": 20
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "Sun_strike2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 54,
+						"w": 20,
+						"h": 20
+					},
+					"frame": {
+						"x": 88,
+						"y": 322,
+						"w": 20,
+						"h": 20
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "fire1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 38,
+						"w": 11,
+						"h": 8
+					},
+					"frame": {
+						"x": 93,
+						"y": 268,
+						"w": 11,
+						"h": 8
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "fire2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 34,
+						"w": 19,
+						"h": 15
+					},
+					"frame": {
+						"x": 88,
+						"y": 344,
+						"w": 19,
+						"h": 15
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.65
+					}
+				},
+				{
+					"filename": "Explosion1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 56,
+						"y": 58,
+						"w": 14,
+						"h": 14
+					},
+					"frame": {
+						"x": 58,
+						"y": 143,
+						"w": 14,
+						"h": 14
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Sun_strike1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 59,
+						"y": 60,
+						"w": 8,
+						"h": 9
+					},
+					"frame": {
+						"x": 110,
+						"y": 322,
+						"w": 8,
+						"h": 9
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:e17825bb637e798f2e9ce77825acd3fd:c351a6ac937c8fa791a096b23325f3e1:0711dc719feaaea23b77a34b2863cad1$"
+	}
+}
