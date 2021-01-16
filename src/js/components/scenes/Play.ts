@@ -1,10 +1,9 @@
 import * as Phaser from 'phaser';
 
 import Player from '../entities/Player';
-
 import Enemies from '../groups/Enemies';
-
 import EventEmitter from '../events/Emitter';
+import effectAnims from '../animations/effectsAnim';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -45,7 +44,7 @@ class Play extends Phaser.Scene {
   }
 
   create({ gameStatus }):void {
-    this.playBgMusic();
+    // this.playBgMusic();
     this.createMap();
     this.createLayers();
     const playerZones = this.getPlayerZones();
@@ -65,9 +64,12 @@ class Play extends Phaser.Scene {
       platformColliders: this.layers.platformColliders
       }
     });
+
     this.createEndOfLevel(playerZones.end, player);
     this.createBackButton();
     this.setupFollowupCameraOn(player);
+
+    effectAnims(this.anims);
 
     if (gameStatus === 'PLAYER_LOSE') return;
     this.createGameEvents();

@@ -39,8 +39,6 @@ export default {
         break;
     }
 
-    console.log(this.collidersLayer);
-    debugger
     const hits = this.collidersLayer.getTilesWithinShape(line);
     if (hits.length > 0) {
       hasHit = hits.some((hit) => hit.index !== -1);
