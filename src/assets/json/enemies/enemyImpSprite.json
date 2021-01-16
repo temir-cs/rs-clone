@@ -1,0 +1,770 @@
+{
+	"textures": [
+		{
+			"image": "enemyImpSprite.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 127,
+				"h": 806
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Fire_Imp_attack4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 95,
+						"y": 106,
+						"w": 116,
+						"h": 55
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 116,
+						"h": 55
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_death4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 72,
+						"y": 119,
+						"w": 99,
+						"h": 43
+					},
+					"frame": {
+						"x": 1,
+						"y": 58,
+						"w": 99,
+						"h": 43
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "fire9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 69,
+						"y": 35,
+						"w": 24,
+						"h": 40
+					},
+					"frame": {
+						"x": 102,
+						"y": 58,
+						"w": 24,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "fire10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 70,
+						"y": 33,
+						"w": 19,
+						"h": 28
+					},
+					"frame": {
+						"x": 102,
+						"y": 100,
+						"w": 19,
+						"h": 28
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "Fire_Imp_attack3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 82,
+						"y": 103,
+						"w": 96,
+						"h": 58
+					},
+					"frame": {
+						"x": 1,
+						"y": 103,
+						"w": 96,
+						"h": 58
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "fire8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 38,
+						"w": 26,
+						"h": 42
+					},
+					"frame": {
+						"x": 99,
+						"y": 130,
+						"w": 26,
+						"h": 42
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "Fire_Imp_death3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 79,
+						"y": 124,
+						"w": 92,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 163,
+						"w": 92,
+						"h": 38
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_attack5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 99,
+						"y": 104,
+						"w": 79,
+						"h": 57
+					},
+					"frame": {
+						"x": 1,
+						"y": 203,
+						"w": 79,
+						"h": 57
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "fire7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 52,
+						"y": 43,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 82,
+						"y": 203,
+						"w": 40,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "fire6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 51,
+						"w": 38,
+						"h": 34
+					},
+					"frame": {
+						"x": 82,
+						"y": 245,
+						"w": 38,
+						"h": 34
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "Fire_Imp_death1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 77,
+						"y": 104,
+						"w": 77,
+						"h": 57
+					},
+					"frame": {
+						"x": 1,
+						"y": 262,
+						"w": 77,
+						"h": 57
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_idle3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 98,
+						"y": 99,
+						"w": 46,
+						"h": 62
+					},
+					"frame": {
+						"x": 80,
+						"y": 281,
+						"w": 46,
+						"h": 62
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_death2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 97,
+						"y": 104,
+						"w": 74,
+						"h": 57
+					},
+					"frame": {
+						"x": 1,
+						"y": 321,
+						"w": 74,
+						"h": 57
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_idle2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 93,
+						"y": 100,
+						"w": 49,
+						"h": 61
+					},
+					"frame": {
+						"x": 77,
+						"y": 345,
+						"w": 49,
+						"h": 61
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_attack2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 101,
+						"w": 71,
+						"h": 60
+					},
+					"frame": {
+						"x": 1,
+						"y": 380,
+						"w": 71,
+						"h": 60
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_hurt2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 97,
+						"y": 103,
+						"w": 50,
+						"h": 58
+					},
+					"frame": {
+						"x": 74,
+						"y": 408,
+						"w": 50,
+						"h": 58
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_walk2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 75,
+						"y": 96,
+						"w": 65,
+						"h": 65
+					},
+					"frame": {
+						"x": 1,
+						"y": 442,
+						"w": 65,
+						"h": 65
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "fire4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 30,
+						"y": 68,
+						"w": 58,
+						"h": 14
+					},
+					"frame": {
+						"x": 68,
+						"y": 468,
+						"w": 58,
+						"h": 14
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "fire3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 30,
+						"y": 69,
+						"w": 58,
+						"h": 13
+					},
+					"frame": {
+						"x": 68,
+						"y": 484,
+						"w": 58,
+						"h": 13
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "fire1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 30,
+						"y": 69,
+						"w": 56,
+						"h": 12
+					},
+					"frame": {
+						"x": 68,
+						"y": 499,
+						"w": 56,
+						"h": 12
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "Fire_Imp_idle1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 79,
+						"y": 101,
+						"w": 65,
+						"h": 60
+					},
+					"frame": {
+						"x": 1,
+						"y": 509,
+						"w": 65,
+						"h": 60
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_hurt1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 90,
+						"y": 102,
+						"w": 55,
+						"h": 59
+					},
+					"frame": {
+						"x": 68,
+						"y": 513,
+						"w": 55,
+						"h": 59
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "fire5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 58,
+						"w": 65,
+						"h": 27
+					},
+					"frame": {
+						"x": 1,
+						"y": 571,
+						"w": 65,
+						"h": 27
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "fire2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 32,
+						"y": 68,
+						"w": 54,
+						"h": 14
+					},
+					"frame": {
+						"x": 68,
+						"y": 574,
+						"w": 54,
+						"h": 14
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "Fire_Imp_walk4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 96,
+						"w": 53,
+						"h": 66
+					},
+					"frame": {
+						"x": 68,
+						"y": 590,
+						"w": 53,
+						"h": 66
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_walk6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 76,
+						"y": 92,
+						"w": 64,
+						"h": 69
+					},
+					"frame": {
+						"x": 1,
+						"y": 600,
+						"w": 64,
+						"h": 69
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_attack1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 84,
+						"y": 101,
+						"w": 59,
+						"h": 60
+					},
+					"frame": {
+						"x": 67,
+						"y": 658,
+						"w": 59,
+						"h": 60
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_walk1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 78,
+						"y": 97,
+						"w": 62,
+						"h": 65
+					},
+					"frame": {
+						"x": 1,
+						"y": 671,
+						"w": 62,
+						"h": 65
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_walk5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 79,
+						"y": 94,
+						"w": 61,
+						"h": 67
+					},
+					"frame": {
+						"x": 65,
+						"y": 720,
+						"w": 61,
+						"h": 67
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				},
+				{
+					"filename": "Fire_Imp_walk3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 80,
+						"y": 94,
+						"w": 60,
+						"h": 67
+					},
+					"frame": {
+						"x": 1,
+						"y": 738,
+						"w": 60,
+						"h": 67
+					},
+					"anchor": {
+						"x": 0.46,
+						"y": 0.62
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:2e7dfecee52930d0c076d579065b1ce5:ed48cbdb28327c88ea3416f5dca160c8:e94f900a1e35c55702921864bd2e105a$"
+	}
+}
