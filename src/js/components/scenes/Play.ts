@@ -1,10 +1,9 @@
 import * as Phaser from 'phaser';
 
 import Player from '../entities/Player';
-
 import Enemies from '../groups/Enemies';
-
 import EventEmitter from '../events/Emitter';
+import effectAnims from '../animations/effectsAnim';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -15,6 +14,7 @@ class Play extends Phaser.Scene {
 
   layers: {
     environmentTop: Phaser.Tilemaps.TilemapLayer,
+    enemiesPlatformColliders: Phaser.Tilemaps.TilemapLayer,
     platformColliders: Phaser.Tilemaps.TilemapLayer,
     environmentBottom: Phaser.Tilemaps.TilemapLayer,
     platforms: Phaser.Tilemaps.TilemapLayer,
@@ -22,6 +22,7 @@ class Play extends Phaser.Scene {
     enemySpawns: Phaser.Tilemaps.ObjectLayer,
   } = {
     platformColliders: null,
+    enemiesPlatformColliders: null,
     environmentTop: null,
     environmentBottom: null,
     platforms: null,
@@ -43,18 +44,18 @@ class Play extends Phaser.Scene {
   }
 
   create({ gameStatus }):void {
-    this.playBgMusic();
+    // this.playBgMusic();
     this.createMap();
     this.createLayers();
     const playerZones = this.getPlayerZones();
     const player = this.createPlayer(playerZones.start);
-    const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.platformColliders);
+    const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
 
     this.createBg();
 
     this.createEnemyColliders(enemies, {
       colliders: {
-        platformColliders: this.layers.platformColliders,
+        platformColliders: this.layers.enemiesPlatformColliders,
         player
       }
     });
@@ -63,9 +64,12 @@ class Play extends Phaser.Scene {
       platformColliders: this.layers.platformColliders
       }
     });
+
     this.createEndOfLevel(playerZones.end, player);
     this.createBackButton();
     this.setupFollowupCameraOn(player);
+
+    effectAnims(this.anims);
 
     if (gameStatus === 'PLAYER_LOSE') return;
     this.createGameEvents();
@@ -113,6 +117,9 @@ class Play extends Phaser.Scene {
     this.layers.platformColliders = this.map.createLayer('platform_colliders', tileset1);
     this.layers.platformColliders.setCollisionByProperty({ collides: true });
     this.layers.platformColliders.setAlpha(0);
+    this.layers.enemiesPlatformColliders = this.map.createLayer('enemies_colliders', tileset1);
+    this.layers.enemiesPlatformColliders.setCollisionByProperty({ collides: true });
+    this.layers.enemiesPlatformColliders.setAlpha(0);
     this.layers.environmentBottom = this.map.createLayer('environment_bottom', tileset2);
     this.layers.platforms = this.map.createLayer('platforms', tileset1);
     this.layers.environmentTop = this.map.createLayer('environment_top', tileset2);
@@ -173,6 +180,8 @@ class Play extends Phaser.Scene {
     const enemies = new Enemies(this);
     const enemyTypes = enemies.getTypes();
     const enemySpawns = enemySpawnsLayer.objects;
+    // console.log('from create enemies');
+    // console.log(collider)
     enemySpawns.forEach((spawn) => {
         const enemy = new enemyTypes[spawn.type](this, spawn.x, spawn.y);
         enemy.setColliders(collider);

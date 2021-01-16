@@ -11,6 +11,9 @@ class Preload extends Phaser.Scene {
     this.load.image('tiles-1', '../../../assets/img/01_forest_platforms.png');
     this.load.image('tiles-2', '../../../assets/img/01_forest_env.png');
     this.load.image('fireball', '../../../assets/img/weapons/fire4.png');
+    this.load.spritesheet('fire-hit-sheet', '../../../assets/img/weapons/fire_hit_effect_sheet.png', {
+      frameWidth: 128, frameHeight: 128
+    });
 
     // Forest Level Background
     this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
