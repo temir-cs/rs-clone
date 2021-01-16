@@ -82,7 +82,7 @@ class Play extends Phaser.Scene {
 
     if (this.tileHits && this.tileHits.length > 0) {
       this.tileHits.forEach((tile) => {
-        tile.index !== -1 && tile.setCollision(true);
+        if (tile.index !== -1) tile.setCollision(true);
       });
     }
 

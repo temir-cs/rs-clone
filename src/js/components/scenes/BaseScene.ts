@@ -1,7 +1,6 @@
 import * as Phaser from 'phaser';
 
 class BaseScene extends Phaser.Scene {
-
   config: any;
   screenCenter: any;
   fontSize: number;
@@ -26,7 +25,7 @@ class BaseScene extends Phaser.Scene {
     };
   }
 
-  create() {
+  create():void {
     this.add.image(0, 0, 'menu-bg')
       .setScale(2.5)
       .setOrigin(0, 0.4);
@@ -50,14 +49,15 @@ class BaseScene extends Phaser.Scene {
     }
   }
 
-  createMenu(menu, setupMenuEvents) {
+  createMenu(menu, setupMenuEvents):void {
     let lastMenuPositionY = 0;
-    menu.forEach((menuItem) => {
+    menu.forEach((item) => {
+      const menuItem = item;
       const menuPosition = [this.screenCenter[0], this.screenCenter[1] + lastMenuPositionY];
       menuItem.textGameObject = this.add.text(menuPosition[0], menuPosition[1], menuItem.text, this.fontOptions).setOrigin(0.5, 1);
       lastMenuPositionY += this.lineHeight;
       setupMenuEvents(menuItem);
-    })
+    });
   }
 }
 
