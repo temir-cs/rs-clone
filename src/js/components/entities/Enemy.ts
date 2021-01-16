@@ -29,7 +29,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
   init() {
     this.gravity = 500;
-    this.speed = 150;
+    this.speed = 40;
     this.timeFromLastTurn = 0;
     this.maxPatrolDistance = 400;
     this.currentPatrolDistance = 0;
@@ -43,8 +43,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setCollideWorldBounds(true);
     this.setImmovable(true);
     this.setOrigin(0.5, 1);
-    this.setSize(56, 56);
-    this.setOffset(0, 72);
+    // this.setSize(56, 56);
+    // this.setOffset(0, 72);
     this.setVelocityX(this.speed);
   }
 

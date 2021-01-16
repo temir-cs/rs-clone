@@ -43,6 +43,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   init() {
     this.hero = 'knight';
     this.gravity = 600;
+
     this.playerSpeed = 300;
     this.bounceVelocity = 200;
     this.jumpHeight = 400;
@@ -64,9 +65,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.setGravityY(this.gravity);
     this.setCollideWorldBounds(true);
-    this.setBodySize(60, 60, true);
+    // this.setBodySize(60, 60, true);
+    // this.setOrigin(0.5, 1);
+    // this.setOffset(15, 50);
+    this.setSize(24, 56);
+    this.setOffset(32, 54);
     this.setOrigin(0.5, 1);
-    this.setOffset(15, 50);
 
     initAnimations(this.scene.anims, this.hero);
 
