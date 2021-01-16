@@ -23,7 +23,7 @@ class Troll extends Enemy {
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();
-      }, 300);
+      }, 400);
       return;
     }
     this.setVelocityX(this.speed);
