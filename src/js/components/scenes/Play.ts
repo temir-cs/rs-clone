@@ -202,7 +202,8 @@ class Play extends Phaser.Scene {
     enemies
       .addCollider(colliders.platformColliders)
       .addCollider(colliders.player, this.onPlayerCollision)
-      .addCollider(colliders.player.projectiles, this.onWeaponHit);
+      .addCollider(colliders.player.projectiles, this.onWeaponHit)
+      .addOverlap(colliders.player.meleeWeapon, this.onWeaponHit);
   }
 
   createPlayerColliders(player, { colliders }):void {

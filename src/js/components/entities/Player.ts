@@ -6,6 +6,8 @@ import anims from '../mixins/anims';
 import Projectile from '../attacks/Projectile';
 import Projectiles from '../attacks/Projectiles';
 import EventEmitter from '../events/Emitter';
+import MeleeWeapon from '../attacks/MeleeWeapon';
+import getTimestamp from '../utils/functions';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
   scene: any;
@@ -25,6 +27,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   projectiles: any;
   lastDirection: any;
   isPlayingAnims: any;
+  meleeWeapon: any;
+  timeFromLastSwing: any;
 
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'player');
@@ -53,6 +57,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     this.projectiles = new Projectiles(this.scene);
+    this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack');
+    this.timeFromLastSwing = null;
 
     this.health = 60;
     this.hp = new HealthBar(
@@ -77,6 +83,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.input.keyboard.on('keydown-Q', () => {
       this.play('attack', true);
       this.projectiles.fireProjectile(this);
+    });
+
+    this.scene.input.keyboard.on('keydown-E', () => {
+      if (this.timeFromLastSwing && this.timeFromLastSwing + this.meleeWeapon.attackSpeed > getTimestamp()) {
+        // console.log('OSTANOVITES!');
+        return;
+      }
+
+      this.play('attack', true);
+      this.meleeWeapon.swing(this);
+      this.timeFromLastSwing = getTimestamp();
     });
   }
 
