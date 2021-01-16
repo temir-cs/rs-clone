@@ -20,6 +20,7 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-forest-clouds-2', '../../../assets/img/levels/forest/clouds_back_layer2.png');
     this.load.image('bg-forest-clouds-small', '../../../assets/img/levels/forest/coluds_small.png');
     this.load.image('bg-forest-tileset', '../../../assets/img/levels/forest/green-tile.png');
+    this.load.audio('forest-theme', '../../../assets/img/sounds/forest-theme.mp3');
 
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');

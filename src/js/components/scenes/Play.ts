@@ -42,7 +42,8 @@ class Play extends Phaser.Scene {
     this.config = config;
   }
 
-  create({ gameStatus }) {
+  create({ gameStatus }):void {
+    this.playBgMusic();
     this.createMap();
     this.createLayers();
     const playerZones = this.getPlayerZones();
@@ -86,6 +87,12 @@ class Play extends Phaser.Scene {
     }
 
     this.plotting = false;
+  }
+
+  playBgMusic():void {
+    if (this.sound.get('forest-theme')) return;
+    this.sound.add('forest-theme', { loop: true, volume: 0.02 })
+      .play();
   }
 
   createMap():void {
@@ -221,7 +228,7 @@ class Play extends Phaser.Scene {
     });
   }
 
-  createBackButton() {
+  createBackButton():void {
     const menuButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 10, 'home')
       .setOrigin(1, 1)
       .setScrollFactor(0)

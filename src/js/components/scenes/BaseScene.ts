@@ -23,13 +23,13 @@ class BaseScene extends Phaser.Scene {
       fontStyle: this.fontStyle,
       fontFamily: this.fontFamily,
       fill: '#fff',
-    };  
+    };
   }
 
   create() {
     this.add.image(0, 0, 'menu-bg')
-      .setScale(1.7)
-      .setOrigin(0, 0.2);
+      .setScale(2.5)
+      .setOrigin(0, 0.4);
 
     if (this.config.canGoBack) {
       const backButton = this.add.image(this.config.width - 20, this.config.height - 20, 'back')
