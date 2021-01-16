@@ -48,14 +48,14 @@ export default (anims, hero) => {
   });
 
   anims.create({
-    key: 'attack',
+    key: 'sword-attack',
     frames: anims.generateFrameNames(`${hero}`, {
       start: 0,
       end: 4,
       prefix: 'Attack/attack',
       suffix: '.png'
     }),
-    frameRate: 8,
+    frameRate: 20,
     repeat: 0
   });
 

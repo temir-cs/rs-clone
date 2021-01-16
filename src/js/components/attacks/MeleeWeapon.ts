@@ -1,80 +1,69 @@
 import * as Phaser from 'phaser';
 import EffectManager from '../effects/EffectManager';
+import Player from '../entities/Player';
+import Enemy from '../entities/Enemy';
 
 class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
   attackSpeed: number;
-  scene: any;
+  scene: Phaser.Scene;
   x: number;
   y: number;
-  weaponName: any;
+  weaponName: string;
   damage: number;
-  wielder: any;
-  effectManager: any;
-  constructor(scene, x, y, weaponName) {
+  wielder: Player;
+  effectManager: EffectManager;
+
+  constructor(scene: Phaser.Scene, x: number, y: number, weaponName: string, player: Player) {
     super(scene, x, y, weaponName);
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
     this.damage = 15;
-    this.attackSpeed = 1000;
+    this.attackSpeed = 500;
     this.weaponName = weaponName;
-    this.wielder = null;
+    this.wielder = player;
     this.effectManager = new EffectManager(this.scene);
 
-    this.setOrigin(0.5, 1);
+    this.setOrigin(1.2, 1.2);
+    this.setBodySize(80, 45);
     this.setDepth(10);
 
-    this.activateWeapon(false);
+    this.setActive(false);
+    this.setVisible(false);
     this.body.reset(0, 0);
 
-    this.on('animationcomplete', (animation) => {
-      console.log('animEnd');
-      // if (animation.key === this.weaponName) {
-      //   this.activateWeapon(false);
-      //   this.body.reset(0, 0);
-      //   this.body.checkCollision.none = false;
-      // }
+    this.wielder.on('animationcomplete', (animation) => {
+      if (animation.key === 'sword-attack') {
+        this.setActive(false);
+        this.body.reset(0, 0);
+        this.body.checkCollision.none = false;
+      }
     });
   }
 
-  preUpdate(time, delta) {
+  preUpdate(time: number, delta: number):void {
     super.preUpdate(time, delta);
-
-    if (!this.active) { return; }
+    if (!this.active) return;
 
     if (this.wielder.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
       this.setFlipX(false);
-      this.body.reset(this.wielder.x + 50, this.wielder.y);
+      this.body.reset(this.wielder.x + 45, this.wielder.y);
     } else {
       this.setFlipX(true);
-      this.body.reset(this.wielder.x - 50, this.wielder.y);
+      this.body.reset(this.wielder.x, this.wielder.y);
     }
   }
 
-  swing(wielder) {
-    this.wielder = wielder;
-    this.activateWeapon(true);
-    this.body.reset(wielder.x, wielder.y);
-    setTimeout(() => this.stopSwing(this.wielder), 100);
+  swing():void {
+    this.setActive(true);
+    this.body.reset(this.wielder.x, this.wielder.y);
   }
 
-  stopSwing(wielder):void {
-    this.wielder = wielder;
-    this.activateWeapon(false);
-    this.body.checkCollision.none = false;
-    this.body.reset(0, 0);
-  }
-
-  deliversHit(target) {
+  deliversHit(target: Enemy):void {
     const impactPosition = { x: this.x, y: this.getRightCenter().y };
     this.effectManager.playEffectOn('fire-hit-effect', target, impactPosition);
     this.body.checkCollision.none = true;
-  }
-
-  activateWeapon(isActive) {
-    this.setActive(isActive);
-    this.setVisible(false);
   }
 }
 

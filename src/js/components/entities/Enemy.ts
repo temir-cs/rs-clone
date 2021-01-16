@@ -17,6 +17,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
   damage: number;
   health: number;
   isPlayingAnims?: any;
+
   constructor(scene:any, x:number, y:number, key:string) {
     super(scene, x, y, key);
     scene.add.existing(this);

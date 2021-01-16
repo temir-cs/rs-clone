@@ -110,7 +110,6 @@ class Play extends Phaser.Scene {
     const tileset1 = this.map.getTileset('01_forest_platforms');
     const tileset2 = this.map.getTileset('01_forest_env');
     const tilesetBg = this.map.getTileset('green-tile');
-    console.log(tilesetBg);
 
     this.map.createLayer('distance', tilesetBg);
 

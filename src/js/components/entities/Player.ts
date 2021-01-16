@@ -57,7 +57,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     this.projectiles = new Projectiles(this.scene);
-    this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack');
+    this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
 
     this.health = 60;
@@ -74,14 +74,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     // this.setBodySize(60, 60, true);
     // this.setOrigin(0.5, 1);
     // this.setOffset(15, 50);
-    this.setSize(24, 56);
-    this.setOffset(32, 54);
+    this.setBodySize(40, 56, true);
+    this.setOffset(22, 54);
     this.setOrigin(0.5, 1);
 
     initAnimations(this.scene.anims, this.hero);
 
     this.scene.input.keyboard.on('keydown-Q', () => {
-      this.play('attack', true);
+      this.play('sword-attack', true);
       this.projectiles.fireProjectile(this);
     });
 
@@ -91,7 +91,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         return;
       }
 
-      this.play('attack', true);
+      this.play('sword-attack', true);
       this.meleeWeapon.swing(this);
       this.timeFromLastSwing = getTimestamp();
     });
@@ -145,7 +145,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.jumpCount = 0;
     }
 
-    if (this.isPlayingAnims('attack')) {
+    if (this.isPlayingAnims('sword-attack')) {
       return;
     }
 

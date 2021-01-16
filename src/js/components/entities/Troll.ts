@@ -7,8 +7,8 @@ class Troll extends Enemy {
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'troll');
 
-    this.setSize(24, 50);
-    this.setOffset(46, 38);
+    this.setBodySize(40, 50);
+    this.setOffset(35, 38);
     initAnims(this.scene.anims);
     this.isDead = false;
   }
