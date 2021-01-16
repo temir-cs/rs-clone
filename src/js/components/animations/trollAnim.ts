@@ -34,4 +34,16 @@ export default (anims) => {
     frameRate: 8,
     repeat: 0
   });
+
+  anims.create({
+    key: 'troll-dead',
+    frames: anims.generateFrameNames('troll', {
+      start: 4,
+      end: 4,
+      prefix: 'death',
+      suffix: '.png'
+    }),
+    frameRate: 1,
+    repeat: -1
+  });
 };
