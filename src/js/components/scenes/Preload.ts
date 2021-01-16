@@ -36,6 +36,15 @@ class Preload extends Phaser.Scene {
     this.load.multiatlas('troll', '../../../assets/json/enemies/enemyGoblinSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('imp', '../../../assets/json/enemies/enemyImpSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
+
+    // Audio
+    this.load.audio('forest-theme', '../../../assets/sounds/forest-theme.mp3');
+    this.load.audio('zap', '../../../assets/sounds/zap.wav');
+    this.load.audio('sword-swing', '../../../assets/sounds/sword-swing.wav');
+    this.load.audio('step', '../../../assets/sounds/step.wav');
+    this.load.audio('jump', '../../../assets/sounds/jump-2.wav');
+    this.load.audio('coin-pickup', '../../../assets/sounds/coin.wav');
+    this.load.audio('damage', '../../../assets/sounds/damage.wav');
   }
 
   create() {

@@ -29,6 +29,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   isPlayingAnims: any;
   meleeWeapon: any;
   timeFromLastSwing: any;
+  zapSound: any;
+  swordSound: any;
+  stepSound: any;
+  jumpSound: any;
+  damageSound: any;
 
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'player');
@@ -55,6 +60,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.consecutiveJumps = 1;
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
+    this.stepSound = this.scene.sound.add('step', { volume: 0.03 });
+    this.jumpSound = this.scene.sound.add('jump', { volume: 0.1 });
+    this.zapSound = this.scene.sound.add('zap', { volume: 0.4 });
+    this.swordSound = this.scene.sound.add('sword-swing', { volume: 0.2 });
+    this.damageSound = this.scene.sound.add('damage', { volume: 0.03 });
+
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     this.projectiles = new Projectiles(this.scene);
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
@@ -80,10 +91,23 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     initAnimations(this.scene.anims, this.hero);
 
+    this.scene.time.addEvent({
+      delay: 400,
+      repeat: -1,
+      callbackScope: this,
+      callback: () => {
+        if (this.isPlayingAnims('run')) {
+          this.stepSound.play();
+        }
+      }
+    });
+
     this.scene.input.keyboard.on('keydown-Q', () => {
       if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
         this.play('sword-attack', true);
+        this.zapSound.play();
       }
+
     });
 
     this.scene.input.keyboard.on('keydown-E', () => {
@@ -93,6 +117,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       }
 
       this.play('sword-attack', true);
+      this.swordSound.play();
       this.meleeWeapon.swing(this);
       this.timeFromLastSwing = getTimestamp();
     });
@@ -140,6 +165,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if ((isSpaceJustDown || isUpJustDown) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
       this.setVelocityY(-this.jumpHeight);
       this.jumpCount += 1;
+      this.jumpSound.play();
     }
 
     if (onFloor) {
@@ -187,6 +213,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.hasBeenHit = true;
     this.bounceOff();
+    this.damageSound.play();
     const damageAnim = this.playDamageTween();
 
     this.hp.decrease(this.health);
