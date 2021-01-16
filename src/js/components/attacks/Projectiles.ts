@@ -1,10 +1,11 @@
 import * as Phaser from 'phaser';
 import Projectile from './Projectile';
 import getTimestamp from '../utils/functions';
+import Player from '../entities/Player';
 
 class Projectiles extends Phaser.Physics.Arcade.Group {
-  timeFromLastProjectile: any;
-  constructor(scene) {
+  timeFromLastProjectile: number;
+  constructor(scene: Phaser.Scene) {
     super(scene.physics.world, scene);
 
     this.createMultiple({
@@ -14,19 +15,18 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
       key: 'fireball',
       classType: Projectile
     });
-
     this.timeFromLastProjectile = null;
   }
 
-  fireProjectile(initiator:any):void {
+  fireProjectile(initiator:Player, anim: any):boolean {
     const projectile = this.getFirstDead(false);
 
     if (!projectile) {
-      return;
+      return false;
     }
 
     if (this.timeFromLastProjectile && this.timeFromLastProjectile + projectile.cooldown > getTimestamp()) {
-      return;
+      return false;
     }
 
     const center:any = initiator.getCenter();
@@ -42,8 +42,9 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
       centerX = center.x - 10;
     }
 
-    projectile.fire(centerX, center.y);
+    projectile.fire(centerX, center.y, anim);
     this.timeFromLastProjectile = getTimestamp();
+    return true;
   }
 }
 

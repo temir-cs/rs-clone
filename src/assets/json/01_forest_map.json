@@ -132,7 +132,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Imp",
                  "visible":true,
                  "width":0,
                  "x":876.666666666667,
@@ -144,7 +144,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Imp",
                  "visible":true,
                  "width":0,
                  "x":524,
@@ -180,7 +180,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Imp",
                  "visible":true,
                  "width":0,
                  "x":2048,
@@ -192,7 +192,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Imp",
                  "visible":true,
                  "width":0,
                  "x":2272,
@@ -395,7 +395,9 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/game-dev\/platformer-assets\/pixel-art-forest-platformer-tileset\/Background\/Bright\/trees.png"
+                 "image":"..\/..\/..\/..\/..\/game-dev\/platformer-assets\/pixel-art-forest-platformer-tileset\/Background\/Bright\/trees.png",
+                 "imageheight":540,
+                 "imagewidth":960
                 }],
          "tilewidth":960
         }, 
@@ -416,7 +418,9 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/game-dev\/platformer-assets\/pixel-art-forest-platformer-tileset\/Background\/Bright\/mountains.png"
+                 "image":"..\/..\/..\/..\/..\/game-dev\/platformer-assets\/pixel-art-forest-platformer-tileset\/Background\/Bright\/mountains.png",
+                 "imageheight":540,
+                 "imagewidth":960
                 }],
          "tilewidth":960
         }, 
@@ -498,7 +502,7 @@
          "margin":0,
          "name":"green-tile",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":1,
          "tileheight":32,
          "tilewidth":32,
          "transparentcolor":"#ff00ff"

@@ -103,9 +103,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     });
 
     this.scene.input.keyboard.on('keydown-Q', () => {
-      this.play('sword-attack', true);
-      this.projectiles.fireProjectile(this);
-      this.zapSound.play();
+      if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
+        this.play('sword-attack', true);
+        this.zapSound.play();
+      }
+
     });
 
     this.scene.input.keyboard.on('keydown-E', () => {

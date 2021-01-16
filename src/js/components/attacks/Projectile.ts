@@ -24,6 +24,8 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
 
     this.damage = 10;
     this.cooldown = 500;
+    this.setBodySize(30, 20)
+      .setOffset(15, 32);
     this.effectManager = new EffectManager(this.scene);
   }
 
@@ -39,10 +41,14 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  fire(x:number, y:number):void {
+  fire(x:number, y:number, anim):void {
     this.activateProjectile(true);
     this.body.reset(x, y);
     this.setVelocityX(this.speed);
+
+    if (anim) {
+      this.play(anim, true);
+    }
   }
 
   deliversHit(target) {
