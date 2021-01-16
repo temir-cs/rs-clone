@@ -31,8 +31,10 @@ class Preload extends Phaser.Scene {
     this.load.image('back', '../../../assets/img/menu/backward_button.png');
     this.load.image('home', '../../../assets/img/menu/home_button.png');
 
+    // Sprites
     this.load.multiatlas('knight', '../../../assets/json/heroes/knightSprite.json', '../../../assets/img/heroes');
     this.load.multiatlas('troll', '../../../assets/json/enemies/enemyGoblinSprite.json', '../../../assets/img/enemies');
+    this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
   }
 
   create() {

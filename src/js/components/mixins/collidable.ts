@@ -5,6 +5,10 @@ export default {
     this.scene.physics.add.collider(this, gameObject, callback, null, this);
     return this;
   },
+  addOverlap(gameObject, callback) {
+    this.scene.physics.add.overlap(this, gameObject, callback, null, this);
+    return this;
+  },
 
   bodyPositionDifferenceX: 0,
   prevRay: null,
