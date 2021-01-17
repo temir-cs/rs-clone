@@ -31,8 +31,8 @@ export default (anims) => {
       prefix: 'Fire_Imp_attack',
       suffix: '.png'
     }),
-    frameRate: 6,
-    repeat: -1,
+    frameRate: 15,
+    repeat: 0,
   });
 
   anims.create({

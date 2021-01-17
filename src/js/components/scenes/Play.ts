@@ -84,6 +84,7 @@ class Play extends Phaser.Scene {
     this.createPlayerColliders(player, {
       colliders: {
         platformColliders: this.layers.platformColliders,
+        projectiles: enemies.getProjectiles(),
         collectables: this.collectables,
         collectableKey: this.collectableKey,
       }
@@ -238,6 +239,8 @@ class Play extends Phaser.Scene {
   createPlayerColliders(player, { colliders }):void {
     player
       .addCollider(colliders.platformColliders)
+      .addCollider(colliders.projectiles, this.onWeaponHit)
+      .addOverlap(colliders.collectables, this.onCollect, this);
       .addOverlap(colliders.collectables, this.onCollect, this)
       .addOverlap(colliders.collectableKey, this.onKeyCollect, this);
   }

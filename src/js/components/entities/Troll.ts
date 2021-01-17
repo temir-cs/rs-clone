@@ -8,7 +8,7 @@ class Troll extends Enemy {
     super(scene, x, y, 'troll');
 
     this.setBodySize(40, 50);
-    this.setOffset(35, 38);
+    this.setOffset(38, 38);
     initAnims(this.scene.anims);
     this.isDead = false;
   }

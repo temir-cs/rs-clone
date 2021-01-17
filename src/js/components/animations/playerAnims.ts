@@ -48,6 +48,18 @@ export default (anims, hero) => {
   });
 
   anims.create({
+    key: 'crouch',
+    frames: anims.generateFrameNames(`${hero}`, {
+      start: 1,
+      end: 1,
+      prefix: 'Jump/jump',
+      suffix: '.png'
+    }),
+    frameRate: 5,
+    repeat: 0
+  });
+
+  anims.create({
     key: 'sword-attack',
     frames: anims.generateFrameNames(`${hero}`, {
       start: 0,
@@ -67,7 +79,7 @@ export default (anims, hero) => {
       prefix: 'Run_Attack/run_attack',
       suffix: '.png'
     }),
-    frameRate: 10,
+    frameRate: 20,
     repeat: 0
   });
 

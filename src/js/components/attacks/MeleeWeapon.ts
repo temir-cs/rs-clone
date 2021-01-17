@@ -34,7 +34,7 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
     this.body.reset(0, 0);
 
     this.wielder.on('animationcomplete', (animation) => {
-      if (animation.key === 'sword-attack') {
+      if (animation.key === 'sword-attack' || animation.key === 'run-attack') {
         this.setActive(false);
         this.body.reset(0, 0);
         this.body.checkCollision.none = false;
