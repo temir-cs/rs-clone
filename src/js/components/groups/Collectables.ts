@@ -1,12 +1,12 @@
 import * as Phaser from 'phaser';
-import Collectable from '../collectables/Collectable';
+import Coin from '../collectables/Coin';
 
 class Collectables extends Phaser.Physics.Arcade.StaticGroup {
   constructor(scene:Phaser.Scene) {
     super(scene.physics.world, scene);
 
     this.createFromConfig({
-      classType: Collectable
+      classType: Coin
     });
   }
 
@@ -26,7 +26,7 @@ class Collectables extends Phaser.Physics.Arcade.StaticGroup {
       const props = this.mapProperties(collectableO.properties);
 
       collectable.score = props.score || defaultScore;
-    });
+   });
   }
 }
 

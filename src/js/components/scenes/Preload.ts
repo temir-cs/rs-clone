@@ -20,6 +20,8 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-forest-clouds-small', '../../../assets/img/levels/forest/coluds_small.png');
     this.load.image('bg-forest-tileset', '../../../assets/img/levels/forest/green-tile.png');
     this.load.image('coin-static', '../../../assets/img/collectables/coin.png');
+    this.load.image('key-static', '../../../assets/img/collectables/key3.png');
+    this.load.image('door-static', '../../../assets/img/levels/forest/door1.png');
 
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
@@ -42,6 +44,8 @@ class Preload extends Phaser.Scene {
     this.load.audio('jump', '../../../assets/sounds/jump-2.wav');
     this.load.audio('coin-pickup', '../../../assets/sounds/coin.wav');
     this.load.audio('damage', '../../../assets/sounds/damage.wav');
+    this.load.audio('key-pickup', '../../../assets/sounds/key.wav');
+    this.load.audio('door-opening', '../../../assets/sounds/door-opening.wav');
   }
 
   create() {

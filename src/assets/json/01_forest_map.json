@@ -290,8 +290,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3140,
-                 "y":346.666666666667
+                 "x":1582,
+                 "y":848.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -632,9 +632,38 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":14,
+         "name":"collectableKey",
+         "objects":[
+                {
+                 "gid":2455,
+                 "height":32,
+                 "id":70,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"hasKey",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1108,
+                 "y":182
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":14,
- "nextobjectid":67,
+ "nextlayerid":16,
+ "nextobjectid":74,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
@@ -859,6 +888,29 @@
                 {
                  "id":0,
                  "image":"..\/..\/..\/..\/..\/..\/__clone_wars_helpers\/craftpix-678945-fantasy-platformer-game-kit-pixel-art\/pixel-art-forest-platformer-tileset\/Objects_Animated\/Coin\/coin.png",
+                 "imageheight":32,
+                 "imagewidth":32
+                }],
+         "tilewidth":32
+        }, 
+        {
+         "columns":0,
+         "firstgid":2455,
+         "grid":
+            {
+             "height":1,
+             "orientation":"orthogonal",
+             "width":1
+            },
+         "margin":0,
+         "name":"key3",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":32,
+         "tiles":[
+                {
+                 "id":0,
+                 "image":"..\/img\/collectables\/key3.png",
                  "imageheight":32,
                  "imagewidth":32
                 }],

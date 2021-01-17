@@ -3,14 +3,12 @@ import initAnims from '../animations/collectablesAnims';
 
 class Collectable extends Phaser.Physics.Arcade.Sprite {
   score: number;
-  coinPickupSound: Phaser.Sound.BaseSound;
+  pickupSound: Phaser.Sound.BaseSound;
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'collectables');
-
     scene.add.existing(this);
     initAnims(this.scene.anims);
 
-    this.coinPickupSound = scene.sound.add('coin-pickup', { volume: 0.4 });
     this.setOrigin(0, 1);
 
     scene.tweens.add({
