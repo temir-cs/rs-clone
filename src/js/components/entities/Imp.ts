@@ -18,6 +18,8 @@ class Imp extends Enemy {
     super.init();
     this.setBodySize(35, 60);
     this.setOffset(100, 100);
+    this.setScale(1.2);
+    this.health = 60;
     this.speed = 50;
 
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
@@ -49,7 +51,8 @@ class Imp extends Enemy {
       this.attackDelay = this.getAttackDelay();
     }
 
-    if (this.isPlayingAnims('imp-hurt') || this.isPlayingAnims('imp-death')) { return; }
+    if (this.isPlayingAnims('imp-hurt') || this.isPlayingAnims('imp-death') || this.isPlayingAnims('imp-attack')) return;
+
     if (this.isDead) {
       this.setActive(false);
       this.play('imp-dead', true);

@@ -34,6 +34,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   stepSound: any;
   jumpSound: any;
   damageSound: any;
+  isCrouching: boolean;
 
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'player');
@@ -57,6 +58,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.bounceVelocity = 200;
     this.jumpHeight = 400;
     this.jumpCount = 0;
+    this.hasBeenHit = false;
+    this.isCrouching = false;
     this.consecutiveJumps = 1;
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
@@ -88,6 +91,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.setBodySize(30, 56, true);
     this.setOffset(30, 54);
     this.setOrigin(0.5, 1);
+    console.log(this);
 
     initAnimations(this.scene.anims, this.hero);
 
@@ -102,28 +106,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       }
     });
 
-    this.scene.input.keyboard.on('keydown-Q', () => {
-      if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
-        this.play('sword-attack', true);
-        this.zapSound.play();
-      }
-    });
-
-    this.scene.input.keyboard.on('keydown-E', () => {
-      if (this.timeFromLastSwing && this.timeFromLastSwing + this.meleeWeapon.attackSpeed > getTimestamp()) {
-        // console.log('OSTANOVITES!');
-        return;
-      }
-
-      if (this.body.onFloor() && this.body.velocity.x !== 0) {
-        this.play('run-attack', true);
-      } else {
-        this.play('sword-attack', true);
-      }
-      this.swordSound.play();
-      this.meleeWeapon.swing(this);
-      this.timeFromLastSwing = getTimestamp();
-    });
+    this.handleAttacks();
+    this.handleMovements();
   }
 
   initEvents(): void {
@@ -141,7 +125,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   update():void {
-    if (this.hasBeenHit || !this.body) return;
+    if (this.hasBeenHit || !this.body || this.isCrouching) return;
 
     if (this.getBounds().top > this.scene.config.height + 250) {
       EventEmitter.emit('PLAYER_LOSE');
@@ -194,6 +178,47 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
+  handleAttacks():void {
+    this.scene.input.keyboard.on('keydown-Q', () => {
+      if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
+        this.play('sword-attack', true);
+        this.zapSound.play();
+      }
+    });
+
+    this.scene.input.keyboard.on('keydown-E', () => {
+      if (this.timeFromLastSwing && this.timeFromLastSwing + this.meleeWeapon.attackSpeed > getTimestamp()) return;
+
+      if (this.body.onFloor() && this.body.velocity.x !== 0) {
+        this.play('run-attack', true);
+      } else {
+        this.play('sword-attack', true);
+      }
+      this.swordSound.play();
+      this.meleeWeapon.swing(this);
+      this.timeFromLastSwing = getTimestamp();
+    });
+  }
+
+  handleMovements() {
+    this.scene.input.keyboard.on('keydown-DOWN', () => {
+      if (!this.body.onFloor()) return;
+      this.body.setSize(30, 28);
+      this.setOffset(30, 82);
+      this.setVelocityX(0);
+      this.play('crouch', true);
+      this.isCrouching = true;
+    });
+
+    this.scene.input.keyboard.on('keyup-DOWN', () => {
+      if (!this.body.onFloor()) return;
+      this.body.setSize(30, 56);
+      this.setOffset(30, 54);
+      this.setY(this.body.y + 30);
+      this.isCrouching = false;
+    });
+  }
+
   bounceOff():void {
     const rightTouch = this.body.touching.right;
     // eslint-disable-next-line no-unused-expressions
@@ -220,7 +245,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     const damageAnim = this.playDamageTween();
 
     this.hp.decrease(this.health);
-    source.deliversHit(this);
+
+    if (source.deliversHit) {
+      source.deliversHit(this);
+    }
 
     this.scene.time.addEvent({
       delay: 1000,
