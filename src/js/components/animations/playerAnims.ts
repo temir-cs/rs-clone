@@ -67,7 +67,7 @@ export default (anims, hero) => {
       prefix: 'Run_Attack/run_attack',
       suffix: '.png'
     }),
-    frameRate: 10,
+    frameRate: 20,
     repeat: 0
   });
 

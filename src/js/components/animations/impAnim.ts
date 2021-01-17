@@ -32,7 +32,7 @@ export default (anims) => {
       suffix: '.png'
     }),
     frameRate: 6,
-    repeat: -1,
+    repeat: 0,
   });
 
   anims.create({

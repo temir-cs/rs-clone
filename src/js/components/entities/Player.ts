@@ -67,7 +67,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.damageSound = this.scene.sound.add('damage', { volume: 0.03 });
 
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
-    this.projectiles = new Projectiles(this.scene);
+    this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
 
@@ -85,8 +85,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     // this.setBodySize(60, 60, true);
     // this.setOrigin(0.5, 1);
     // this.setOffset(15, 50);
-    this.setBodySize(40, 56, true);
-    this.setOffset(22, 54);
+    this.setBodySize(30, 56, true);
+    this.setOffset(30, 54);
     this.setOrigin(0.5, 1);
 
     initAnimations(this.scene.anims, this.hero);
@@ -115,7 +115,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         return;
       }
 
-      this.play('sword-attack', true);
+      if (this.body.onFloor() && this.body.velocity.x !== 0) {
+        this.play('run-attack', true);
+      } else {
+        this.play('sword-attack', true);
+      }
       this.swordSound.play();
       this.meleeWeapon.swing(this);
       this.timeFromLastSwing = getTimestamp();
@@ -171,7 +175,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.jumpCount = 0;
     }
 
-    if (this.isPlayingAnims('sword-attack')) {
+    if (this.isPlayingAnims('sword-attack') || this.isPlayingAnims('run-attack')) {
       return;
     }
 
@@ -200,10 +204,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     setTimeout(() => this.setVelocityY(-this.bounceVelocity));
   }
 
-  takesHit(initiator):void {
+  takesHit(source):void {
     if (this.hasBeenHit) return;
 
-    this.health -= initiator.damage;
+    this.health -= source.damage;
     // TEMIR - ADDED FUNCTIONALITY FOR SCENE CHANGE
     if (this.health <= 0) {
       EventEmitter.emit('PLAYER_LOSE');
@@ -216,6 +220,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     const damageAnim = this.playDamageTween();
 
     this.hp.decrease(this.health);
+    source.deliversHit(this);
 
     this.scene.time.addEvent({
       delay: 1000,

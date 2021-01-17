@@ -1,24 +1,23 @@
 import * as Phaser from 'phaser';
 import Projectile from './Projectile';
 import getTimestamp from '../utils/functions';
-import Player from '../entities/Player';
 
 class Projectiles extends Phaser.Physics.Arcade.Group {
   timeFromLastProjectile: number;
-  constructor(scene: Phaser.Scene) {
+  constructor(scene: Phaser.Scene, key: string) {
     super(scene.physics.world, scene);
 
     this.createMultiple({
       frameQuantity: 5,
       active: false,
       visible: false,
-      key: 'fireball',
+      key,
       classType: Projectile
     });
     this.timeFromLastProjectile = null;
   }
 
-  fireProjectile(initiator:Player, anim: any):boolean {
+  fireProjectile(initiator:any, anim: any):boolean {
     const projectile = this.getFirstDead(false);
 
     if (!projectile) {

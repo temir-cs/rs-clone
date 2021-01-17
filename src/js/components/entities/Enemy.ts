@@ -17,6 +17,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
   damage: number;
   health: number;
   isPlayingAnims?: any;
+  projectiles: any;
 
   constructor(scene:any, x:number, y:number, key:string) {
     super(scene, x, y, key);
@@ -40,6 +41,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.health = 40;
     this.damage = 10;
+    this.projectiles = null;
 
     this.rayGraphics = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
 
