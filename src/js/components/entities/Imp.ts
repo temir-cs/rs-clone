@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Enemy from './Enemy';
 import initAnims from '../animations/impAnim';
 import Projectiles from '../attacks/Projectiles';

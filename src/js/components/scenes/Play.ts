@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import * as Phaser from 'phaser';
 
 import Player from '../entities/Player';
@@ -240,7 +241,7 @@ class Play extends Phaser.Scene {
     player
       .addCollider(colliders.platformColliders)
       .addCollider(colliders.projectiles, this.onWeaponHit)
-      .addOverlap(colliders.collectables, this.onCollect, this);
+      .addOverlap(colliders.collectables, this.onCollect, this)
       .addOverlap(colliders.collectables, this.onCollect, this)
       .addOverlap(colliders.collectableKey, this.onKeyCollect, this);
   }
