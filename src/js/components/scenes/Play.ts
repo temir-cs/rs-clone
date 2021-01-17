@@ -5,7 +5,10 @@ import Enemies from '../groups/Enemies';
 import EventEmitter from '../events/Emitter';
 import effectAnims from '../animations/effectsAnim';
 import Collectables from '../groups/Collectables';
+import Key from '../collectables/Key';
 import ScoreBoard from '../hud/ScoreBoard';
+import BoardForKey from '../hud/BoardForKey';
+import Door from '../helper_objects/Door';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -23,6 +26,7 @@ class Play extends Phaser.Scene {
     playerZones: Phaser.Tilemaps.ObjectLayer,
     enemySpawns: Phaser.Tilemaps.ObjectLayer,
     collectables: Phaser.Tilemaps.ObjectLayer,
+    collectableKey: Phaser.Tilemaps.ObjectLayer,
   } = {
     platformColliders: null,
     enemiesPlatformColliders: null,
@@ -32,6 +36,7 @@ class Play extends Phaser.Scene {
     playerZones: null,
     enemySpawns: null,
     collectables: null,
+    collectableKey: null,
   };
 
   private plotting: boolean;
@@ -43,7 +48,10 @@ class Play extends Phaser.Scene {
   private mountainsImg: any;
   private collectables: any;
   private score: number;
-  private scoreBoard: any
+  private scoreBoard: any;
+  private collectableKey: any;
+  private hasKey: boolean;
+  private BoardForKey: any;
 
   constructor(config) {
     super('PlayScene');
@@ -52,6 +60,7 @@ class Play extends Phaser.Scene {
 
   create({ gameStatus }):void {
     // this.playBgMusic();
+    this.hasKey = false;
     this.score = 0;
     this.createMap();
     effectAnims(this.anims);
@@ -60,9 +69,11 @@ class Play extends Phaser.Scene {
     const player = this.createPlayer(playerZones.start);
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
     this.createCollectables(this.layers.collectables);
+    this.createKeyCollectable(this.layers.collectableKey);
 
     this.createBg();
     this.scoreBoard = new ScoreBoard(this);
+    this.BoardForKey = new BoardForKey(this);
 
     this.createEnemyColliders(enemies, {
       colliders: {
@@ -74,6 +85,7 @@ class Play extends Phaser.Scene {
       colliders: {
         platformColliders: this.layers.platformColliders,
         collectables: this.collectables,
+        collectableKey: this.collectableKey,
       }
     });
 
@@ -85,10 +97,16 @@ class Play extends Phaser.Scene {
     this.createGameEvents();
   }
 
+  createKeyCollectable(layer):void {
+    layer.objects.forEach((obj) => {
+      this.collectableKey = new Key(this, obj.x, obj.y);
+    });
+    this.physics.add.existing(this.collectableKey);
+  }
+
   createCollectables(collectableLayer: Phaser.Tilemaps.ObjectLayer):void {
     this.collectables = new Collectables(this).setDepth(-1);
     this.collectables.addFromLayer(collectableLayer);
-    this.collectables.playAnimation('coin');
   }
 
   playBgMusic():void {
@@ -123,6 +141,7 @@ class Play extends Phaser.Scene {
     this.layers.playerZones = this.map.getObjectLayer('player_zones');
     this.layers.enemySpawns = this.map.getObjectLayer('enemy_spawns');
     this.layers.collectables = this.map.getObjectLayer('collectables');
+    this.layers.collectableKey = this.map.getObjectLayer('collectableKey');
   }
 
   createBg() {
@@ -204,15 +223,23 @@ class Play extends Phaser.Scene {
 
   onCollect(entity, collectable) {
     this.score += collectable.score;
-    collectable.coinPickupSound.play();
+    collectable.pickupSound.play();
     this.scoreBoard.updateScoreBoard(this.score);
     collectable.disableBody(true, true);
+  }
+
+  onKeyCollect() {
+    this.collectableKey.pickupSound.play();
+    this.collectableKey.disableBody(true, true);
+    this.hasKey = true;
+    this.BoardForKey.activateKey();
   }
 
   createPlayerColliders(player, { colliders }):void {
     player
       .addCollider(colliders.platformColliders)
-      .addOverlap(colliders.collectables, this.onCollect, this);
+      .addOverlap(colliders.collectables, this.onCollect, this)
+      .addOverlap(colliders.collectableKey, this.onKeyCollect, this);
   }
 
   setupFollowupCameraOn(player):void {
@@ -236,10 +263,14 @@ class Play extends Phaser.Scene {
       .setAlpha(0)
       .setOrigin(0.5, 1)
       .setSize(5, 100);
+    const door = new Door(this, end.x, end.y - 30, 'doors').setDepth(-1);
 
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
-      eolOverlap.active = false;
-      console.log('You Won!!');
+      if (this.hasKey) {
+        eolOverlap.active = false;
+        door.openDoor();
+        console.log('You Won!!');
+      }
     });
   }
 

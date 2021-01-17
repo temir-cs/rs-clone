@@ -1,0 +1,270 @@
+{
+	"textures": [
+		{
+			"image": "doorsSprite.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 795,
+				"h": 88
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "cave-door1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 21,
+						"w": 76,
+						"h": 86
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 76,
+						"h": 86
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "cave-door2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 21,
+						"w": 76,
+						"h": 86
+					},
+					"frame": {
+						"x": 79,
+						"y": 1,
+						"w": 76,
+						"h": 86
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "cave-door3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 21,
+						"w": 76,
+						"h": 86
+					},
+					"frame": {
+						"x": 157,
+						"y": 1,
+						"w": 76,
+						"h": 86
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "cave-door4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 21,
+						"w": 76,
+						"h": 86
+					},
+					"frame": {
+						"x": 235,
+						"y": 1,
+						"w": 76,
+						"h": 86
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "cave-door5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 21,
+						"w": 76,
+						"h": 86
+					},
+					"frame": {
+						"x": 313,
+						"y": 1,
+						"w": 76,
+						"h": 86
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "castle_door1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 24,
+						"y": 21,
+						"w": 79,
+						"h": 85
+					},
+					"frame": {
+						"x": 391,
+						"y": 1,
+						"w": 79,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "castle_door2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 24,
+						"y": 21,
+						"w": 79,
+						"h": 85
+					},
+					"frame": {
+						"x": 472,
+						"y": 1,
+						"w": 79,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "castle_door3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 24,
+						"y": 21,
+						"w": 79,
+						"h": 85
+					},
+					"frame": {
+						"x": 553,
+						"y": 1,
+						"w": 79,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "castle_door4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 24,
+						"y": 21,
+						"w": 79,
+						"h": 85
+					},
+					"frame": {
+						"x": 634,
+						"y": 1,
+						"w": 79,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "castle_door5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 24,
+						"y": 21,
+						"w": 79,
+						"h": 85
+					},
+					"frame": {
+						"x": 715,
+						"y": 1,
+						"w": 79,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:d2debcbf08ae1fb38eb194d497c21ac1:0282c2f94587cbe82f5929cd1989081e:d84ce016e055681ea52d2f191981fed4$"
+	}
+}
