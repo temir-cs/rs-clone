@@ -3,7 +3,7 @@ import HealthBar from '../hud/HealthBar';
 import initAnimations from '../animations/playerAnims';
 import collidable from '../mixins/collidable';
 import anims from '../mixins/anims';
-import Projectile from '../attacks/Projectile';
+// import Projectile from '../attacks/Projectile';
 import Projectiles from '../attacks/Projectiles';
 import EventEmitter from '../events/Emitter';
 import MeleeWeapon from '../attacks/MeleeWeapon';
@@ -107,7 +107,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.play('sword-attack', true);
         this.zapSound.play();
       }
-
     });
 
     this.scene.input.keyboard.on('keydown-E', () => {

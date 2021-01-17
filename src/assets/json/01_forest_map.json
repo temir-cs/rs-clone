@@ -81,7 +81,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -92,7 +92,7 @@
          "name":"distance",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":100,
          "x":0,
          "y":0
@@ -104,7 +104,7 @@
          "name":"enemies_colliders",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":100,
          "x":0,
          "y":0
@@ -247,7 +247,7 @@
          "name":"platform_colliders",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":100,
          "x":0,
          "y":0
@@ -295,12 +295,346 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":13,
+         "name":"collectables",
+         "objects":[
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":36,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":143,
+                 "y":271
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":37,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":195,
+                 "y":270.5
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":38,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":591,
+                 "y":267.5
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":40,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":463,
+                 "y":657
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":41,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":511,
+                 "y":672
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":42,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":552,
+                 "y":702
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":43,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1457,
+                 "y":176
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":46,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1422,
+                 "y":176
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":48,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1385.66666666667,
+                 "y":176.333333333333
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":49,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":976,
+                 "y":240
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":50,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":976,
+                 "y":240
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":51,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2972,
+                 "y":966.666666666667
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":52,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":3020,
+                 "y":965.333333333333
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":53,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2898.66666666667,
+                 "y":741.333333333333
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":54,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2849.33333333333,
+                 "y":776
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":55,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2826.66666666667,
+                 "y":828
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":56,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2541.33333333333,
+                 "y":194.666666666667
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":58,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2144,
+                 "y":320
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":59,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2208,
+                 "y":320
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":60,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2112,
+                 "y":576
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":61,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2048,
+                 "y":576
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":62,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1984,
+                 "y":576
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":63,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2272,
+                 "y":960
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":64,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2208,
+                 "y":960
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":65,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2080,
+                 "y":832
+                }, 
+                {
+                 "gid":2454,
+                 "height":32,
+                 "id":66,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2016,
+                 "y":832
+                }],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"score",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"coin"
+                }],
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }],
- "nextlayerid":13,
- "nextobjectid":35,
+ "nextlayerid":14,
+ "nextobjectid":67,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
@@ -395,7 +729,7 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/game-dev\/platformer-assets\/pixel-art-forest-platformer-tileset\/Background\/Bright\/trees.png",
+                 "image":"..\/img\/levels\/forest\/trees.png",
                  "imageheight":540,
                  "imagewidth":960
                 }],
@@ -418,7 +752,7 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/game-dev\/platformer-assets\/pixel-art-forest-platformer-tileset\/Background\/Bright\/mountains.png",
+                 "image":"..\/img\/levels\/forest\/mountains.png",
                  "imageheight":540,
                  "imagewidth":960
                 }],
@@ -496,7 +830,7 @@
         {
          "columns":1,
          "firstgid":2453,
-         "image":"..\/..\/..\/..\/..\/game-dev\/my-assets\/green-tile.png",
+         "image":"..\/img\/levels\/forest\/green-tile.png",
          "imageheight":32,
          "imagewidth":32,
          "margin":0,
@@ -506,6 +840,29 @@
          "tileheight":32,
          "tilewidth":32,
          "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":0,
+         "firstgid":2454,
+         "grid":
+            {
+             "height":1,
+             "orientation":"orthogonal",
+             "width":1
+            },
+         "margin":0,
+         "name":"coin",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":32,
+         "tiles":[
+                {
+                 "id":0,
+                 "image":"..\/..\/..\/..\/..\/..\/__clone_wars_helpers\/craftpix-678945-fantasy-platformer-game-kit-pixel-art\/pixel-art-forest-platformer-tileset\/Objects_Animated\/Coin\/coin.png",
+                 "imageheight":32,
+                 "imagewidth":32
+                }],
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
