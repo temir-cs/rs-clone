@@ -266,8 +266,8 @@ class Play extends Phaser.Scene {
     const doorSound = this.sound.add('door-opening', { volume: 0.4 });
 
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
-      eolOverlap.active = false;
       if (this.hasKey) {
+        eolOverlap.active = false;
         doorSound.play();
         console.log('You Won!!');
       }
