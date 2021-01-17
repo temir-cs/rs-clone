@@ -115,7 +115,7 @@
 					}
 				},
 				{
-					"filename": "crystal.png",
+					"filename": "crystal1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1065,6 +1065,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:02b3a7044742f69302c5c1f790abccb2:8e156d9552c5fb55c0cd0012b041e6db:9522b5eb6ea648650736d9bf7a279496$"
+		"smartupdate": "$TexturePacker:SmartUpdate:ad2cd881600f65d1c5ee2c866d25c1c0:8e156d9552c5fb55c0cd0012b041e6db:97a70fb1d4c8dd4baaa04dc67d0612dd$"
 	}
 }
