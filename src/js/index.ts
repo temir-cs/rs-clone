@@ -6,7 +6,7 @@ import MenuScene from './components/scenes/Menu';
 import LevelsScene from './components/scenes/LevelsScene';
 
 const MAP_WIDTH = 3200;
-const MAP_HEIGHT = 1080;
+const MAP_HEIGHT = 1280;
 const WIDTH: number = document.body.offsetWidth;
 const HEIGHT = 800;
 // const HEIGHT: number = document.body.offsetHeight;

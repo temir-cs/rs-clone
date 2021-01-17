@@ -127,7 +127,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   update():void {
     if (this.hasBeenHit || !this.body || this.isCrouching) return;
 
-    if (this.getBounds().top > this.scene.config.height + 250) {
+    if (this.getBounds().top > this.scene.config.height + 450) {
       EventEmitter.emit('PLAYER_LOSE');
       return;
     }
