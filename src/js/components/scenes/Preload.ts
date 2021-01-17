@@ -21,7 +21,7 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-forest-tileset', '../../../assets/img/levels/forest/green-tile.png');
     this.load.image('coin-static', '../../../assets/img/collectables/coin.png');
     this.load.image('key-static', '../../../assets/img/collectables/key3.png');
-    this.load.image('door-static', '../../../assets/img/levels/forest/door1.png');
+    // this.load.image('door-static', '../../../assets/img/levels/forest/door1.png');
 
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
@@ -35,6 +35,7 @@ class Preload extends Phaser.Scene {
     this.load.multiatlas('imp', '../../../assets/json/enemies/enemyImpSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
     this.load.multiatlas('collectables', '../../../assets/json/collectables/collectablesSprite.json', '../../../assets/img/collectables');
+    this.load.multiatlas('doors', '../../../assets/json/doors/doorsSprite.json', '../../../assets/img/doors/');
 
     // Audio
     this.load.audio('forest-theme', '../../../assets/sounds/forest-theme.mp3');

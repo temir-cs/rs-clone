@@ -58,4 +58,16 @@ export default (anims) => {
     frameRate: 10,
     repeat: -1
   });
+
+  anims.create({
+    key: 'key',
+    frames: anims.generateFrameNames('collectables', {
+      start: 1,
+      end: 8,
+      prefix: 'key',
+      suffix: '.png'
+    }),
+    frameRate: 10,
+    repeat: -1
+  });
 };

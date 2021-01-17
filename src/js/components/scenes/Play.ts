@@ -8,6 +8,7 @@ import Collectables from '../groups/Collectables';
 import Key from '../collectables/Key';
 import ScoreBoard from '../hud/ScoreBoard';
 import BoardForKey from '../hud/BoardForKey';
+import Door from '../helper_objects/Door';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -262,13 +263,12 @@ class Play extends Phaser.Scene {
       .setAlpha(0)
       .setOrigin(0.5, 1)
       .setSize(5, 100);
-    this.add.image(end.x, end.y - 30, 'door-static').setDepth(-1);
-    const doorSound = this.sound.add('door-opening', { volume: 0.4 });
+    const door = new Door(this, end.x, end.y - 30, 'doors').setDepth(-1);
 
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
       if (this.hasKey) {
         eolOverlap.active = false;
-        doorSound.play();
+        door.openDoor();
         console.log('You Won!!');
       }
     });
