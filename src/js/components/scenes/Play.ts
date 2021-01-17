@@ -4,6 +4,8 @@ import Player from '../entities/Player';
 import Enemies from '../groups/Enemies';
 import EventEmitter from '../events/Emitter';
 import effectAnims from '../animations/effectsAnim';
+import Collectables from '../groups/Collectables';
+import ScoreBoard from '../hud/ScoreBoard';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -20,6 +22,7 @@ class Play extends Phaser.Scene {
     platforms: Phaser.Tilemaps.TilemapLayer,
     playerZones: Phaser.Tilemaps.ObjectLayer,
     enemySpawns: Phaser.Tilemaps.ObjectLayer,
+    collectables: Phaser.Tilemaps.ObjectLayer,
   } = {
     platformColliders: null,
     enemiesPlatformColliders: null,
@@ -28,6 +31,7 @@ class Play extends Phaser.Scene {
     platforms: null,
     playerZones: null,
     enemySpawns: null,
+    collectables: null,
   };
 
   private plotting: boolean;
@@ -37,6 +41,9 @@ class Play extends Phaser.Scene {
   private treesImg: any;
   private cloudsImg: any;
   private mountainsImg: any;
+  private collectables: any;
+  private score: number;
+  private scoreBoard: any
 
   constructor(config) {
     super('PlayScene');
@@ -45,13 +52,17 @@ class Play extends Phaser.Scene {
 
   create({ gameStatus }):void {
     // this.playBgMusic();
+    this.score = 0;
     this.createMap();
+    effectAnims(this.anims);
     this.createLayers();
     const playerZones = this.getPlayerZones();
     const player = this.createPlayer(playerZones.start);
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
+    this.createCollectables(this.layers.collectables);
 
     this.createBg();
+    this.scoreBoard = new ScoreBoard(this);
 
     this.createEnemyColliders(enemies, {
       colliders: {
@@ -61,7 +72,8 @@ class Play extends Phaser.Scene {
     });
     this.createPlayerColliders(player, {
       colliders: {
-      platformColliders: this.layers.platformColliders
+        platformColliders: this.layers.platformColliders,
+        collectables: this.collectables,
       }
     });
 
@@ -69,28 +81,14 @@ class Play extends Phaser.Scene {
     this.createBackButton();
     this.setupFollowupCameraOn(player);
 
-    effectAnims(this.anims);
-
     if (gameStatus === 'PLAYER_LOSE') return;
     this.createGameEvents();
   }
 
-  stopDrawing(pointer) {
-    this.line.x2 = pointer.worldX;
-    this.line.y2 = pointer.worldY;
-    this.graphics.clear();
-
-    this.graphics.strokeLineShape(this.line);
-
-    this.tileHits = this.layers.platforms.getTilesWithinShape(this.line);
-
-    if (this.tileHits && this.tileHits.length > 0) {
-      this.tileHits.forEach((tile) => {
-        if (tile.index !== -1) tile.setCollision(true);
-      });
-    }
-
-    this.plotting = false;
+  createCollectables(collectableLayer: Phaser.Tilemaps.ObjectLayer):void {
+    this.collectables = new Collectables(this).setDepth(-1);
+    this.collectables.addFromLayer(collectableLayer);
+    this.collectables.playAnimation('coin');
   }
 
   playBgMusic():void {
@@ -124,6 +122,7 @@ class Play extends Phaser.Scene {
     this.layers.environmentTop = this.map.createLayer('environment_top', tileset2);
     this.layers.playerZones = this.map.getObjectLayer('player_zones');
     this.layers.enemySpawns = this.map.getObjectLayer('enemy_spawns');
+    this.layers.collectables = this.map.getObjectLayer('collectables');
   }
 
   createBg() {
@@ -179,8 +178,6 @@ class Play extends Phaser.Scene {
     const enemies = new Enemies(this);
     const enemyTypes = enemies.getTypes();
     const enemySpawns = enemySpawnsLayer.objects;
-    // console.log('from create enemies');
-    // console.log(collider)
     enemySpawns.forEach((spawn) => {
         const enemy = new enemyTypes[spawn.type](this, spawn.x, spawn.y);
         enemy.setColliders(collider);
@@ -189,11 +186,11 @@ class Play extends Phaser.Scene {
     return enemies;
   }
 
-  onPlayerCollision(enemy, player) {
+  onPlayerCollision(enemy, player):void {
     player.takesHit(enemy);
   }
 
-  onWeaponHit(entity, source) {
+  onWeaponHit(entity, source):void {
     entity.takesHit(source);
   }
 
@@ -205,8 +202,17 @@ class Play extends Phaser.Scene {
       .addOverlap(colliders.player.meleeWeapon, this.onWeaponHit);
   }
 
+  onCollect(entity, collectable) {
+    this.score += collectable.score;
+    collectable.coinPickupSound.play();
+    this.scoreBoard.updateScoreBoard(this.score);
+    collectable.disableBody(true, true);
+  }
+
   createPlayerColliders(player, { colliders }):void {
-    player.addCollider(colliders.platformColliders);
+    player
+      .addCollider(colliders.platformColliders)
+      .addOverlap(colliders.collectables, this.onCollect, this);
   }
 
   setupFollowupCameraOn(player):void {

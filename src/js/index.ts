@@ -5,12 +5,12 @@ import PreloadScene from './components/scenes/Preload';
 import MenuScene from './components/scenes/Menu';
 import LevelsScene from './components/scenes/LevelsScene';
 
-const MAP_WIDTH: number = 3200;
-const MAP_HEIGHT: number = 1080;
+const MAP_WIDTH = 3200;
+const MAP_HEIGHT = 1080;
 const WIDTH: number = document.body.offsetWidth;
-const HEIGHT: number = 800;
+const HEIGHT = 800;
 // const HEIGHT: number = document.body.offsetHeight;
-const ZOOM_FACTOR: number = 1;
+const ZOOM_FACTOR = 1;
 
 const SHARED_CONFIG: {
     mapOffset: number,

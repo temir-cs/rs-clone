@@ -10,10 +10,6 @@ class Preload extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', '../../../assets/json/01_forest_map.json');
     this.load.image('tiles-1', '../../../assets/img/01_forest_platforms.png');
     this.load.image('tiles-2', '../../../assets/img/01_forest_env.png');
-    this.load.image('fireball', '../../../assets/img/weapons/fire4.png');
-    this.load.spritesheet('fire-hit-sheet', '../../../assets/img/weapons/fire_hit_effect_sheet.png', {
-      frameWidth: 128, frameHeight: 128
-    });
 
     // Forest Level Background
     this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
@@ -23,7 +19,7 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-forest-clouds-2', '../../../assets/img/levels/forest/clouds_back_layer2.png');
     this.load.image('bg-forest-clouds-small', '../../../assets/img/levels/forest/coluds_small.png');
     this.load.image('bg-forest-tileset', '../../../assets/img/levels/forest/green-tile.png');
-    this.load.audio('forest-theme', '../../../assets/img/sounds/forest-theme.mp3');
+    this.load.image('coin-static', '../../../assets/img/collectables/coin.png');
 
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
@@ -36,6 +32,7 @@ class Preload extends Phaser.Scene {
     this.load.multiatlas('troll', '../../../assets/json/enemies/enemyGoblinSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('imp', '../../../assets/json/enemies/enemyImpSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
+    this.load.multiatlas('collectables', '../../../assets/json/collectables/collectablesSprite.json', '../../../assets/img/collectables');
 
     // Audio
     this.load.audio('forest-theme', '../../../assets/sounds/forest-theme.mp3');
