@@ -22,6 +22,8 @@ class Imp extends Enemy {
     this.setScale(1.2);
     this.health = 60;
     this.speed = 50;
+    this.hitSound = this.scene.sound.add('imp-hit', { volume: 0.4 });
+    this.deathSound = this.scene.sound.add('imp-dead', { volume: 0.4 });
 
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.timeFromLastAttack = 0;

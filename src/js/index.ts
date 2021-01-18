@@ -4,6 +4,7 @@ import PlayScene from './components/scenes/Play';
 import PreloadScene from './components/scenes/Preload';
 import MenuScene from './components/scenes/Menu';
 import LevelsScene from './components/scenes/LevelsScene';
+import GameOverScene from './components/scenes/GameOverScene';
 
 const MAP_WIDTH = 3200;
 const MAP_HEIGHT = 1280;
@@ -43,7 +44,7 @@ const SHARED_CONFIG: {
   },
 };
 
-const Scenes = [PreloadScene, MenuScene, LevelsScene, PlayScene];
+const Scenes = [PreloadScene, MenuScene, LevelsScene, PlayScene, GameOverScene];
 const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
 const initScenes = () => Scenes.map(createScene);
 

@@ -29,12 +29,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   isPlayingAnims: any;
   meleeWeapon: any;
   timeFromLastSwing: any;
-  zapSound: any;
-  swordSound: any;
-  stepSound: any;
-  jumpSound: any;
-  damageSound: any;
-  isCrouching: boolean;
+  zapSound: Phaser.Sound.BaseSound;
+  swordSound: Phaser.Sound.BaseSound;
+  stepSound: Phaser.Sound.BaseSound;
+  jumpSound: Phaser.Sound.BaseSound;
+  hitSound: Phaser.Sound.BaseSound;
+  deathSound: Phaser.Sound.BaseSound;
 
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'player');
@@ -59,7 +59,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.jumpHeight = 400;
     this.jumpCount = 0;
     this.hasBeenHit = false;
-    this.isCrouching = false;
     this.consecutiveJumps = 1;
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
@@ -67,14 +66,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.jumpSound = this.scene.sound.add('jump', { volume: 0.1 });
     this.zapSound = this.scene.sound.add('zap', { volume: 0.4 });
     this.swordSound = this.scene.sound.add('sword-swing', { volume: 0.2 });
-    this.damageSound = this.scene.sound.add('damage', { volume: 0.03 });
+    this.hitSound = this.scene.sound.add('player-hit', { volume: 0.03 });
+    this.deathSound = this.scene.sound.add('player-dead', { volume: 0.05 });
 
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
 
-    this.health = 60;
+    this.health = 10;
     this.hp = new HealthBar(
       this.scene,
       this.scene.config.leftTopCorner.x + 10,
@@ -91,7 +91,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.setBodySize(30, 56, true);
     this.setOffset(30, 54);
     this.setOrigin(0.5, 1);
-    console.log(this);
 
     initAnimations(this.scene.anims, this.hero);
 
@@ -124,18 +123,35 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
+  playDeath() {
+    console.log('DEATH!');
+    this.play('death');
+    return this.scene.tweens.add({
+      targets: this,
+      duration: 80,
+      repeat: -1,
+      tint: 0xffffff,
+    });
+  }
+
   update():void {
-    if (this.hasBeenHit || !this.body || this.isCrouching) return;
+    if (this.hasBeenHit || !this.body) return;
 
     if (this.getBounds().top > this.scene.config.height + 450) {
+      this.deathSound.play();
       EventEmitter.emit('PLAYER_LOSE');
       return;
     }
 
-    const { left, right, space, up } = this.cursors;
+    const { left, right, space, up, down } = this.cursors;
     const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
     const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
     const onFloor = this.body.onFloor();
+
+    if (onFloor && down.isDown) {
+      if (!this.isAttacking()) this.sitDown();
+      return;
+    }
 
     if (left.isDown) {
       this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT;
@@ -200,23 +216,37 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
-  handleMovements() {
+  isAttacking():boolean {
+    return this.isPlayingAnims('sword-attack') || this.isPlayingAnims('run-attack');
+  }
+
+  resetMovements():void {
+    this.body.setSize(30, 56);
+    this.setOffset(30, 54);
+    this.setY(this.body.y + 30);
+  }
+
+  handleMovements():void {
     this.scene.input.keyboard.on('keydown-DOWN', () => {
-      if (!this.body.onFloor()) return;
-      this.body.setSize(30, 28);
-      this.setOffset(30, 82);
-      this.setVelocityX(0);
-      this.play('crouch', true);
-      this.isCrouching = true;
+      this.sitDown();
     });
 
     this.scene.input.keyboard.on('keyup-DOWN', () => {
       if (!this.body.onFloor()) return;
-      this.body.setSize(30, 56);
-      this.setOffset(30, 54);
-      this.setY(this.body.y + 30);
-      this.isCrouching = false;
+      this.resetMovements();
     });
+  }
+
+  sitDown():void {
+    if (!this.body.onFloor()) return;
+    this.body.setSize(30, 28);
+    this.setOffset(30, 82);
+    this.setVelocityX(0);
+    this.play('crouch', true);
+  }
+
+  isSitting():boolean {
+    return this.isPlayingAnims('sit-down');
   }
 
   bounceOff():void {
@@ -229,20 +259,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     setTimeout(() => this.setVelocityY(-this.bounceVelocity));
   }
 
-  takesHit(source):void {
-    if (this.hasBeenHit) return;
-
-    this.health -= source.damage;
-    // TEMIR - ADDED FUNCTIONALITY FOR SCENE CHANGE
-    if (this.health <= 0) {
-      EventEmitter.emit('PLAYER_LOSE');
-      return;
-    }
-
+  checkAfterHit(source, status:boolean):void {
     this.hasBeenHit = true;
     this.bounceOff();
-    this.damageSound.play();
-    const damageAnim = this.playDamageTween();
+    let damageAnim:any = null;
+    if (status === true) {
+      damageAnim = this.playDamageTween();
+      this.hitSound.play();
+    } else {
+      damageAnim = this.playDeath();
+      this.deathSound.play();
+    }
 
     this.hp.decrease(this.health);
 
@@ -253,12 +280,32 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.time.addEvent({
       delay: 1000,
       callback: () => {
-        this.hasBeenHit = false;
-        damageAnim.stop();
-        this.clearTint();
+          this.hasBeenHit = false;
+          damageAnim.stop();
+          this.clearTint();
+          if (status === false) {
+            this.setVisible(false);
+            this.body.destroy();
+            this.setActive(false);
+            setTimeout(() => EventEmitter.emit('PLAYER_LOSE'), 2000);
+          }
       },
       loop: false,
     });
+  }
+
+  takesHit(source):void {
+    if (this.hasBeenHit) return;
+
+    this.health -= source.damage;
+    if (this.health <= 0) {
+      // EventEmitter.emit('PLAYER_LOSE');
+      // return;
+      this.checkAfterHit(source, false);
+      return;
+    }
+    this.checkAfterHit(source, true);
+    this.resetMovements();
   }
 }
 

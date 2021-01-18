@@ -18,6 +18,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
   health: number;
   isPlayingAnims?: any;
   projectiles: any;
+  hitSound: Phaser.Sound.BaseSound;
+  deathSound: Phaser.Sound.BaseSound;
 
   constructor(scene:any, x:number, y:number, key:string) {
     super(scene, x, y, key);
@@ -42,6 +44,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.health = 40;
     this.damage = 10;
     this.projectiles = null;
+    this.hitSound = this.scene.sound.add('troll-hit', { volume: 0.4 });
+    this.deathSound = this.scene.sound.add('troll-dead', { volume: 0.4 });
 
     this.rayGraphics = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
 
@@ -88,9 +92,18 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.collidersLayer = collidersLayer;
   }
 
+  playHitSound():void {
+    if (this.health > 0) {
+      this.hitSound.play();
+    } else {
+      this.deathSound.play();
+    }
+  }
+
   takesHit(source):void {
     source.deliversHit(this);
     this.health -= source.damage;
+    this.playHitSound();
 
     if (this.health <= 0) {
       this.setTint(0xff0000);
