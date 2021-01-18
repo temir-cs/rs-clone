@@ -194,6 +194,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
         this.play('sword-attack', true);
         this.zapSound.play();
+        // this.fixBodyPosition();
       }
     });
 
@@ -208,7 +209,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.swordSound.play();
       this.meleeWeapon.swing(this);
       this.timeFromLastSwing = getTimestamp();
+      // this.fixBodyPosition();
     });
+  }
+
+  fixBodyPosition():void {
+    this.body.setSize(30, 56);
+    this.setOffset(30, 54);
+    this.setY(this.body.y + 30);
+    this.isCrouching = false;
   }
 
   handleMovements() {
@@ -223,10 +232,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.input.keyboard.on('keyup-DOWN', () => {
       if (!this.body.onFloor()) return;
-      this.body.setSize(30, 56);
-      this.setOffset(30, 54);
-      this.setY(this.body.y + 30);
-      this.isCrouching = false;
+      this.fixBodyPosition();
     });
   }
 
@@ -265,7 +271,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.clearTint();
           if (status === false) {
             this.setVisible(false);
-            EventEmitter.emit('PLAYER_LOSE');
+            // EventEmitter.emit('PLAYER_LOSE');
+            this.body.destroy();
+            this.setActive(false);
+            setTimeout(() => EventEmitter.emit('PLAYER_LOSE'), 4000);
           }
       },
       loop: false,
@@ -284,6 +293,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       return;
     }
     this.isAlive(source, true);
+    this.fixBodyPosition();
   }
 }
 
