@@ -27,7 +27,7 @@ class GameOverScene extends BaseScene {
       fontFamily: this.fontFamily,
       fill: '#fff',
     };
-    this.add.text(510, 150, 'GAME OVER', this.newOptions).setOrigin(0, 0);
+    this.add.text(this.screenCenter[0], this.screenCenter[1] - 180, 'GAME OVER', this.newOptions).setOrigin(0.5, 0.5);
   }
 
   setupMenuEvents(menuItem) {
@@ -40,7 +40,7 @@ class GameOverScene extends BaseScene {
 
     textGameObject.on('pointerout', () => {
       textGameObject.setStyle({ fill: '#fff' });
-    })
+    });
 
     textGameObject.on('pointerup', () => {
       menuItem.scene && this.scene.start(menuItem.scene);

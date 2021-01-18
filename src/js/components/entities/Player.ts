@@ -29,11 +29,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   isPlayingAnims: any;
   meleeWeapon: any;
   timeFromLastSwing: any;
-  zapSound: any;
-  swordSound: any;
-  stepSound: any;
-  jumpSound: any;
-  damageSound: any;
+  zapSound: Phaser.Sound.BaseSound;
+  swordSound: Phaser.Sound.BaseSound;
+  stepSound: Phaser.Sound.BaseSound;
+  jumpSound: Phaser.Sound.BaseSound;
+  hitSound: Phaser.Sound.BaseSound;
+  deathSound: Phaser.Sound.BaseSound;
 
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'player');
@@ -65,14 +66,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.jumpSound = this.scene.sound.add('jump', { volume: 0.1 });
     this.zapSound = this.scene.sound.add('zap', { volume: 0.4 });
     this.swordSound = this.scene.sound.add('sword-swing', { volume: 0.2 });
-    this.damageSound = this.scene.sound.add('damage', { volume: 0.03 });
+    this.hitSound = this.scene.sound.add('player-hit', { volume: 0.03 });
+    this.deathSound = this.scene.sound.add('player-dead', { volume: 0.05 });
 
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
 
-    this.health = 60;
+    this.health = 10;
     this.hp = new HealthBar(
       this.scene,
       this.scene.config.leftTopCorner.x + 10,
@@ -89,7 +91,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.setBodySize(30, 56, true);
     this.setOffset(30, 54);
     this.setOrigin(0.5, 1);
-    console.log(this);
 
     initAnimations(this.scene.anims, this.hero);
 
@@ -137,6 +138,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.hasBeenHit || !this.body) return;
 
     if (this.getBounds().top > this.scene.config.height + 450) {
+      this.deathSound.play();
       EventEmitter.emit('PLAYER_LOSE');
       return;
     }
@@ -257,15 +259,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     setTimeout(() => this.setVelocityY(-this.bounceVelocity));
   }
 
-  isAlive(source, status:boolean):void {
+  checkAfterHit(source, status:boolean):void {
     this.hasBeenHit = true;
     this.bounceOff();
-    this.damageSound.play();
     let damageAnim:any = null;
     if (status === true) {
       damageAnim = this.playDamageTween();
+      this.hitSound.play();
     } else {
       damageAnim = this.playDeath();
+      this.deathSound.play();
     }
 
     this.hp.decrease(this.health);
@@ -282,10 +285,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.clearTint();
           if (status === false) {
             this.setVisible(false);
-            // EventEmitter.emit('PLAYER_LOSE');
             this.body.destroy();
             this.setActive(false);
-            setTimeout(() => EventEmitter.emit('PLAYER_LOSE'), 4000);
+            setTimeout(() => EventEmitter.emit('PLAYER_LOSE'), 2000);
           }
       },
       loop: false,
@@ -296,14 +298,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.hasBeenHit) return;
 
     this.health -= source.damage;
-    // TEMIR - ADDED FUNCTIONALITY FOR SCENE CHANGE
     if (this.health <= 0) {
       // EventEmitter.emit('PLAYER_LOSE');
       // return;
-      this.isAlive(source, false);
+      this.checkAfterHit(source, false);
       return;
     }
-    this.isAlive(source, true);
+    this.checkAfterHit(source, true);
     this.resetMovements();
   }
 }

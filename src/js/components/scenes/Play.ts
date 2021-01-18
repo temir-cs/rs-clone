@@ -44,9 +44,9 @@ class Play extends Phaser.Scene {
   private graphics: Phaser.GameObjects.Graphics;
   private line: Phaser.Geom.Line;
   private tileHits: any;
-  private treesImg: any;
-  private cloudsImg: any;
-  private mountainsImg: any;
+  private bkgForest: any;
+  private bkgClouds: any;
+  private bkgMountains: any;
   private collectables: any;
   private score: number;
   private scoreBoard: any;
@@ -148,13 +148,13 @@ class Play extends Phaser.Scene {
 
   createBg() {
     const bgObject = this.map.getObjectLayer('distance_bg').objects[0];
-    this.treesImg = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-trees')
+    this.bkgForest = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-trees')
       .setOrigin(0, 1)
       .setDepth(-10)
       .setScale(1.5)
       .setScrollFactor(0, 1);
 
-    this.mountainsImg = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-mountains')
+    this.bkgMountains = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-mountains')
       .setOrigin(0, 1)
       .setDepth(-11)
       .setScale(1.5)
@@ -172,7 +172,7 @@ class Play extends Phaser.Scene {
       .setScale(1.5)
       .setScrollFactor(0, 1);
 
-    this.cloudsImg = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-small')
+    this.bkgClouds = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-small')
       .setOrigin(0, 1)
       .setDepth(-10)
       .setScale(1.5)
@@ -300,9 +300,9 @@ class Play extends Phaser.Scene {
   }
 
   update():void {
-    this.treesImg.tilePositionX = this.cameras.main.scrollX * 0.2;
-    this.mountainsImg.tilePositionX = this.cameras.main.scrollX * 0.15;
-    this.cloudsImg.tilePositionX = this.cameras.main.scrollX * 0.1;
+    this.bkgForest.tilePositionX = this.cameras.main.scrollX * 0.2;
+    this.bkgMountains.tilePositionX = this.cameras.main.scrollX * 0.15;
+    this.bkgClouds.tilePositionX = this.cameras.main.scrollX * 0.1;
   }
 }
 
