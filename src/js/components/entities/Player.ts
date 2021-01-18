@@ -34,7 +34,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   stepSound: any;
   jumpSound: any;
   damageSound: any;
-  isCrouching: boolean;
 
   constructor(scene:Phaser.Scene, x:number, y:number) {
     super(scene, x, y, 'player');
@@ -59,7 +58,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.jumpHeight = 400;
     this.jumpCount = 0;
     this.hasBeenHit = false;
-    this.isCrouching = false;
     this.consecutiveJumps = 1;
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
@@ -136,17 +134,22 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   update():void {
-    if (this.hasBeenHit || !this.body || this.isCrouching) return;
+    if (this.hasBeenHit || !this.body) return;
 
     if (this.getBounds().top > this.scene.config.height + 450) {
       EventEmitter.emit('PLAYER_LOSE');
       return;
     }
 
-    const { left, right, space, up } = this.cursors;
+    const { left, right, space, up, down } = this.cursors;
     const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
     const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
     const onFloor = this.body.onFloor();
+
+    if (onFloor && down.isDown) {
+      if (!this.isAttacking()) this.sitDown();
+      return;
+    }
 
     if (left.isDown) {
       this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT;
@@ -194,7 +197,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
         this.play('sword-attack', true);
         this.zapSound.play();
-        // this.fixBodyPosition();
       }
     });
 
@@ -209,31 +211,40 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.swordSound.play();
       this.meleeWeapon.swing(this);
       this.timeFromLastSwing = getTimestamp();
-      // this.fixBodyPosition();
     });
   }
 
-  fixBodyPosition():void {
+  isAttacking():boolean {
+    return this.isPlayingAnims('sword-attack') || this.isPlayingAnims('run-attack');
+  }
+
+  resetMovements():void {
     this.body.setSize(30, 56);
     this.setOffset(30, 54);
     this.setY(this.body.y + 30);
-    this.isCrouching = false;
   }
 
-  handleMovements() {
+  handleMovements():void {
     this.scene.input.keyboard.on('keydown-DOWN', () => {
-      if (!this.body.onFloor()) return;
-      this.body.setSize(30, 28);
-      this.setOffset(30, 82);
-      this.setVelocityX(0);
-      this.play('crouch', true);
-      this.isCrouching = true;
+      this.sitDown();
     });
 
     this.scene.input.keyboard.on('keyup-DOWN', () => {
       if (!this.body.onFloor()) return;
-      this.fixBodyPosition();
+      this.resetMovements();
     });
+  }
+
+  sitDown():void {
+    if (!this.body.onFloor()) return;
+    this.body.setSize(30, 28);
+    this.setOffset(30, 82);
+    this.setVelocityX(0);
+    this.play('crouch', true);
+  }
+
+  isSitting():boolean {
+    return this.isPlayingAnims('sit-down');
   }
 
   bounceOff():void {
@@ -293,7 +304,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       return;
     }
     this.isAlive(source, true);
-    this.fixBodyPosition();
+    this.resetMovements();
   }
 }
 
