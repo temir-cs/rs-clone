@@ -48,6 +48,10 @@ class Preload extends Phaser.Scene {
     this.load.audio('damage', '../../../assets/sounds/damage.wav');
     this.load.audio('key-pickup', '../../../assets/sounds/key.wav');
     this.load.audio('door-opening', '../../../assets/sounds/door-opening.wav');
+    this.load.audio('troll-hit', '../../../assets/sounds/troll-hit.wav');
+    this.load.audio('troll-dead', '../../../assets/sounds/troll-dead.wav');
+    this.load.audio('imp-hit', '../../../assets/sounds/imp-hit.wav');
+    this.load.audio('imp-dead', '../../../assets/sounds/imp-dead.wav');
   }
 
   create() {
