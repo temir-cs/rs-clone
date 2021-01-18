@@ -188,6 +188,7 @@ class Play extends Phaser.Scene {
   createGameEvents() {
     EventEmitter.on('PLAYER_LOSE', () => {
       this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
+      this.scene.start('GameOverScene');
     });
   }
 

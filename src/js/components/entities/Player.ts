@@ -124,6 +124,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
+  playDeath() {
+    console.log('DEATH!');
+    this.play('death');
+    return this.scene.tweens.add({
+      targets: this,
+      duration: 80,
+      repeat: -1,
+      tint: 0xffffff,
+    });
+  }
+
   update():void {
     if (this.hasBeenHit || !this.body || this.isCrouching) return;
 
@@ -229,20 +240,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     setTimeout(() => this.setVelocityY(-this.bounceVelocity));
   }
 
-  takesHit(source):void {
-    if (this.hasBeenHit) return;
-
-    this.health -= source.damage;
-    // TEMIR - ADDED FUNCTIONALITY FOR SCENE CHANGE
-    if (this.health <= 0) {
-      EventEmitter.emit('PLAYER_LOSE');
-      return;
-    }
-
+  isAlive(source, status:boolean):void {
     this.hasBeenHit = true;
     this.bounceOff();
     this.damageSound.play();
-    const damageAnim = this.playDamageTween();
+    let damageAnim:any = null;
+    if (status === true) {
+      damageAnim = this.playDamageTween();
+    } else {
+      damageAnim = this.playDeath();
+    }
 
     this.hp.decrease(this.health);
 
@@ -253,12 +260,30 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.time.addEvent({
       delay: 1000,
       callback: () => {
-        this.hasBeenHit = false;
-        damageAnim.stop();
-        this.clearTint();
+          this.hasBeenHit = false;
+          damageAnim.stop();
+          this.clearTint();
+          if (status === false) {
+            this.setVisible(false);
+            EventEmitter.emit('PLAYER_LOSE');
+          }
       },
       loop: false,
     });
+  }
+
+  takesHit(source):void {
+    if (this.hasBeenHit) return;
+
+    this.health -= source.damage;
+    // TEMIR - ADDED FUNCTIONALITY FOR SCENE CHANGE
+    if (this.health <= 0) {
+      // EventEmitter.emit('PLAYER_LOSE');
+      // return;
+      this.isAlive(source, false);
+      return;
+    }
+    this.isAlive(source, true);
   }
 }
 

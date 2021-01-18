@@ -95,6 +95,17 @@ export default (anims, hero) => {
     repeat: -1
   });
 
+  // anims.create({
+  //   key: 'death',
+  //   frames: anims.generateFrameNames(`${hero}`, {
+  //     start: 1,
+  //     end: 10,
+  //     prefix: 'Death/death',
+  //     suffix: '.png'
+  //   }),
+  //   frameRate: 8,
+  //   repeat: 0
+  // });
   anims.create({
     key: 'death',
     frames: anims.generateFrameNames(`${hero}`, {
@@ -103,7 +114,7 @@ export default (anims, hero) => {
       prefix: 'Death/death',
       suffix: '.png'
     }),
-    frameRate: 8,
-    repeat: 0
+    frameRate: 10,
+    repeat: -1
   });
 };
