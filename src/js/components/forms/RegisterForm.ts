@@ -1,15 +1,14 @@
-import debounce from '../utils/debounce';
+import Login from './LoginForm';
 
 class Register {
   form: string;
   container: HTMLElement;
-  gameStart: any;
+  mainMenu: any;
   loginForm: any;
   usernameField: HTMLInputElement;
   passwordField: HTMLInputElement;
-  constructor(gameStart, loginForm) {
-    this.loginForm = loginForm;
-    this.gameStart = gameStart;
+  constructor(mainMenu) {
+    this.mainMenu = mainMenu;
     this.container = document.body;
     this.form = ` 
       <form id="reg-form">
@@ -22,6 +21,7 @@ class Register {
   }
 
   init() {
+    this.loginForm = new Login(this.mainMenu, this);
     this.container.innerHTML = this.form;
     const formElement = document.querySelector('#reg-form');
     const linkToLogin = document.querySelector('#go-to-login');
@@ -32,35 +32,38 @@ class Register {
       this.removeForm();
       this.loginForm.init();
     });
-    formElement.addEventListener('submit', debounce(this.listenToSubmit));
-  }
+    formElement.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const message = document.querySelector('#message');
+      const username = this.usernameField.value;
+      const password = this.passwordField.value;
 
-  listenToSubmit(event) {
-    event.preventDefault();
-    const message = document.querySelector('#message');
-    const username = this.usernameField.value;
-    const password = this.passwordField.value;
-
-    fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username,
-        password
+      fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username,
+          password
+        })
       })
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.status === 'ok') {
-        this.removeForm();
-        this.gameStart(username);
-      } else {
-        console.log(data);
-        message.innerHTML = 'This username already taken please try another one';
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'ok') {
+          this.removeForm();
+          localStorage.setItem('user', username);
+          this.mainMenu.init(username);
+        } else {
+          console.log(data);
+          message.innerHTML = 'This username already taken please try another one';
+          setTimeout(() => { message.innerHTML = ''; }, 1000);
+        }
+      })
+      .catch((err) => {
+        message.innerHTML = 'Something went wrong';
         setTimeout(() => { message.innerHTML = ''; }, 1000);
-      }
+      });
     });
   }
 

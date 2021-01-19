@@ -1,15 +1,16 @@
 import gameStart from './game';
 
-import Login from './components/Forms/LoginForm';
+import Register from './components/forms/RegisterForm';
 
-import Register from './components/Forms/RegisterForm';
+import MainMenu from './components/main_menu/MainMenu';
+
+const mainMenu = new MainMenu(gameStart);
+const registerForm = new Register(mainMenu);
 
 const user = localStorage.getItem('user');
-const LoginForm = new Login(gameStart);
-const registerForm = new Register(gameStart, LoginForm);
-
 if (user) {
   gameStart(user);
 } else {
+  console.log(user);
   registerForm.init();
 }
