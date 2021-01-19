@@ -9,7 +9,7 @@ const registerForm = new Register(mainMenu);
 
 const user = localStorage.getItem('user');
 if (user) {
-  gameStart(user);
+  mainMenu.init(user);
 } else {
   console.log(user);
   registerForm.init();
