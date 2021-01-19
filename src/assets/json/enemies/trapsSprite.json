@@ -1,0 +1,482 @@
+{
+	"textures": [
+		{
+			"image": "trapsSprite.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 299,
+				"h": 255
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "fire_trap10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 46,
+						"y": 0,
+						"w": 37,
+						"h": 121
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 37,
+						"h": 121
+					}
+				},
+				{
+					"filename": "fire_trap9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 46,
+						"y": 0,
+						"w": 37,
+						"h": 121
+					},
+					"frame": {
+						"x": 1,
+						"y": 124,
+						"w": 37,
+						"h": 121
+					}
+				},
+				{
+					"filename": "fire_trap8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 46,
+						"y": 3,
+						"w": 37,
+						"h": 118
+					},
+					"frame": {
+						"x": 40,
+						"y": 1,
+						"w": 37,
+						"h": 118
+					}
+				},
+				{
+					"filename": "spikes_trap5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 22,
+						"y": 30,
+						"w": 85,
+						"h": 69
+					},
+					"frame": {
+						"x": 79,
+						"y": 1,
+						"w": 85,
+						"h": 69
+					}
+				},
+				{
+					"filename": "fire_trap7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 46,
+						"y": 7,
+						"w": 37,
+						"h": 114
+					},
+					"frame": {
+						"x": 40,
+						"y": 121,
+						"w": 37,
+						"h": 114
+					}
+				},
+				{
+					"filename": "Blade1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 28,
+						"w": 73,
+						"h": 72
+					},
+					"frame": {
+						"x": 79,
+						"y": 72,
+						"w": 73,
+						"h": 72
+					}
+				},
+				{
+					"filename": "Blade2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 28,
+						"w": 74,
+						"h": 71
+					},
+					"frame": {
+						"x": 79,
+						"y": 146,
+						"w": 74,
+						"h": 71
+					}
+				},
+				{
+					"filename": "Blade3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 29,
+						"w": 73,
+						"h": 71
+					},
+					"frame": {
+						"x": 166,
+						"y": 1,
+						"w": 73,
+						"h": 71
+					}
+				},
+				{
+					"filename": "spike4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 57,
+						"h": 63
+					},
+					"frame": {
+						"x": 241,
+						"y": 1,
+						"w": 57,
+						"h": 63
+					}
+				},
+				{
+					"filename": "spikes_trap4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 46,
+						"w": 74,
+						"h": 53
+					},
+					"frame": {
+						"x": 154,
+						"y": 74,
+						"w": 74,
+						"h": 53
+					}
+				},
+				{
+					"filename": "fire_trap6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 47,
+						"y": 23,
+						"w": 33,
+						"h": 98
+					},
+					"frame": {
+						"x": 155,
+						"y": 129,
+						"w": 33,
+						"h": 98
+					}
+				},
+				{
+					"filename": "fire_trap5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 48,
+						"y": 36,
+						"w": 31,
+						"h": 85
+					},
+					"frame": {
+						"x": 190,
+						"y": 129,
+						"w": 31,
+						"h": 85
+					}
+				},
+				{
+					"filename": "spikes_trap3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 61,
+						"w": 73,
+						"h": 38
+					},
+					"frame": {
+						"x": 190,
+						"y": 216,
+						"w": 73,
+						"h": 38
+					}
+				},
+				{
+					"filename": "spikes_trap2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 80,
+						"w": 73,
+						"h": 19
+					},
+					"frame": {
+						"x": 79,
+						"y": 219,
+						"w": 73,
+						"h": 19
+					}
+				},
+				{
+					"filename": "fire_trap4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 51,
+						"y": 58,
+						"w": 28,
+						"h": 63
+					},
+					"frame": {
+						"x": 223,
+						"y": 129,
+						"w": 28,
+						"h": 63
+					}
+				},
+				{
+					"filename": "fire_trap3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 73,
+						"w": 26,
+						"h": 48
+					},
+					"frame": {
+						"x": 230,
+						"y": 74,
+						"w": 26,
+						"h": 48
+					}
+				},
+				{
+					"filename": "spike2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 13,
+						"w": 35,
+						"h": 37
+					},
+					"frame": {
+						"x": 258,
+						"y": 66,
+						"w": 35,
+						"h": 37
+					}
+				},
+				{
+					"filename": "spike3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 8,
+						"w": 43,
+						"h": 47
+					},
+					"frame": {
+						"x": 253,
+						"y": 124,
+						"w": 43,
+						"h": 47
+					}
+				},
+				{
+					"filename": "fire_trap2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 98,
+						"w": 26,
+						"h": 23
+					},
+					"frame": {
+						"x": 253,
+						"y": 173,
+						"w": 26,
+						"h": 23
+					}
+				},
+				{
+					"filename": "spikes_trap1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 94,
+						"w": 73,
+						"h": 5
+					},
+					"frame": {
+						"x": 1,
+						"y": 247,
+						"w": 73,
+						"h": 5
+					}
+				},
+				{
+					"filename": "fire_trap1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 121
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 113,
+						"w": 26,
+						"h": 8
+					},
+					"frame": {
+						"x": 40,
+						"y": 237,
+						"w": 26,
+						"h": 8
+					}
+				},
+				{
+					"filename": "spike1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 20,
+						"y": 20,
+						"w": 23,
+						"h": 23
+					},
+					"frame": {
+						"x": 154,
+						"y": 229,
+						"w": 23,
+						"h": 23
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:b3162fd5045912a233eaec79d1336972:60902cf46c6176de61868e537f2d1212:b46140cafc2c830e01d10107ea9da5e3$"
+	}
+}

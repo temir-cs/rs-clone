@@ -8,8 +8,12 @@ class Preload extends Phaser.Scene {
 
   preload() {
     this.load.tilemapTiledJSON('map', '../../../assets/json/01_forest_map.json');
-    this.load.image('tiles-1', '../../../assets/img/01_forest_platforms.png');
-    this.load.image('tiles-2', '../../../assets/img/01_forest_env.png');
+    this.load.image('tiles-1', '../../../assets/img/levels/forest/01_forest_platforms.png');
+    this.load.image('tiles-2', '../../../assets/img/levels/forest/01_forest_env.png');
+    this.load.image('tiles-3', '../../../assets/img/levels/forest/castle_tiles.png');
+
+    this.load.tilemapTiledJSON('map-lvl2', '../../../assets/json/02_castle_map.json');
+    this.load.image('tiles-1-lvl2', '../../../assets/img/levels/castle/castle_platforms.png');
 
     // Forest Level Background
     this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
@@ -19,9 +23,18 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-forest-clouds-2', '../../../assets/img/levels/forest/clouds_back_layer2.png');
     this.load.image('bg-forest-clouds-small', '../../../assets/img/levels/forest/coluds_small.png');
     this.load.image('bg-forest-tileset', '../../../assets/img/levels/forest/green-tile.png');
+
+    // Castle Level Background
+    this.load.image('bg-castle-sky', '../../../assets/img/levels/castle/sky.png');
+    this.load.image('bg-castle-trees', '../../../assets/img/levels/castle/trees.png');
+    this.load.image('bg-castle-wall', '../../../assets/img/levels/castle/wall.png');
+    this.load.image('bg-castle-top', '../../../assets/img/levels/castle/top.png');
+    this.load.image('bg-castle-down', '../../../assets/img/levels/castle/down.png');
+    this.load.image('bg-castle-tileset', '../../../assets/img/levels/castle/castle_bg_tiles.png');
+
+    // Static pictures
     this.load.image('coin-static', '../../../assets/img/collectables/coin.png');
     this.load.image('key-static', '../../../assets/img/collectables/key3.png');
-    // this.load.image('door-static', '../../../assets/img/levels/forest/door1.png');
 
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');

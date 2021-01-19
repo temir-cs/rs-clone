@@ -9,7 +9,7 @@ import GameOverScene from './components/scenes/GameOverScene';
 const MAP_WIDTH = 3200;
 const MAP_HEIGHT = 1280;
 const WIDTH: number = document.body.offsetWidth;
-const HEIGHT = 800;
+const HEIGHT = 600;
 // const HEIGHT: number = document.body.offsetHeight;
 const ZOOM_FACTOR = 1;
 

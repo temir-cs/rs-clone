@@ -74,7 +74,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
 
-    this.health = 10;
+    this.health = 60;
     this.hp = new HealthBar(
       this.scene,
       this.scene.config.leftTopCorner.x + 10,

@@ -10,12 +10,16 @@ import Key from '../collectables/Key';
 import ScoreBoard from '../hud/ScoreBoard';
 import BoardForKey from '../hud/BoardForKey';
 import Door from '../helper_objects/Door';
+import { createMapCastle, createLayersCastle, createBgCastle, bgParallaxCastle } from './levels_utils/castleUtils';
+import { createMapForest,
+        createLayersForest,
+        createBgForest,
+        bgParallaxForest } from './levels_utils/forestUtils';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
   config: any;
   map: Phaser.Tilemaps.Tilemap = null;
-  // player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody = null;
   player: Phaser.Physics.Arcade.Sprite;
 
   layers: {
@@ -23,6 +27,7 @@ class Play extends Phaser.Scene {
     enemiesPlatformColliders: Phaser.Tilemaps.TilemapLayer,
     platformColliders: Phaser.Tilemaps.TilemapLayer,
     environmentBottom: Phaser.Tilemaps.TilemapLayer,
+    castleWall: Phaser.Tilemaps.TilemapLayer,
     platforms: Phaser.Tilemaps.TilemapLayer,
     playerZones: Phaser.Tilemaps.ObjectLayer,
     enemySpawns: Phaser.Tilemaps.ObjectLayer,
@@ -33,6 +38,7 @@ class Play extends Phaser.Scene {
     enemiesPlatformColliders: null,
     environmentTop: null,
     environmentBottom: null,
+    castleWall: null,
     platforms: null,
     playerZones: null,
     enemySpawns: null,
@@ -54,25 +60,41 @@ class Play extends Phaser.Scene {
   private hasKey: boolean;
   private BoardForKey: any;
 
+  lvlKey: string;
+  private createMap: any;
+  private createLayers: any;
+  private createBg: any;
+  private bgParallax: any;
+
   constructor(config) {
     super('PlayScene');
     this.config = config;
+    this.lvlKey = 'forest';
+    this.createLayers = createLayersForest;
+    this.createBg = createBgForest;
+    this.bgParallax = bgParallaxForest;
+    this.createMap = createMapForest;
+    // this.lvlKey = 'castle';
+    // this.createLayers = createLayersCastle;
+    // this.createBg = createBgCastle;
+    // this.bgParallax = bgParallaxCastle;
+    // this.createMap = createMapCastle;
   }
 
   create({ gameStatus }):void {
     // this.playBgMusic();
     this.hasKey = false;
     this.score = 0;
-    this.createMap();
+    this.createMap(this);
     effectAnims(this.anims);
-    this.createLayers();
+    this.createLayers(this);
     const playerZones = this.getPlayerZones();
     const player = this.createPlayer(playerZones.start);
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
     this.createCollectables(this.layers.collectables);
     this.createKeyCollectable(this.layers.collectableKey);
 
-    this.createBg();
+    this.createBg(this);
     this.scoreBoard = new ScoreBoard(this);
     this.BoardForKey = new BoardForKey(this);
 
@@ -115,74 +137,6 @@ class Play extends Phaser.Scene {
     if (this.sound.get('forest-theme')) return;
     this.sound.add('forest-theme', { loop: true, volume: 0.02 })
       .play();
-  }
-
-  createMap():void {
-    this.map = this.make.tilemap({ key: 'map' });
-    this.map.addTilesetImage('01_forest_platforms', 'tiles-1');
-    this.map.addTilesetImage('01_forest_env', 'tiles-2');
-    this.map.addTilesetImage('green-tile', 'bg-forest-tileset');
-  }
-
-  createLayers():void {
-    const tileset1 = this.map.getTileset('01_forest_platforms');
-    const tileset2 = this.map.getTileset('01_forest_env');
-    const tilesetBg = this.map.getTileset('green-tile');
-
-    this.map.createLayer('distance', tilesetBg);
-
-    this.layers.platformColliders = this.map.createLayer('platform_colliders', tileset1);
-    this.layers.platformColliders.setCollisionByProperty({ collides: true });
-    this.layers.platformColliders.setAlpha(0);
-    this.layers.enemiesPlatformColliders = this.map.createLayer('enemies_colliders', tileset1);
-    this.layers.enemiesPlatformColliders.setCollisionByProperty({ collides: true });
-    this.layers.enemiesPlatformColliders.setAlpha(0);
-    this.layers.environmentBottom = this.map.createLayer('environment_bottom', tileset2);
-    this.layers.platforms = this.map.createLayer('platforms', tileset1);
-    this.layers.environmentTop = this.map.createLayer('environment_top', tileset2);
-    this.layers.playerZones = this.map.getObjectLayer('player_zones');
-    this.layers.enemySpawns = this.map.getObjectLayer('enemy_spawns');
-    this.layers.collectables = this.map.getObjectLayer('collectables');
-    this.layers.collectableKey = this.map.getObjectLayer('collectableKey');
-  }
-
-  createBg() {
-    const bgObject = this.map.getObjectLayer('distance_bg').objects[0];
-    this.bkgForest = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-trees')
-      .setOrigin(0, 1)
-      .setDepth(-10)
-      .setScale(1.5)
-      .setScrollFactor(0, 1);
-
-    this.bkgMountains = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-mountains')
-      .setOrigin(0, 1)
-      .setDepth(-11)
-      .setScale(1.5)
-      .setScrollFactor(0, 1);
-
-    this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-1')
-      .setOrigin(0, 1)
-      .setDepth(-12)
-      .setScale(1.5)
-      .setScrollFactor(0, 1);
-
-    this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-2')
-      .setOrigin(0, 1)
-      .setDepth(-13)
-      .setScale(1.5)
-      .setScrollFactor(0, 1);
-
-    this.bkgClouds = this.add.tileSprite(bgObject.x, bgObject.y, this.config.width, bgObject.height, 'bg-forest-clouds-small')
-      .setOrigin(0, 1)
-      .setDepth(-10)
-      .setScale(1.5)
-      .setScrollFactor(0, 1);
-
-    this.add.tileSprite(0, 0, this.config.width, bgObject.height, 'bg-forest-sky')
-      .setOrigin(0, 0)
-      .setDepth(-14)
-      .setScale(1.2)
-      .setScrollFactor(0, 1);
   }
 
   createGameEvents() {
@@ -268,7 +222,8 @@ class Play extends Phaser.Scene {
       .setAlpha(0)
       .setOrigin(0.5, 1)
       .setSize(5, 100);
-    const door = new Door(this, end.x, end.y - 30, 'doors').setDepth(-1);
+
+    const door = new Door(this, end.x, end.y - 30, this.lvlKey).setDepth(-1);
 
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
       if (this.hasKey) {
@@ -300,9 +255,7 @@ class Play extends Phaser.Scene {
   }
 
   update():void {
-    this.bkgForest.tilePositionX = this.cameras.main.scrollX * 0.2;
-    this.bkgMountains.tilePositionX = this.cameras.main.scrollX * 0.15;
-    this.bkgClouds.tilePositionX = this.cameras.main.scrollX * 0.1;
+    this.bgParallax(this);
   }
 }
 
