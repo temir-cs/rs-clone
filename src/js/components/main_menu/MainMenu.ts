@@ -34,7 +34,7 @@ class MainMenu {
     this.leaderboardLink.addEventListener('click', async () => {
       console.log("asd");
       
-      const results = await fetch('http://localhost:3000/leaderboard', {
+      const results = await fetch('https://rscloneapi.herokuapp.com/leaderboard', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

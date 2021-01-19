@@ -38,7 +38,7 @@ class Register {
       const username = this.usernameField.value;
       const password = this.passwordField.value;
 
-      fetch('http://localhost:3000/users', {
+      fetch('https://rscloneapi.herokuapp.com/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

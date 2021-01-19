@@ -11,6 +11,5 @@ const user = localStorage.getItem('user');
 if (user) {
   mainMenu.init(user);
 } else {
-  console.log(user);
   registerForm.init();
 }

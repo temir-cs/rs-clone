@@ -34,8 +34,8 @@ class Login {
       const message = document.querySelector('#message');
       const username = this.usernameField.value;
       const password = this.passwordField.value;
-      fetch('http://localhost:3000/users', {
-        method: 'GET',
+      fetch('https://rscloneapi.herokuapp.com/user', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -46,6 +46,7 @@ class Login {
       })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.status === 'ok') {
           this.removeForm();
           localStorage.setItem('user', username);
@@ -57,13 +58,15 @@ class Login {
         }
       })
       .catch((err) => {
+        console.log(err);
+        
         message.innerHTML = 'Something went wrong';
         setTimeout(() => { message.innerHTML = ''; }, 1000);
       });
     });
   }
 
-  removeForm():void {
+  removeForm():void {    
     this.usernameField.value = '';
     this.passwordField.value = '';
     this.container.innerHTML = '';
