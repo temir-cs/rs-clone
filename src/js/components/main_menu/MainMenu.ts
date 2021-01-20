@@ -9,10 +9,18 @@ class MainMenu {
     this.startGame = startGame;
     this.container = document.body;
     this.html = `
-    <div id="menu-wrapper">
-      <a id="to-play">To play</a>
-      <a id="leaderboard">Leaderboard</a>
-      <a href="#">About development</a>
+    <div id="menu-wrapper"  class="main-menu__container">
+      <ul class="main-menu__list">
+        <li class="main-menu__item">
+          <a id="to-play">To play</a>
+       </li>
+        <li class="main-menu__item">
+          <a id="leaderboard">Leaderboard</a>
+        </li>
+        <li class="main-menu__item">
+          <a href="#">About development</a>
+        </li>
+      </ul>
     </div>`;
   }
 

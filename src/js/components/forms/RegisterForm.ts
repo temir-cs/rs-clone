@@ -12,14 +12,17 @@ class Register {
     this.mainMenu = mainMenu;
     this.container = document.body;
     this.warnTimeout = 2000;
-    this.form = ` 
-      <form id="reg-form">
+    this.form = `
+    <div class="form__container">
+      <h3 class="form__title">Registration</h3>
+      <form id="reg-form" class="form__form">
         <span id="message"></span>
-        <input type="text" name="username" id="username" required>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" value="Register">
+        <input class="form__input" type="text" name="username" id="username" required>
+        <input class="form__input" type="password" name="password" id="password" required>
+        <input class="form__btn" type="submit" value="Register">
       </form>
-      <a id="go-to-login">You already have a login?</a>`;
+      <a id="go-to-login" class="form__link">You already have a login?</a>
+      </div>`;
   }
 
   init() {
@@ -45,7 +48,7 @@ class Register {
         return;
       }
 
-      if (/\s/.test(password)|| /[а-яА-ЯЁё]/.test(password)) {
+      if (/\s/.test(password) || /[а-яА-ЯЁё]/.test(password)) {
         message.innerHTML = 'Password shouldn`t contain any kind of spaces or cyrillic charachters';
         setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
         return;

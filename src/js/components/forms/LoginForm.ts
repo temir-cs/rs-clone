@@ -9,13 +9,17 @@ class Login {
     this.mainMenu = mainMenu;
     this.regForm = regForm;
     this.container = document.body;
-    this.form = ` 
-      <form id="login-form">
-        <input type="text" name="username" id="username" required>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" value="Login">
+    this.form = `
+    <div class="form__container">
+    <h3 class="form__title">Authorization</h3>
+       <form id="login-form"  class="form__form">
+        <input class="form__input" type="text" name="username" id="username" required>
+        <input class="form__input" type="password" name="password" id="password" required>
+        <input class="form__btn" type="submit" value="Login">
       </form>
-      <a id="go-to-register">You are not regitered yet?</a>`;
+      <a id="go-to-register" class="form__link">You are not regitered yet?</a>
+    </div>
+`;
   }
 
   init():void {
@@ -59,14 +63,14 @@ class Login {
       })
       .catch((err) => {
         console.log(err);
-        
+
         message.innerHTML = 'Something went wrong';
         setTimeout(() => { message.innerHTML = ''; }, 1000);
       });
     });
   }
 
-  removeForm():void {    
+  removeForm():void {
     this.usernameField.value = '';
     this.passwordField.value = '';
     this.container.innerHTML = '';
