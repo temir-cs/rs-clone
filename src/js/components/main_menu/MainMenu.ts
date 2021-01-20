@@ -32,8 +32,6 @@ class MainMenu {
       this.startGame(this.username);
     });
     this.leaderboardLink.addEventListener('click', async () => {
-      console.log("asd");
-      
       const results = await fetch('https://rscloneapi.herokuapp.com/leaderboard', {
         method: 'GET',
         headers: {

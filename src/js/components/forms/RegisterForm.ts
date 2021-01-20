@@ -7,9 +7,11 @@ class Register {
   loginForm: any;
   usernameField: HTMLInputElement;
   passwordField: HTMLInputElement;
+  warnTimeout: number;
   constructor(mainMenu) {
     this.mainMenu = mainMenu;
     this.container = document.body;
+    this.warnTimeout = 2000;
     this.form = ` 
       <form id="reg-form">
         <span id="message"></span>
@@ -37,7 +39,17 @@ class Register {
       const message = document.querySelector('#message');
       const username = this.usernameField.value;
       const password = this.passwordField.value;
+      if (/\s/.test(username) || /[а-яА-ЯЁё]/.test(username)) {
+        message.innerHTML = 'Username shouldn`t contain any kind of spaces or cyrillic charachters';
+        setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
+        return;
+      }
 
+      if (/\s/.test(password)|| /[а-яА-ЯЁё]/.test(password)) {
+        message.innerHTML = 'Password shouldn`t contain any kind of spaces or cyrillic charachters';
+        setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
+        return;
+      }
       fetch('https://rscloneapi.herokuapp.com/users', {
         method: 'POST',
         headers: {
@@ -57,12 +69,12 @@ class Register {
         } else {
           console.log(data);
           message.innerHTML = 'This username already taken please try another one';
-          setTimeout(() => { message.innerHTML = ''; }, 1000);
+          setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
         }
       })
       .catch((err) => {
         message.innerHTML = 'Something went wrong';
-        setTimeout(() => { message.innerHTML = ''; }, 1000);
+        setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
       });
     });
   }
