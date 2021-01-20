@@ -2,6 +2,7 @@ import * as Phaser from 'phaser';
 
 import collidable from '../mixins/collidable';
 import anims from '../mixins/anims';
+import EventEmitter from '../events/Emitter';
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
   config: any;
@@ -106,6 +107,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.playHitSound();
 
     if (this.health <= 0) {
+      EventEmitter.emit('ENEMY_KILLED');
       this.setTint(0xff0000);
       this.setVelocity(0, -200);
       this.body.checkCollision.none = true;

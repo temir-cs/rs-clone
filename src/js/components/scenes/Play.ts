@@ -16,6 +16,9 @@ import { createMapForest,
         createBgForest,
         bgParallaxForest } from './levels_utils/forestUtils';
 
+const DEFAULT_LEVEL = 1;
+const LIVES = 3;
+
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
   config: any;
@@ -54,7 +57,7 @@ class Play extends Phaser.Scene {
   private bkgClouds: any;
   private bkgMountains: any;
   private collectables: any;
-  private score: number;
+  private coinCount: number;
   private scoreBoard: any;
   private collectableKey: any;
   private hasKey: boolean;
@@ -65,6 +68,8 @@ class Play extends Phaser.Scene {
   private createLayers: any;
   private createBg: any;
   private bgParallax: any;
+  killCount: number;
+  livesCount: number;
 
   constructor(config) {
     super('PlayScene');
@@ -75,7 +80,13 @@ class Play extends Phaser.Scene {
     this.cameras.main.fadeIn(3000);
     this.checkLevel();
     this.hasKey = false;
-    this.score = 0;
+    console.log('Gamestatus: ', gameStatus);
+    this.coinCount = this.registry.get('coinCount') || 0;
+    this.killCount = this.registry.get('killCount') || 0;
+    this.livesCount = this.registry.get('livesCount') || LIVES;
+    console.log('coinCount', this.coinCount);
+    console.log('killCount', this.killCount);
+    console.log('livesCount', this.livesCount);
     this.createMap(this);
     effectAnims(this.anims);
     this.createLayers(this);
@@ -108,7 +119,7 @@ class Play extends Phaser.Scene {
     this.createBackButton();
     this.setupFollowupCameraOn(player);
 
-    if (gameStatus === 'PLAYER_LOSE') return;
+    if (gameStatus === 'PLAYER_LOSE' || gameStatus === 'LEVEL_COMPLETED') return;
     this.createGameEvents();
   }
 
@@ -148,8 +159,25 @@ class Play extends Phaser.Scene {
 
   createGameEvents() {
     EventEmitter.on('PLAYER_LOSE', () => {
+      this.livesCount -= 1;
+      this.registry.set('livesCount', this.livesCount);
       this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
-      this.scene.start('GameOverScene');
+      if (this.livesCount === 0) {
+        this.scene.start('GameOverScene');
+        this.registry.set('stats', {
+          coinCount: this.registry.get('coinCount') || 0,
+          killCount: this.registry.get('killCount') || 0,
+        });
+        this.registry.set('level', DEFAULT_LEVEL);
+      }
+      this.registry.set('coinCount', 0);
+      this.registry.set('killCount', 0);
+    });
+
+    EventEmitter.on('ENEMY_KILLED', () => {
+      this.killCount += 1;
+      this.registry.set('killCount', this.killCount);
+      console.log('Kills: ', this.registry.get('killCount'));
     });
   }
 
@@ -186,10 +214,12 @@ class Play extends Phaser.Scene {
   }
 
   onCollect(entity, collectable) {
-    this.score += collectable.score;
+    this.coinCount += collectable.score;
+    this.registry.set('coinCount', this.coinCount);
     collectable.pickupSound.play();
-    this.scoreBoard.updateScoreBoard(this.score);
+    this.scoreBoard.updateScoreBoard(this.coinCount);
     collectable.disableBody(true, true);
+    console.log('Coins: ', this.registry.get('coinCount'));
   }
 
   onKeyCollect() {
@@ -225,7 +255,7 @@ class Play extends Phaser.Scene {
   }
 
   getCurrentLevel() {
-    return this.registry.get('level') || 1;
+    return this.registry.get('level') || DEFAULT_LEVEL;
   }
 
   createEndOfLevel(end, player) {
