@@ -69,20 +69,11 @@ class Play extends Phaser.Scene {
   constructor(config) {
     super('PlayScene');
     this.config = config;
-    this.lvlKey = 'forest';
-    this.createLayers = createLayersForest;
-    this.createBg = createBgForest;
-    this.bgParallax = bgParallaxForest;
-    this.createMap = createMapForest;
-    // this.lvlKey = 'castle';
-    // this.createLayers = createLayersCastle;
-    // this.createBg = createBgCastle;
-    // this.bgParallax = bgParallaxCastle;
-    // this.createMap = createMapCastle;
   }
 
   create({ gameStatus }):void {
-    // this.playBgMusic();
+    this.cameras.main.fadeIn(3000);
+    this.checkLevel();
     this.hasKey = false;
     this.score = 0;
     this.createMap(this);
@@ -119,6 +110,22 @@ class Play extends Phaser.Scene {
 
     if (gameStatus === 'PLAYER_LOSE') return;
     this.createGameEvents();
+  }
+
+  checkLevel() {
+    if (this.getCurrentLevel() === 1) {
+      this.lvlKey = 'forest';
+      this.createLayers = createLayersForest;
+      this.createBg = createBgForest;
+      this.bgParallax = bgParallaxForest;
+      this.createMap = createMapForest;
+    } else if (this.getCurrentLevel() === 2) {
+      this.lvlKey = 'castle';
+      this.createLayers = createLayersCastle;
+      this.createBg = createBgCastle;
+      this.bgParallax = bgParallaxCastle;
+      this.createMap = createMapCastle;
+    }
   }
 
   createKeyCollectable(layer):void {
@@ -217,6 +224,10 @@ class Play extends Phaser.Scene {
     };
   }
 
+  getCurrentLevel() {
+    return this.registry.get('level') || 1;
+  }
+
   createEndOfLevel(end, player) {
     const endOfLevel = this.physics.add.sprite(end.x, end.y, 'end')
       .setAlpha(0)
@@ -230,6 +241,10 @@ class Play extends Phaser.Scene {
         eolOverlap.active = false;
         door.openDoor();
         console.log('You Won!!');
+        this.registry.inc('level', 1);
+        this.cameras.main.fadeOut(3000);
+        setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), 4000);
+        // this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' });
       }
     });
   }

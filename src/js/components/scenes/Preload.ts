@@ -66,11 +66,22 @@ class Preload extends Phaser.Scene {
     this.load.audio('troll-dead', '../../../assets/sounds/troll-dead.wav');
     this.load.audio('imp-hit', '../../../assets/sounds/imp-hit.wav');
     this.load.audio('imp-dead', '../../../assets/sounds/imp-dead.wav');
+
+    this.load.once('complete', () => {
+      this.startGame();
+    });
   }
 
-  create() {
+  startGame() {
+    this.registry.set('level', 1);
+    this.registry.set('unlocked-levels', 2);
     this.scene.start('MenuScene');
   }
+
+  // create() {
+  //   this.registry.set('level', 1);
+  //   this.scene.start('MenuScene');
+  // }
 }
 
 export default Preload;
