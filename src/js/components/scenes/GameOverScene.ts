@@ -2,7 +2,10 @@ import BaseScene from './BaseScene';
 
 class GameOverScene extends BaseScene {
   menu: any;
-  newOptions: any;
+  largeFont: any;
+  smallFont: any;
+  coinCount: number;
+  killCount: number;
   constructor(config) {
     super('GameOverScene', config);
 
@@ -21,13 +24,34 @@ class GameOverScene extends BaseScene {
 
     this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem));
 
-    this.newOptions = {
-      fontSize: '78px',
+    this.largeFont = {
+      fontSize: '64px',
       fontStyle: this.fontStyle,
       fontFamily: this.fontFamily,
       fill: '#fff',
     };
-    this.add.text(this.screenCenter[0], this.screenCenter[1] - 180, 'GAME OVER', this.newOptions).setOrigin(0.5, 0.5);
+
+    this.smallFont = {
+      fontSize: '24px',
+      fontStyle: this.fontStyle,
+      fontFamily: this.fontFamily,
+      fill: '#fff',
+    };
+
+    const stats = this.registry.get('stats');
+    console.log(JSON.stringify(stats));
+    const totalCoins = stats.coinCount;
+    const totalKills = stats.killCount;
+
+    this.add.text(this.screenCenter[0], this.screenCenter[1] - 180, 'GAME OVER', this.largeFont).setOrigin(0.5, 0.5);
+
+    this.add.text(this.screenCenter[0], this.screenCenter[1] - 180, 'GAME OVER', this.largeFont).setOrigin(0.5, 0.5);
+
+    this.add.text(this.screenCenter[0] - 100, this.screenCenter[1] - 80, 'Coins', this.smallFont).setOrigin(0.5, 0.5);
+    this.add.text(this.screenCenter[0] + 100, this.screenCenter[1] - 80, `${totalCoins}`, this.smallFont).setOrigin(0.5, 0.5);
+
+    this.add.text(this.screenCenter[0] - 100, this.screenCenter[1] - 120, 'Kills', this.smallFont).setOrigin(0.5, 0.5);
+    this.add.text(this.screenCenter[0] + 100, this.screenCenter[1] - 120, `${totalKills}`, this.smallFont).setOrigin(0.5, 0.5);
   }
 
   setupMenuEvents(menuItem) {

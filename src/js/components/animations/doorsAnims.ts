@@ -1,6 +1,6 @@
 export default (anims) => {
   anims.create({
-    key: 'castle-door',
+    key: 'forest-door',
     frames: anims.generateFrameNames('doors', {
       start: 1,
       end: 5,
@@ -12,7 +12,7 @@ export default (anims) => {
   });
 
   anims.create({
-    key: 'castle-door-idle',
+    key: 'forest-door-idle',
     frames: anims.generateFrameNames('doors', {
       start: 1,
       end: 1,
@@ -24,7 +24,7 @@ export default (anims) => {
   });
 
   anims.create({
-    key: 'cave-door',
+    key: 'castle-door',
     frames: anims.generateFrameNames('doors', {
       start: 1,
       end: 5,
@@ -33,5 +33,17 @@ export default (anims) => {
     }),
     frameRate: 5,
     repeat: 0
+  });
+
+  anims.create({
+    key: 'castle-door-idle',
+    frames: anims.generateFrameNames('doors', {
+      start: 1,
+      end: 1,
+      prefix: 'cave-door',
+      suffix: '.png'
+    }),
+    frameRate: 5,
+    repeat: -1
   });
 };

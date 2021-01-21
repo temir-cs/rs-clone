@@ -74,7 +74,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
 
-    this.health = 10;
+    this.health = 60;
     this.hp = new HealthBar(
       this.scene,
       this.scene.config.leftTopCorner.x + 10,
@@ -136,8 +136,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   update():void {
     if (this.hasBeenHit || !this.body) return;
-
-    if (this.getBounds().top > this.scene.config.height + 450) {
+    // 450
+    if (this.getBounds().top > this.scene.config.height + 650) {
       this.deathSound.play();
       EventEmitter.emit('PLAYER_LOSE');
       return;

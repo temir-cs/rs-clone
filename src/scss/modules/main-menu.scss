@@ -1,0 +1,53 @@
+.main-menu__container {
+  margin: 0 auto;
+  margin-top: 10rem;
+  width: 43.2rem;
+  height: 23.8rem;
+  background-image: url("../../assets/img/forms/menu_bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-menu__list {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include list-normalize();
+}
+
+.main-menu__item {
+  display: block;
+  width: 30rem;
+  height: 4rem;
+  margin-bottom: 2rem;
+
+  background-color: #ff8a00;
+  background-image: linear-gradient(to top, #ff8a00, #ffc300);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+
+  &:hover {
+    background-image: none;
+    cursor: pointer;
+  }
+
+  & a {
+    text-decoration: none;
+
+    color: $input-dark;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+}

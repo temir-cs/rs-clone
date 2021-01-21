@@ -3,19 +3,21 @@ import initAnims from '../animations/doorsAnims';
 
 class Door extends Phaser.Physics.Arcade.Sprite {
   openSound: any;
+  key: string;
 
-  constructor(scene:Phaser.Scene, x:number, y:number, key) {
-    super(scene, x, y, key);
+  constructor(scene:Phaser.Scene, x:number, y:number, key: string) {
+    super(scene, x, y, 'doors');
+    this.key = key;
     scene.add.existing(this);
     initAnims(this.scene.anims);
-    this.play('castle-door-idle', true);
+    this.play(`${this.key}-door-idle`, true);
 
     this.openSound = this.scene.sound.add('door-opening', { volume: 0.4 });
   }
 
   openDoor() {
     this.openSound.play();
-    this.play('castle-door', true);
+    this.play(`${this.key}-door`, true);
   }
 }
 
