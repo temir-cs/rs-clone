@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import HealthBar from '../hud/HealthBar';
+import Hud from '../hud/Hud';
 import initAnimations from '../animations/playerAnims';
 import collidable from '../mixins/collidable';
 import anims from '../mixins/anims';
@@ -77,7 +78,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.health = 60;
     this.hp = new HealthBar(
       this.scene,
-      this.scene.config.leftTopCorner.x + 10,
+      this.scene.config.leftTopCorner.x + 65,
       this.scene.config.leftTopCorner.y + 10,
       1,
       this.health

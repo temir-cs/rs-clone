@@ -7,8 +7,7 @@ import EventEmitter from '../events/Emitter';
 import effectAnims from '../animations/effectsAnim';
 import Collectables from '../groups/Collectables';
 import Key from '../collectables/Key';
-import ScoreBoard from '../hud/ScoreBoard';
-import BoardForKey from '../hud/BoardForKey';
+import ScoreBoard from '../hud/Hud';
 import Door from '../helper_objects/Door';
 import { createMapCastle, createLayersCastle, createBgCastle, bgParallaxCastle } from './levels_utils/castleUtils';
 import { createMapForest,
@@ -62,10 +61,9 @@ class Play extends Phaser.Scene {
   private bkgMountains: any;
   private collectables: any;
   private coinCount: number;
-  private scoreBoard: any;
+  private hud: any;
   private collectableKey: any;
   private hasKey: boolean;
-  private BoardForKey: any;
 
   lvlKey: string;
   private createMap: any;
@@ -99,11 +97,13 @@ class Play extends Phaser.Scene {
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
     this.createCollectables(this.layers.collectables);
     this.createKeyCollectable(this.layers.collectableKey);
+    console.log('Current hero: ', player.hero);
 
     this.createBg(this);
-    this.scoreBoard = new ScoreBoard(this);
-    this.BoardForKey = new BoardForKey(this);
-    this.scoreBoard.renderLives(this.livesCount);
+    this.hud = new ScoreBoard(this);
+    // this.BoardForKey = new BoardForKey(this);
+    this.hud.renderAvatar(player.hero);
+    this.hud.renderLives(this.livesCount);
 
     this.createEnemyColliders(enemies, {
       colliders: {
@@ -197,7 +197,7 @@ class Play extends Phaser.Scene {
     });
   }
 
-  createPlayer(start):Phaser.Physics.Arcade.Sprite {
+  createPlayer(start):Player {
     return new Player(this, start.x, start.y);
   }
 
@@ -233,7 +233,7 @@ class Play extends Phaser.Scene {
     this.stats.coins += collectable.score;
     this.registry.set('stats', { ...this.stats });
     collectable.pickupSound.play();
-    this.scoreBoard.updateScoreBoard(this.stats.coins);
+    this.hud.updateScoreBoard(this.stats.coins);
     collectable.disableBody(true, true);
     console.log('Coins: ', this.getCurrentStats().coins);
   }
@@ -242,7 +242,7 @@ class Play extends Phaser.Scene {
     this.collectableKey.pickupSound.play();
     this.collectableKey.disableBody(true, true);
     this.hasKey = true;
-    this.BoardForKey.activateKey();
+    this.hud.activateKey();
   }
 
   createPlayerColliders(player, { colliders }):void {
