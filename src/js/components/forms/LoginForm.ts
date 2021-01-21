@@ -1,12 +1,12 @@
 class Login {
   form: string;
   container: HTMLElement;
-  mainMenu: any;
+  startGame: any;
   usernameField: HTMLInputElement;
   passwordField: HTMLInputElement;
   regForm: any;
-  constructor(mainMenu, regForm) {
-    this.mainMenu = mainMenu;
+  constructor(startGame, regForm) {
+    this.startGame = startGame;
     this.regForm = regForm;
     this.container = document.body;
     this.form = `
@@ -54,7 +54,7 @@ class Login {
         if (data.status === 'ok') {
           this.removeForm();
           localStorage.setItem('user', username);
-          this.mainMenu.init(username);
+          this.startGame(username);
         } else {
           console.log(data);
           message.innerHTML = 'User with this credentials doesn`t exists';

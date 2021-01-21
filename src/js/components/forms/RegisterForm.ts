@@ -3,13 +3,13 @@ import Login from './LoginForm';
 class Register {
   form: string;
   container: HTMLElement;
-  mainMenu: any;
+  startGame: any;
   loginForm: any;
   usernameField: HTMLInputElement;
   passwordField: HTMLInputElement;
   warnTimeout: number;
-  constructor(mainMenu) {
-    this.mainMenu = mainMenu;
+  constructor(startGame) {
+    this.startGame = startGame;
     this.container = document.body;
     this.warnTimeout = 2000;
     this.form = `
@@ -26,7 +26,7 @@ class Register {
   }
 
   init() {
-    this.loginForm = new Login(this.mainMenu, this);
+    this.loginForm = new Login(this.startGame, this);
     this.container.innerHTML = this.form;
     const formElement = document.querySelector('#reg-form');
     const linkToLogin = document.querySelector('#go-to-login');
@@ -68,7 +68,7 @@ class Register {
         if (data.status === 'ok') {
           this.removeForm();
           localStorage.setItem('user', username);
-          this.mainMenu.init(username);
+          this.startGame(username);
         } else {
           console.log(data);
           message.innerHTML = 'This username already taken please try another one';
