@@ -170,8 +170,19 @@ class Play extends Phaser.Scene {
         });
         this.registry.set('level', DEFAULT_LEVEL);
       }
-      this.registry.set('coinCount', 0);
-      this.registry.set('killCount', 0);
+
+      const currentLvl = this.getCurrentLevel();
+
+      console.log('CurrentLevel: ', currentLvl);
+      if (currentLvl > 1) {
+        const lastLevelCoins = this.registry.get('lastCoinCount');
+        const lastLevelKills = this.registry.get('lastKillCount');
+        this.registry.set('coinCount', lastLevelCoins);
+        this.registry.set('killCount', lastLevelKills);
+      } else {
+        this.registry.set('coinCount', 0);
+        this.registry.set('killCount', 0);
+      }
     });
 
     EventEmitter.on('ENEMY_KILLED', () => {
@@ -274,6 +285,8 @@ class Play extends Phaser.Scene {
         this.registry.inc('level', 1);
         this.cameras.main.fadeOut(3000);
         setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), 4000);
+        this.registry.set('lastCoinCount', this.coinCount);
+        this.registry.set('lastKillCount', this.killCount);
         // this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' });
       }
     });
