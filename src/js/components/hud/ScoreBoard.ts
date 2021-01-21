@@ -7,13 +7,15 @@ class ScoreBoard {
   scoreText: Phaser.GameObjects.Text;
   scoreImage: Phaser.GameObjects.Image;
   coinCount: number;
+  stats: any;
 
   constructor(scene) {
     this.scene = scene;
     const { rightTopCorner } = scene.config;
     this.fontSize = 24;
     this.containerWidth = 80;
-    this.coinCount = this.scene.registry.get('coinCount') || 0;
+    this.stats = this.scene.registry.get('stats');
+    this.coinCount = this.stats ? this.stats.coins : 0;
 
     this.scoreImage = this.scene.add.image(rightTopCorner.x - this.containerWidth, rightTopCorner.y + 4, 'coin-static')
         .setOrigin(0)

@@ -38,10 +38,10 @@ class GameOverScene extends BaseScene {
       fill: '#fff',
     };
 
-    const stats = this.registry.get('stats');
+    const stats = this.registry.get('finalStats');
     console.log(JSON.stringify(stats));
-    const totalCoins = stats.coinCount;
-    const totalKills = stats.killCount;
+    const totalCoins = stats.coins;
+    const totalKills = stats.kills;
 
     this.add.text(this.screenCenter[0], this.screenCenter[1] - 180, 'GAME OVER', this.largeFont).setOrigin(0.5, 0.5);
 

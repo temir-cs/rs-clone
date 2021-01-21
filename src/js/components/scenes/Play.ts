@@ -18,6 +18,10 @@ import { createMapForest,
 
 const DEFAULT_LEVEL = 1;
 const LIVES = 3;
+const DEFAULT_STATS = {
+  coins: 0,
+  kills: 0,
+};
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -70,6 +74,7 @@ class Play extends Phaser.Scene {
   private bgParallax: any;
   killCount: number;
   livesCount: number;
+  stats: any;
 
   constructor(config) {
     super('PlayScene');
@@ -81,11 +86,14 @@ class Play extends Phaser.Scene {
     this.checkLevel();
     this.hasKey = false;
     console.log('Gamestatus: ', gameStatus);
-    this.coinCount = this.registry.get('coinCount') || 0;
-    this.killCount = this.registry.get('killCount') || 0;
+    // this.coinCount = this.registry.get('coinCount') || 0;
+    // this.killCount = this.registry.get('killCount') || 0;
     this.livesCount = this.registry.get('livesCount') || LIVES;
-    console.log('coinCount', this.coinCount);
-    console.log('killCount', this.killCount);
+
+    this.stats = this.getCurrentStats();
+
+    console.log('coinCount', this.stats.coins);
+    console.log('killCount', this.stats.kills);
     console.log('livesCount', this.livesCount);
     this.createMap(this);
     effectAnims(this.anims);
@@ -121,6 +129,10 @@ class Play extends Phaser.Scene {
 
     if (gameStatus === 'PLAYER_LOSE' || gameStatus === 'LEVEL_COMPLETED') return;
     this.createGameEvents();
+  }
+
+  update():void {
+    this.bgParallax(this);
   }
 
   checkLevel() {
@@ -164,10 +176,8 @@ class Play extends Phaser.Scene {
       this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
       if (this.livesCount === 0) {
         this.scene.start('GameOverScene');
-        this.registry.set('stats', {
-          coinCount: this.registry.get('coinCount') || 0,
-          killCount: this.registry.get('killCount') || 0,
-        });
+        const finalStats = this.getCurrentStats();
+        this.registry.set('finalStats', { ...finalStats });
         this.registry.set('level', DEFAULT_LEVEL);
       }
 
@@ -175,20 +185,18 @@ class Play extends Phaser.Scene {
 
       console.log('CurrentLevel: ', currentLvl);
       if (currentLvl > 1) {
-        const lastLevelCoins = this.registry.get('lastCoinCount');
-        const lastLevelKills = this.registry.get('lastKillCount');
-        this.registry.set('coinCount', lastLevelCoins);
-        this.registry.set('killCount', lastLevelKills);
+        const lastLevelStats = this.registry.get('lastLevelStats');
+        console.log('lastLevelStats :', lastLevelStats);
+        this.registry.set('stats', { ...lastLevelStats });
       } else {
-        this.registry.set('coinCount', 0);
-        this.registry.set('killCount', 0);
+        this.registry.set('stats', { ...DEFAULT_STATS });
       }
     });
 
     EventEmitter.on('ENEMY_KILLED', () => {
-      this.killCount += 1;
-      this.registry.set('killCount', this.killCount);
-      console.log('Kills: ', this.registry.get('killCount'));
+      this.stats.kills += 1;
+      this.registry.set('stats', { ...this.stats });
+      console.log('Kills: ', this.registry.get('stats').kills);
     });
   }
 
@@ -225,12 +233,13 @@ class Play extends Phaser.Scene {
   }
 
   onCollect(entity, collectable) {
-    this.coinCount += collectable.score;
-    this.registry.set('coinCount', this.coinCount);
+    this.stats.coins += collectable.score;
+    this.registry.set('stats', { ...this.stats });
     collectable.pickupSound.play();
-    this.scoreBoard.updateScoreBoard(this.coinCount);
+    this.scoreBoard.updateScoreBoard(this.stats.coins);
     collectable.disableBody(true, true);
-    console.log('Coins: ', this.registry.get('coinCount'));
+    console.log('Coins: ', this.getCurrentStats().coins);
+    console.log('Last level coins: ', this.registry.get('lastLevelStats') ? this.registry.get('lastLevelStats').coins : 0);
   }
 
   onKeyCollect() {
@@ -285,8 +294,7 @@ class Play extends Phaser.Scene {
         this.registry.inc('level', 1);
         this.cameras.main.fadeOut(3000);
         setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), 4000);
-        this.registry.set('lastCoinCount', this.coinCount);
-        this.registry.set('lastKillCount', this.killCount);
+        this.registry.set('lastLevelStats', { ...this.stats });
         // this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' });
       }
     });
@@ -312,9 +320,12 @@ class Play extends Phaser.Scene {
     });
   }
 
-  update():void {
-    this.bgParallax(this);
+  getCurrentStats():any {
+    let stats = this.registry.get('stats');
+    if (!stats) {
+      stats = { ...DEFAULT_STATS };
+    }
+    return stats;
   }
 }
-
 export default Play;
