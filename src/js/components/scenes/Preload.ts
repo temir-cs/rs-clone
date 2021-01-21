@@ -67,6 +67,8 @@ class Preload extends Phaser.Scene {
     this.load.audio('imp-hit', '../../../assets/sounds/imp-hit.wav');
     this.load.audio('imp-dead', '../../../assets/sounds/imp-dead.wav');
 
+    this.load.bitmapFont('arcade', '../../../assets/font/highscore/arcade.png', '../../../assets/font/highscore/arcade.xml');
+
     this.load.once('complete', () => {
       this.startGame();
     });
