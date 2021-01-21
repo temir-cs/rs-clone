@@ -63,7 +63,6 @@ class ScoreBoard {
         .setOrigin(0)
         .setScrollFactor(0));
     }
-    console.log(this.lives);
   }
 
   updateScoreBoard(score):void {

@@ -124,7 +124,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   playDeath() {
-    console.log('DEATH!');
     this.play('death');
     return this.scene.tweens.add({
       targets: this,

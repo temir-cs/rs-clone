@@ -54,8 +54,8 @@ class GameOverScene extends BaseScene {
     this.add.text(this.screenCenter[0] + 100, this.screenCenter[1] - 120, `${totalKills}`, this.smallFont).setOrigin(0.5, 0.5);
   }
 
-  setupMenuEvents(menuItem) {
-    const textGameObject = menuItem.textGameObject;
+  setupMenuEvents(menuItem):void {
+    const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 
     textGameObject.on('pointerover', () => {
@@ -67,7 +67,7 @@ class GameOverScene extends BaseScene {
     });
 
     textGameObject.on('pointerup', () => {
-      menuItem.scene && this.scene.start(menuItem.scene);
+      if (menuItem.scene) this.scene.start(menuItem.scene);
 
       if (menuItem.text === 'Exit') {
         this.game.destroy(true);
