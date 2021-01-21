@@ -85,8 +85,12 @@ class Play extends Phaser.Scene {
     this.cameras.main.fadeIn(3000);
     this.checkLevel();
     this.hasKey = false;
+    console.log('Gamestatus: ', gameStatus);
     this.livesCount = this.registry.get('livesCount') || LIVES;
     this.stats = this.getCurrentStats();
+    console.log('coinCount', this.stats.coins);
+    console.log('killCount', this.stats.kills);
+    console.log('livesCount', this.livesCount);
     this.createMap(this);
     effectAnims(this.anims);
     this.createLayers(this);
@@ -99,6 +103,7 @@ class Play extends Phaser.Scene {
     this.createBg(this);
     this.scoreBoard = new ScoreBoard(this);
     this.BoardForKey = new BoardForKey(this);
+    this.scoreBoard.renderLives(this.livesCount);
 
     this.createEnemyColliders(enemies, {
       colliders: {
@@ -175,8 +180,10 @@ class Play extends Phaser.Scene {
 
       const currentLvl = this.getCurrentLevel();
 
+      console.log('CurrentLevel: ', currentLvl);
       if (currentLvl > 1) {
         const lastLevelStats = this.registry.get('lastLevelStats');
+        console.log('lastLevelStats :', lastLevelStats);
         this.registry.set('stats', { ...lastLevelStats });
       } else {
         this.registry.set('stats', { ...DEFAULT_STATS });
@@ -186,6 +193,7 @@ class Play extends Phaser.Scene {
     EventEmitter.on('ENEMY_KILLED', () => {
       this.stats.kills += 1;
       this.registry.set('stats', { ...this.stats });
+      console.log('Kills: ', this.registry.get('stats').kills);
     });
   }
 
@@ -227,6 +235,7 @@ class Play extends Phaser.Scene {
     collectable.pickupSound.play();
     this.scoreBoard.updateScoreBoard(this.stats.coins);
     collectable.disableBody(true, true);
+    console.log('Coins: ', this.getCurrentStats().coins);
   }
 
   onKeyCollect() {
@@ -277,6 +286,7 @@ class Play extends Phaser.Scene {
       if (this.hasKey) {
         eolOverlap.active = false;
         door.openDoor();
+        console.log('You Won!!');
         this.registry.inc('level', 1);
         this.cameras.main.fadeOut(3000);
         setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), 4000);

@@ -34,6 +34,7 @@ class Preload extends Phaser.Scene {
 
     // Static pictures
     this.load.image('coin-static', '../../../assets/img/collectables/coin.png');
+    this.load.image('heart-static', '../../../assets/img/collectables/heart.png');
     this.load.image('key-static', '../../../assets/img/collectables/key3.png');
 
     // Menu items
