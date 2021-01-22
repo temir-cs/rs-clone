@@ -51,7 +51,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   init() {
-    this.hero = 'knight';
+    this.hero = 'mage';
+    this.health = 60;
+    this.hp = new HealthBar(
+      this.scene,
+      this.scene.config.leftTopCorner.x + 65,
+      this.scene.config.leftTopCorner.y + 10,
+      1,
+      this.health
+    );
     this.gravity = 600;
 
     this.playerSpeed = 300;
@@ -73,15 +81,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
-
-    this.health = 60;
-    this.hp = new HealthBar(
-      this.scene,
-      this.scene.config.leftTopCorner.x + 65,
-      this.scene.config.leftTopCorner.y + 10,
-      1,
-      this.health
-    );
 
     this.setGravityY(this.gravity);
     this.setCollideWorldBounds(true);
