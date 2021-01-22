@@ -59,7 +59,7 @@ class Vampire extends Enemy {
 
     if (this.isDead) {
       this.setActive(false);
-      this.play('vampire-dead', true);
+      this.play('vampire-death', true);
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();

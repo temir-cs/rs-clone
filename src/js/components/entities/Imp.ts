@@ -58,7 +58,7 @@ class Imp extends Enemy {
 
     if (this.isDead) {
       this.setActive(false);
-      this.play('imp-dead', true);
+      this.play('imp-death', true);
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();

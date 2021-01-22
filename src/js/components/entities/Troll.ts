@@ -19,7 +19,7 @@ class Troll extends Enemy {
     if (this.isPlayingAnims('troll-hurt') || this.isPlayingAnims('troll-death')) { return; }
     if (this.isDead) {
       this.setActive(false);
-      this.play('troll-dead', true);
+      this.play('troll-death', true);
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();

@@ -58,6 +58,17 @@ export default (anims) => {
     repeat: 0
   });
   anims.create({
+    key: 'spikes-trap-rising',
+    frames: anims.generateFrameNames('traps', {
+      start: 1,
+      end: 5,
+      prefix: 'spikes_trap',
+      suffix: '.png'
+    }),
+    frameRate: 12,
+    repeat: 0
+  });
+  anims.create({
     key: 'spikes-trap-idle',
     frames: anims.generateFrameNames('traps', {
       start: 5,

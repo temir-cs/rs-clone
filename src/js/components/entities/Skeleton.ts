@@ -21,7 +21,7 @@ class Skeleton extends Enemy {
     if (this.isPlayingAnims('skeleton-hurt') || this.isPlayingAnims('skeleton-death')) { return; }
     if (this.isDead) {
       this.setActive(false);
-      this.play('skeleton-dead', true);
+      this.play('skeleton-death', true);
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();

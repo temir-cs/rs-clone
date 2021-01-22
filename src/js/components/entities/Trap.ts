@@ -12,6 +12,7 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   isPlayingAnims?: any;
   damage: number;
   isAttacking?: boolean;
+  isSleeping?: boolean;
   // changeSize?: any;
 
   constructor(scene:Phaser.Scene, x:number, y:number, key: string) {
@@ -46,7 +47,16 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   }
 
   update():void {
-    if (this.isPlayingAnims(`${this.key}`)) {
+    if (this.isPlayingAnims(`${this.key}`) || this.isPlayingAnims(`${this.key}-rising`)) {
+      return;
+    }
+
+    if (this.isSleeping) {
+      if (this.sleepTime < getTimestamp() - this.timeFromLastAttack) {
+        this.isSleeping = false;
+        this.play(`${this.key}-rising`, true);
+        this.timeFromLastAttack = getTimestamp();
+      }
       return;
     }
 
