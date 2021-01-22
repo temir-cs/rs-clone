@@ -30,7 +30,7 @@ export default (anims) => {
       suffix: '.png'
     }),
     frameRate: 5,
-    repeat: -1,
+    repeat: 0,
   });
   anims.create({
     key: 'skeleton-hurt',
@@ -41,7 +41,7 @@ export default (anims) => {
       suffix: '.png'
     }),
     frameRate: 5,
-    repeat: -1,
+    repeat: 0,
   });
   anims.create({
     key: 'skeleton-death',
@@ -52,6 +52,6 @@ export default (anims) => {
       suffix: '.png'
     }),
     frameRate: 8,
-    repeat: -1,
+    repeat: 0,
   });
 };

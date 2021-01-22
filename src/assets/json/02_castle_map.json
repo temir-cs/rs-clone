@@ -127,7 +127,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Vampire",
                  "visible":true,
                  "width":0,
                  "x":2864,
@@ -139,7 +139,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Skeleton",
                  "visible":true,
                  "width":0,
                  "x":2541,
@@ -151,7 +151,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Vampire",
                  "visible":true,
                  "width":0,
                  "x":1682,
@@ -163,7 +163,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Skeleton",
                  "visible":true,
                  "width":0,
                  "x":1409,
@@ -175,7 +175,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Vampire",
                  "visible":true,
                  "width":0,
                  "x":488.666666666667,
@@ -187,11 +187,11 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Skeleton",
                  "visible":true,
                  "width":0,
-                 "x":320,
-                 "y":693
+                 "x":355,
+                 "y":691
                 }, 
                 {
                  "height":0,
@@ -199,7 +199,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Skeleton",
                  "visible":true,
                  "width":0,
                  "x":1993,
@@ -211,7 +211,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Troll",
+                 "type":"Vampire",
                  "visible":true,
                  "width":0,
                  "x":1954.66666666667,
@@ -352,6 +352,42 @@
                  "width":0,
                  "x":3021.66666666667,
                  "y":1024.75
+                }, 
+                {
+                 "height":0,
+                 "id":68,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Fire",
+                 "visible":true,
+                 "width":0,
+                 "x":940,
+                 "y":282
+                }, 
+                {
+                 "height":0,
+                 "id":69,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Fire",
+                 "visible":true,
+                 "width":0,
+                 "x":2320,
+                 "y":499
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -771,7 +807,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":68,
+ "nextobjectid":70,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
@@ -845,7 +881,9 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/img\/collectables\/key3.png"
+                 "image":"..\/img\/collectables\/key3.png",
+                 "imageheight":32,
+                 "imagewidth":32
                 }],
          "tilewidth":32
         }, 
@@ -866,7 +904,9 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/img\/collectables\/coin.png"
+                 "image":"..\/img\/collectables\/coin.png",
+                 "imageheight":32,
+                 "imagewidth":32
                 }],
          "tilewidth":32
         }, 
