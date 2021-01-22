@@ -7,7 +7,7 @@ import EventEmitter from '../events/Emitter';
 import effectAnims from '../animations/effectsAnim';
 import Collectables from '../groups/Collectables';
 import Key from '../collectables/Key';
-import ScoreBoard from '../hud/Hud';
+import Hud from '../hud/Hud';
 import Door from '../helper_objects/Door';
 import { createMapCastle, createLayersCastle, createBgCastle, bgParallaxCastle } from './levels_utils/castleUtils';
 import { createMapForest,
@@ -100,7 +100,7 @@ class Play extends Phaser.Scene {
     console.log('Current hero: ', player.hero);
 
     this.createBg(this);
-    this.hud = new ScoreBoard(this);
+    this.hud = new Hud(this);
     // this.BoardForKey = new BoardForKey(this);
     this.hud.renderAvatar(player.hero);
     this.hud.renderLives(this.livesCount);

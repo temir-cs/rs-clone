@@ -1,7 +1,7 @@
 import * as Phaser from 'phaser';
 import Play from '../scenes/Play';
 
-class ScoreBoard {
+class Hud {
   fontSize?: number;
   containerWidth?: number;
   scene: Phaser.Scene;
@@ -75,4 +75,4 @@ class ScoreBoard {
   }
 }
 
-export default ScoreBoard;
+export default Hud;
