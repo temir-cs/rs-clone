@@ -53,6 +53,7 @@ class Preload extends Phaser.Scene {
     this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
     this.load.multiatlas('collectables', '../../../assets/json/collectables/collectablesSprite.json', '../../../assets/img/collectables');
     this.load.multiatlas('doors', '../../../assets/json/doors/doorsSprite.json', '../../../assets/img/doors/');
+    this.load.multiatlas('traps', '../../../assets/json/enemies/trapsSprite.json', '../../../assets/img/enemies/');
 
     // Audio
     this.load.audio('forest-theme', '../../../assets/sounds/forest-theme.mp3');
@@ -69,6 +70,7 @@ class Preload extends Phaser.Scene {
     this.load.audio('troll-dead', '../../../assets/sounds/troll-dead.wav');
     this.load.audio('imp-hit', '../../../assets/sounds/imp-hit.wav');
     this.load.audio('imp-dead', '../../../assets/sounds/imp-dead.wav');
+    this.load.audio('fire-trap', '../../../assets/sounds/flamestrike.mp3');
 
     this.load.bitmapFont('arcade', '../../../assets/font/highscore/arcade.png', '../../../assets/font/highscore/arcade.xml');
 

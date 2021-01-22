@@ -24,6 +24,7 @@ const createLayersCastle = (context):void => {
   context.layers.collectables = context.map.getObjectLayer('collectables');
   context.layers.collectableKey = context.map.getObjectLayer('collectableKey');
   context.layers.enemySpawns = context.map.getObjectLayer('enemy_spawns');
+  context.layers.trapsSpawns = context.map.getObjectLayer('traps');
  };
 
 const createBgCastle = (context) => {
