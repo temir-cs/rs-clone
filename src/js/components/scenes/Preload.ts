@@ -32,9 +32,12 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-castle-down', '../../../assets/img/levels/castle/down.png');
     this.load.image('bg-castle-tileset', '../../../assets/img/levels/castle/castle_bg_tiles.png');
 
-    // Static pictures
-    this.load.image('coin-static', '../../../assets/img/collectables/coin.png');
-    this.load.image('key-static', '../../../assets/img/collectables/key3.png');
+    // HUD elements
+    this.load.image('coin-static', '../../../assets/img/hud/coin.png');
+    this.load.image('heart-static', '../../../assets/img/hud/heart.png');
+    this.load.image('key-static', '../../../assets/img/hud/key.png');
+    this.load.image('knight-avatar', '../../../assets/img/hud/knight-avatar.png');
+    this.load.image('mage-avatar', '../../../assets/img/hud/mage-avatar.png');
 
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
