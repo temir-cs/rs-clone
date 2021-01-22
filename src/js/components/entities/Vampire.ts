@@ -22,7 +22,7 @@ class Vampire extends Enemy {
     this.speed = 60;
    this.setBodySize(40, 80);
     this.setOrigin(0, 0);
-    this.setOffset(20, 30);
+    this.setOffset(20, 26);
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.timeFromLastAttack = 0;
     this.attackDelay = this.getAttackDelay();

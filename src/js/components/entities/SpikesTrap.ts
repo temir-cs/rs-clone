@@ -1,12 +1,7 @@
 import Trap from './Trap';
-import getTimestamp from '../utils/functions';
 
 class SpikesTrap extends Trap {
   isSleeping: boolean;
-
-  constructor(scene:Phaser.Scene, x:number, y:number, key: string) {
-    super(scene, x, y, key);
-  }
 
   init() {
     super.init();
