@@ -6,14 +6,13 @@ import anims from '../mixins/anims';
 class Trap extends Phaser.Physics.Arcade.Sprite {
   attackSound: any;
   key: string;
-  timeFromLastAttack: number;
+  timeFromLastStateChange: number;
   sleepTime: number;
+  attackTime?: number;
   scene:Phaser.Scene;
   isPlayingAnims?: any;
   damage: number;
   isAttacking?: boolean;
-  isSleeping?: boolean;
-  // changeSize?: any;
 
   constructor(scene:Phaser.Scene, x:number, y:number, key: string) {
     super(scene, x, y, 'traps');
@@ -25,6 +24,7 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
 
   init():void {
     this.sleepTime = Phaser.Math.Between(1500, 4000);
+    this.attackTime = 0;
     // this.attackSound = this.scene.sound.add(`${this.key}`, { volume: 0.2 });
     this.attackSound = this.scene.sound.add('fire-trap', { volume: 0.2 });
     this.isAttacking = false;
@@ -33,44 +33,61 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
     this.play(`${this.key}-idle`, true);
     this.setOrigin(0.5, 1);
     this.scene.physics.add.existing(this);
-    this.timeFromLastAttack = getTimestamp();
+    this.timeFromLastStateChange = getTimestamp();
   }
 
-  changeSize():void {
-    if (this.isAttacking) {
-      this.setBodySize(30, 110);
-      this.setOffset(50, 0);
-    } else {
-      this.setBodySize(30, 30);
-      this.setOffset(50, 130);
-    }
+  shouldSleep():boolean {
+    return (this.sleepTime > getTimestamp() - this.timeFromLastStateChange);
+  }
+
+  shouldStayActive():boolean {
+    return (this.attackTime > getTimestamp() - this.timeFromLastStateChange);
+  }
+
+  sleep():void {
+    this.setBodySize(30, 30);
+    this.setOffset(50, 130);
+    this.play(`${this.key}-sleep`, true);
+  }
+
+  activate():void {
+    this.setBodySize(30, 110);
+    this.setOffset(50, 0);
+    this.play(`${this.key}`, true);
+    this.attackSound.play();
+    this.isAttacking = true;
+  }
+
+  attack():void {
+    this.play(`${this.key}-idle`, true);
+  }
+
+  deactivate():void {
+    this.isAttacking = false;
   }
 
   update():void {
-    if (this.isPlayingAnims(`${this.key}`) || this.isPlayingAnims(`${this.key}-rising`)) {
+    if (this.isPlayingAnims(`${this.key}`) || this.isPlayingAnims(`${this.key}-hiding`)) {
       return;
     }
 
-    if (this.isSleeping) {
-      if (this.sleepTime < getTimestamp() - this.timeFromLastAttack) {
-        this.isSleeping = false;
-        this.play(`${this.key}-rising`, true);
-        this.timeFromLastAttack = getTimestamp();
+    if (this.shouldSleep() && !this.isAttacking) {
+      this.sleep();
+      return;
+    }
+
+    if (this.isAttacking) {
+      if (this.shouldStayActive()) {
+        this.attack();
+        return;
       }
-      return;
+        this.deactivate();
+        this.timeFromLastStateChange = getTimestamp();
+        return;
     }
 
-    if (this.timeFromLastAttack && (this.sleepTime) < getTimestamp() - this.timeFromLastAttack) {
-      this.isAttacking = true;
-      this.changeSize();
-      this.play(`${this.key}`, true);
-      this.attackSound.play();
-      this.timeFromLastAttack = getTimestamp();
-      return;
-    }
-    this.isAttacking = false;
-    this.changeSize();
-    this.play(`${this.key}-idle`, true);
+    this.activate();
+    this.timeFromLastStateChange = getTimestamp();
   }
 }
 

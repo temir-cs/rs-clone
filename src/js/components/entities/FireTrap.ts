@@ -8,16 +8,6 @@ class FireTrap extends Trap {
     this.setBodySize(30, 1);
     this.setOffset(50, 130);
   }
-
-  changeSize():void {
-    if (this.isAttacking) {
-      this.setBodySize(30, 110);
-      this.setOffset(50, 0);
-    } else {
-      this.setBodySize(30, 1);
-      this.setOffset(50, 130);
-    }
-  }
 }
 
 export default FireTrap;
