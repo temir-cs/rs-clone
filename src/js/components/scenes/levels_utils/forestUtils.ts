@@ -28,6 +28,7 @@ const createLayersForest = (context):void => {
     context.layers.enemySpawns = context.map.getObjectLayer('enemy_spawns');
     context.layers.collectables = context.map.getObjectLayer('collectables');
     context.layers.collectableKey = context.map.getObjectLayer('collectableKey');
+    context.layers.trapsSpawns = context.map.getObjectLayer('traps');
   };
 
 const createBgForest = (context) => {

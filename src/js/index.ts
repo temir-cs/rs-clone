@@ -1,15 +1,11 @@
 import gameStart from './game';
 
-import Register from './components/forms/RegisterForm';
+import Routes from './components/routes/Routes';
 
-// import MainMenu from './components/main_menu/MainMenu';
-
-// const mainMenu = new MainMenu(gameStart);
-const registerForm = new Register(gameStart);
-
+const router = new Routes(gameStart);
 const user = localStorage.getItem('user');
 if (user) {
-  gameStart(user);
+  gameStart();
 } else {
-  registerForm.init();
+  router.init();
 }

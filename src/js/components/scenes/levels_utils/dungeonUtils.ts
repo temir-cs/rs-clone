@@ -1,14 +1,14 @@
-const createMapCastle = (context):void => {
-  context.map = context.make.tilemap({ key: 'map-lvl2' });
-  context.map.addTilesetImage('castle_platforms', 'tiles-1-lvl2');
-  context.map.addTilesetImage('castle_bg_tiles', 'bg-castle-tileset');
+const createMapDungeon = (context):void => {
+  context.map = context.make.tilemap({ key: 'map-lvl3' });
+  context.map.addTilesetImage('dungeon_platforms', 'tiles-1-lvl3');
+  context.map.addTilesetImage('dungeon_bg_tiles', 'bg-dungeon-tileset');
 };
 
-const createLayersCastle = (context):void => {
-  const tileset1 = context.map.getTileset('castle_platforms');
-  const tilesetBg = context.map.getTileset('castle_bg_tiles');
+const createLayersDungeon = (context):void => {
+  const tileset1 = context.map.getTileset('dungeon_platforms');
+  const tilesetBg = context.map.getTileset('dungeon_bg_tiles');
 
-  context.map.createLayer('distance', tilesetBg).setDepth(-3);
+  context.map.createLayer('distance', tilesetBg).setDepth(-20);
 
   context.layers.castleWall = context.map.createLayer('castle_wall', tileset1).setDepth(-2);
   context.layers.platformColliders = context.map.createLayer('platform_colliders', tileset1);
@@ -27,41 +27,46 @@ const createLayersCastle = (context):void => {
   context.layers.trapsSpawns = context.map.getObjectLayer('traps');
  };
 
-const createBgCastle = (context) => {
+const createBgDungeon = (context) => {
   const bgObject = context.map.getObjectLayer('distance_bg').objects[0];
 
-  context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-castle-down')
-    .setOrigin(0, 1)
-    .setDepth(-11)
-    .setScale(1.2)
-    .setScrollFactor(0, 1);
-
-  context.wallsImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-castle-wall')
-    .setOrigin(0, 1)
-    .setDepth(-12)
-    .setScale(1.2)
-    .setScrollFactor(0, 1);
-
-  context.treesImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-castle-trees')
+  context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-dungeon-back')
     .setOrigin(0, 1)
     .setDepth(-13)
-    .setScale(1.4)
+    .setScale(1.6)
     .setScrollFactor(0, 1);
 
-  context.add.tileSprite(0, 0, context.config.width, bgObject.height, 'bg-castle-sky')
+  context.wallsImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-dungeon-middle')
+    .setOrigin(0, 1)
+    .setDepth(-12)
+    .setScale(1.6)
+    .setScrollFactor(0, 1);
+
+  context.treesImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-dungeon-main')
+    .setOrigin(0, 1)
+    .setDepth(-11)
+    .setScale(1.6)
+    .setScrollFactor(0, 1);
+
+  context.add.tileSprite(bgObject.x, 0, context.config.width, bgObject.height, 'bg-dungeon-top')
     .setOrigin(0, 0)
-    .setDepth(-14)
-    .setScale(1.5)
+    .setDepth(-10)
+    .setScale(1.1)
+    .setScrollFactor(0, 1);
+
+  context.add.tileSprite(0, 0, context.config.width, bgObject.height, 'bg-dungeon-bottom')
+    .setOrigin(0, 0)
+    .setDepth(-10)
+    .setScale(2)
     .setScrollFactor(0, 1);
 };
 
-const bgParallaxCastle = (context) => {
+const bgParallaxDungeon = (context) => {
   context.treesImg.tilePositionX = context.cameras.main.scrollX * 0.2;
-  context.wallsImg.tilePositionX = context.cameras.main.scrollX * 0.15;
-  context.wallsImg.tilePositionY = context.cameras.main.scrollY * 0.15;
+  context.wallsImg.tilePositionX = context.cameras.main.scrollX * 0.1;
 };
 
- export { createMapCastle,
-          createLayersCastle,
-          createBgCastle,
-          bgParallaxCastle };
+ export { createMapDungeon,
+          createLayersDungeon,
+          createBgDungeon,
+          bgParallaxDungeon };

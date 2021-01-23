@@ -15,6 +15,10 @@ class Preload extends Phaser.Scene {
     this.load.tilemapTiledJSON('map-lvl2', '../../../assets/json/02_castle_map.json');
     this.load.image('tiles-1-lvl2', '../../../assets/img/levels/castle/castle_platforms.png');
 
+    this.load.tilemapTiledJSON('map-lvl3', '../../../assets/json/03_dungeon_map.json');
+    this.load.image('tiles-1-lvl3', '../../../assets/img/levels/dungeon/dungeon_platforms.png');
+    this.load.image('bg-dungeon-tileset', '../../../assets/img/levels/dungeon/dungeon_bg_tiles.png');
+
     // Forest Level Background
     this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
     this.load.image('bg-forest-trees', '../../../assets/img/levels/forest/trees.png');
@@ -32,9 +36,18 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-castle-down', '../../../assets/img/levels/castle/down.png');
     this.load.image('bg-castle-tileset', '../../../assets/img/levels/castle/castle_bg_tiles.png');
 
+
     // Hero select images
     this.load.image('knight-image', '../../../assets/img/heroes/knight-image.png');
     this.load.image('mage-image', '../../../assets/img/heroes/mage-image.png');
+    
+    // dungeon Level Background
+    this.load.image('bg-dungeon-back', '../../../assets/img/levels/dungeon/back_ruin_spots.png');
+    this.load.image('bg-dungeon-middle', '../../../assets/img/levels/dungeon/ruins_closer.png');
+    this.load.image('bg-dungeon-main', '../../../assets/img/levels/dungeon/ruins_main.png');
+    this.load.image('bg-dungeon-bottom', '../../../assets/img/levels/dungeon/ruins_low1.png');
+    this.load.image('bg-dungeon-top', '../../../assets/img/levels/dungeon/ruins_top.png');
+
 
     // HUD elements
     this.load.image('coin-static', '../../../assets/img/hud/coin.png');
@@ -54,10 +67,13 @@ class Preload extends Phaser.Scene {
     this.load.multiatlas('knight', '../../../assets/json/heroes/knightSprite.json', '../../../assets/img/heroes');
     this.load.multiatlas('mage', '../../../assets/json/heroes/mageSprite.json', '../../../assets/img/heroes');
     this.load.multiatlas('troll', '../../../assets/json/enemies/enemyGoblinSprite.json', '../../../assets/img/enemies');
+    this.load.multiatlas('skeleton', '../../../assets/json/enemies/enemySkeleton.json', '../../../assets/img/enemies');
+    this.load.multiatlas('vampire', '../../../assets/json/enemies/enemyVampire.json', '../../../assets/img/enemies');
     this.load.multiatlas('imp', '../../../assets/json/enemies/enemyImpSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
     this.load.multiatlas('collectables', '../../../assets/json/collectables/collectablesSprite.json', '../../../assets/img/collectables');
     this.load.multiatlas('doors', '../../../assets/json/doors/doorsSprite.json', '../../../assets/img/doors/');
+    this.load.multiatlas('traps', '../../../assets/json/enemies/trapsSprite.json', '../../../assets/img/enemies/');
 
     // Audio
     this.load.audio('forest-theme', '../../../assets/sounds/forest-theme.mp3');
@@ -74,6 +90,7 @@ class Preload extends Phaser.Scene {
     this.load.audio('troll-dead', '../../../assets/sounds/troll-dead.wav');
     this.load.audio('imp-hit', '../../../assets/sounds/imp-hit.wav');
     this.load.audio('imp-dead', '../../../assets/sounds/imp-dead.wav');
+    this.load.audio('fire-trap', '../../../assets/sounds/flamestrike.mp3');
 
     this.load.bitmapFont('arcade', '../../../assets/font/highscore/arcade.png', '../../../assets/font/highscore/arcade.xml');
 
@@ -84,7 +101,7 @@ class Preload extends Phaser.Scene {
 
   startGame() {
     this.registry.set('level', 1);
-    this.registry.set('unlocked-levels', 2);
+    this.registry.set('unlocked-levels', 3);
     this.scene.start('MenuScene');
   }
 
