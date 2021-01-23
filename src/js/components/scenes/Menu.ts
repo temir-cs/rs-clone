@@ -31,7 +31,7 @@ class MenuScene extends BaseScene {
     });
 
     textGameObject.on('pointerup', () => {
-      if (this.menu.scene) {
+      if (menuItem.scene) {
         this.scene.start(menuItem.scene);
       }
     });
