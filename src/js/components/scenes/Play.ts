@@ -16,6 +16,10 @@ import { createMapForest,
         createLayersForest,
         createBgForest,
         bgParallaxForest } from './levels_utils/forestUtils';
+import { createMapDungeon,
+        createLayersDungeon,
+        createBgDungeon,
+        bgParallaxDungeon } from './levels_utils/dungeonUtils';
 
 const DEFAULT_LEVEL = 1;
 const LIVES = 3;
@@ -40,7 +44,6 @@ class Play extends Phaser.Scene {
     collectables: Phaser.Tilemaps.ObjectLayer,
     collectableKey: Phaser.Tilemaps.ObjectLayer,
     trapsSpawns?: Phaser.Tilemaps.ObjectLayer,
-
   } = {
     platformColliders: null,
     enemiesPlatformColliders: null,
@@ -97,17 +100,16 @@ class Play extends Phaser.Scene {
     this.createMap(this);
     effectAnims(this.anims);
     this.createLayers(this);
+    this.createCollectables(this.layers.collectables);
     const playerZones = this.getPlayerZones();
     const player = this.createPlayer(playerZones.start);
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
-    this.createCollectables(this.layers.collectables);
     this.createKeyCollectable(this.layers.collectableKey);
     this.createTraps(this.layers.trapsSpawns);
     console.log('Current hero: ', player.hero);
 
     this.createBg(this);
     this.hud = new Hud(this);
-    // this.BoardForKey = new BoardForKey(this);
     this.hud.renderAvatar(player.hero);
     this.hud.renderLives(this.livesCount);
 
@@ -155,6 +157,12 @@ class Play extends Phaser.Scene {
       this.createBg = createBgCastle;
       this.bgParallax = bgParallaxCastle;
       this.createMap = createMapCastle;
+    } else if (this.getCurrentLevel() === 3) {
+      this.lvlKey = 'dungeon';
+      this.createLayers = createLayersDungeon;
+      this.createBg = createBgDungeon;
+      this.bgParallax = bgParallaxDungeon;
+      this.createMap = createMapDungeon;
     }
   }
 
@@ -162,7 +170,6 @@ class Play extends Phaser.Scene {
     this.traps = new Traps(this);
     const trapsTypes = this.traps.getTypes();
     layer.objects.forEach((obj) => {
-      // console.log(obj.type);
       const trap = new trapsTypes[`${obj.type}Trap`](this, obj.x, obj.y, `${obj.type}-trap`);
       this.traps.add(trap);
     });
