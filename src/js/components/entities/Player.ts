@@ -64,7 +64,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.gravity = 600;
 
     this.playerSpeed = heroData.speed;
-    this.bounceVelocity = 200;
+    this.bounceVelocity = heroData.bounceVelocity;
     this.jumpHeight = 400;
     this.jumpCount = 0;
     this.hasBeenHit = false;
@@ -249,10 +249,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.setOffset(30, 82);
     this.setVelocityX(0);
     this.play(`${this.hero}-crouch`, true);
-  }
-
-  isSitting():boolean {
-    return this.isPlayingAnims('sit-down');
   }
 
   bounceOff():void {

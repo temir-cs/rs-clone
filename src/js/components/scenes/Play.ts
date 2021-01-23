@@ -77,10 +77,17 @@ class Play extends Phaser.Scene {
 
   create({ gameStatus }):void {
     this.gameStatus = gameStatus;
+    console.log('Gamestatus: ', gameStatus);
+    if (gameStatus === 'NEW_GAME') {
+      console.log('Events cleared!');
+      EventEmitter.removeAllListeners();
+      this.registry.set('level', DEFAULT_LEVEL);
+      this.registry.set('stats', { ...DEFAULT_STATS });
+    }
+
     this.cameras.main.fadeIn(3000);
     this.checkLevel();
     this.hasKey = false;
-    console.log('Gamestatus: ', gameStatus);
     this.livesCount = this.getCurrentLives();
     this.stats = this.getCurrentStats();
     console.log('coinCount', this.stats.coins);
@@ -119,11 +126,6 @@ class Play extends Phaser.Scene {
     this.createEndOfLevel(playerZones.end, player);
     this.createHomeButton();
     this.setupFollowupCameraOn(player);
-
-    if (gameStatus === 'NEW_GAME') {
-      console.log('Events cleared!');
-      EventEmitter.removeAllListeners();
-    }
 
     if (gameStatus === 'PLAYER_LOSE' || gameStatus === 'LEVEL_COMPLETED') return;
     this.createGameEvents();

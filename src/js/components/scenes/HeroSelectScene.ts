@@ -21,12 +21,14 @@ const HERO_STATS = {
   knight: {
     hero: 'knight',
     health: 50,
-    speed: 300
+    speed: 250,
+    bounceVelocity: 120,
   },
   mage: {
     hero: 'mage',
     health: 25,
-    speed: 400,
+    speed: 300,
+    bounceVelocity: 200,
   }
 };
 
