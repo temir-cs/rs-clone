@@ -70,6 +70,6 @@ const config: Phaser.Types.Core.GameConfig = {
 //   const game = new Phaser.Game(config);
 // };
 
-export default function startGame(username: string):void {
+export default function startGame():void {
    const game = new Phaser.Game(config);
 }
