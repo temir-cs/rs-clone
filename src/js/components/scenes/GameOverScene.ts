@@ -10,7 +10,7 @@ class GameOverScene extends BaseScene {
     super('GameOverScene', config);
 
     this.menu = [
-      { scene: 'PlayScene', text: 'Restart' },
+      { scene: 'HeroSelectScene', text: 'New Game' },
       { scene: 'MenuScene', text: 'Main menu' },
       { scene: null, text: 'Exit' }
     ];

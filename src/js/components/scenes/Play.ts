@@ -21,6 +21,11 @@ const DEFAULT_STATS = {
   coins: 0,
   kills: 0,
 };
+const GAME_STATUSES = [
+  'PLAYER_LOSE',
+  'LEVEL_COMPLETED',
+  'GAME_RESTART',
+];
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -73,6 +78,7 @@ class Play extends Phaser.Scene {
   killCount: number;
   livesCount: number;
   stats: any;
+  gameStatus: any;
 
   constructor(config) {
     super('PlayScene');
@@ -80,11 +86,12 @@ class Play extends Phaser.Scene {
   }
 
   create({ gameStatus }):void {
+    this.gameStatus = gameStatus;
     this.cameras.main.fadeIn(3000);
     this.checkLevel();
     this.hasKey = false;
     console.log('Gamestatus: ', gameStatus);
-    this.livesCount = this.registry.get('livesCount') || LIVES;
+    this.livesCount = this.getCurrentLives();
     this.stats = this.getCurrentStats();
     console.log('coinCount', this.stats.coins);
     console.log('killCount', this.stats.kills);
@@ -121,18 +128,25 @@ class Play extends Phaser.Scene {
     });
 
     this.createEndOfLevel(playerZones.end, player);
-    this.createBackButton();
+    this.createHomeButton();
     this.setupFollowupCameraOn(player);
+
+    if (gameStatus === 'NEW_GAME') {
+      console.log('Events cleared!');
+      EventEmitter.removeAllListeners();
+    }
 
     if (gameStatus === 'PLAYER_LOSE' || gameStatus === 'LEVEL_COMPLETED') return;
     this.createGameEvents();
+    // console.log('Events on: ', EventEmitter.eventNames());
   }
 
   update():void {
     this.bgParallax(this);
   }
 
-  checkLevel() {
+  checkLevel():void {
+    console.log('Current level: ', this.getCurrentLevel());
     if (this.getCurrentLevel() === 1) {
       this.lvlKey = 'forest';
       this.createLayers = createLayersForest;
@@ -167,27 +181,11 @@ class Play extends Phaser.Scene {
   }
 
   createGameEvents() {
+    console.log('ADDED GAME EVENTS!');
     EventEmitter.on('PLAYER_LOSE', () => {
+      console.log('PLAYER_LOSE LAUNCHED!');
       this.livesCount -= 1;
-      this.registry.set('livesCount', this.livesCount);
-      this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
-      if (this.livesCount === 0) {
-        this.scene.start('GameOverScene');
-        const finalStats = this.getCurrentStats();
-        this.registry.set('finalStats', { ...finalStats });
-        this.registry.set('level', DEFAULT_LEVEL);
-      }
-
-      const currentLvl = this.getCurrentLevel();
-
-      console.log('CurrentLevel: ', currentLvl);
-      if (currentLvl > 1) {
-        const lastLevelStats = this.registry.get('lastLevelStats');
-        console.log('lastLevelStats :', lastLevelStats);
-        this.registry.set('stats', { ...lastLevelStats });
-      } else {
-        this.registry.set('stats', { ...DEFAULT_STATS });
-      }
+      this.restartLevel();
     });
 
     EventEmitter.on('ENEMY_KILLED', () => {
@@ -274,6 +272,18 @@ class Play extends Phaser.Scene {
     return this.registry.get('level') || DEFAULT_LEVEL;
   }
 
+  getCurrentLives():any {
+    return this.gameStatus === 'NEW_GAME' ? LIVES : this.registry.get('livesCount');
+  }
+
+  getCurrentStats():any {
+    let stats = this.registry.get('stats');
+    if (!stats) {
+      stats = { ...DEFAULT_STATS };
+    }
+    return stats;
+  }
+
   createEndOfLevel(end, player) {
     const endOfLevel = this.physics.add.sprite(end.x, end.y, 'end')
       .setAlpha(0)
@@ -291,37 +301,56 @@ class Play extends Phaser.Scene {
         this.cameras.main.fadeOut(3000);
         setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), 4000);
         this.registry.set('lastLevelStats', { ...this.stats });
-        // this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' });
+        this.registry.set('livesCount', this.livesCount);
       }
     });
   }
 
-  createBackButton():void {
-    const menuButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 10, 'home')
+  createHomeButton():void {
+    const homeButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 10, 'home')
       .setOrigin(1, 1)
       .setScrollFactor(0)
       .setScale(1)
       .setInteractive();
 
-    menuButton.on('pointerup', () => {
+    homeButton.on('pointerup', () => {
+      this.registry.set('level', DEFAULT_LEVEL);
       this.scene.start('MenuScene');
     });
 
-    menuButton.on('pointerover', () => {
-      menuButton.setTint(0x0FFF00);
+    homeButton.on('pointerover', () => {
+      homeButton.setTint(0x0FFF00);
     });
 
-    menuButton.on('pointerout', () => {
-      menuButton.clearTint();
+    homeButton.on('pointerout', () => {
+      homeButton.clearTint();
     });
   }
 
-  getCurrentStats():any {
-    let stats = this.registry.get('stats');
-    if (!stats) {
-      stats = { ...DEFAULT_STATS };
+  restartLevel():void {
+    this.registry.set('livesCount', this.livesCount);
+    if (this.livesCount <= 0) {
+      this.displayGameOver();
+    } else {
+      this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
     }
-    return stats;
+
+    const currentLvl = this.getCurrentLevel();
+
+    if (currentLvl > 1) {
+      const lastLevelStats = this.registry.get('lastLevelStats');
+      console.log('lastLevelStats :', lastLevelStats);
+      this.registry.set('stats', { ...lastLevelStats });
+    } else {
+      this.registry.set('stats', { ...DEFAULT_STATS });
+    }
+  }
+
+  displayGameOver():void {
+    this.scene.start('GameOverScene');
+    const finalStats = this.getCurrentStats();
+    this.registry.set('finalStats', { ...finalStats });
+    this.registry.set('level', DEFAULT_LEVEL);
   }
 }
 export default Play;
