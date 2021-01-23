@@ -19,7 +19,7 @@ class MenuScene extends BaseScene {
   }
 
   setupMenuEvents(menuItem) {
-    const textGameObject = menuItem.textGameObject;
+    const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 
     textGameObject.on('pointerover', () => {
