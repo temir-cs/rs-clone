@@ -42,7 +42,6 @@ class LevelsScene extends BaseScene {
     textGameObject.on('pointerup', () => {
       if (menuItem.scene) {
         this.registry.set('level', menuItem.level);
-        this.registry.set('stats', { ...DEFAULT_STATS });
         this.scene.start(menuItem.scene, { gameStatus: 'NEW_GAME' });
       }
 

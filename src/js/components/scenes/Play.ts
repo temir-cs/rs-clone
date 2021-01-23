@@ -75,13 +75,12 @@ class Play extends Phaser.Scene {
     this.config = config;
   }
 
-  create({ gameStatus }):void {
+  create({ gameStatus }) {
     this.gameStatus = gameStatus;
     console.log('Gamestatus: ', gameStatus);
     if (gameStatus === 'NEW_GAME') {
       console.log('Events cleared!');
       EventEmitter.removeAllListeners();
-      this.registry.set('level', DEFAULT_LEVEL);
       this.registry.set('stats', { ...DEFAULT_STATS });
     }
 
@@ -171,7 +170,7 @@ class Play extends Phaser.Scene {
       .play();
   }
 
-  createGameEvents() {
+  createGameEvents():void {
     console.log('ADDED GAME EVENTS!');
     EventEmitter.on('PLAYER_LOSE', () => {
       console.log('PLAYER_LOSE LAUNCHED!');
@@ -218,7 +217,7 @@ class Play extends Phaser.Scene {
       .addOverlap(colliders.player.meleeWeapon, this.onWeaponHit);
   }
 
-  onCollect(entity, collectable) {
+  onCollect(entity, collectable):void {
     this.stats.coins += collectable.score;
     this.registry.set('stats', { ...this.stats });
     collectable.pickupSound.play();
@@ -275,7 +274,7 @@ class Play extends Phaser.Scene {
     return stats;
   }
 
-  createEndOfLevel(end, player) {
+  createEndOfLevel(end, player):void {
     const endOfLevel = this.physics.add.sprite(end.x, end.y, 'end')
       .setAlpha(0)
       .setOrigin(0.5, 1)
