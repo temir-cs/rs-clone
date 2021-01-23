@@ -51,11 +51,20 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   init() {
-    this.hero = 'knight';
+    const heroData = this.getCurrentHeroStats();
+    this.hero = heroData.hero;
+    this.health = heroData.health;
+    this.hp = new HealthBar(
+      this.scene,
+      this.scene.config.leftTopCorner.x + 65,
+      this.scene.config.leftTopCorner.y + 10,
+      1,
+      this.health
+    );
     this.gravity = 600;
 
-    this.playerSpeed = 300;
-    this.bounceVelocity = 200;
+    this.playerSpeed = heroData.speed;
+    this.bounceVelocity = heroData.bounceVelocity;
     this.jumpHeight = 400;
     this.jumpCount = 0;
     this.hasBeenHit = false;
@@ -73,15 +82,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'attack', this);
     this.timeFromLastSwing = null;
-
-    this.health = 60;
-    this.hp = new HealthBar(
-      this.scene,
-      this.scene.config.leftTopCorner.x + 65,
-      this.scene.config.leftTopCorner.y + 10,
-      1,
-      this.health
-    );
 
     this.setGravityY(this.gravity);
     this.setCollideWorldBounds(true);
@@ -114,7 +114,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   playDamageTween() {
-    this.play('hurt');
+    this.play(`${this.hero}-hurt`);
     return this.scene.tweens.add({
       targets: this,
       duration: 80,
@@ -124,7 +124,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   playDeath() {
-    this.play('death');
+    this.play(`${this.hero}-death`);
     return this.scene.tweens.add({
       targets: this,
       duration: 80,
@@ -137,14 +137,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.hasBeenHit || !this.body) return;
     // 450
     if (this.getBounds().top > this.scene.config.height + 650) {
+      console.log('BOOM!');
       this.deathSound.play();
       EventEmitter.emit('PLAYER_LOSE');
       return;
     }
 
-    const { left, right, space, up, down } = this.cursors;
+    const { left, right, up, down } = this.cursors;
     const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
-    const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
+    // const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
     const onFloor = this.body.onFloor();
 
     if (onFloor && down.isDown) {
@@ -164,7 +165,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityX(0);
     }
 
-    if ((isSpaceJustDown || isUpJustDown) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
+    if ((isUpJustDown) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
       this.setVelocityY(-this.jumpHeight);
       this.jumpCount += 1;
       this.jumpSound.play();
@@ -174,49 +175,55 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.jumpCount = 0;
     }
 
-    if (this.isPlayingAnims('sword-attack') || this.isPlayingAnims('run-attack')) {
+    if (this.isPlayingAnims(`${this.hero}-attack`) || this.isPlayingAnims(`${this.hero}-run-attack`)) {
       return;
     }
 
     if (onFloor) {
       if (this.body.velocity.x !== 0) {
-        this.play('run', true);
+        this.play(`${this.hero}-run`, true);
       } else {
-        this.play('idle', true);
+        this.play(`${this.hero}-idle`, true);
       }
     } else {
       if (this.jumpCount === 0) {
-        this.play('jump', true);
+        this.play(`${this.hero}-jump`, true);
       } else {
-        this.play('midjump', true);
+        this.play(`${this.hero}-midjump`, true);
       }
     }
   }
 
   handleAttacks():void {
     this.scene.input.keyboard.on('keydown-Q', () => {
-      if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
-        this.play('sword-attack', true);
-        this.zapSound.play();
+      if (this.hero === 'knight') {
+        if (this.timeFromLastSwing && this.timeFromLastSwing + this.meleeWeapon.attackSpeed > getTimestamp()) return;
+
+        if (this.body.onFloor() && this.body.velocity.x !== 0) {
+          this.play(`${this.hero}-run-attack`, true);
+        } else {
+          this.play(`${this.hero}-attack`, true);
+        }
+        this.swordSound.play();
+        this.meleeWeapon.swing(this);
+        this.timeFromLastSwing = getTimestamp();
+      }
+
+      if (this.hero === 'mage') {
+        if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
+          this.play(`${this.hero}-attack`, true);
+          this.zapSound.play();
+        }
       }
     });
 
     this.scene.input.keyboard.on('keydown-E', () => {
-      if (this.timeFromLastSwing && this.timeFromLastSwing + this.meleeWeapon.attackSpeed > getTimestamp()) return;
-
-      if (this.body.onFloor() && this.body.velocity.x !== 0) {
-        this.play('run-attack', true);
-      } else {
-        this.play('sword-attack', true);
-      }
-      this.swordSound.play();
-      this.meleeWeapon.swing(this);
-      this.timeFromLastSwing = getTimestamp();
+      console.log('Action button pressed!');
     });
   }
 
   isAttacking():boolean {
-    return this.isPlayingAnims('sword-attack') || this.isPlayingAnims('run-attack');
+    return this.isPlayingAnims(`${this.hero}-attack`) || this.isPlayingAnims(`${this.hero}-run-attack`);
   }
 
   resetMovements():void {
@@ -241,11 +248,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.body.setSize(30, 28);
     this.setOffset(30, 82);
     this.setVelocityX(0);
-    this.play('crouch', true);
-  }
-
-  isSitting():boolean {
-    return this.isPlayingAnims('sit-down');
+    this.play(`${this.hero}-crouch`, true);
   }
 
   bounceOff():void {
@@ -305,6 +308,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
     this.checkAfterHit(source, true);
     this.resetMovements();
+  }
+
+  getCurrentHeroStats():any {
+    const data = this.scene.registry.get('currentHeroStats');
+    if (data) return data;
+    return { hero: 'knight', health: 50, speed: 200 };
   }
 }
 

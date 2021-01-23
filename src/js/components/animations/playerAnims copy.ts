@@ -5,7 +5,7 @@ const ANIMS_DURATION = {
     jump: { start: 1, end: 7 },
     midjump: { start: 5, end: 10 },
     crouch: { start: 1, end: 1 },
-    'attack': { start: 0, end: 4 },
+    'sword-attack': { start: 0, end: 4 },
     'run-attack': { start: 1, end: 8 },
     hurt: { start: 1, end: 4 },
     death: { start: 1, end: 10 }
@@ -16,7 +16,7 @@ const ANIMS_DURATION = {
     jump: { start: 1, end: 7 },
     midjump: { start: 5, end: 10 },
     crouch: { start: 1, end: 1 },
-    attack: { start: 1, end: 7 },
+    'sword-attack': { start: 1, end: 7 },
     'run-attack': { start: 1, end: 8 },
     hurt: { start: 1, end: 4 },
     death: { start: 1, end: 10 }
@@ -25,7 +25,7 @@ const ANIMS_DURATION = {
 
 export default (anims, hero) => {
   anims.create({
-    key: `${hero}-idle`,
+    key: 'idle',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero].idle.start,
       end: ANIMS_DURATION[hero].idle.end,
@@ -35,8 +35,9 @@ export default (anims, hero) => {
     frameRate: 5,
     repeat: 1,
   });
+  console.log(anims.get('idle'));
   anims.create({
-    key: `${hero}-run`,
+    key: 'run',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero].run.start,
       end: ANIMS_DURATION[hero].run.end,
@@ -48,7 +49,7 @@ export default (anims, hero) => {
   });
 
   anims.create({
-    key: `${hero}-jump`,
+    key: 'jump',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero].jump.start,
       end: ANIMS_DURATION[hero].jump.end,
@@ -60,7 +61,7 @@ export default (anims, hero) => {
   });
 
   anims.create({
-    key: `${hero}-midjump`,
+    key: 'midjump',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero].midjump.start,
       end: ANIMS_DURATION[hero].midjump.end,
@@ -72,7 +73,7 @@ export default (anims, hero) => {
   });
 
   anims.create({
-    key: `${hero}-crouch`,
+    key: 'crouch',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero].crouch.start,
       end: ANIMS_DURATION[hero].crouch.end,
@@ -84,10 +85,10 @@ export default (anims, hero) => {
   });
 
   anims.create({
-    key: `${hero}-attack`,
+    key: 'sword-attack',
     frames: anims.generateFrameNames(`${hero}`, {
-      start: ANIMS_DURATION[hero]['attack'].start,
-      end: ANIMS_DURATION[hero]['attack'].end,
+      start: ANIMS_DURATION[hero]['sword-attack'].start,
+      end: ANIMS_DURATION[hero]['sword-attack'].end,
       prefix: 'Attack/attack',
       suffix: '.png'
     }),
@@ -96,7 +97,7 @@ export default (anims, hero) => {
   });
 
   anims.create({
-    key: `${hero}-run-attack`,
+    key: 'run-attack',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero]['run-attack'].start,
       end: ANIMS_DURATION[hero]['run-attack'].end,
@@ -108,7 +109,7 @@ export default (anims, hero) => {
   });
 
   anims.create({
-    key: `${hero}-hurt`,
+    key: 'hurt',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero].hurt.start,
       end: ANIMS_DURATION[hero].hurt.end,
@@ -131,7 +132,7 @@ export default (anims, hero) => {
   //   repeat: 0
   // });
   anims.create({
-    key: `${hero}-death`,
+    key: 'death',
     frames: anims.generateFrameNames(`${hero}`, {
       start: ANIMS_DURATION[hero].death.start,
       end: ANIMS_DURATION[hero].death.end,

@@ -6,10 +6,9 @@ class MenuScene extends BaseScene {
     super('MenuScene', config);
 
     this.menu = [
-      { scene: 'PlayScene', text: 'Play' },
+      { scene: 'HeroSelectScene', text: 'Play' },
       { scene: 'LevelsScene', text: 'Levels' },
       { scene: 'HighscoreScene', text: 'Highscore' },
-      { scene: null, text: 'Exit' }
     ];
   }
 
@@ -20,7 +19,7 @@ class MenuScene extends BaseScene {
   }
 
   setupMenuEvents(menuItem) {
-    const textGameObject = menuItem.textGameObject;
+    const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 
     textGameObject.on('pointerover', () => {
@@ -32,9 +31,8 @@ class MenuScene extends BaseScene {
     });
 
     textGameObject.on('pointerup', () => {
-      menuItem.scene && this.scene.start(menuItem.scene);
-      if (menuItem.text === 'Exit') {
-        this.game.destroy(true);
+      if (this.menu.scene) {
+        this.scene.start(menuItem.scene);
       }
     });
   }

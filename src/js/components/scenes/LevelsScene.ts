@@ -1,4 +1,5 @@
 import BaseScene from './BaseScene';
+import { DEFAULT_STATS } from './consts';
 
 class LevelsScene extends BaseScene {
   menu: any;
@@ -19,11 +20,11 @@ class LevelsScene extends BaseScene {
     const levels = this.registry.get('unlocked-levels');
     for (let i = 1; i <= levels; i += 1) {
       this.menu.push({
-        scene: 'PlayScene', text: `Level ${i}`, level: i
+        scene: 'HeroSelectScene', text: `Level ${i}`, level: i,
       });
     }
 
-    this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem)); // or bind.this
+    this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem));
   }
 
   setupMenuEvents(menuItem) {
@@ -41,7 +42,7 @@ class LevelsScene extends BaseScene {
     textGameObject.on('pointerup', () => {
       if (menuItem.scene) {
         this.registry.set('level', menuItem.level);
-        this.scene.start(menuItem.scene);
+        this.scene.start(menuItem.scene, { gameStatus: 'NEW_GAME' });
       }
 
       if (menuItem.text === 'Exit') {
