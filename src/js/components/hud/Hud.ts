@@ -43,7 +43,7 @@ class Hud {
         .setOrigin(0)
         .setScale(1)
         .setScrollFactor(0);
-    const coinsTextPosition = [this.coinsImage.x + this.coinsImage.width + 5, this.coinsImage.y + 7];
+    const coinsTextPosition = [this.coinsImage.x + this.coinsImage.width, this.coinsImage.y + 7];
     this.coinsText = this.scene.add.text(coinsTextPosition[0], coinsTextPosition[1], `${this.coinCount}`, this.hudFont)
       .setScrollFactor(0);
   }

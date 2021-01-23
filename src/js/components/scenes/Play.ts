@@ -15,17 +15,7 @@ import { createMapForest,
         createBgForest,
         bgParallaxForest } from './levels_utils/forestUtils';
 
-const DEFAULT_LEVEL = 1;
-const LIVES = 3;
-const DEFAULT_STATS = {
-  coins: 0,
-  kills: 0,
-};
-const GAME_STATUSES = [
-  'PLAYER_LOSE',
-  'LEVEL_COMPLETED',
-  'GAME_RESTART',
-];
+import { DEFAULT_LEVEL, DEFAULT_STATS, LIVES } from './consts';
 
 // type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
@@ -108,7 +98,6 @@ class Play extends Phaser.Scene {
 
     this.createBg(this);
     this.hud = new Hud(this);
-    // this.BoardForKey = new BoardForKey(this);
     this.hud.renderAvatar(player.hero);
     this.hud.renderLives(this.livesCount);
 
@@ -338,7 +327,7 @@ class Play extends Phaser.Scene {
     const currentLvl = this.getCurrentLevel();
 
     if (currentLvl > 1) {
-      const lastLevelStats = this.registry.get('lastLevelStats');
+      const lastLevelStats = this.registry.get('lastLevelStats') || { ...DEFAULT_STATS };
       console.log('lastLevelStats :', lastLevelStats);
       this.registry.set('stats', { ...lastLevelStats });
     } else {

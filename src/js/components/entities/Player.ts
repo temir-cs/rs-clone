@@ -143,9 +143,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
-    const { left, right, space, up, down } = this.cursors;
+    const { left, right, up, down } = this.cursors;
     const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
-    const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
+    // const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
     const onFloor = this.body.onFloor();
 
     if (onFloor && down.isDown) {
@@ -165,7 +165,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityX(0);
     }
 
-    if ((isSpaceJustDown || isUpJustDown) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
+    if ((isUpJustDown) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
       this.setVelocityY(-this.jumpHeight);
       this.jumpCount += 1;
       this.jumpSound.play();
@@ -196,23 +196,29 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   handleAttacks():void {
     this.scene.input.keyboard.on('keydown-Q', () => {
-      if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
-        this.play(`${this.hero}-attack`, true);
-        this.zapSound.play();
+      if (this.hero === 'knight') {
+        if (this.timeFromLastSwing && this.timeFromLastSwing + this.meleeWeapon.attackSpeed > getTimestamp()) return;
+
+        if (this.body.onFloor() && this.body.velocity.x !== 0) {
+          this.play(`${this.hero}-run-attack`, true);
+        } else {
+          this.play(`${this.hero}-attack`, true);
+        }
+        this.swordSound.play();
+        this.meleeWeapon.swing(this);
+        this.timeFromLastSwing = getTimestamp();
+      }
+
+      if (this.hero === 'mage') {
+        if (this.projectiles.fireProjectile(this, 'fire-projectile')) {
+          this.play(`${this.hero}-attack`, true);
+          this.zapSound.play();
+        }
       }
     });
 
     this.scene.input.keyboard.on('keydown-E', () => {
-      if (this.timeFromLastSwing && this.timeFromLastSwing + this.meleeWeapon.attackSpeed > getTimestamp()) return;
-
-      if (this.body.onFloor() && this.body.velocity.x !== 0) {
-        this.play(`${this.hero}-run-attack`, true);
-      } else {
-        this.play(`${this.hero}-attack`, true);
-      }
-      this.swordSound.play();
-      this.meleeWeapon.swing(this);
-      this.timeFromLastSwing = getTimestamp();
+      console.log('Action button pressed!');
     });
   }
 
