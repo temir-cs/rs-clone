@@ -6,6 +6,8 @@ import Enemies from '../groups/Enemies';
 import EventEmitter from '../events/Emitter';
 import effectAnims from '../animations/effectsAnim';
 import Collectables from '../groups/Collectables';
+import Traps from '../groups/Traps';
+
 import Key from '../collectables/Key';
 import Hud from '../hud/Hud';
 import Door from '../helper_objects/Door';
@@ -21,8 +23,6 @@ const DEFAULT_STATS = {
   coins: 0,
   kills: 0,
 };
-
-// type newPlayer = Player & {addcollider: () => void};
 class Play extends Phaser.Scene {
   config: any;
   map: Phaser.Tilemaps.Tilemap = null;
@@ -39,6 +39,8 @@ class Play extends Phaser.Scene {
     enemySpawns: Phaser.Tilemaps.ObjectLayer,
     collectables: Phaser.Tilemaps.ObjectLayer,
     collectableKey: Phaser.Tilemaps.ObjectLayer,
+    trapsSpawns?: Phaser.Tilemaps.ObjectLayer,
+
   } = {
     platformColliders: null,
     enemiesPlatformColliders: null,
@@ -50,6 +52,8 @@ class Play extends Phaser.Scene {
     enemySpawns: null,
     collectables: null,
     collectableKey: null,
+    trapsSpawns: null,
+
   };
 
   private plotting: boolean;
@@ -73,6 +77,7 @@ class Play extends Phaser.Scene {
   killCount: number;
   livesCount: number;
   stats: any;
+  traps?: any;
 
   constructor(config) {
     super('PlayScene');
@@ -97,6 +102,7 @@ class Play extends Phaser.Scene {
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
     this.createCollectables(this.layers.collectables);
     this.createKeyCollectable(this.layers.collectableKey);
+    this.createTraps(this.layers.trapsSpawns);
     console.log('Current hero: ', player.hero);
 
     this.createBg(this);
@@ -117,6 +123,7 @@ class Play extends Phaser.Scene {
         projectiles: enemies.getProjectiles(),
         collectables: this.collectables,
         collectableKey: this.collectableKey,
+        trap: this.traps,
       }
     });
 
@@ -130,6 +137,9 @@ class Play extends Phaser.Scene {
 
   update():void {
     this.bgParallax(this);
+    if (this.traps) {
+      this.traps.update();
+    }
   }
 
   checkLevel() {
@@ -146,6 +156,16 @@ class Play extends Phaser.Scene {
       this.bgParallax = bgParallaxCastle;
       this.createMap = createMapCastle;
     }
+  }
+
+  createTraps(layer):void {
+    this.traps = new Traps(this);
+    const trapsTypes = this.traps.getTypes();
+    layer.objects.forEach((obj) => {
+      // console.log(obj.type);
+      const trap = new trapsTypes[`${obj.type}Trap`](this, obj.x, obj.y, `${obj.type}-trap`);
+      this.traps.add(trap);
+    });
   }
 
   createKeyCollectable(layer):void {
@@ -250,7 +270,7 @@ class Play extends Phaser.Scene {
       .addCollider(colliders.platformColliders)
       .addCollider(colliders.projectiles, this.onWeaponHit)
       .addOverlap(colliders.collectables, this.onCollect, this)
-      .addOverlap(colliders.collectables, this.onCollect, this)
+      .addOverlap(colliders.trap, this.onWeaponHit, this)
       .addOverlap(colliders.collectableKey, this.onKeyCollect, this);
   }
 
