@@ -65,6 +65,10 @@ const config: Phaser.Types.Core.GameConfig = {
     }
   },
   scene: initScenes(),
+  scale: {
+    mode: Phaser.Scale.ScaleModes.FIT,
+    autoCenter: Phaser.Scale.Center.CENTER_BOTH
+  },
   parent: 'game',
 };
 
