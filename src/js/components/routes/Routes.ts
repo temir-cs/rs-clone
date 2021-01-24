@@ -23,6 +23,9 @@ class Routes {
       register: new Register()
     };
     this.refreshHash();
+    const loaderSpinner = document.querySelector('.loader');
+    loaderSpinner.classList.add('loader--hidden');
+    this.routes.register.init();
   }
 
   refreshHash(path = 'register') {
