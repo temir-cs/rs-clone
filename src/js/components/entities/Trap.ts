@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
 import initAnims from '../animations/trapsAnims';
-import getTimestamp from '../utils/functions';
+import { getTimestamp } from '../utils/functions';
 import anims from '../mixins/anims';
 
 class Trap extends Phaser.Physics.Arcade.Sprite {

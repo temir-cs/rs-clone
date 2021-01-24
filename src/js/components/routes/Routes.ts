@@ -1,6 +1,7 @@
 import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
 import { requestToServer, getCredentials } from './utils';
+import { clearAllBeforeGame } from '../utils/functions';
 
 class Routes {
   routes: { login: Login, register: Register; };
@@ -60,7 +61,8 @@ class Routes {
       (async () => {
         const responseData = await requestToServer(credentials, hashLocation);
         if (responseData.status === 'ok') {
-          this.routes[path].removeForm();
+          // this.routes[path].removeForm();
+          clearAllBeforeGame();
           localStorage.setItem('user', credentials.username);
           this.refreshHash('game');
         } else if (hashLocation === 'signup') {

@@ -1,0 +1,87 @@
+.page-footer {
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 47.4rem;
+  margin-top: -30rem;
+  padding-top: 40rem;
+  // background-color: red;
+  background-image: url("../../assets/img/welcome_screen/bottom.png"),
+    url("../../assets/img/welcome_screen/trees.png");
+  background-repeat: no-repeat;
+  background-size: 192rem 47.4rem, 145.5rem 30rem;
+  background-position: bottom center, bottom center;
+}
+
+.page-footer__container {
+  @include container();
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.page-footer__text {
+  font-size: 1rem;
+  line-height: 2rem;
+  color: $footer-text-color;
+  margin-left: 1rem;
+  pointer-events: initial;
+}
+
+.page-footer__img {
+  width: 13rem;
+  height: 4.7rem;
+}
+
+.page-footer__link {
+  pointer-events: initial;
+  color: $footer-text-color;
+  &:hover {
+    cursor: pointer;
+    color: $background-light;
+  }
+}
+
+
+
+@media only screen and #{$tablet-width} {
+  .page-footer {
+    width: 100%;
+    height: 30rem;
+    margin-top: -20rem;
+    padding-top: 26rem;
+    background-size: 114rem 28.1rem, 90rem 18.6rem;
+    // background-color: red;
+  }
+
+  .page-footer__container {
+    @include container();
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .page-footer__text {
+    font-size: 0.8rem;
+    line-height: 1rem;
+    color: $footer-text-color;
+    margin-left: 1rem;
+    pointer-events: initial;
+  }
+
+  .page-footer__img {
+    width: 6.5rem;
+    height: 2.35rem;
+  }
+
+  .page-footer__link {
+    pointer-events: initial;
+    color: $footer-text-color;
+    &:hover {
+      cursor: pointer;
+      color: $background-light;
+    }
+  }
+}

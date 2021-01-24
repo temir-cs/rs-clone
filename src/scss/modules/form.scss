@@ -1,25 +1,21 @@
 .form__container {
-  margin: 0 auto;
-  margin-top: 10rem;
-  width: 44rem;
-  height: 26.8rem;
-  background-image: url('../../assets/img/forms/form_bg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  // outline: 1px red solid;
+  width: 80rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .form__title {
   color: $input-dark;
   font-size: 2rem;
-  font-weight: 600;
 }
 
 .form__form {
-  margin-top: 1.5rem;
+  width: 100%;
+  margin-top: 0.8rem;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -33,7 +29,7 @@
   padding: 0 1rem;
 
   background-color: $input-dark;
-  border: 1px white solid;
+  border: 1px $input-txt-color solid;
   outline: none;
 
   color: $input-txt-color;
@@ -41,6 +37,7 @@
 
   &:invalid {
     background-color: $input-dark;
+    // background-color: $form-error;
   }
 }
 
@@ -48,14 +45,15 @@
   display: block;
   width: 20rem;
   height: 4rem;
-  margin-bottom: 1.2rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
 
-  background-color: #ff8a00;
-  background-image: linear-gradient(to top, #ff8a00, #ffc300);
+  background-color: $btn-color;
+  background-image: $btn-gradient;
 
   color: $input-dark;
   font-size: 1.6rem;
-  font-weight: 600;
+  text-align: center;
 
   &:hover {
     cursor: pointer;
@@ -64,12 +62,63 @@
 }
 
 .form__link {
-  color: $input-txt-color;
-  font-size: 1.2rem;
-  font-weight: 600;
+  color: $text-color;
+  font-size: 1.4rem;
 
   &:hover {
     cursor: pointer;
-    color: #ffc300;
+    border-bottom: 1px $text-color solid;
   }
+}
+
+.form__msg {
+  display: block;
+  margin-bottom: 1rem;
+  color: $form-error;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+
+@media only screen and #{$tablet-width} {
+  .form__title {
+    color: $input-dark;
+    font-size: 1.8rem;
+  }
+
+  .form__form {
+    margin-top: 1rem;
+
+  }
+
+  .form__input {
+    width: 20rem;
+    height: 3.2rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+
+    color: $input-txt-color;
+    line-height: 3.2rem;
+
+  }
+
+  .form__btn {
+    width: 20rem;
+    height: 3.6rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    font-size: 1.4rem;
+  }
+
+  .form__link {
+    font-size: 1.2rem;
+  }
+
+  .form__msg {
+    margin-bottom: 1rem;
+    color: $form-error;
+    font-size: 1rem;
+  }
+
 }

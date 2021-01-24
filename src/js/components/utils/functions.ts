@@ -1,6 +1,15 @@
-const getTimestamp:any = () => {
+const getTimestamp = ():any => {
   const d = new Date();
   return d.getTime();
 };
 
-export default getTimestamp;
+const clearAllBeforeGame = ():void => {
+  console.log('clear');
+  const { body } = document;
+  body.innerHTML = '<div id="game"></div>';
+};
+
+export {
+  getTimestamp,
+  clearAllBeforeGame
+};
