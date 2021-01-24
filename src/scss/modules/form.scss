@@ -66,8 +66,9 @@
   font-size: 1.4rem;
 
   &:hover {
+    color: $links-hover;
     cursor: pointer;
-    border-bottom: 1px $text-color solid;
+    border-bottom: 1px $links-hover solid;
   }
 }
 
