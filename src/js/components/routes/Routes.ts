@@ -1,7 +1,8 @@
 import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
 import { requestToServer, getCredentials } from './utils';
-import { clearAllBeforeGame } from '../utils/functions';
+import { clearAllBeforeGame,
+          mobileToggleMenu } from '../utils/functions';
 
 class Routes {
   routes: { login: Login, register: Register; };
@@ -25,6 +26,7 @@ class Routes {
     this.refreshHash();
     const loaderSpinner = document.querySelector('.loader');
     loaderSpinner.classList.add('loader--hidden');
+    mobileToggleMenu();
     this.routes.register.init();
   }
 

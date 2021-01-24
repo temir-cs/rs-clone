@@ -82,6 +82,11 @@
 
 
 @media only screen and #{$tablet-width} {
+
+  .form__container {
+    width: 90%;
+  }
+
   .form__title {
     color: $input-dark;
     font-size: 1.8rem;
