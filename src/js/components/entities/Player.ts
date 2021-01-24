@@ -7,7 +7,7 @@ import anims from '../mixins/anims';
 import Projectiles from '../attacks/Projectiles';
 import EventEmitter from '../events/Emitter';
 import MeleeWeapon from '../attacks/MeleeWeapon';
-import getTimestamp from '../utils/functions';
+import { getTimestamp } from '../utils/functions';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
   scene: any;

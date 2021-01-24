@@ -1,10 +1,19 @@
+@mixin container() {
+  width: 140rem;
+  margin: 0 auto;
+  // outline: 1px red solid;
+  @media #{$tablet-width} {
+    width: 700px;
+  }
+
+  @media #{$mobile-width} {
+    width: 320px;
+  }
+}
+
 @mixin list-normalize() {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-
-@mixin block-border() {
-  border: 1px $map-bg-color solid;
-}

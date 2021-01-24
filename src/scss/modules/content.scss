@@ -1,0 +1,33 @@
+.content {
+  position: relative;
+  z-index: 1;
+  @include container();
+  padding: 0 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  // outline: 1px red solid;
+  margin-bottom: 14rem;
+}
+
+.content__text {
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  text-align: center;
+}
+
+
+@media only screen and #{$tablet-width} {
+  .content {
+    padding: 0;
+    margin-bottom: 8rem;
+  }
+
+  .content__text {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+  }
+
+
+}
