@@ -34,7 +34,8 @@ class Highscore extends BaseScene {
       .then((res) => res.json())
       .then((data) => {
         this.scores = data.map((item) => {
-          const score = item.coins * 10 + item.kills * 20 + item.levels * 30;
+           console.log('SERVER SCOREs', item);
+          const score = item.coins * 10 + item.kills * 20 + item.level * 30;
           return { username: item.username, score };
         });
         this.createHighscore();

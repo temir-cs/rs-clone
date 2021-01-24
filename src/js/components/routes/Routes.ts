@@ -1,5 +1,6 @@
 import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
+import MainScreen from '../welcome_screen/MainScreen';
 import { requestToServer, getCredentials } from './utils';
 import { clearAllBeforeGame } from '../utils/functions';
 
@@ -10,25 +11,29 @@ class Routes {
   gameStart: any;
   warnTimeout: number;
   warn: string;
+  mainScreen: MainScreen;
   constructor(gameStart) {
+    this.mainScreen = new MainScreen();
     this.gameStart = gameStart;
     this.warnTimeout = 2000;
-    this.warn = 'Username shouldn`t contain any kind of spaces or cyrillic charachters';
+    this.warn = 'Username shouldn`t contain any kind of spaces or cyrillic characters';
   }
 
   init() {
     window.addEventListener('hashchange', (event) => this.onRouteChange(event));
+    this.refreshHash();
+    this.mainScreen.init('main');
     this.routes = {
       login: new Login(),
       register: new Register()
     };
-    this.refreshHash();
-    const loaderSpinner = document.querySelector('.loader');
-    loaderSpinner.classList.add('loader--hidden');
-    this.routes.register.init();
   }
 
-  refreshHash(path = 'register') {
+  renderRegForm() {
+    this.refreshHash('register');
+  }
+
+  refreshHash(path = 'main'):void {
     // window.location.hash = '';
     window.location.hash = `#${path}`;
   }
@@ -36,7 +41,16 @@ class Routes {
   onRouteChange(event) {
     const hashLocation = window.location.hash.substring(1);
     if (hashLocation === 'game') {
+      clearAllBeforeGame();
       this.gameStart();
+    } else if (hashLocation === 'main') {
+      this.mainScreen.init(hashLocation);
+      const user = localStorage.getItem('user');
+      if (!user) {
+        this.renderRegForm();
+      }
+    } else if (hashLocation === 'tutorial' || hashLocation === 'about') {
+      this.mainScreen.init(hashLocation);
     } else if (hashLocation === 'login' || hashLocation === 'register') {
       this.routes[hashLocation].init();
     } else if (hashLocation === 'signup' || hashLocation === 'signin') {
@@ -65,7 +79,6 @@ class Routes {
         const responseData = await requestToServer(credentials, hashLocation);
         if (responseData.status === 'ok') {
           // this.routes[path].removeForm();
-          clearAllBeforeGame();
           localStorage.setItem('user', credentials.username);
           this.refreshHash('game');
         } else if (hashLocation === 'signup') {

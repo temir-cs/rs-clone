@@ -9,7 +9,13 @@ const clearAllBeforeGame = ():void => {
   body.innerHTML = '<div id="game"></div>';
 };
 
+const stopSpinner = ():void => {
+  const loaderSpinner = document.querySelector('.loader');
+  loaderSpinner.classList.add('loader--hidden');
+};
+
 export {
   getTimestamp,
-  clearAllBeforeGame
+  clearAllBeforeGame,
+  stopSpinner
 };

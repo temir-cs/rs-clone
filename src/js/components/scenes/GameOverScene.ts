@@ -1,4 +1,5 @@
 import BaseScene from './BaseScene';
+import { requestToServer } from '../routes/utils';
 
 class GameOverScene extends BaseScene {
   menu: any;
@@ -39,7 +40,8 @@ class GameOverScene extends BaseScene {
     };
 
     const stats = this.registry.get('finalStats');
-    console.log(JSON.stringify(stats));
+    const user = localStorage.getItem('user');
+    requestToServer({ ...stats, username: user }, 'leaderboard');
     const totalCoins = stats.coins;
     const totalKills = stats.kills;
 

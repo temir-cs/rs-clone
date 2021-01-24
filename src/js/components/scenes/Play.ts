@@ -367,7 +367,7 @@ class Play extends Phaser.Scene {
 
   displayGameOver():void {
     this.scene.start('GameOverScene');
-    const finalStats = this.getCurrentStats();
+    const finalStats = { ...this.getCurrentStats(), level: this.getCurrentLevel() };
     this.registry.set('finalStats', { ...finalStats });
     this.registry.set('level', DEFAULT_LEVEL);
   }
