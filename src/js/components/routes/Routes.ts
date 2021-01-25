@@ -2,7 +2,8 @@ import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
 import MainScreen from '../welcome_screen/MainScreen';
 import { requestToServer, getCredentials } from './utils';
-import { clearAllBeforeGame } from '../utils/functions';
+import { clearAllBeforeGame,
+          mobileToggleMenu } from '../utils/functions';
 
 class Routes {
   routes: { login: Login, register: Register; };
@@ -27,6 +28,7 @@ class Routes {
       login: new Login(),
       register: new Register()
     };
+    mobileToggleMenu();
   }
 
   renderRegForm() {

@@ -9,6 +9,7 @@ class MenuScene extends BaseScene {
       { scene: 'HeroSelectScene', text: 'Play' },
       { scene: 'LevelsScene', text: 'Levels' },
       { scene: 'HighscoreScene', text: 'Highscore' },
+      { scene: 'SettingsScene', text: 'Settings' }
     ];
   }
 

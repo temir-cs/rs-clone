@@ -2,6 +2,7 @@ import * as Phaser from 'phaser';
 import WebFontFile from '../loaders/WebFontLoader';
 
 class Preload extends Phaser.Scene {
+  text: Phaser.GameObjects.Text;
   constructor() {
     super('PreloadScene');
   }
@@ -57,6 +58,7 @@ class Preload extends Phaser.Scene {
     // Menu items
     this.load.image('menu-bg', '../../../assets/img/menu/menu-bg.png');
     this.load.image('game-over', '../../../assets/img/menu/gameover.jpg');
+    this.load.image('landscapeMode', '../../../assets/img/menu/landscapeMode.png');
     this.load.addFile(new WebFontFile(this.load, 'Press Start 2P'));
     this.load.image('back', '../../../assets/img/menu/backward_button.png');
     this.load.image('home', '../../../assets/img/menu/home_button.png');
@@ -103,7 +105,6 @@ class Preload extends Phaser.Scene {
     this.registry.set('unlocked-levels', 3);
     this.scene.start('MenuScene');
   }
-
   // create() {
   //   this.registry.set('level', 1);
   //   this.scene.start('MenuScene');
