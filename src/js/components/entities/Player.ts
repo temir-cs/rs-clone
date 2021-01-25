@@ -3,7 +3,7 @@ import HealthBar from '../hud/HealthBar';
 import initAnimations from '../animations/playerAnims';
 import collidable from '../mixins/collidable';
 import anims from '../mixins/anims';
-// import Projectile from '../attacks/Projectile';
+import Projectile from '../attacks/Projectile';
 import Projectiles from '../attacks/Projectiles';
 import EventEmitter from '../events/Emitter';
 import MeleeWeapon from '../attacks/MeleeWeapon';
@@ -11,6 +11,7 @@ import { getTimestamp } from '../utils/functions';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
   scene: any;
+  config: any;
   body: Phaser.Physics.Arcade.Body;
   hero: string;
   playerSpeed: number;
@@ -22,13 +23,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   hasBeenHit: boolean;
   bounceVelocity: number;
   health: number;
-  hp: any;
-  config: any;
-  projectiles: any;
-  lastDirection: any;
-  isPlayingAnims: any;
-  meleeWeapon: any;
-  timeFromLastSwing: any;
+  hp: HealthBar;
+  projectiles: Projectiles;
+  lastDirection: number;
+  isPlayingAnims: (animKey: string) => boolean;
+  meleeWeapon: MeleeWeapon;
+  timeFromLastSwing: number;
   zapSound: Phaser.Sound.BaseSound;
   swordSound: Phaser.Sound.BaseSound;
   stepSound: Phaser.Sound.BaseSound;
@@ -50,7 +50,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.update = this.update.bind(this);
   }
 
-  init() {
+  init():void {
     const heroData = this.getCurrentHeroStats();
     this.hero = heroData.hero;
     this.health = heroData.health;
@@ -85,9 +85,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.setGravityY(this.gravity);
     this.setCollideWorldBounds(true);
-    // this.setBodySize(60, 60, true);
-    // this.setOrigin(0.5, 1);
-    // this.setOffset(15, 50);
     this.setBodySize(30, 56, true);
     this.setOffset(30, 54);
     this.setOrigin(0.5, 1);
@@ -113,7 +110,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
   }
 
-  playDamageTween() {
+  playDamageTween():Phaser.Tweens.Tween {
     this.play(`${this.hero}-hurt`);
     return this.scene.tweens.add({
       targets: this,
@@ -123,7 +120,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
-  playDeath() {
+  playDeath():Phaser.Tweens.Tween {
     this.play(`${this.hero}-death`);
     return this.scene.tweens.add({
       targets: this,
@@ -205,7 +202,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.play(`${this.hero}-attack`, true);
         }
         this.swordSound.play();
-        this.meleeWeapon.swing(this);
+        this.meleeWeapon.swing();
         this.timeFromLastSwing = getTimestamp();
       }
 
@@ -253,11 +250,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   bounceOff():void {
     const rightTouch = this.body.touching.right;
-    // eslint-disable-next-line no-unused-expressions
-    rightTouch
-      ? this.setVelocityX(-this.bounceVelocity)
-      : this.setVelocityX(this.bounceVelocity);
-
+    if (rightTouch) {
+      this.setVelocityX(-this.bounceVelocity);
+    } else {
+      this.setVelocityX(this.bounceVelocity);
+    }
     setTimeout(() => this.setVelocityY(-this.bounceVelocity));
   }
 
@@ -296,13 +293,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
-  takesHit(source):void {
+  takesHit(source: Projectile | MeleeWeapon):void {
     if (this.hasBeenHit) return;
 
     this.health -= source.damage;
     if (this.health <= 0) {
-      // EventEmitter.emit('PLAYER_LOSE');
-      // return;
       this.checkAfterHit(source, false);
       return;
     }
@@ -310,10 +305,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.resetMovements();
   }
 
-  getCurrentHeroStats():any {
+  getCurrentHeroStats():{ hero: string, health: number, speed: number, bounceVelocity: number } {
     const data = this.scene.registry.get('currentHeroStats');
     if (data) return data;
-    return { hero: 'knight', health: 50, speed: 200 };
+    return { hero: 'knight', health: 50, speed: 250, bounceVelocity: 120 };
   }
 }
 

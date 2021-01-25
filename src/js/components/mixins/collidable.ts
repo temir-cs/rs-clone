@@ -14,7 +14,7 @@ export default {
   prevRay: null,
   prevHasHit: null,
 
-  raycast(body, rayLength = 30, precision = 0, steepness = 1) {
+  raycast(body: Phaser.Physics.Arcade.Body, rayLength = 30, precision = 0, steepness = 1):{ray: Phaser.Geom.Line, hasHit: boolean} {
     const { x, y, width, height } = body;
 
     this.bodyPositionDifferenceX += body.x - body.prev.x;
@@ -41,6 +41,8 @@ export default {
         line.x2 = line.x1 - rayLength * steepness;
         line.y2 = line.y1 + rayLength;
         break;
+      default:
+        break;
     }
 
     const hits = this.collidersLayer.getTilesWithinShape(line);
@@ -48,7 +50,7 @@ export default {
       hasHit = hits.some((hit) => hit.index !== -1);
       this.prevHasHit = hasHit;
     }
-    // console.log(hasHit)
+
     this.prevRay = line;
     this.bodyPositionDifferenceX = 0;
     return { ray: line, hasHit };

@@ -24,9 +24,9 @@ const SHARED_CONFIG: {
     height: number,
     zoomFactor: number,
     debug: boolean,
-    leftTopCorner: object,
-    rightTopCorner: object,
-    rightBottomCorner: object,
+    leftTopCorner: {x: number, y: number},
+    rightTopCorner: {x: number, y: number},
+    rightBottomCorner: {x: number, y: number},
   } = {
   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
   heightOffset: MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0,

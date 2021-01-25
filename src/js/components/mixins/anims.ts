@@ -1,5 +1,5 @@
 export default {
-  isPlayingAnims(animsKey:any):boolean {
+  isPlayingAnims(animsKey:string):boolean {
     return (this.anims.isPlaying && this.anims.getName()) === animsKey;
   }
 };

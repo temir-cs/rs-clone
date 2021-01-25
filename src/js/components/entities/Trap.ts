@@ -5,7 +5,7 @@ import anims from '../mixins/anims';
 import Player from './Player';
 
 class Trap extends Phaser.Physics.Arcade.Sprite {
-  attackSound: any;
+  attackSound: Phaser.Sound.BaseSound;
   key: string;
   player: Player;
   x: number;
@@ -15,7 +15,7 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   sleepTime: number;
   attackTime?: number;
   scene:Phaser.Scene;
-  isPlayingAnims?: any;
+  isPlayingAnims?: (key:string) => boolean;
   damage: number;
   isAttacking?: boolean;
 

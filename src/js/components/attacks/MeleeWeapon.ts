@@ -60,7 +60,7 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
     this.body.reset(this.wielder.x, this.wielder.y);
   }
 
-  deliversHit(target: Enemy):void {
+  deliversHit(target: Enemy | Player):void {
     const impactPosition = { x: this.x, y: this.getRightCenter().y };
     this.effectManager.playEffectOn('sword-hit', target, impactPosition);
     this.body.checkCollision.none = true;

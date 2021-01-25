@@ -7,7 +7,7 @@ class EffectManager {
     this.scene = scene;
   }
 
-  playEffectOn(effectName: string, target: Phaser.Physics.Arcade.Sprite, impactPosition: any):void {
+  playEffectOn(effectName: string, target: Phaser.Physics.Arcade.Sprite, impactPosition: {x: number, y: number}):void {
     const effect = new SpriteEffect(this.scene, 0, 0, effectName, impactPosition);
     effect.playOn(target);
   }

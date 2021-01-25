@@ -1,7 +1,8 @@
-/* eslint-disable class-methods-use-this */
 import Enemy from './Enemy';
 import initAnims from '../animations/impAnim';
 import Projectiles from '../attacks/Projectiles';
+import Projectile from '../attacks/Projectile';
+import MeleeWeapon from '../attacks/MeleeWeapon';
 
 class Imp extends Enemy {
   isDead: boolean;
@@ -15,7 +16,7 @@ class Imp extends Enemy {
     this.isDead = false;
   }
 
-  init() {
+  init():void {
     super.init();
     this.setBodySize(35, 60);
     this.setOffset(100, 100);
@@ -27,12 +28,12 @@ class Imp extends Enemy {
 
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
     this.timeFromLastAttack = 0;
-    this.attackDelay = this.getAttackDelay();
+    this.setAttackDelay();
     this.lastDirection = null;
   }
 
-  getAttackDelay():number {
-    return Phaser.Math.Between(1000, 4000);
+  setAttackDelay():void {
+    this.attackDelay = Phaser.Math.Between(1000, 4000);
   }
 
   update(time:number, delta:number):void {
@@ -51,7 +52,7 @@ class Imp extends Enemy {
       this.play('imp-attack', true);
 
       this.timeFromLastAttack = time;
-      this.attackDelay = this.getAttackDelay();
+      this.setAttackDelay();
     }
 
     if (this.isPlayingAnims('imp-hurt') || this.isPlayingAnims('imp-death') || this.isPlayingAnims('imp-attack')) return;
@@ -69,7 +70,7 @@ class Imp extends Enemy {
     this.play('imp-walk', true);
   }
 
-  takesHit(source):void {
+  takesHit(source: Projectile | MeleeWeapon):void {
     super.takesHit(source);
     this.setVelocityX(this.speed * 0.1);
     this.play('imp-hurt', true);

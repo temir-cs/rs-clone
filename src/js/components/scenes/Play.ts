@@ -78,9 +78,6 @@ class Play extends Phaser.Scene {
   stats: any;
   gameStatus: any;
   traps?: any;
-  textLandscape: any;
-  land: Phaser.GameObjects.Image;
-  lockOrientation: any;
 
   constructor(config) {
     super('PlayScene');

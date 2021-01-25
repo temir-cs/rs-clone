@@ -1,4 +1,3 @@
-import initAnims from '../animations/collectablesAnims';
 import Collectable from './Collectable';
 
 class Coin extends Collectable {

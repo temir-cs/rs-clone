@@ -1,19 +1,18 @@
 import * as Phaser from 'phaser';
-
 import EffectManager from '../effects/EffectManager';
 
 class Projectile extends Phaser.Physics.Arcade.Sprite {
-  speed: any;
-  scene: any;
+  speed: number;
+  scene: Phaser.Scene;
   x: number;
   y: number;
-  key: any;
+  key: string;
   damage: number;
   traveledDistance: number;
   maxDistance: number;
   cooldown: number;
-  effectManager: any;
-  constructor(scene, x, y, key) {
+  effectManager: EffectManager;
+  constructor(scene: Phaser.Scene, x: number, y:number, key:string) {
     super(scene, x, y, key);
 
     scene.add.existing(this);
@@ -30,7 +29,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     this.effectManager = new EffectManager(this.scene);
   }
 
-  preUpdate(time, delta):void {
+  preUpdate(time:number, delta:number):void {
     super.preUpdate(time, delta);
 
     this.traveledDistance += this.body.deltaAbsX();
@@ -52,7 +51,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  deliversHit(target) {
+  deliversHit(target:Phaser.Physics.Arcade.Sprite):void {
     this.activateProjectile(false);
     this.traveledDistance = 0;
     const impactPosition = { x: this.x, y: this.y };

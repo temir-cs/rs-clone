@@ -1,6 +1,8 @@
 import * as Phaser from 'phaser';
 import Projectile from './Projectile';
 import { getTimestamp } from '../utils/functions';
+import Player from '../entities/Player';
+import Enemy from '../entities/Enemy';
 
 class Projectiles extends Phaser.Physics.Arcade.Group {
   timeFromLastProjectile: number;
@@ -17,7 +19,7 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
     this.timeFromLastProjectile = null;
   }
 
-  fireProjectile(initiator:any, anim: any):boolean {
+  fireProjectile(initiator:Enemy | Player, anim: string):boolean {
     const projectile = this.getFirstDead(false);
 
     if (!projectile) {
@@ -28,7 +30,7 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
       return false;
     }
 
-    const center:any = initiator.getCenter();
+    const center:Phaser.Math.Vector2 = initiator.getCenter();
     let centerX:number;
 
     if (initiator.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {

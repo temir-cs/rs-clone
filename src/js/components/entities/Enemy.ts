@@ -3,26 +3,31 @@ import * as Phaser from 'phaser';
 import collidable from '../mixins/collidable';
 import anims from '../mixins/anims';
 import EventEmitter from '../events/Emitter';
+import Projectiles from '../attacks/Projectiles';
+import Projectile from '../attacks/Projectile';
+import MeleeWeapon from '../attacks/MeleeWeapon';
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
   config: any;
   body: Phaser.Physics.Arcade.Body;
-  raycast: any;
+  projectiles?: Projectiles;
+  hitSound: Phaser.Sound.BaseSound;
+  deathSound: Phaser.Sound.BaseSound;
+  lastDirection?: number;
   gravity: number;
   timeFromLastTurn: number;
   speed: number;
   maxPatrolDistance: number;
   currentPatrolDistance: number;
   rayGraphics: Phaser.GameObjects.Graphics;
-  collidersLayer: any;
+  collidersLayer: Phaser.Tilemaps.TilemapLayer;
   damage: number;
   health: number;
-  isPlayingAnims?: any;
-  projectiles: any;
-  hitSound: Phaser.Sound.BaseSound;
-  deathSound: Phaser.Sound.BaseSound;
+  isPlayingAnims?: (animKey: string) => boolean;
+  raycast: (body: Phaser.Physics.Arcade.Body, rayLength: number, precision: number, steepness: number)
+            => {ray: Phaser.Geom.Line, hasHit: boolean};
 
-  constructor(scene:any, x:number, y:number, key:string) {
+  constructor(scene: any, x:number, y:number, key:string) {
     super(scene, x, y, key);
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -35,7 +40,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.initEvents();
   }
 
-  init() {
+  init():void {
     this.gravity = 500;
     this.speed = 80;
     this.timeFromLastTurn = 0;
@@ -54,8 +59,6 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setCollideWorldBounds(true);
     this.setImmovable(true);
     this.setOrigin(0.5, 1);
-    // this.setSize(56, 56);
-    // this.setOffset(0, 72);
     this.setVelocityX(this.speed);
   }
 
@@ -89,7 +92,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  setColliders(collidersLayer:Phaser.Tilemaps.Tilemap):void {
+  setColliders(collidersLayer: Phaser.Tilemaps.TilemapLayer):void {
     this.collidersLayer = collidersLayer;
   }
 
@@ -101,7 +104,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  takesHit(source):void {
+  takesHit(source: Projectile | MeleeWeapon):void {
     source.deliversHit(this);
     this.health -= source.damage;
     this.playHitSound();

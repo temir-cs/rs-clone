@@ -4,9 +4,9 @@ class SpriteEffect extends Phaser.Physics.Arcade.Sprite {
   scene: Phaser.Scene;
   target: Phaser.Physics.Arcade.Sprite;
   effectName: string;
-  impactPosition: any;
+  impactPosition: {x: number, y: number};
 
-  constructor(scene:Phaser.Scene, x:number, y:number, effectName:string, impactPosition: any) {
+  constructor(scene:Phaser.Scene, x:number, y:number, effectName:string, impactPosition: {x: number, y: number}) {
     super(scene, x, y, null);
 
     scene.add.existing(this);
@@ -23,7 +23,7 @@ class SpriteEffect extends Phaser.Physics.Arcade.Sprite {
     }, this);
   }
 
-  preUpdate(time, delta):void {
+  preUpdate(time: number, delta: number):void {
     super.preUpdate(time, delta);
     this.placeEffect();
   }
