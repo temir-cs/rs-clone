@@ -80,6 +80,7 @@ class Play extends Phaser.Scene {
   traps?: any;
   textLandscape: any;
   land: Phaser.GameObjects.Image;
+  lockOrientation: any;
 
 
   constructor(config) {
@@ -143,31 +144,12 @@ class Play extends Phaser.Scene {
     if (gameStatus === 'PLAYER_LOSE' || gameStatus === 'LEVEL_COMPLETED') return;
     this.createGameEvents();
     // console.log('Events on: ', EventEmitter.eventNames());
-
-    // Check for orientation mode
-    this.land = this.add.image(75, 0, 'landscapeMode').setOrigin(0);
-    this.textLandscape = this.add.text(450, 250, 'SET YOUR\nPHONE TO LANDSCAPE',
-    { font: '78px Press Start 2P', color: 'black', align: 'center' }).setOrigin(0.5);
-    this.checkOriention(this.scale.orientation);
-    this.scale.on('orientationchange', this.checkOriention, this);
   }
 
   update():void {
     this.bgParallax(this);
     if (this.traps) {
       this.traps.update();
-    }
-  }
-
-  checkOriention(orientation:any):void {
-    if (orientation === Phaser.Scale.PORTRAIT) {
-        console.log('CHETAM1');
-        this.land.alpha = 0.4;
-        this.textLandscape.setVisible(true);
-    } else if (orientation === Phaser.Scale.LANDSCAPE) {
-        this.land.alpha = 0;
-        this.textLandscape.setVisible(false);
-        console.log('CHETAM2');
     }
   }
 

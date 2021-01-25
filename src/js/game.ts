@@ -7,6 +7,7 @@ import HeroSelectScene from './components/scenes/HeroSelectScene';
 import LevelsScene from './components/scenes/LevelsScene';
 import GameOverScene from './components/scenes/GameOverScene';
 import Highscore from './components/scenes/Highscore';
+import SettingsScene from './components/scenes/SettingsScene';
 
 const MAP_WIDTH = 3200;
 const MAP_HEIGHT = 1280;
@@ -47,7 +48,7 @@ const SHARED_CONFIG: {
   },
 };
 
-const Scenes = [PreloadScene, MenuScene, HeroSelectScene, LevelsScene, PlayScene, GameOverScene, Highscore];
+const Scenes = [PreloadScene, MenuScene, HeroSelectScene, LevelsScene, PlayScene, GameOverScene, Highscore, SettingsScene];
 const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
 const initScenes = () => Scenes.map(createScene);
 
@@ -67,7 +68,7 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: initScenes(),
   scale: {
     mode: Phaser.Scale.ScaleModes.FIT,
-    autoCenter: Phaser.Scale.Center.CENTER_BOTH
+    autoCenter: Phaser.Scale.Center.CENTER_BOTH,
   },
   parent: 'game',
 };
