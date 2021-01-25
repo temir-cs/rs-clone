@@ -91,6 +91,7 @@ class Preload extends Phaser.Scene {
     this.load.audio('imp-hit', '../../../assets/sounds/imp-hit.wav');
     this.load.audio('imp-dead', '../../../assets/sounds/imp-dead.wav');
     this.load.audio('fire-trap', '../../../assets/sounds/flamestrike.mp3');
+    this.load.audio('spikes-trap', '../../../assets/sounds/spikes-trap.mp3');
 
     this.load.bitmapFont('arcade', '../../../assets/font/highscore/arcade.png', '../../../assets/font/highscore/arcade.xml');
 

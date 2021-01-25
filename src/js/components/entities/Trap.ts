@@ -2,10 +2,15 @@ import * as Phaser from 'phaser';
 import initAnims from '../animations/trapsAnims';
 import { getTimestamp } from '../utils/functions';
 import anims from '../mixins/anims';
+import Player from './Player';
 
 class Trap extends Phaser.Physics.Arcade.Sprite {
   attackSound: any;
   key: string;
+  player: Player;
+  x: number;
+  y: number;
+  playSoundDistance: number;
   timeFromLastStateChange: number;
   sleepTime: number;
   attackTime?: number;
@@ -14,10 +19,14 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   damage: number;
   isAttacking?: boolean;
 
-  constructor(scene:Phaser.Scene, x:number, y:number, key: string) {
+  constructor(scene:Phaser.Scene, x:number, y:number, key: string, player: Player) {
     super(scene, x, y, 'traps');
     this.key = key.toLowerCase();
+    this.player = player;
     this.scene = scene;
+    this.x = x;
+    this.y = y;
+    this.playSoundDistance = 600;
     Object.assign(this, anims);
     this.init();
   }
@@ -25,8 +34,8 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   init():void {
     this.sleepTime = Phaser.Math.Between(1500, 4000);
     this.attackTime = 0;
-    // this.attackSound = this.scene.sound.add(`${this.key}`, { volume: 0.2 });
-    this.attackSound = this.scene.sound.add('fire-trap', { volume: 0.2 });
+    this.attackSound = this.scene.sound.add(`${this.key}`, { volume: 0.2 });
+    // this.attackSound = this.scene.sound.add('fire-trap', { volume: 0.2 });
     this.isAttacking = false;
     this.scene.add.existing(this);
     initAnims(this.scene.anims);
@@ -50,11 +59,18 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
     this.play(`${this.key}-sleep`, true);
   }
 
+  isPlayerComing():boolean {
+    const playerCenter = this.player.getCenter();
+    return (Math.abs(playerCenter.x - this.x) <= this.playSoundDistance);
+  }
+
   activate():void {
     this.setBodySize(30, 110);
     this.setOffset(50, 0);
     this.play(`${this.key}`, true);
-    this.attackSound.play();
+    if (this.isPlayerComing()) {
+      this.attackSound.play();
+    }
     this.isAttacking = true;
   }
 

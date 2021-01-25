@@ -3,8 +3,6 @@ class Register {
   container: HTMLElement;
   mainText: HTMLElement;
   constructor() {
-    this.mainText = document.querySelector('.content__var');
-    this.container = document.querySelector('.form__container');
     this.form = `
     <form id="reg-form" class="form__form">
       <span id="message" class="form__msg"></span>
@@ -16,14 +14,11 @@ class Register {
   }
 
   init() {
+    this.mainText = document.querySelector('.content__var');
+    this.container = document.querySelector('.form__container');
     this.mainText.innerText = 'Регистрируйся и поехали!';
     this.container.innerHTML = this.form;
   }
-
-//   removeForm():void {
-    // this.container.innerHTML = '';
-
-//   }
 }
 
 export default Register;

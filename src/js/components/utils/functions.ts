@@ -21,8 +21,14 @@ const mobileToggleMenu = ():void => {
   });
 };
 
+const stopSpinner = ():void => {
+  const loaderSpinner = document.querySelector('.loader');
+  loaderSpinner.classList.add('loader--hidden');
+};
+
 export {
   getTimestamp,
   clearAllBeforeGame,
   mobileToggleMenu,
+  stopSpinner
 };

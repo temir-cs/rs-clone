@@ -1,8 +1,9 @@
 import Trap from './Trap';
+import Player from './Player';
 
 class FireTrap extends Trap {
-  constructor(scene:Phaser.Scene, x:number, y:number, key: string) {
-    super(scene, x, y, key);
+  constructor(scene:Phaser.Scene, x:number, y:number, key: string, player: Player) {
+    super(scene, x, y, key, player);
     this.damage = 10;
     this.setOrigin(0.5, 1);
     this.setBodySize(30, 1);

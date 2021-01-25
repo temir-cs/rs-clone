@@ -82,7 +82,6 @@ class Play extends Phaser.Scene {
   land: Phaser.GameObjects.Image;
   lockOrientation: any;
 
-
   constructor(config) {
     super('PlayScene');
     this.config = config;
@@ -113,7 +112,7 @@ class Play extends Phaser.Scene {
     const player = this.createPlayer(playerZones.start);
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
     this.createKeyCollectable(this.layers.collectableKey);
-    this.createTraps(this.layers.trapsSpawns);
+    this.createTraps(this.layers.trapsSpawns, player);
     console.log('Current hero: ', player.hero);
 
     this.createBg(this);
@@ -176,11 +175,11 @@ class Play extends Phaser.Scene {
     }
   }
 
-  createTraps(layer):void {
+  createTraps(layer: Phaser.Tilemaps.ObjectLayer, player: Player):void {
     this.traps = new Traps(this);
     const trapsTypes = this.traps.getTypes();
     layer.objects.forEach((obj) => {
-      const trap = new trapsTypes[`${obj.type}Trap`](this, obj.x, obj.y, `${obj.type}-trap`);
+      const trap = new trapsTypes[`${obj.type}Trap`](this, obj.x, obj.y, `${obj.type}-trap`, player);
       this.traps.add(trap);
     });
   }
@@ -371,7 +370,7 @@ class Play extends Phaser.Scene {
 
   displayGameOver():void {
     this.scene.start('GameOverScene');
-    const finalStats = this.getCurrentStats();
+    const finalStats = { ...this.getCurrentStats(), level: this.getCurrentLevel() };
     this.registry.set('finalStats', { ...finalStats });
     this.registry.set('level', DEFAULT_LEVEL);
   }
