@@ -19,7 +19,7 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
     this.timeFromLastProjectile = null;
   }
 
-  fireProjectile(initiator:Enemy | Player, anim: string):boolean {
+  fireProjectile(initiator:Enemy | Player, anim: string, target: { x: number, y: number } = null):boolean {
     const projectile = this.getFirstDead(false);
 
     if (!projectile) {
@@ -43,7 +43,7 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
       centerX = center.x - 10;
     }
 
-    projectile.fire(centerX, center.y, anim);
+    projectile.fire(centerX, center.y, anim, target);
     this.timeFromLastProjectile = getTimestamp();
     return true;
   }

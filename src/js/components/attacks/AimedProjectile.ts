@@ -1,14 +1,14 @@
 import * as Phaser from 'phaser';
 import EffectManager from '../effects/EffectManager';
 
-class Projectile extends Phaser.Physics.Arcade.Sprite {
+class AimedProjectile extends Phaser.Physics.Arcade.Sprite {
+  xSpeed: number;
+  ySpeed: number;
   speed: number;
+  direction: number;
   scene: Phaser.Scene;
   x: number;
   y: number;
-  xSpeed: number;
-  ySpeed: number;
-  direction: number;
   key: string;
   damage: number;
   traveledDistance: number;
@@ -21,13 +21,12 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.speed = 300;
-    this.maxDistance = 300;
-    this.traveledDistance = 0;
-
     this.xSpeed = 0;
     this.ySpeed = 0;
+    this.speed = 300;
     this.direction = 0;
+    this.maxDistance = 500;
+    this.traveledDistance = 0;
 
     this.damage = 10;
     this.cooldown = 500;
@@ -51,28 +50,18 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
   fire(x:number, y:number, anim: string, target : { x: number, y: number }):void {
     this.activateProjectile(true);
     this.body.reset(x, y);
-    if (target === null) {
-      this.setVelocityX(this.speed);
-    } else {
-      this.direction = Math.atan((target.x - this.x) / (target.y - this.y));
-      this.direction += ((Math.random() / 10)) + (-(Math.random() / 10));
 
-      if (target.y >= this.y) {
-        this.xSpeed = this.speed * Math.sin(this.direction);
-        this.ySpeed = this.speed * Math.cos(this.direction);
-      } else {
-        this.xSpeed = -this.speed * Math.sin(this.direction);
-        this.ySpeed = -this.speed * Math.cos(this.direction);
-      }
+    this.direction = Math.atan((target.x - this.x) / (target.y - this.y));
 
-      console.log('Player.x: ', target.x);
-      console.log('Player.y: ', target.y);
+    this.xSpeed = this.speed * Math.sin(this.direction);
+    this.ySpeed = this.speed * Math.cos(this.direction);
 
-      this.setVelocityX(this.xSpeed);
-      this.setVelocityY(this.ySpeed);
+    this.setVelocityX(this.xSpeed);
+    this.setVelocityY(this.ySpeed);
 
-      this.rotation = Phaser.Math.Angle.Between(x, y, target.x, target.y);
-    }
+    this.rotation = 90;
+
+    console.log('Rotation: ', this.rotation);
 
     if (anim) {
       this.play(anim, true);
@@ -97,4 +86,4 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
   }
 }
 
-export default Projectile;
+export default AimedProjectile;

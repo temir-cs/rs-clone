@@ -1,11 +1,12 @@
 import Enemy from './Enemy';
+import Player from './Player';
 
 import initAnims from '../animations/skeletonAnims';
 
 class Skeleton extends Enemy {
   isDead: boolean;
-  constructor(scene:Phaser.Scene, x:number, y:number) {
-    super(scene, x, y, 'skeleton');
+  constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
+    super(scene, x, y, 'skeleton', player);
     this.speed = 60;
     this.setBodySize(40, 70);
     this.setOrigin(0, 0);

@@ -107,7 +107,7 @@ class Play extends Phaser.Scene {
     this.createCollectables(this.layers.collectables);
     const playerZones = this.getPlayerZones();
     const player = this.createPlayer(playerZones.start);
-    const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders);
+    const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders, player);
     this.createKeyCollectable(this.layers.collectableKey);
     this.createTraps(this.layers.trapsSpawns, player);
     console.log('Current hero: ', player.hero);
@@ -218,12 +218,12 @@ class Play extends Phaser.Scene {
     return new Player(this, start.x, start.y);
   }
 
-  createEnemies(enemySpawnsLayer, collider) {
+  createEnemies(enemySpawnsLayer, collider, player):Enemies {
     const enemies = new Enemies(this);
     const enemyTypes = enemies.getTypes();
     const enemySpawns = enemySpawnsLayer.objects;
     enemySpawns.forEach((spawn) => {
-        const enemy = new enemyTypes[spawn.type](this, spawn.x, spawn.y);
+        const enemy = new enemyTypes[spawn.type](this, spawn.x, spawn.y, player);
         enemy.setColliders(collider);
         enemies.add(enemy);
     });

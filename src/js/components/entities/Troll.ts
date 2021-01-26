@@ -1,11 +1,12 @@
 import Enemy from './Enemy';
+import Player from './Player';
 
 import initAnims from '../animations/trollAnim';
 
 class Troll extends Enemy {
   isDead: boolean;
-  constructor(scene:Phaser.Scene, x:number, y:number) {
-    super(scene, x, y, 'troll');
+  constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
+    super(scene, x, y, 'troll', player);
 
     this.setBodySize(40, 50);
     this.setOffset(38, 38);
