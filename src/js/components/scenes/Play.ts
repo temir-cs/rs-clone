@@ -11,7 +11,10 @@ import Traps from '../groups/Traps';
 import Key from '../collectables/Key';
 import Hud from '../hud/Hud';
 import Door from '../helper_objects/Door';
-import { createMapCastle, createLayersCastle, createBgCastle, bgParallaxCastle } from './levels_utils/castleUtils';
+import { createMapCastle,
+        createLayersCastle,
+        createBgCastle,
+        bgParallaxCastle } from './levels_utils/castleUtils';
 import { createMapForest,
         createLayersForest,
         createBgForest,
@@ -20,6 +23,10 @@ import { createMapDungeon,
         createLayersDungeon,
         createBgDungeon,
         bgParallaxDungeon } from './levels_utils/dungeonUtils';
+import { createMapFinal,
+        createLayersFinal,
+        createBgFinal,
+        bgParallaxFinal } from './levels_utils/finalUtils';
 
 import { DEFAULT_LEVEL, DEFAULT_STATS, LIVES } from './consts';
 
@@ -151,24 +158,37 @@ class Play extends Phaser.Scene {
 
   checkLevel():void {
     console.log('Current level: ', this.getCurrentLevel());
-    if (this.getCurrentLevel() === 1) {
-      this.lvlKey = 'forest';
-      this.createLayers = createLayersForest;
-      this.createBg = createBgForest;
-      this.bgParallax = bgParallaxForest;
-      this.createMap = createMapForest;
-    } else if (this.getCurrentLevel() === 2) {
-      this.lvlKey = 'castle';
-      this.createLayers = createLayersCastle;
-      this.createBg = createBgCastle;
-      this.bgParallax = bgParallaxCastle;
-      this.createMap = createMapCastle;
-    } else if (this.getCurrentLevel() === 3) {
-      this.lvlKey = 'dungeon';
-      this.createLayers = createLayersDungeon;
-      this.createBg = createBgDungeon;
-      this.bgParallax = bgParallaxDungeon;
-      this.createMap = createMapDungeon;
+    switch (this.getCurrentLevel()) {
+      case 1:
+        this.lvlKey = 'forest';
+        this.createLayers = createLayersForest;
+        this.createBg = createBgForest;
+        this.bgParallax = bgParallaxForest;
+        this.createMap = createMapForest;
+        break;
+      case 2:
+        this.lvlKey = 'castle';
+        this.createLayers = createLayersCastle;
+        this.createBg = createBgCastle;
+        this.bgParallax = bgParallaxCastle;
+        this.createMap = createMapCastle;
+        break;
+      case 3:
+        this.lvlKey = 'dungeon';
+        this.createLayers = createLayersDungeon;
+        this.createBg = createBgDungeon;
+        this.bgParallax = bgParallaxDungeon;
+        this.createMap = createMapDungeon;
+        break;
+      case 4:
+        this.lvlKey = 'final';
+        this.createLayers = createLayersFinal;
+        this.createBg = createBgFinal;
+        this.bgParallax = bgParallaxFinal;
+        this.createMap = createMapFinal;
+        break;
+      default:
+        break;
     }
   }
 
@@ -274,8 +294,14 @@ class Play extends Phaser.Scene {
   setupFollowupCameraOn(player):void {
     const { height, width, mapOffset, heightOffset, zoomFactor } = this.config;
 
-    this.physics.world.setBounds(0, -100, width + mapOffset, height + heightOffset + 200);
-    this.cameras.main.setBounds(0, 0, width + mapOffset, height + heightOffset).setZoom(zoomFactor);
+    if (this.getCurrentLevel() === 4) {
+      this.physics.world.setBounds(0, -100, 1920, 1280 + 200);
+      this.cameras.main.setBounds(0, 0, 1920, 1280).setZoom(zoomFactor);
+    } else {
+      this.physics.world.setBounds(0, -100, width + mapOffset, height + heightOffset + 200);
+      this.cameras.main.setBounds(0, 0, width + mapOffset, height + heightOffset).setZoom(zoomFactor);
+    }
+
     this.cameras.main.startFollow(player);
   }
 

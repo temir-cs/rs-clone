@@ -20,6 +20,8 @@ class Preload extends Phaser.Scene {
     this.load.image('tiles-1-lvl3', '../../../assets/img/levels/dungeon/dungeon_platforms.png');
     this.load.image('bg-dungeon-tileset', '../../../assets/img/levels/dungeon/dungeon_bg_tiles.png');
 
+    this.load.tilemapTiledJSON('map-lvl4', '../../../assets/json/04_final_map.json');
+
     // Forest Level Background
     this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
     this.load.image('bg-forest-trees', '../../../assets/img/levels/forest/trees.png');
@@ -47,6 +49,14 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-dungeon-main', '../../../assets/img/levels/dungeon/ruins_main.png');
     this.load.image('bg-dungeon-bottom', '../../../assets/img/levels/dungeon/ruins_low1.png');
     this.load.image('bg-dungeon-top', '../../../assets/img/levels/dungeon/ruins_top.png');
+
+    // final Level Background
+    this.load.image('bg-final-back', '../../../assets/img/levels/final/bg.png');
+    this.load.image('bg-final-mist', '../../../assets/img/levels/final/myst.png');
+    this.load.image('bg-final-top', '../../../assets/img/levels/final/rock2.png');
+    this.load.image('bg-final-bottom', '../../../assets/img/levels/final/rock1.png');
+    this.load.image('bg-final-middle', '../../../assets/img/levels/final/rock3.png');
+    this.load.image('bg-final-middle2', '../../../assets/img/levels/final/rock5.png');
 
     // HUD elements
     this.load.image('coin-static', '../../../assets/img/hud/coin.png');
@@ -102,7 +112,7 @@ class Preload extends Phaser.Scene {
 
   startGame() {
     this.registry.set('level', 1);
-    this.registry.set('unlocked-levels', 3);
+    this.registry.set('unlocked-levels', 4);
     this.scene.start('MenuScene');
   }
   // create() {
