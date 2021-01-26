@@ -5,7 +5,7 @@ import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
 import Player from './Player';
 
-class Imp extends Enemy {
+class Boss extends Enemy {
   isDead: boolean;
   projectiles: Projectiles;
   timeFromLastAttack: number;
@@ -85,4 +85,4 @@ class Imp extends Enemy {
   }
 }
 
-export default Imp;
+export default Boss;

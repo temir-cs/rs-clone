@@ -3,7 +3,7 @@ import Player from './Player';
 import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
 
-class EnemyNotShooting extends Enemy {
+class MeleeEnemy extends Enemy {
   isDead: boolean;
   enemyName: string;
 
@@ -43,4 +43,4 @@ class EnemyNotShooting extends Enemy {
   }
 }
 
-export default EnemyNotShooting;
+export default MeleeEnemy;

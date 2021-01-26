@@ -1,9 +1,9 @@
-import EnemyNotShooting from './EnemyNotShooting';
+import MeleeEnemy from './MeleeEnemy';
 import Player from './Player';
 
 import initAnims from '../animations/trollAnim';
 
-class Troll extends EnemyNotShooting {
+class Troll extends MeleeEnemy {
   isDead: boolean;
   constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
     super(scene, x, y, 'troll', player);

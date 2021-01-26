@@ -80,6 +80,7 @@ class Preload extends Phaser.Scene {
     this.load.multiatlas('skeleton', '../../../assets/json/enemies/enemySkeleton.json', '../../../assets/img/enemies');
     this.load.multiatlas('vampire', '../../../assets/json/enemies/enemyVampire.json', '../../../assets/img/enemies');
     this.load.multiatlas('imp', '../../../assets/json/enemies/enemyImpSprite.json', '../../../assets/img/enemies');
+    this.load.multiatlas('boss', '../../../assets/json/enemies/bossSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
     this.load.multiatlas('collectables', '../../../assets/json/collectables/collectablesSprite.json', '../../../assets/img/collectables');
     this.load.multiatlas('doors', '../../../assets/json/doors/doorsSprite.json', '../../../assets/img/doors/');
