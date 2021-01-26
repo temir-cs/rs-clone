@@ -254,7 +254,7 @@
                  "name":"spawn",
                  "point":true,
                  "rotation":0,
-                 "type":"Imp",
+                 "type":"Boss",
                  "visible":true,
                  "width":0,
                  "x":849.5,

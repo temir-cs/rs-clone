@@ -5,6 +5,7 @@ import Player from '../entities/Player';
 import Enemies from '../groups/Enemies';
 import EventEmitter from '../events/Emitter';
 import effectAnims from '../animations/effectsAnim';
+import teslaBallAnims from '../animations/teslaBallAnims';
 import Collectables from '../groups/Collectables';
 import Traps from '../groups/Traps';
 
@@ -110,6 +111,7 @@ class Play extends Phaser.Scene {
     console.log('livesCount', this.livesCount);
     this.createMap(this);
     effectAnims(this.anims);
+    teslaBallAnims(this.anims);
     this.createLayers(this);
     this.createCollectables(this.layers.collectables);
     const playerZones = this.getPlayerZones();

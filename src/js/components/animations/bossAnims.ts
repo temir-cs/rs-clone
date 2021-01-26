@@ -40,7 +40,7 @@ export default (anims) => {
     frames: anims.generateFrameNames('boss', {
       start: 1,
       end: 5,
-      prefix: 'Magic_;lightning',
+      prefix: 'Magic_lightning',
       suffix: '.png'
     }),
     frameRate: 12,
@@ -76,7 +76,7 @@ export default (anims) => {
     frames: anims.generateFrameNames('boss', {
       start: 5,
       end: 5,
-      prefix: 'Fire_boss_death',
+      prefix: 'Death',
       suffix: '.png'
     }),
     frameRate: 1,
