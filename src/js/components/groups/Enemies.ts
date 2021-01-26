@@ -2,15 +2,18 @@ import * as Phaser from 'phaser';
 import ENEMY_TYPES from '../types/types';
 import Enemy from '../entities/Enemy';
 import collidable from '../mixins/collidable';
+import { EnemiesTypesInterface } from '../interfaces/interfaces';
 
 class Enemies extends Phaser.GameObjects.Group {
+  types: EnemiesTypesInterface;
+
   constructor(scene: Phaser.Scene) {
     super(scene);
-
+    this.types = ENEMY_TYPES;
     Object.assign(this, collidable);
   }
 
-  getProjectiles() {
+  getProjectiles(): Phaser.GameObjects.Group {
     const projectiles = new Phaser.GameObjects.Group(this.scene);
     const enemies = this.getChildren();
     enemies.forEach((enemy: Enemy) => {
@@ -22,9 +25,8 @@ class Enemies extends Phaser.GameObjects.Group {
     return projectiles;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  getTypes() {
-    return ENEMY_TYPES;
+  getTypes():EnemiesTypesInterface {
+    return this.types;
   }
 }
 
