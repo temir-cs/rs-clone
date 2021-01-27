@@ -1,4 +1,4 @@
-const getTimestamp = ():any => {
+const getTimestamp = ():number => {
   const d = new Date();
   return d.getTime();
 };

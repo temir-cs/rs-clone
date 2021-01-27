@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import Play from '../scenes/Play';
+import { Stats } from '../interfaces/interfaces';
 
 class Hud {
   fontSize?: number;
@@ -11,13 +12,11 @@ class Hud {
   livesImage: Phaser.GameObjects.Image;
   keyImage: Phaser.GameObjects.Image;
   coinCount: number;
-  // ARRAY
-  lives: any;
-  // OBJECTS
-  stats: any;
-  leftTopCorner: any;
-  rightTopCorner: any;
-  hudFont: any;
+  lives: Array<Phaser.GameObjects.Image>;
+  stats: Stats;
+  leftTopCorner: {x: number, y: number};
+  rightTopCorner: {x: number, y: number};
+  hudFont: {fontSize: string, fontStyle: string, fontFamily: string, fill: string};
 
   constructor(scene:Play) {
     this.scene = scene;
@@ -65,8 +64,8 @@ class Hud {
     }
   }
 
-  updateScoreBoard(score):void {
-    this.coinsText.setText(score);
+  updateScoreBoard(score:number):void {
+    this.coinsText.setText(`${score}`);
   }
 
   activateKey():void {

@@ -1,10 +1,12 @@
-const createMapCastle = (context):void => {
+import Play from '../Play';
+
+const createMapCastle = (context:Play):void => {
   context.map = context.make.tilemap({ key: 'map-lvl2' });
   context.map.addTilesetImage('castle_platforms', 'tiles-1-lvl2');
   context.map.addTilesetImage('castle_bg_tiles', 'bg-castle-tileset');
 };
 
-const createLayersCastle = (context):void => {
+const createLayersCastle = (context:Play):void => {
   const tileset1 = context.map.getTileset('castle_platforms');
   const tilesetBg = context.map.getTileset('castle_bg_tiles');
 
@@ -27,7 +29,7 @@ const createLayersCastle = (context):void => {
   context.layers.trapsSpawns = context.map.getObjectLayer('traps');
  };
 
-const createBgCastle = (context) => {
+const createBgCastle = (context:Play):void => {
   const bgObject = context.map.getObjectLayer('distance_bg').objects[0];
 
   context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-castle-down')
@@ -55,7 +57,7 @@ const createBgCastle = (context) => {
     .setScrollFactor(0, 1);
 };
 
-const bgParallaxCastle = (context) => {
+const bgParallaxCastle = (context:Play):void => {
   context.treesImg.tilePositionX = context.cameras.main.scrollX * 0.2;
   context.wallsImg.tilePositionX = context.cameras.main.scrollX * 0.15;
   context.wallsImg.tilePositionY = context.cameras.main.scrollY * 0.15;

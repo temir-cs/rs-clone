@@ -19,3 +19,7 @@ export interface TrapsTypesInterface {
   FireTrap: typeof FireTrap;
   SpikesTrap: typeof SpikesTrap;
 }
+export interface Stats {
+  coins: number;
+  kills: number;
+}

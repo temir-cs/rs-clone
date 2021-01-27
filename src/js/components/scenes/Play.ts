@@ -67,9 +67,7 @@ class Play extends Phaser.Scene {
   private graphics: Phaser.GameObjects.Graphics;
   private line: Phaser.Geom.Line;
   private tileHits: any;
-  private bkgForest: any;
-  private bkgClouds: any;
-  private bkgMountains: any;
+
   private collectables: any;
   private coinCount: number;
   private hud: any;
@@ -86,6 +84,12 @@ class Play extends Phaser.Scene {
   stats: any;
   gameStatus: any;
   traps?: any;
+  wallsImg?: any;
+  treesImg?: any;
+  bkgForest?: any;
+  bkgClouds?: any;
+  bkgMountains?: any;
+  mistImg?: any;
 
   constructor(config) {
     super('PlayScene');

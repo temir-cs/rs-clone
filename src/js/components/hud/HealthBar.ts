@@ -1,15 +1,15 @@
 import * as Phaser from 'phaser';
 
 class HealthBar {
-  public bar: any;
+  public bar: Phaser.GameObjects.Graphics;
   public x: number;
   public y: number;
   public health: number;
   public value: number;
-  public size: any;
+  public size: {width: number, height: number};
   public pixelPerHealth: number;
   public scale: number;
-  constructor(scene:any, x:number, y:number, scale = 1, health:number) {
+  constructor(scene:Phaser.Scene, x:number, y:number, scale = 1, health:number) {
     this.bar = new Phaser.GameObjects.Graphics(scene);
 
     this.scale = scale;
@@ -23,7 +23,6 @@ class HealthBar {
     };
 
     this.pixelPerHealth = this.size.width / this.value;
-
     scene.add.existing(this.bar);
     this.draw(this.x, this.y, this.scale);
   }
@@ -34,14 +33,12 @@ class HealthBar {
     } else {
       this.value = amount;
     }
-
     this.draw(this.x, this.y, this.scale);
   }
 
-  draw(x:number, y:number, scale:number):void {
+  draw(x:number, y:number, scale:number):Phaser.GameObjects.Graphics {
     this.bar.clear();
     const { width, height } = this.size;
-
     const margin = 2;
 
     this.bar.fillStyle(0x000);

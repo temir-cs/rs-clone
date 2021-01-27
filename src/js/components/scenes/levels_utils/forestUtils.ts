@@ -1,4 +1,6 @@
-const createMapForest = (context):void => {
+import Play from '../Play';
+
+const createMapForest = (context:Play):void => {
   context.map = context.make.tilemap({ key: 'map' });
   context.map.addTilesetImage('01_forest_platforms', 'tiles-1');
   context.map.addTilesetImage('01_forest_env', 'tiles-2');
@@ -6,7 +8,7 @@ const createMapForest = (context):void => {
   context.map.addTilesetImage('castle_tiles', 'tiles-3');
 };
 
-const createLayersForest = (context):void => {
+const createLayersForest = (context:Play):void => {
     const tileset1 = context.map.getTileset('01_forest_platforms');
     const tileset2 = context.map.getTileset('01_forest_env');
     const tilesetBg = context.map.getTileset('green-tile');
@@ -31,7 +33,7 @@ const createLayersForest = (context):void => {
     context.layers.trapsSpawns = context.map.getObjectLayer('traps');
   };
 
-const createBgForest = (context) => {
+const createBgForest = (context:Play):void => {
     const bgObject = context.map.getObjectLayer('distance_bg').objects[0];
     context.bkgForest = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-forest-trees')
       .setOrigin(0, 1)
@@ -70,7 +72,7 @@ const createBgForest = (context) => {
       .setScrollFactor(0, 1);
   };
 
-const bgParallaxForest = (context) => {
+const bgParallaxForest = (context:Play):void => {
   context.bkgForest.tilePositionX = context.cameras.main.scrollX * 0.2;
   context.bkgMountains.tilePositionX = context.cameras.main.scrollX * 0.15;
   context.bkgClouds.tilePositionX = context.cameras.main.scrollX * 0.1;

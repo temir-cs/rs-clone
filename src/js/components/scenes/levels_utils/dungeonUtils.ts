@@ -1,10 +1,12 @@
-const createMapDungeon = (context):void => {
+import Play from '../Play';
+
+const createMapDungeon = (context:Play):void => {
   context.map = context.make.tilemap({ key: 'map-lvl3' });
   context.map.addTilesetImage('dungeon_platforms', 'tiles-1-lvl3');
   context.map.addTilesetImage('dungeon_bg_tiles', 'bg-dungeon-tileset');
 };
 
-const createLayersDungeon = (context):void => {
+const createLayersDungeon = (context:Play):void => {
   const tileset1 = context.map.getTileset('dungeon_platforms');
   const tilesetBg = context.map.getTileset('dungeon_bg_tiles');
 
@@ -27,7 +29,7 @@ const createLayersDungeon = (context):void => {
   context.layers.trapsSpawns = context.map.getObjectLayer('traps');
  };
 
-const createBgDungeon = (context) => {
+const createBgDungeon = (context:Play):void => {
   const bgObject = context.map.getObjectLayer('distance_bg').objects[0];
 
   context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-dungeon-back')
@@ -61,7 +63,7 @@ const createBgDungeon = (context) => {
     .setScrollFactor(0, 1);
 };
 
-const bgParallaxDungeon = (context) => {
+const bgParallaxDungeon = (context:Play):void => {
   context.treesImg.tilePositionX = context.cameras.main.scrollX * 0.2;
   context.wallsImg.tilePositionX = context.cameras.main.scrollX * 0.1;
 };

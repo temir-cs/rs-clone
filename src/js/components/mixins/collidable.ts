@@ -1,11 +1,30 @@
 import * as Phaser from 'phaser';
 
+interface colliderType {
+  addCollider: (otherGameobject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+              callback: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+              context: Phaser.Scene) => colliderType;
+  addOverlap: (gameObject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+              callback: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+              context: Phaser.Scene) => colliderType;
+  bodyPositionDifferenceX: number;
+  prevRay: Phaser.Geom.Line;
+  prevHasHit: boolean;
+  rayCast: (body: Phaser.Physics.Arcade.Body, rayLength:number, precision:number, steepness:number)
+            =>{ray: Phaser.Geom.Line, hasHit: boolean};
+}
+
 export default {
-  addCollider(otherGameobject, callback, context) {
+  addCollider(otherGameobject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+              callback: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+              context: Phaser.Scene):colliderType {
     this.scene.physics.add.collider(this, otherGameobject, callback, null, context || this);
     return this;
   },
-  addOverlap(gameObject, callback, context) {
+
+  addOverlap(gameObject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+              callback: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+              context: Phaser.Scene):colliderType {
     this.scene.physics.add.overlap(this, gameObject, callback, null, context || this);
     return this;
   },
