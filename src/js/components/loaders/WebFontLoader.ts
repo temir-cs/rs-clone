@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import Phaser from 'phaser';
-
-import WebFontLoader from 'webfontloader';
+import * as Phaser from 'phaser';
+import * as WebFontLoader from 'webfontloader';
 
 export default class WebFontFile extends Phaser.Loader.File {
-  constructor(loader, fontNames, service = 'google') {
+  fontNames: Array<string>;
+  service: string;
+
+  constructor(loader: Phaser.Loader.LoaderPlugin, fontNames:string | Array<string>, service = 'google') {
     super(loader, {
       type: 'webfont',
       key: fontNames.toString()
@@ -14,12 +15,12 @@ export default class WebFontFile extends Phaser.Loader.File {
     this.service = service;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  load() {
+  load():void {
     const config = {
       active: () => {
         this.loader.nextFile(this, true);
-      }
+      },
+      google: null,
     };
 
     switch (this.service) {
