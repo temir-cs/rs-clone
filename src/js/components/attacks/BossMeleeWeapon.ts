@@ -26,8 +26,8 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
     this.wielder = wielder;
     this.effectManager = new EffectManager(this.scene);
 
-    this.setOrigin(1.2, 1.2);
-    this.setBodySize(80, 45);
+    this.setOrigin(3, 2);
+    this.setBodySize(160, 90);
     this.setDepth(10);
 
     this.setActive(false);
@@ -49,7 +49,7 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
 
     if (this.wielder.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
       this.setFlipX(false);
-      this.body.reset(this.wielder.x + 45, this.wielder.y);
+      this.body.reset(this.wielder.x + 150, this.wielder.y);
     } else {
       this.setFlipX(true);
       this.body.reset(this.wielder.x, this.wielder.y);
@@ -62,6 +62,7 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
   }
 
   deliversHit(target: Enemy | Player):void {
+    console.log('Hit player!');
     const impactPosition = { x: this.x, y: this.getRightCenter().y };
     this.effectManager.playEffectOn('sword-hit', target, impactPosition);
     this.body.checkCollision.none = true;

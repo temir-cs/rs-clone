@@ -6,12 +6,14 @@ import EventEmitter from '../events/Emitter';
 import Projectiles from '../attacks/Projectiles';
 import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
+import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
   config: any;
   body: Phaser.Physics.Arcade.Body;
   projectiles?: Projectiles;
+  meleeWeapon?: BossMeleeWeapon;
   hitSound: Phaser.Sound.BaseSound;
   deathSound: Phaser.Sound.BaseSound;
   lastDirection?: number;
@@ -54,6 +56,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.health = 40;
     this.damage = 10;
     this.projectiles = null;
+    this.meleeWeapon = null;
     this.hitSound = this.scene.sound.add('troll-hit', { volume: 0.4 });
     this.deathSound = this.scene.sound.add('troll-dead', { volume: 0.4 });
 

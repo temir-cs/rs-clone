@@ -1,18 +1,19 @@
 import Enemy from './Enemy';
 import initAnims from '../animations/bossAnims';
 import BossProjectiles from '../attacks/BossProjectiles';
-import Projectiles from '../attacks/Projectiles';
 import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
 import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
-import AimedProjectile from '../attacks/BossProjectile';
+import { getTimestamp } from '../utils/functions';
 
 class Boss extends Enemy {
   isDead: boolean;
   projectiles: BossProjectiles;
   meleeWeapon: BossMeleeWeapon;
-  timeFromLastAttack: number;
+  timeFromLastShot: number;
+  timeFromLastSwing: number;
+  distanceToPlayer: number;
   attackDelay: number;
   lastDirection: number;
   constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
@@ -35,8 +36,8 @@ class Boss extends Enemy {
 
     this.projectiles = new BossProjectiles(this.scene, 'tesla-ball');
     this.meleeWeapon = new BossMeleeWeapon(this.scene, 0, 0, 'boss-attack', this);
-    console.log('Projectiles: ', this.projectiles);
-    this.timeFromLastAttack = 0;
+    this.timeFromLastShot = 0;
+    this.timeFromLastSwing = 0;
     this.setAttackDelay();
     this.lastDirection = null;
   }
@@ -49,6 +50,7 @@ class Boss extends Enemy {
   update(time:number, delta:number):void {
     // disable patrolling
     // super.update(time, delta);
+    this.distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
 
     if (!this.active) return;
 
@@ -66,12 +68,19 @@ class Boss extends Enemy {
     //
     // }
 
-    if (this.timeFromLastAttack + this.attackDelay <= time) {
-      this.projectiles.fireProjectile(this, 'tesla-ball', this.player);
-      this.play('boss-magic-attack', true);
-
-      this.timeFromLastAttack = time;
-      this.setAttackDelay();
+    if (this.distanceToPlayer > 300) {
+      if (this.timeFromLastShot + this.attackDelay <= time) {
+        this.projectiles.fireProjectile(this, 'tesla-ball', this.player);
+        this.play('boss-magic-attack', true);
+        this.timeFromLastShot = time;
+        this.setAttackDelay();
+      }
+    } else {
+      if (this.timeFromLastSwing + 3000 <= time) {
+        this.meleeWeapon.swing();
+        this.play('boss-attack', true);
+        this.timeFromLastSwing = time;
+      }
     }
 
     if (this.isPlayingAnims('boss-hurt')
@@ -90,6 +99,10 @@ class Boss extends Enemy {
     }
     this.setVelocityX(0);
     this.play('boss-idle', true);
+  }
+
+  getMeleeWeapon():BossMeleeWeapon {
+    return this.meleeWeapon;
   }
 
   takesHit(source: Projectile | MeleeWeapon):void {

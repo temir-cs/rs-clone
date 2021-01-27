@@ -13,6 +13,17 @@ class Enemies extends Phaser.GameObjects.Group {
     Object.assign(this, collidable);
   }
 
+  getMeleeWeapons(): Phaser.GameObjects.Group {
+    const meleeWeapons = new Phaser.GameObjects.Group(this.scene);
+    const enemies = this.getChildren();
+    enemies.forEach((enemy: Enemy) => {
+      if (enemy.meleeWeapon) {
+        meleeWeapons.add(enemy.meleeWeapon);
+      }
+    });
+    return meleeWeapons;
+  }
+
   getProjectiles(): Phaser.GameObjects.Group {
     const projectiles = new Phaser.GameObjects.Group(this.scene);
     const enemies = this.getChildren();
