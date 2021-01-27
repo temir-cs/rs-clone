@@ -26,9 +26,9 @@ const HERO_STATS = {
   },
   mage: {
     hero: 'mage',
-    health: 25,
+    health: 2500,
     speed: 300,
-    bounceVelocity: 200,
+    bounceVelocity: 0,
   }
 };
 

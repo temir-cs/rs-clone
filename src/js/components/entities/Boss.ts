@@ -4,12 +4,14 @@ import BossProjectiles from '../attacks/BossProjectiles';
 import Projectiles from '../attacks/Projectiles';
 import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
+import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
 import AimedProjectile from '../attacks/BossProjectile';
 
 class Boss extends Enemy {
   isDead: boolean;
   projectiles: BossProjectiles;
+  meleeWeapon: BossMeleeWeapon;
   timeFromLastAttack: number;
   attackDelay: number;
   lastDirection: number;
@@ -25,12 +27,14 @@ class Boss extends Enemy {
     this.setBodySize(60, 110);
     this.setOffset(45, 95);
     this.setScale(1.2);
+    this.name = 'boss';
     this.health = 250;
     this.speed = 50;
     this.hitSound = this.scene.sound.add('imp-hit', { volume: 0.4 });
     this.deathSound = this.scene.sound.add('imp-dead', { volume: 0.4 });
 
     this.projectiles = new BossProjectiles(this.scene, 'tesla-ball');
+    this.meleeWeapon = new BossMeleeWeapon(this.scene, 0, 0, 'boss-attack', this);
     console.log('Projectiles: ', this.projectiles);
     this.timeFromLastAttack = 0;
     this.setAttackDelay();
@@ -48,11 +52,19 @@ class Boss extends Enemy {
 
     if (!this.active) return;
 
-    if (this.body.velocity.x > 0) {
-      this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
-    } else {
+    if (this.body.x > this.player.x) {
+      this.setFlipX(true);
       this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT;
+    } else {
+      this.setFlipX(false);
+      this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     }
+
+    // if (this.body.velocity.x > 0) {
+    //
+    // } else {
+    //
+    // }
 
     if (this.timeFromLastAttack + this.attackDelay <= time) {
       this.projectiles.fireProjectile(this, 'tesla-ball', this.player);

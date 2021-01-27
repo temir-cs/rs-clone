@@ -80,6 +80,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
   }
 
   deliversHit(target:Phaser.Physics.Arcade.Sprite):void {
+    console.log('Target: ', target);
     this.activateProjectile(false);
     this.traveledDistance = 0;
     const impactPosition = { x: this.x, y: this.y };

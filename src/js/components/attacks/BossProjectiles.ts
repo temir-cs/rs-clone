@@ -34,21 +34,19 @@ class BossProjectiles extends Phaser.Physics.Arcade.Group {
     const center:Phaser.Math.Vector2 = initiator.getCenter();
     let centerX:number;
 
-    // if (initiator.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
-    //   projectile.speed = Math.abs(projectile.speed);
-    //   projectile.setFlipX(false);
-    //   centerX = center.x + 10;
-    // } else {
-    //   projectile.speed = -Math.abs(projectile.speed);
-    //   projectile.setFlipX(true);
-    //   centerX = center.x - 10;
-    // }
+    if (initiator.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
+      projectile.setFlipX(false);
+      centerX = center.x;
+    } else {
+      projectile.setFlipX(true);
+      centerX = center.x - 100;
+    }
 
-    projectile.speed = Math.abs(projectile.speed);
-    projectile.setFlipX(false);
-    centerX = center.x + 10;
+    // projectile.speed = Math.abs(projectile.speed);
+    // projectile.setFlipX(false);
+    // centerX = center.x + 10;
 
-    projectile.fire(centerX, center.y, anim, target);
+    projectile.fire(centerX, center.y - 50, anim, target);
     this.timeFromLastProjectile = getTimestamp();
     return true;
   }
