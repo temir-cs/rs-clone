@@ -2,12 +2,13 @@ import Enemy from './Enemy';
 import Player from './Player';
 import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
+import Play from '../scenes/Play';
 
 class MeleeEnemy extends Enemy {
   isDead: boolean;
   enemyName: string;
 
-  constructor(scene:Phaser.Scene, x:number, y:number, enemyName: string, player: Player) {
+  constructor(scene:Play, x:number, y:number, enemyName: string, player: Player) {
     super(scene, x, y, enemyName, player);
     this.enemyName = enemyName;
     this.isDead = false;

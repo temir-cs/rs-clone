@@ -3,6 +3,7 @@ import Player from './Player';
 
 import initAnims from '../animations/vampireAnims';
 import Projectiles from '../attacks/Projectiles';
+import Play from '../scenes/Play';
 
 class Vampire extends Enemy {
   isDead: boolean;
@@ -11,7 +12,7 @@ class Vampire extends Enemy {
   attackDelay: number;
   lastDirection: number;
 
-  constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
+  constructor(scene:Play, x:number, y:number, player: Player) {
     super(scene, x, y, 'vampire', player);
 
     initAnims(this.scene.anims);

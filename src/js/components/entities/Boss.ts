@@ -7,6 +7,7 @@ import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
 import { getTimestamp } from '../utils/functions';
 import EventEmitter from '../events/Emitter';
+import Play from '../scenes/Play';
 
 class Boss extends Enemy {
   isDead: boolean;
@@ -17,7 +18,7 @@ class Boss extends Enemy {
   distanceToPlayer: number;
   attackDelay: number;
   lastDirection: number;
-  constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
+  constructor(scene: Play, x:number, y:number, player: Player) {
     super(scene, x, y, 'boss', player);
     initAnims(this.scene.anims);
     this.isDead = false;

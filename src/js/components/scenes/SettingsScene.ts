@@ -1,10 +1,11 @@
 import BaseScene from './BaseScene';
 import { DEFAULT_STATS } from './consts';
+import { SceneConfig } from '../interfaces/interfaces';
 
 class SettingsScene extends BaseScene {
   menu: any;
   levels: number;
-  constructor(config) {
+  constructor(config: SceneConfig) {
     super('SettingsScene', { ...config, canGoBack: true });
 
     // this.menu = [

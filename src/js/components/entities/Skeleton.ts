@@ -2,10 +2,11 @@ import MeleeEnemy from './MeleeEnemy';
 import Player from './Player';
 
 import initAnims from '../animations/skeletonAnims';
+import Play from '../scenes/Play';
 
 class Skeleton extends MeleeEnemy {
   isDead: boolean;
-  constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
+  constructor(scene:Play, x:number, y:number, player: Player) {
     super(scene, x, y, 'skeleton', player);
     this.speed = 60;
     this.setBodySize(40, 70);

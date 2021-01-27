@@ -23,3 +23,15 @@ export interface Stats {
   coins: number;
   kills: number;
 }
+
+export interface SceneConfig {
+  mapOffset: number;
+  heightOffset: number;
+  width: number;
+  height: number;
+  zoomFactor: number;
+  debug: boolean;
+  leftTopCorner: {x: number, y: number};
+  rightTopCorner: {x: number, y: number};
+  rightBottomCorner: {x: number, y: number};
+}

@@ -8,9 +8,11 @@ import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
 import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
+import Play from '../scenes/Play';
+import { SceneConfig } from '../interfaces/interfaces';
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
-  config: any;
+  config: SceneConfig;
   body: Phaser.Physics.Arcade.Body;
   projectiles?: Projectiles;
   meleeWeapon?: BossMeleeWeapon;
@@ -31,7 +33,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
   raycast: (body: Phaser.Physics.Arcade.Body, rayLength: number, precision: number, steepness: number)
             => {ray: Phaser.Geom.Line, hasHit: boolean};
 
-  constructor(scene: any, x:number, y:number, key:string, player: Player) {
+  constructor(scene: Play, x:number, y:number, key:string, player: Player) {
     super(scene, x, y, key);
     scene.add.existing(this);
     scene.physics.add.existing(this);

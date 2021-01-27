@@ -31,8 +31,10 @@ import { createMapFinal,
 
 import { DEFAULT_LEVEL, DEFAULT_STATS, LIVES } from './consts';
 
+import { SceneConfig } from '../interfaces/interfaces';
+
 class Play extends Phaser.Scene {
-  config: any;
+  config: SceneConfig;
   map: Phaser.Tilemaps.Tilemap = null;
   player: Phaser.Physics.Arcade.Sprite;
 
@@ -91,7 +93,7 @@ class Play extends Phaser.Scene {
   bkgMountains?: any;
   mistImg?: any;
 
-  constructor(config) {
+  constructor(config: SceneConfig) {
     super('PlayScene');
     this.config = config;
   }
