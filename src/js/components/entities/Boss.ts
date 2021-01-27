@@ -6,6 +6,7 @@ import MeleeWeapon from '../attacks/MeleeWeapon';
 import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
 import { getTimestamp } from '../utils/functions';
+import EventEmitter from '../events/Emitter';
 
 class Boss extends Enemy {
   isDead: boolean;
@@ -29,8 +30,8 @@ class Boss extends Enemy {
     this.setOffset(45, 95);
     this.setScale(1.2);
     this.name = 'boss';
-    this.health = 250;
-    this.speed = 50;
+    this.health = 25;
+    this.speed = 20;
     this.hitSound = this.scene.sound.add('imp-hit', { volume: 0.4 });
     this.deathSound = this.scene.sound.add('imp-dead', { volume: 0.4 });
 
@@ -54,18 +55,27 @@ class Boss extends Enemy {
 
     if (!this.active) return;
 
+    if (this.isDead) {
+      this.setActive(false);
+      setTimeout(() => {
+        this.rayGraphics.clear();
+        this.destroy();
+      }, 700);
+      return;
+    }
+
     if (this.body.x > this.player.x) {
       this.setFlipX(true);
+      this.setVelocityX(-this.speed);
       this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT;
     } else {
       this.setFlipX(false);
+      this.setVelocityX(this.speed);
       this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     }
 
     // if (this.body.velocity.x > 0) {
-    //
     // } else {
-    //
     // }
 
     if (this.distanceToPlayer > 300) {
@@ -87,18 +97,8 @@ class Boss extends Enemy {
     || this.isPlayingAnims('boss-death')
     || this.isPlayingAnims('boss-attack')
     || this.isPlayingAnims('boss-magic-attack')) return;
-
-    if (this.isDead) {
-      this.setActive(false);
-      this.play('boss-death', true);
-      setTimeout(() => {
-        this.rayGraphics.clear();
-        this.destroy();
-      }, 400);
-      return;
-    }
-    this.setVelocityX(0);
-    this.play('boss-idle', true);
+    // this.setVelocityX(0);
+    this.play('boss-walk', true);
   }
 
   getMeleeWeapon():BossMeleeWeapon {
@@ -106,12 +106,16 @@ class Boss extends Enemy {
   }
 
   takesHit(source: Projectile | MeleeWeapon):void {
-    super.takesHit(source);
-    this.setVelocityX(this.speed * 0.1);
+    source.deliversHit(this);
+    this.health -= source.damage;
+    this.playHitSound();
+    // this.setVelocityX(this.speed * 0.1);
     this.play('boss-hurt', true);
 
     if (this.health <= 0) {
       this.play('boss-death', true);
+      EventEmitter.emit('ENEMY_KILLED');
+      this.setTint(0xff0000);
       this.setVelocityX(0);
       this.isDead = true;
     }

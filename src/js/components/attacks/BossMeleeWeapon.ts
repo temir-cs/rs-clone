@@ -36,6 +36,7 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
 
     this.wielder.on('animationcomplete', (animation) => {
       if (animation.key === 'boss-attack') {
+        console.log('Swing finished!');
         this.setActive(false);
         this.body.reset(0, 0);
         this.body.checkCollision.none = false;
@@ -62,7 +63,6 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
   }
 
   deliversHit(target: Enemy | Player):void {
-    console.log('Hit player!');
     const impactPosition = { x: this.x, y: this.getRightCenter().y };
     this.effectManager.playEffectOn('sword-hit', target, impactPosition);
     this.body.checkCollision.none = true;
