@@ -3,6 +3,7 @@ import initAnims from '../animations/impAnim';
 import Projectiles from '../attacks/Projectiles';
 import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
+import Player from './Player';
 
 class Imp extends Enemy {
   isDead: boolean;
@@ -10,10 +11,11 @@ class Imp extends Enemy {
   timeFromLastAttack: number;
   attackDelay: number;
   lastDirection: number;
-  constructor(scene:Phaser.Scene, x:number, y:number) {
-    super(scene, x, y, 'imp');
+  constructor(scene:Phaser.Scene, x:number, y:number, player: Player) {
+    super(scene, x, y, 'imp', player);
     initAnims(this.scene.anims);
     this.isDead = false;
+    this.player = player;
   }
 
   init():void {

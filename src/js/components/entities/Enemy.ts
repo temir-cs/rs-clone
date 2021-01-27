@@ -6,11 +6,14 @@ import EventEmitter from '../events/Emitter';
 import Projectiles from '../attacks/Projectiles';
 import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
+import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
+import Player from './Player';
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
   config: any;
   body: Phaser.Physics.Arcade.Body;
   projectiles?: Projectiles;
+  meleeWeapon?: BossMeleeWeapon;
   hitSound: Phaser.Sound.BaseSound;
   deathSound: Phaser.Sound.BaseSound;
   lastDirection?: number;
@@ -23,17 +26,20 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
   collidersLayer: Phaser.Tilemaps.TilemapLayer;
   damage: number;
   health: number;
+  player: Player;
   isPlayingAnims?: (animKey: string) => boolean;
   raycast: (body: Phaser.Physics.Arcade.Body, rayLength: number, precision: number, steepness: number)
             => {ray: Phaser.Geom.Line, hasHit: boolean};
 
-  constructor(scene: any, x:number, y:number, key:string) {
+  constructor(scene: any, x:number, y:number, key:string, player: Player) {
     super(scene, x, y, key);
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.config = scene.config;
     Object.assign(this, collidable);
     Object.assign(this, anims);
+
+    this.player = player;
 
     this.setOrigin(0.5, 1);
     this.init();
@@ -50,6 +56,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.health = 40;
     this.damage = 10;
     this.projectiles = null;
+    this.meleeWeapon = null;
     this.hitSound = this.scene.sound.add('troll-hit', { volume: 0.4 });
     this.deathSound = this.scene.sound.add('troll-dead', { volume: 0.4 });
 

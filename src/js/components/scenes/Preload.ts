@@ -20,6 +20,8 @@ class Preload extends Phaser.Scene {
     this.load.image('tiles-1-lvl3', '../../../assets/img/levels/dungeon/dungeon_platforms.png');
     this.load.image('bg-dungeon-tileset', '../../../assets/img/levels/dungeon/dungeon_bg_tiles.png');
 
+    this.load.tilemapTiledJSON('map-lvl4', '../../../assets/json/04_final_map.json');
+
     // Forest Level Background
     this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
     this.load.image('bg-forest-trees', '../../../assets/img/levels/forest/trees.png');
@@ -48,6 +50,14 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-dungeon-bottom', '../../../assets/img/levels/dungeon/ruins_low1.png');
     this.load.image('bg-dungeon-top', '../../../assets/img/levels/dungeon/ruins_top.png');
 
+    // final Level Background
+    this.load.image('bg-final-back', '../../../assets/img/levels/final/bg.png');
+    this.load.image('bg-final-mist', '../../../assets/img/levels/final/myst.png');
+    this.load.image('bg-final-top', '../../../assets/img/levels/final/rock2.png');
+    this.load.image('bg-final-bottom', '../../../assets/img/levels/final/rock1.png');
+    this.load.image('bg-final-middle', '../../../assets/img/levels/final/rock3.png');
+    this.load.image('bg-final-middle2', '../../../assets/img/levels/final/rock5.png');
+
     // HUD elements
     this.load.image('coin-static', '../../../assets/img/hud/coin.png');
     this.load.image('heart-static', '../../../assets/img/hud/heart.png');
@@ -70,7 +80,9 @@ class Preload extends Phaser.Scene {
     this.load.multiatlas('skeleton', '../../../assets/json/enemies/enemySkeleton.json', '../../../assets/img/enemies');
     this.load.multiatlas('vampire', '../../../assets/json/enemies/enemyVampire.json', '../../../assets/img/enemies');
     this.load.multiatlas('imp', '../../../assets/json/enemies/enemyImpSprite.json', '../../../assets/img/enemies');
+    this.load.multiatlas('boss', '../../../assets/json/enemies/bossSprite.json', '../../../assets/img/enemies');
     this.load.multiatlas('weapon-effects', '../../../assets/json/weapons/weaponEffects.json', '../../../assets/img/weapons');
+    this.load.multiatlas('tesla-ball', '../../../assets/json/weapons/teslaBall.json', '../../../assets/img/weapons');
     this.load.multiatlas('collectables', '../../../assets/json/collectables/collectablesSprite.json', '../../../assets/img/collectables');
     this.load.multiatlas('doors', '../../../assets/json/doors/doorsSprite.json', '../../../assets/img/doors/');
     this.load.multiatlas('traps', '../../../assets/json/enemies/trapsSprite.json', '../../../assets/img/enemies/');
@@ -102,7 +114,7 @@ class Preload extends Phaser.Scene {
 
   startGame() {
     this.registry.set('level', 1);
-    this.registry.set('unlocked-levels', 3);
+    this.registry.set('unlocked-levels', 4);
     this.scene.start('MenuScene');
   }
   // create() {

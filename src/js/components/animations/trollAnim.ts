@@ -1,6 +1,6 @@
 export default (anims) => {
   anims.create({
-    key: 'troll-idle',
+    key: 'troll-walk',
     frames: anims.generateFrameNames('troll', {
       start: 1,
       end: 6,

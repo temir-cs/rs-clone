@@ -31,6 +31,7 @@ class SpriteEffect extends Phaser.Physics.Arcade.Sprite {
   placeEffect():void {
     if (!this.target || !this.body) { return; }
     const center = this.target.getCenter();
+    if (this.target.name === 'boss') center.x -= 60;
     this.body.reset(center.x, this.impactPosition.y);
   }
 

@@ -1,7 +1,7 @@
 import * as Phaser from 'phaser';
 import EffectManager from '../effects/EffectManager';
 
-class Projectile extends Phaser.Physics.Arcade.Sprite {
+class BossProjectile extends Phaser.Physics.Arcade.Sprite {
   speed: number;
   scene: Phaser.Scene;
   x: number;
@@ -22,7 +22,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     this.speed = 300;
-    this.maxDistance = 300;
+    this.maxDistance = 1000;
     this.traveledDistance = 0;
 
     this.xSpeed = 0;
@@ -30,9 +30,8 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     this.direction = 0;
 
     this.damage = 10;
-    this.cooldown = 500;
-    this.setBodySize(30, 20)
-      .setOffset(15, 32);
+    this.cooldown = 100;
+    this.setBodySize(50, 50);
     this.effectManager = new EffectManager(this.scene);
   }
 
@@ -94,4 +93,4 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
   }
 }
 
-export default Projectile;
+export default BossProjectile;

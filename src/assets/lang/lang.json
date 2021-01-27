@@ -1,0 +1,62 @@
+{
+  "RU": {
+    "Menu": {
+      "playBtn": "Начать игру",
+      "levelsBtn": "Уровни",
+      "highscoreBtn": "Таблица очков",
+      "settingBtn": "Настройки"
+    },
+    "HeroSelectScene": {
+      "knightName": "Винсент",
+      "knightClass": "Класс: рыцарь",
+      "knightCombat": "Тип боя: ближний",
+      "knightHealth": "Здоровье: много",
+      "knightSpeed": "Скорость: медленно",
+      "mageName": "Валери",
+      "mageClass": "Класс: маг",
+      "mageCombat": "Тип боя: дальний",
+      "mageHealth": "Здоровье: мало",
+      "mageSpeed": "Скорость: быстро"
+    },
+    "SettingsScene": {
+      "fullScreen": "Полный экран (вкл / выкл)"
+    },
+    "GameOverScene": {
+      "gameOver": "Игра окончена",
+      "totalKills": "Монстров убито",
+      "totalCoins": "Монет собрано",
+      "newGame": "Начать заново",
+      "mainMenu": "Главное меню"
+    }
+  },
+  "EN": {
+    "Menu": {
+      "playBtn": "Play game",
+      "levelsBtn": "Levels",
+      "highscoreBtn": "Leaderboards",
+      "settingBtn": "Settings"
+    },
+    "HeroSelectScene": {
+      "knightName": "Vincent",
+      "knightClass": "Class: knight",
+      "knightCombat": "Combat: melee",
+      "knightHealth": "Health: more",
+      "knightSpeed": "Speed: less",
+      "mageName": "Valerie",
+      "mageClass": "Claas: mage",
+      "mageCombat": "Combat: ranged",
+      "mageHealth": "Health: less",
+      "mageSpeed": "Speed: more"
+    },
+    "SettingsScene": {
+      "fullScreen": "Fullscreen (on / off)"
+    },
+    "GameOverScene": {
+      "gameOver": "Game Over",
+      "totalKills": "Total kills",
+      "totalCoins": "Total coins",
+      "newGame": "New Game",
+      "mainMenu": "Main menu"
+    }
+  }
+}

@@ -248,9 +248,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.play(`${this.hero}-crouch`, true);
   }
 
-  bounceOff():void {
-    const rightTouch = this.body.touching.right;
-    if (rightTouch) {
+  bounceOff(source):void {
+    if (this.x < source.x) {
       this.setVelocityX(-this.bounceVelocity);
     } else {
       this.setVelocityX(this.bounceVelocity);
@@ -260,7 +259,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   checkAfterHit(source, status:boolean):void {
     this.hasBeenHit = true;
-    this.bounceOff();
+    this.bounceOff(source);
     let damageAnim:any = null;
     if (status === true) {
       damageAnim = this.playDamageTween();
@@ -294,6 +293,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   takesHit(source: Projectile | MeleeWeapon):void {
+    console.log('Player hit!');
     if (this.hasBeenHit) return;
 
     this.health -= source.damage;
