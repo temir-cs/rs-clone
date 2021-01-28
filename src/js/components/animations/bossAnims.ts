@@ -31,7 +31,7 @@ export default (anims) => {
       prefix: 'Attack',
       suffix: '.png'
     }),
-    frameRate: 12,
+    frameRate: 8,
     repeat: 0,
   });
 

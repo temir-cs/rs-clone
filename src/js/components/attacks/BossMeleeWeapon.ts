@@ -4,7 +4,7 @@ import Boss from '../entities/Boss';
 import Enemy from '../entities/Enemy';
 import Player from '../entities/Player';
 
-class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
+class BossMeleeWeapon extends Phaser.Physics.Arcade.Sprite {
   attackSpeed: number;
   scene: Phaser.Scene;
   x: number;
@@ -20,13 +20,13 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.damage = 15;
+    this.damage = 10;
     this.attackSpeed = 500;
     this.weaponName = weaponName;
     this.wielder = wielder;
     this.effectManager = new EffectManager(this.scene);
 
-    this.setOrigin(3, 2);
+    this.setOrigin(3, 3);
     this.setBodySize(160, 90);
     this.setDepth(10);
 
@@ -34,14 +34,14 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
     this.setVisible(false);
     this.body.reset(0, 0);
 
-    this.wielder.on('animationcomplete', (animation) => {
-      if (animation.key === 'boss-attack') {
-        console.log('Swing finished!');
-        this.setActive(false);
-        this.body.reset(0, 0);
-        this.body.checkCollision.none = false;
-      }
-    });
+    // this.wielder.on('animationcomplete', (animation) => {
+    //   if (animation.key === 'boss-attack') {
+    //     console.log('Swing finished!');
+    //     this.setActive(false);
+    //     this.body.reset(0, 0);
+    //     this.body.checkCollision.none = false;
+    //   }
+    // });
   }
 
   preUpdate(time: number, delta: number):void {
@@ -69,4 +69,4 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
   }
 }
 
-export default MeleeWeapon;
+export default BossMeleeWeapon;
