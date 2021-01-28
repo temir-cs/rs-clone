@@ -96,7 +96,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       repeat: -1,
       callbackScope: this,
       callback: () => {
-        if (this.isPlayingAnims('run')) {
+        if (this.isPlayingAnims(`${this.hero}-run`)) {
           this.stepSound.play();
         }
       }
@@ -132,9 +132,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   update():void {
     if (this.hasBeenHit || !this.body) return;
-    // 450
     if (this.getBounds().top > this.scene.config.height + 650) {
-      console.log('BOOM!');
       this.deathSound.play();
       EventEmitter.emit('PLAYER_LOSE');
       return;

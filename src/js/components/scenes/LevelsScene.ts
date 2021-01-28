@@ -12,13 +12,18 @@ class LevelsScene extends BaseScene {
   create():void {
     super.create();
 
-    this.menu = [];
-    const levels = this.registry.get('unlocked-levels');
-    for (let i = 1; i <= levels; i += 1) {
-      this.menu.push({
-        scene: 'HeroSelectScene', text: `Level ${i}`, level: i,
-      });
-    }
+    this.menu = [
+      { scene: 'HeroSelectScene', text: 'Forest', level: 1 },
+      { scene: 'HeroSelectScene', text: 'Castle', level: 2 },
+      { scene: 'HeroSelectScene', text: 'Dungeon', level: 3 },
+      { scene: 'HeroSelectScene', text: 'Boss Level', level: 4 },
+  ];
+    // const levels = this.registry.get('unlocked-levels');
+    // for (let i = 1; i <= levels; i += 1) {
+    //   this.menu.push({
+    //     scene: 'HeroSelectScene', text: `Level ${i}`, level: i,
+    //   });
+    // }
 
     this.createMenu(this.menu, (menuItem:MenuType) => this.setupMenuEvents(menuItem));
   }

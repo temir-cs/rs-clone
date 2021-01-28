@@ -31,8 +31,8 @@ class Boss extends Enemy {
     this.name = 'boss';
     this.health = 200;
     this.speed = 40;
-    this.hitSound = this.scene.sound.add('imp-hit', { volume: 0.4 });
-    this.deathSound = this.scene.sound.add('imp-dead', { volume: 0.4 });
+    this.hitSound = this.scene.sound.add('boss-hit', { volume: 0.4 });
+    this.deathSound = this.scene.sound.add('boss-death', { volume: 0.6 });
 
     this.projectiles = new BossProjectiles(this.scene, 'tesla-ball');
     this.meleeWeapon = new BossMeleeWeapon(this.scene, 0, 0, 'boss-attack', this);
@@ -44,20 +44,9 @@ class Boss extends Enemy {
 
   setAttackDelay():void {
     this.attackDelay = Phaser.Math.Between(1000, 4000);
-    console.log('Attack delay: ', this.attackDelay);
-    // this.attackDelay = 2000;
   }
 
-  update(time:number, delta:number):void {
-    // if (this) {
-    //   if (this.anims.currentAnim) {
-    //     console.log('Current anim: ', this.anims.currentAnim.key, 'Frame: ', this.anims.currentFrame.index);
-    //   }
-    // }
-
-    // console.log('delta: ', delta);
-    // console.log('Velocity: ', this.body.velocity);
-
+  update(time:number):void {
     this.distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
     if (!this.active) return;
 
@@ -101,7 +90,6 @@ class Boss extends Enemy {
           this.meleeWeapon.swing();
         }, 400);
         setTimeout(() => {
-          console.log('Swing finished!');
           this.meleeWeapon.setActive(false);
           this.meleeWeapon.body.reset(0, 0);
           this.meleeWeapon.body.checkCollision.none = false;
@@ -127,9 +115,6 @@ class Boss extends Enemy {
 
   stopThenWalk():void {
     this.setVelocityX(0);
-    // setTimeout(() => {
-    //   this.setBossVelocity();
-    // }, 1000);
     this.scene.time.addEvent({
       delay: 1000,
       callback: () => {
@@ -149,7 +134,6 @@ class Boss extends Enemy {
 
   takesHit(source: Projectile | MeleeWeapon):void {
     super.takesHit(source);
-    console.log('Health left: ', this.health);
     this.play('boss-hurt', true);
 
     if (this.health <= 0) {
