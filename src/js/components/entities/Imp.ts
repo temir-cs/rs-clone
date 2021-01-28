@@ -1,26 +1,11 @@
-import Enemy from './Enemy';
+import RangedEnemy from './RangedEnemy';
 import initAnims from '../animations/impAnim';
-import Projectiles from '../attacks/Projectiles';
-import Projectile from '../attacks/Projectile';
-import MeleeWeapon from '../attacks/MeleeWeapon';
 import Player from './Player';
 import Play from '../scenes/Play';
 
-class Imp extends Enemy {
-  isDead: boolean;
-  projectiles: Projectiles;
-  timeFromLastAttack: number;
-  attackDelay: number;
-  lastDirection: number;
+class Imp extends RangedEnemy {
   constructor(scene:Play, x:number, y:number, player: Player) {
     super(scene, x, y, 'imp', player);
-    initAnims(this.scene.anims);
-    this.isDead = false;
-    this.player = player;
-  }
-
-  init():void {
-    super.init();
     this.setBodySize(35, 60);
     this.setOffset(100, 100);
     this.setScale(1.2);
@@ -28,61 +13,7 @@ class Imp extends Enemy {
     this.speed = 50;
     this.hitSound = this.scene.sound.add('imp-hit', { volume: 0.4 });
     this.deathSound = this.scene.sound.add('imp-dead', { volume: 0.4 });
-
-    this.projectiles = new Projectiles(this.scene, 'fire-projectile');
-    this.timeFromLastAttack = 0;
-    this.setAttackDelay();
-    this.lastDirection = null;
-  }
-
-  setAttackDelay():void {
-    this.attackDelay = Phaser.Math.Between(1000, 4000);
-  }
-
-  update(time:number, delta:number):void {
-    super.update(time, delta);
-
-    if (!this.active) return;
-
-    if (this.body.velocity.x > 0) {
-      this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
-    } else {
-      this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT;
-    }
-
-    if (this.timeFromLastAttack + this.attackDelay <= time) {
-      this.projectiles.fireProjectile(this, 'fire-projectile');
-      this.play('imp-attack', true);
-
-      this.timeFromLastAttack = time;
-      this.setAttackDelay();
-    }
-
-    if (this.isPlayingAnims('imp-hurt') || this.isPlayingAnims('imp-death') || this.isPlayingAnims('imp-attack')) return;
-
-    if (this.isDead) {
-      this.setActive(false);
-      this.play('imp-death', true);
-      setTimeout(() => {
-        this.rayGraphics.clear();
-        this.destroy();
-      }, 400);
-      return;
-    }
-    this.setVelocityX(this.speed);
-    this.play('imp-walk', true);
-  }
-
-  takesHit(source: Projectile | MeleeWeapon):void {
-    super.takesHit(source);
-    this.setVelocityX(this.speed * 0.1);
-    this.play('imp-hurt', true);
-
-    if (this.health <= 0) {
-      this.play('imp-death', true);
-      this.setVelocityX(0);
-      this.isDead = true;
-    }
+    initAnims(this.scene.anims);
   }
 }
 

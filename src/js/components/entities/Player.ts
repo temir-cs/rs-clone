@@ -293,7 +293,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   takesHit(source: Projectile | MeleeWeapon):void {
-    console.log('Player hit!');
     if (this.hasBeenHit) return;
 
     this.health -= source.damage;

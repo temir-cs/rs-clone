@@ -50,18 +50,47 @@ class Boss extends Enemy {
   }
 
   update(time:number, delta:number):void {
-    // disable patrolling
-    // super.update(time, delta);
+    // if (this) {
+    //   if (this.anims.currentAnim) {
+    //     console.log('Current anim: ', this.anims.currentAnim.key, 'Frame: ', this.anims.currentFrame.index);
+    //   }
+    // }
+
     this.distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
 
     if (!this.active) return;
 
+    // if (this.body.velocity.x > 0) {
+    // } else {
+    // }
+
+    if (this.active) {
+      if (this.distanceToPlayer > 300) {
+        if (this.timeFromLastShot + this.attackDelay <= time) {
+          this.projectiles.fireProjectile(this, 'tesla-ball', this.player);
+          this.play('boss-magic-attack', true);
+          this.timeFromLastShot = time;
+          this.setAttackDelay();
+        }
+      } else {
+        if (this.timeFromLastSwing + 3000 <= time) {
+          this.meleeWeapon.swing();
+          this.play('boss-attack', true);
+          this.timeFromLastSwing = time;
+        }
+      }
+    }
+
+    if (this.isPlayingAnims('boss-hurt')
+    || this.isPlayingAnims('boss-death')
+    || this.isPlayingAnims('boss-attack')
+    || this.isPlayingAnims('boss-magic-attack')) return;
+
     if (this.isDead) {
       this.setActive(false);
       setTimeout(() => {
-        this.rayGraphics.clear();
         this.destroy();
-      }, 700);
+      }, 1500);
       return;
     }
 
@@ -75,30 +104,6 @@ class Boss extends Enemy {
       this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     }
 
-    // if (this.body.velocity.x > 0) {
-    // } else {
-    // }
-
-    if (this.distanceToPlayer > 300) {
-      if (this.timeFromLastShot + this.attackDelay <= time) {
-        this.projectiles.fireProjectile(this, 'tesla-ball', this.player);
-        this.play('boss-magic-attack', true);
-        this.timeFromLastShot = time;
-        this.setAttackDelay();
-      }
-    } else {
-      if (this.timeFromLastSwing + 3000 <= time) {
-        this.meleeWeapon.swing();
-        this.play('boss-attack', true);
-        this.timeFromLastSwing = time;
-      }
-    }
-
-    if (this.isPlayingAnims('boss-hurt')
-    || this.isPlayingAnims('boss-death')
-    || this.isPlayingAnims('boss-attack')
-    || this.isPlayingAnims('boss-magic-attack')) return;
-    // this.setVelocityX(0);
     this.play('boss-walk', true);
   }
 
@@ -110,7 +115,6 @@ class Boss extends Enemy {
     source.deliversHit(this);
     this.health -= source.damage;
     this.playHitSound();
-    // this.setVelocityX(this.speed * 0.1);
     this.play('boss-hurt', true);
 
     if (this.health <= 0) {

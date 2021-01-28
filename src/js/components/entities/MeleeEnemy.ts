@@ -20,7 +20,6 @@ class MeleeEnemy extends Enemy {
     if (this.isPlayingAnims(`${this.enemyName}-hurt`) || this.isPlayingAnims(`${this.enemyName}-death`)) { return; }
     if (this.isDead) {
       this.setActive(false);
-      this.play(`${this.enemyName}-death`, true);
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();

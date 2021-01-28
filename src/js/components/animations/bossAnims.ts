@@ -62,24 +62,12 @@ export default (anims) => {
   anims.create({
     key: 'boss-death',
     frames: anims.generateFrameNames('boss', {
-      start: 0,
+      start: 1,
       end: 5,
       prefix: 'Death',
       suffix: '.png'
     }),
     frameRate: 5,
     repeat: 0
-  });
-
-  anims.create({
-    key: 'boss-dead',
-    frames: anims.generateFrameNames('boss', {
-      start: 5,
-      end: 5,
-      prefix: 'Death',
-      suffix: '.png'
-    }),
-    frameRate: 1,
-    repeat: -1
   });
 };

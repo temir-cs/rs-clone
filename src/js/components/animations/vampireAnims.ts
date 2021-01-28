@@ -29,7 +29,7 @@ export default (anims) => {
       prefix: 'vampire_attack',
       suffix: '.png'
     }),
-    frameRate: 5,
+    frameRate: 10,
     repeat: 0,
   });
   anims.create({
@@ -41,7 +41,7 @@ export default (anims) => {
       suffix: '.png'
     }),
     frameRate: 5,
-    repeat: -1,
+    repeat: 0,
   });
   anims.create({
     key: 'vampire-death',
@@ -52,6 +52,6 @@ export default (anims) => {
       suffix: '.png'
     }),
     frameRate: 7,
-    repeat: -1,
+    repeat: 0,
   });
 };
