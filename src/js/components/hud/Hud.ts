@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
 import Play from '../scenes/Play';
-import { Stats } from '../interfaces/interfaces';
+import { Stats, FontConfig } from '../interfaces/interfaces';
 
 class Hud {
   fontSize?: number;
@@ -16,7 +16,7 @@ class Hud {
   stats: Stats;
   leftTopCorner: {x: number, y: number};
   rightTopCorner: {x: number, y: number};
-  hudFont: {fontSize: string, fontStyle: string, fontFamily: string, fill: string};
+  hudFont: FontConfig;
 
   constructor(scene:Play) {
     this.scene = scene;

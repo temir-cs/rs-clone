@@ -1,9 +1,9 @@
 import BaseScene from './BaseScene';
 import { DEFAULT_STATS } from './consts';
-import { SceneConfig } from '../interfaces/interfaces';
+import { SceneConfig, MenuType } from '../interfaces/interfaces';
 
 class SettingsScene extends BaseScene {
-  menu: any;
+  menu: MenuType[];
   levels: number;
   constructor(config: SceneConfig) {
     super('SettingsScene', { ...config, canGoBack: true });
@@ -14,16 +14,16 @@ class SettingsScene extends BaseScene {
     // ];
   }
 
-  create() {
+  create():void {
     super.create();
 
     this.menu = [
       { text: 'Fullscreen on/off' }
     ];
-    this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem));
+    this.createMenu(this.menu, (menuItem:MenuType) => this.setupMenuEvents(menuItem));
   }
 
-  setupMenuEvents(menuItem) {
+  setupMenuEvents(menuItem:MenuType): void {
     const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 

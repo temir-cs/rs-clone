@@ -34,4 +34,35 @@ export interface SceneConfig {
   leftTopCorner: {x: number, y: number};
   rightTopCorner: {x: number, y: number};
   rightBottomCorner: {x: number, y: number};
+  canGoBack?: boolean;
+}
+
+export interface FontConfig {
+  fontSize: string;
+  fontStyle: string;
+  fontFamily: string;
+  fill: string;
+}
+
+export interface MenuType {
+  scene?: string;
+  text?: string;
+  textGameObject?: Phaser.GameObjects.Text;
+  level?: number;
+}
+
+export interface colliderType {
+  addCollider: (otherGameobject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
+                | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+                callback?: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+                context?: Phaser.Scene) => colliderType;
+  addOverlap: (gameObject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
+                | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+                callback?: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+                context?: Phaser.Scene) => colliderType;
+  bodyPositionDifferenceX: number;
+  prevRay: Phaser.Geom.Line;
+  prevHasHit: boolean;
+  rayCast: (body: Phaser.Physics.Arcade.Body, rayLength:number, precision:number, steepness:number)
+            =>{ray: Phaser.Geom.Line, hasHit: boolean};
 }

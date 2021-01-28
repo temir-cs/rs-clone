@@ -1,15 +1,16 @@
 import * as Phaser from 'phaser';
+import { SceneConfig, FontConfig, MenuType } from '../interfaces/interfaces';
 
 class BaseScene extends Phaser.Scene {
-  config: any;
-  screenCenter: any;
+  config: SceneConfig;
+  screenCenter: Array<number>;
   fontSize: number;
   fontStyle: string;
   lineHeight: number;
-  fontOptions: object;
+  fontOptions: FontConfig;
   fontFamily: string;
 
-  constructor(key, config) {
+  constructor(key: string, config: SceneConfig) {
     super(key);
     this.config = config;
     this.screenCenter = [config.width / 2, config.height / 2];
@@ -49,7 +50,7 @@ class BaseScene extends Phaser.Scene {
     }
   }
 
-  createMenu(menu, setupMenuEvents):void {
+  createMenu(menu: MenuType[], setupMenuEvents: (menuItem: MenuType)=>void):void {
     let lastMenuPositionY = 0;
     menu.forEach((item) => {
       const menuItem = item;

@@ -31,7 +31,7 @@ import { createMapFinal,
 
 import { DEFAULT_LEVEL, DEFAULT_STATS, LIVES } from './consts';
 
-import { SceneConfig } from '../interfaces/interfaces';
+import { SceneConfig, Stats } from '../interfaces/interfaces';
 
 class Play extends Phaser.Scene {
   config: SceneConfig;
@@ -65,15 +65,15 @@ class Play extends Phaser.Scene {
 
   };
 
-  private plotting: boolean;
-  private graphics: Phaser.GameObjects.Graphics;
-  private line: Phaser.Geom.Line;
-  private tileHits: any;
+  // private plotting: boolean;
+  // private graphics: Phaser.GameObjects.Graphics;
+  // private line: Phaser.Geom.Line;
+  // private tileHits: any;
 
-  private collectables: any;
-  private coinCount: number;
-  private hud: any;
-  private collectableKey: any;
+  private collectables: Collectables;
+  // private coinCount: number;
+  private hud: Hud;
+  private collectableKey: Key;
   private hasKey: boolean;
 
   lvlKey: string;
@@ -83,16 +83,16 @@ class Play extends Phaser.Scene {
   private bgParallax: any;
   killCount: number;
   livesCount: number;
-  stats: any;
+  stats: Stats;
   gameStatus: any;
-  traps?: any;
-  wallsImg?: any;
-  treesImg?: any;
-  bkgForest?: any;
-  bkgClouds?: any;
-  bkgMountains?: any;
-  mistImg?: any;
-  music: any;
+  traps?: Traps;
+  wallsImg?: Phaser.GameObjects.TileSprite;
+  treesImg?: Phaser.GameObjects.TileSprite;
+  bkgForest?: Phaser.GameObjects.TileSprite;
+  bkgClouds?: Phaser.GameObjects.TileSprite;
+  bkgMountains?: Phaser.GameObjects.TileSprite;
+  mistImg?: Phaser.GameObjects.TileSprite;
+  music: Phaser.Sound.BaseSound;
   canGoMenu: boolean;
   musicState: boolean;
   currentMusic: string;
@@ -102,7 +102,7 @@ class Play extends Phaser.Scene {
     this.config = config;
   }
 
-  create({ gameStatus }) {
+  create({ gameStatus }):void {
     this.gameStatus = gameStatus;
     console.log('Gamestatus: ', gameStatus);
     if (gameStatus === 'NEW_GAME') {
@@ -187,7 +187,6 @@ class Play extends Phaser.Scene {
         if (this.musicState === true) {
           this.playBgMusic(this.currentMusic);
         }
-        // this.playBgMusic(this.currentMusic);
         break;
       case 2:
         this.lvlKey = 'castle';
@@ -196,7 +195,6 @@ class Play extends Phaser.Scene {
         this.bgParallax = bgParallaxCastle;
         this.createMap = createMapCastle;
         this.currentMusic = 'castle-theme';
-        // this.playBgMusic(this.currentMusic);
         if (this.musicState === true) {
           this.playBgMusic(this.currentMusic);
         }
@@ -208,7 +206,6 @@ class Play extends Phaser.Scene {
         this.bgParallax = bgParallaxDungeon;
         this.createMap = createMapDungeon;
         this.currentMusic = 'forest-lvl-theme';
-        // this.playBgMusic(this.currentMusic);
         if (this.musicState === true) {
           this.playBgMusic(this.currentMusic);
         }
@@ -220,7 +217,6 @@ class Play extends Phaser.Scene {
         this.bgParallax = bgParallaxFinal;
         this.createMap = createMapFinal;
         this.currentMusic = 'boss-theme';
-        // this.playBgMusic(this.currentMusic);
         if (this.musicState === true) {
           this.playBgMusic(this.currentMusic);
         }
@@ -260,7 +256,9 @@ class Play extends Phaser.Scene {
   }
 
   stopBgMusic():void {
-    this.music.stop();
+    if (this.music) {
+      this.music.stop();
+    }
   }
 
   createGameEvents():void {
@@ -320,7 +318,7 @@ class Play extends Phaser.Scene {
     console.log('Coins: ', this.getCurrentStats().coins);
   }
 
-  onKeyCollect() {
+  onKeyCollect():void {
     this.collectableKey.pickupSound.play();
     this.collectableKey.disableBody(true, true);
     this.hasKey = true;
@@ -337,7 +335,7 @@ class Play extends Phaser.Scene {
       .addOverlap(colliders.collectableKey, this.onKeyCollect, this);
   }
 
-  setupFollowupCameraOn(player):void {
+  setupFollowupCameraOn(player:Player):void {
     const { height, width, mapOffset, heightOffset, zoomFactor } = this.config;
 
     if (this.getCurrentLevel() === 4) {
@@ -351,7 +349,7 @@ class Play extends Phaser.Scene {
     this.cameras.main.startFollow(player);
   }
 
-  getPlayerZones() {
+  getPlayerZones():{start:Phaser.Types.Tilemaps.TiledObject; end: Phaser.Types.Tilemaps.TiledObject} {
     const zones = this.layers.playerZones.objects;
     return {
       start: zones[0],
@@ -359,15 +357,15 @@ class Play extends Phaser.Scene {
     };
   }
 
-  getCurrentLevel() {
+  getCurrentLevel():number {
     return this.registry.get('level') || DEFAULT_LEVEL;
   }
 
-  getCurrentLives():any {
+  getCurrentLives():number {
     return this.gameStatus === 'NEW_GAME' ? LIVES : this.registry.get('livesCount');
   }
 
-  getCurrentStats():any {
+  getCurrentStats():Stats {
     let stats = this.registry.get('stats');
     if (!stats) {
       stats = { ...DEFAULT_STATS };
@@ -375,7 +373,7 @@ class Play extends Phaser.Scene {
     return stats;
   }
 
-  createEndOfLevel(end, player):void {
+  createEndOfLevel(end: Phaser.Types.Tilemaps.TiledObject, player: Player):void {
     const endOfLevel = this.physics.add.sprite(end.x, end.y, 'end')
       .setAlpha(0)
       .setOrigin(0.5, 1)

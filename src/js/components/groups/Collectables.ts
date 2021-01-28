@@ -18,7 +18,7 @@ class Collectables extends Phaser.Physics.Arcade.StaticGroup {
     }, {});
   }
 
-  addFromLayer(layer) {
+  addFromLayer(layer:Phaser.Tilemaps.ObjectLayer):void{
     const { score: defaultScore, type } = this.mapProperties(layer.properties);
 
     layer.objects.forEach((collectableO) => {

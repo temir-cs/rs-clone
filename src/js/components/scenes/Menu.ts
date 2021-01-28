@@ -1,8 +1,9 @@
 import BaseScene from './BaseScene';
+import { SceneConfig, MenuType } from '../interfaces/interfaces';
 
 class MenuScene extends BaseScene {
-  menu: any;
-  constructor(config) {
+  menu: MenuType[];
+  constructor(config: SceneConfig) {
     super('MenuScene', config);
 
     this.menu = [
@@ -13,13 +14,13 @@ class MenuScene extends BaseScene {
     ];
   }
 
-  create() {
+  create():void {
     super.create();
 
-    this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem)); // or bind.this
+    this.createMenu(this.menu, (menuItem: MenuType) => this.setupMenuEvents(menuItem)); // or bind.this
   }
 
-  setupMenuEvents(menuItem) {
+  setupMenuEvents(menuItem: MenuType):void {
     const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 

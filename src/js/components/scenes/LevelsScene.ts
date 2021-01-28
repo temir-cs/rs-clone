@@ -1,19 +1,15 @@
 import BaseScene from './BaseScene';
 import { DEFAULT_STATS } from './consts';
+import { SceneConfig, MenuType } from '../interfaces/interfaces';
 
 class LevelsScene extends BaseScene {
-  menu: any;
+  menu: MenuType[];
   levels: number;
-  constructor(config) {
+  constructor(config: SceneConfig) {
     super('LevelsScene', { ...config, canGoBack: true });
-
-    // this.menu = [
-    //   { scene: 'PlayScene', text: 'Level 1' },
-    //   { scene: 'PlayScene', text: 'Level 2' },
-    // ];
   }
 
-  create() {
+  create():void {
     super.create();
 
     this.menu = [];
@@ -24,10 +20,10 @@ class LevelsScene extends BaseScene {
       });
     }
 
-    this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem));
+    this.createMenu(this.menu, (menuItem:MenuType) => this.setupMenuEvents(menuItem));
   }
 
-  setupMenuEvents(menuItem) {
+  setupMenuEvents(menuItem:MenuType):void {
     const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 

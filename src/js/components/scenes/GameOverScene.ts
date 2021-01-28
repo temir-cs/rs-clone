@@ -1,13 +1,14 @@
 import BaseScene from './BaseScene';
 import { requestToServer } from '../routes/utils';
+import { SceneConfig, FontConfig, MenuType } from '../interfaces/interfaces';
 
 class GameOverScene extends BaseScene {
-  menu: any;
-  largeFont: any;
-  smallFont: any;
+  menu: MenuType[];
+  largeFont: FontConfig;
+  smallFont: FontConfig;
   coinCount: number;
   killCount: number;
-  constructor(config) {
+  constructor(config:SceneConfig) {
     super('GameOverScene', config);
 
     this.menu = [
@@ -17,13 +18,13 @@ class GameOverScene extends BaseScene {
     ];
   }
 
-  create() {
+  create():void {
     super.create();
 
     this.add.image(0, 0, 'game-over')
     .setOrigin(0, 0);
 
-    this.createMenu(this.menu, (menuItem) => this.setupMenuEvents(menuItem));
+    this.createMenu(this.menu, (menuItem: MenuType) => this.setupMenuEvents(menuItem));
 
     this.largeFont = {
       fontSize: '64px',
@@ -56,7 +57,7 @@ class GameOverScene extends BaseScene {
     this.add.text(this.screenCenter[0] + 100, this.screenCenter[1] - 120, `${totalKills}`, this.smallFont).setOrigin(0.5, 0.5);
   }
 
-  setupMenuEvents(menuItem):void {
+  setupMenuEvents(menuItem: MenuType):void {
     const { textGameObject } = menuItem;
     textGameObject.setInteractive();
 

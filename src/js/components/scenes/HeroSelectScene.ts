@@ -1,5 +1,6 @@
 import BaseScene from './BaseScene';
 import EventEmitter from '../events/Emitter';
+import { SceneConfig, FontConfig } from '../interfaces/interfaces';
 
 const KNIGHT_DESC = [
   'Vincent',
@@ -33,7 +34,9 @@ const HERO_STATS = {
 };
 
 class HeroSelectScene extends BaseScene {
-  constructor(config) {
+  fontOptions: FontConfig;
+
+  constructor(config:SceneConfig) {
     super('HeroSelectScene', { ...config, canGoBack: true });
   }
 
@@ -66,7 +69,7 @@ class HeroSelectScene extends BaseScene {
     }
   }
 
-  setupMenuEvents(item, hero:string):void {
+  setupMenuEvents(item:Phaser.GameObjects.Image, hero:string):void {
     item.setInteractive();
 
     item.on('pointerup', () => {

@@ -8,6 +8,7 @@ import LevelsScene from './components/scenes/LevelsScene';
 import GameOverScene from './components/scenes/GameOverScene';
 import Highscore from './components/scenes/Highscore';
 import SettingsScene from './components/scenes/SettingsScene';
+import { SceneConfig } from './components/interfaces/interfaces';
 
 const MAP_WIDTH = 3200;
 const MAP_HEIGHT = 1280;
@@ -17,17 +18,7 @@ const HEIGHT = 540;
 // const HEIGHT: number = document.body.offsetHeight;
 const ZOOM_FACTOR = 1;
 
-const SHARED_CONFIG: {
-    mapOffset: number,
-    heightOffset: number,
-    width: number,
-    height: number,
-    zoomFactor: number,
-    debug: boolean,
-    leftTopCorner: {x: number, y: number},
-    rightTopCorner: {x: number, y: number},
-    rightBottomCorner: {x: number, y: number},
-  } = {
+const SHARED_CONFIG: SceneConfig = {
   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
   heightOffset: MAP_HEIGHT > HEIGHT ? MAP_HEIGHT - HEIGHT : 0,
   width: WIDTH,
