@@ -92,6 +92,10 @@ class Play extends Phaser.Scene {
   bkgClouds?: any;
   bkgMountains?: any;
   mistImg?: any;
+  music: any;
+  canGoMenu: boolean;
+  musicState: boolean;
+  currentMusic: string;
 
   constructor(config: SceneConfig) {
     super('PlayScene');
@@ -106,7 +110,6 @@ class Play extends Phaser.Scene {
       EventEmitter.removeAllListeners();
       this.registry.set('stats', { ...DEFAULT_STATS });
     }
-
     this.cameras.main.fadeIn(3000);
     this.checkLevel();
     this.hasKey = false;
@@ -151,6 +154,7 @@ class Play extends Phaser.Scene {
 
     this.createEndOfLevel(playerZones.end, player);
     this.createHomeButton();
+    this.createMuteButton();
     this.setupFollowupCameraOn(player);
 
     if (gameStatus === 'PLAYER_LOSE' || gameStatus === 'LEVEL_COMPLETED') return;
@@ -166,6 +170,11 @@ class Play extends Phaser.Scene {
   }
 
   checkLevel():void {
+    this.canGoMenu = true;
+    this.musicState = true;
+    if (localStorage.getItem('musicState') !== null) {
+      this.musicState = false;
+    }
     console.log('Current level: ', this.getCurrentLevel());
     switch (this.getCurrentLevel()) {
       case 1:
@@ -174,6 +183,11 @@ class Play extends Phaser.Scene {
         this.createBg = createBgForest;
         this.bgParallax = bgParallaxForest;
         this.createMap = createMapForest;
+        this.currentMusic = 'forest-theme';
+        if (this.musicState === true) {
+          this.playBgMusic(this.currentMusic);
+        }
+        // this.playBgMusic(this.currentMusic);
         break;
       case 2:
         this.lvlKey = 'castle';
@@ -181,6 +195,11 @@ class Play extends Phaser.Scene {
         this.createBg = createBgCastle;
         this.bgParallax = bgParallaxCastle;
         this.createMap = createMapCastle;
+        this.currentMusic = 'castle-theme';
+        // this.playBgMusic(this.currentMusic);
+        if (this.musicState === true) {
+          this.playBgMusic(this.currentMusic);
+        }
         break;
       case 3:
         this.lvlKey = 'dungeon';
@@ -188,6 +207,11 @@ class Play extends Phaser.Scene {
         this.createBg = createBgDungeon;
         this.bgParallax = bgParallaxDungeon;
         this.createMap = createMapDungeon;
+        this.currentMusic = 'forest-lvl-theme';
+        // this.playBgMusic(this.currentMusic);
+        if (this.musicState === true) {
+          this.playBgMusic(this.currentMusic);
+        }
         break;
       case 4:
         this.lvlKey = 'final';
@@ -195,6 +219,11 @@ class Play extends Phaser.Scene {
         this.createBg = createBgFinal;
         this.bgParallax = bgParallaxFinal;
         this.createMap = createMapFinal;
+        this.currentMusic = 'boss-theme';
+        // this.playBgMusic(this.currentMusic);
+        if (this.musicState === true) {
+          this.playBgMusic(this.currentMusic);
+        }
         break;
       default:
         break;
@@ -222,16 +251,23 @@ class Play extends Phaser.Scene {
     this.collectables.addFromLayer(collectableLayer);
   }
 
-  playBgMusic():void {
-    if (this.sound.get('forest-theme')) return;
-    this.sound.add('forest-theme', { loop: true, volume: 0.02 })
-      .play();
+  playBgMusic(musicTheme:string):void {
+    // if (this.sound.get('forest-theme')) return;
+    // this.music = this.sound.add('forest-theme', { loop: true, volume: 0.02 })
+    //   .play();
+    this.music = this.sound.add(musicTheme, { loop: true, volume: 0.02 });
+    this.music.play();
+  }
+
+  stopBgMusic():void {
+    this.music.stop();
   }
 
   createGameEvents():void {
     console.log('ADDED GAME EVENTS!');
     EventEmitter.on('PLAYER_LOSE', () => {
       console.log('PLAYER_LOSE LAUNCHED!');
+      this.stopBgMusic();
       this.livesCount -= 1;
       this.restartLevel();
     });
@@ -349,11 +385,14 @@ class Play extends Phaser.Scene {
 
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
       if (this.hasKey) {
+        this.canGoMenu = false;
         eolOverlap.active = false;
         door.openDoor();
         console.log('You Won!!');
         this.registry.inc('level', 1);
         this.cameras.main.fadeOut(3000);
+        // this.stopBgMusic();
+        setTimeout(() => this.stopBgMusic(), 3000);
         setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), 4000);
         this.registry.set('lastLevelStats', { ...this.stats });
         this.registry.set('livesCount', this.livesCount);
@@ -369,8 +408,11 @@ class Play extends Phaser.Scene {
       .setInteractive();
 
     homeButton.on('pointerup', () => {
+      if (this.canGoMenu === false) { return; }
       this.registry.set('level', DEFAULT_LEVEL);
       this.scene.start('MenuScene');
+      // this.stopBgMusic();
+      this.game.sound.stopAll();
     });
 
     homeButton.on('pointerover', () => {
@@ -382,12 +424,43 @@ class Play extends Phaser.Scene {
     });
   }
 
+  createMuteButton():void {
+    const muteButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 100, 'mute')
+      .setOrigin(1, 1)
+      .setScrollFactor(0)
+      .setScale(1)
+      .setInteractive();
+
+    muteButton.on('pointerup', () => {
+      if (this.canGoMenu === false) { return; }
+      if (this.musicState === true) {
+        this.stopBgMusic();
+        this.musicState = false;
+        localStorage.setItem('musicState', 'false');
+        return;
+      }
+      this.playBgMusic(this.currentMusic);
+      this.musicState = true;
+      localStorage.removeItem('musicState');
+      console.log('THIS IS MUSIC', this.music);
+    });
+
+    muteButton.on('pointerover', () => {
+      muteButton.setTint(0x0FFF00);
+    });
+
+    muteButton.on('pointerout', () => {
+      muteButton.clearTint();
+    });
+  }
+
   restartLevel():void {
     this.registry.set('livesCount', this.livesCount);
     if (this.livesCount <= 0) {
       this.displayGameOver();
     } else {
       this.scene.restart({ gameStatus: 'PLAYER_LOSE' });
+      this.stopBgMusic();
     }
 
     const currentLvl = this.getCurrentLevel();

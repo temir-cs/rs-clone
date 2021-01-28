@@ -72,6 +72,7 @@ class Preload extends Phaser.Scene {
     this.load.addFile(new WebFontFile(this.load, 'Press Start 2P'));
     this.load.image('back', '../../../assets/img/menu/backward_button.png');
     this.load.image('home', '../../../assets/img/menu/home_button.png');
+    this.load.image('mute', '../../../assets/img/menu/mute-music.png');
 
     // Sprites
     this.load.multiatlas('knight', '../../../assets/json/heroes/knightSprite.json', '../../../assets/img/heroes');
@@ -89,6 +90,9 @@ class Preload extends Phaser.Scene {
 
     // Audio
     this.load.audio('forest-theme', '../../../assets/sounds/forest-theme.mp3');
+    this.load.audio('forest-lvl-theme', '../../../assets/sounds/forest-lvl-theme.mp3');
+    this.load.audio('castle-theme', '../../../assets/sounds/09-BLOODYTEARS.mp3');
+    this.load.audio('boss-theme', '../../../assets/sounds/boss-music.mp3');
     this.load.audio('zap', '../../../assets/sounds/zap.wav');
     this.load.audio('sword-swing', '../../../assets/sounds/sword-swing.wav');
     this.load.audio('step', '../../../assets/sounds/step.wav');
