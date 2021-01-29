@@ -1,5 +1,4 @@
 import * as Phaser from 'phaser';
-import Projectile from './Projectile';
 import AimedProjectile from './BossProjectile';
 import { getTimestamp } from '../utils/functions';
 import Player from '../entities/Player';

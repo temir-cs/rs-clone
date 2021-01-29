@@ -7,6 +7,12 @@ import Boss from '../entities/Boss';
 import FireTrap from '../entities/FireTrap';
 import SpikesTrap from '../entities/SpikesTrap';
 
+import Projectile from '../attacks/Projectile';
+import MeleeWeapon from '../attacks/MeleeWeapon';
+import Player from '../entities/Player';
+import Enemy from '../entities/Enemy';
+import Collectable from '../collectables/Collectable';
+
 export interface EnemiesTypesInterface {
   Troll: typeof Troll;
   Imp: typeof Imp;
@@ -54,15 +60,25 @@ export interface MenuType {
 export interface colliderType {
   addCollider: (otherGameobject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
                 | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
-                callback?: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+                callback?: (()=>void) | ((entity: Player, collectable: Collectable)=>void)
+                | ((enemy: Projectile | MeleeWeapon, player: Player)=>void) |
+                ((entity: Player | Enemy, source: Projectile | MeleeWeapon)=>void),
                 context?: Phaser.Scene) => colliderType;
   addOverlap: (gameObject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
                 | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
-                callback?: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
+                callback?: (()=>void) | ((entity: Player, collectable: Collectable)=>void)
+                | ((entity: Player | Enemy, source: Projectile | MeleeWeapon)=>void),
                 context?: Phaser.Scene) => colliderType;
   bodyPositionDifferenceX: number;
   prevRay: Phaser.Geom.Line;
   prevHasHit: boolean;
   rayCast: (body: Phaser.Physics.Arcade.Body, rayLength:number, precision:number, steepness:number)
             =>{ray: Phaser.Geom.Line, hasHit: boolean};
+}
+
+export interface collectablesProperties {
+  name?: string;
+  type?: string;
+  value?: string | number;
+  score?: number;
 }

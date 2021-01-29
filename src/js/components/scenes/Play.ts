@@ -6,8 +6,11 @@ import Enemies from '../groups/Enemies';
 import EventEmitter from '../events/Emitter';
 import effectAnims from '../animations/effectsAnim';
 import teslaBallAnims from '../animations/teslaBallAnims';
+import Collectable from '../collectables/Collectable';
 import Collectables from '../groups/Collectables';
 import Traps from '../groups/Traps';
+import Projectile from '../attacks/Projectile';
+import MeleeWeapon from '../attacks/MeleeWeapon';
 
 import Key from '../collectables/Key';
 import Hud from '../hud/Hud';
@@ -29,9 +32,31 @@ import { createMapFinal,
         createBgFinal,
         bgParallaxFinal } from './levels_utils/finalUtils';
 
-import { DEFAULT_LEVEL, DEFAULT_STATS, LIVES } from './consts';
+import { DEFAULT_LEVEL,
+          DEFAULT_STATS,
+          LIVES } from './consts';
 
-import { SceneConfig, Stats } from '../interfaces/interfaces';
+import { SceneConfig,
+          Stats } from '../interfaces/interfaces';
+import Enemy from '../entities/Enemy';
+
+type GameStatusType = {gameStatus: string};
+type EnemyCollidersType = {
+  colliders: {
+    platformColliders?: Phaser.Tilemaps.TilemapLayer;
+    player: Player;
+  }
+}
+type PlayerCollidersType = {
+  colliders: {
+    platformColliders?: Phaser.Tilemaps.TilemapLayer;
+    projectiles?: Phaser.GameObjects.Group;
+    meleeWeapons?: Phaser.GameObjects.Group;
+    collectables?: Collectables;
+    trap?: Traps;
+    collectableKey?: Key;
+  }
+}
 
 class Play extends Phaser.Scene {
   config: SceneConfig;
@@ -77,14 +102,14 @@ class Play extends Phaser.Scene {
   private hasKey: boolean;
 
   lvlKey: string;
-  private createMap: any;
-  private createLayers: any;
-  private createBg: any;
-  private bgParallax: any;
+  private createMap: (context:Play) => void ;
+  private createLayers: (context:Play) => void ;
+  private createBg: (context:Play) => void ;
+  private bgParallax: (context:Play) => void ;
   killCount: number;
   livesCount: number;
   stats: Stats;
-  gameStatus: any;
+  gameStatus: string;
   traps?: Traps;
   wallsImg?: Phaser.GameObjects.TileSprite;
   treesImg?: Phaser.GameObjects.TileSprite;
@@ -102,7 +127,7 @@ class Play extends Phaser.Scene {
     this.config = config;
   }
 
-  create({ gameStatus }):void {
+  create({ gameStatus } : GameStatusType):void {
     this.gameStatus = gameStatus;
     console.log('Gamestatus: ', gameStatus);
     if (gameStatus === 'NEW_GAME') {
@@ -235,7 +260,7 @@ class Play extends Phaser.Scene {
     });
   }
 
-  createKeyCollectable(layer):void {
+  createKeyCollectable(layer: Phaser.Tilemaps.ObjectLayer):void {
     layer.objects.forEach((obj) => {
       this.collectableKey = new Key(this, obj.x, obj.y);
     });
@@ -248,9 +273,6 @@ class Play extends Phaser.Scene {
   }
 
   playBgMusic(musicTheme:string):void {
-    // if (this.sound.get('forest-theme')) return;
-    // this.music = this.sound.add('forest-theme', { loop: true, volume: 0.02 })
-    //   .play();
     this.music = this.sound.add(musicTheme, { loop: true, volume: 0.02 });
     this.music.play();
   }
@@ -277,11 +299,11 @@ class Play extends Phaser.Scene {
     });
   }
 
-  createPlayer(start):Player {
+  createPlayer(start:Phaser.Types.Tilemaps.TiledObject):Player {
     return new Player(this, start.x, start.y);
   }
 
-  createEnemies(enemySpawnsLayer, collider, player):Enemies {
+  createEnemies(enemySpawnsLayer: Phaser.Tilemaps.ObjectLayer, collider: Phaser.Tilemaps.TilemapLayer, player:Player):Enemies {
     const enemies = new Enemies(this);
     const enemyTypes = enemies.getTypes();
     const enemySpawns = enemySpawnsLayer.objects;
@@ -293,15 +315,15 @@ class Play extends Phaser.Scene {
     return enemies;
   }
 
-  onPlayerCollision(enemy, player):void {
+  onPlayerCollision(enemy: Projectile | MeleeWeapon, player: Player):void {
     player.takesHit(enemy);
   }
 
-  onWeaponHit(entity, source):void {
+  onWeaponHit(entity: Player | Enemy, source: Projectile | MeleeWeapon):void {
     entity.takesHit(source);
   }
 
-  createEnemyColliders(enemies, { colliders }):void {
+  createEnemyColliders(enemies: Enemies, { colliders }:EnemyCollidersType):void {
     enemies
       .addCollider(colliders.platformColliders)
       .addCollider(colliders.player, this.onPlayerCollision)
@@ -309,7 +331,7 @@ class Play extends Phaser.Scene {
       .addOverlap(colliders.player.meleeWeapon, this.onWeaponHit);
   }
 
-  onCollect(entity, collectable):void {
+  onCollect(entity: Player, collectable: Collectable):void {
     this.stats.coins += collectable.score;
     this.registry.set('stats', { ...this.stats });
     collectable.pickupSound.play();
@@ -325,7 +347,7 @@ class Play extends Phaser.Scene {
     this.hud.activateKey();
   }
 
-  createPlayerColliders(player, { colliders }):void {
+  createPlayerColliders(player: Player, { colliders }:PlayerCollidersType):void {
     player
       .addCollider(colliders.platformColliders)
       .addCollider(colliders.projectiles, this.onWeaponHit)

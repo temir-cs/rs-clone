@@ -40,7 +40,19 @@ const SHARED_CONFIG: SceneConfig = {
 };
 
 const Scenes = [PreloadScene, MenuScene, HeroSelectScene, LevelsScene, PlayScene, GameOverScene, Highscore, SettingsScene];
-const createScene = (Scene: any):Phaser.Scene => new Scene(SHARED_CONFIG);
+interface Constructable<T> {
+  new(args: SceneConfig) : T;
+}
+type ScenesType = Constructable<PreloadScene>
+                | Constructable<MenuScene>
+                | Constructable<HeroSelectScene>
+                | Constructable<LevelsScene>
+                | Constructable<PlayScene>
+                | Constructable<GameOverScene>
+                | Constructable<Highscore>
+                | Constructable<SettingsScene>;
+
+const createScene = (Scene: ScenesType):Phaser.Scene => new Scene(SHARED_CONFIG);
 const initScenes = () => Scenes.map(createScene);
 
 const config: Phaser.Types.Core.GameConfig = {

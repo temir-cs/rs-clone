@@ -1,17 +1,21 @@
 import * as Phaser from 'phaser';
+import Play from '../scenes/Play';
 import HealthBar from '../hud/HealthBar';
 import initAnimations from '../animations/playerAnims';
 import collidable from '../mixins/collidable';
 import anims from '../mixins/anims';
 import Projectile from '../attacks/Projectile';
 import Projectiles from '../attacks/Projectiles';
+import Collectable from '../collectables/Collectable';
+import Enemy from './Enemy';
 import EventEmitter from '../events/Emitter';
 import MeleeWeapon from '../attacks/MeleeWeapon';
 import { getTimestamp } from '../utils/functions';
+import { colliderType, SceneConfig } from '../interfaces/interfaces';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
-  scene: any;
-  config: any;
+  scene: Play;
+  config: SceneConfig;
   body: Phaser.Physics.Arcade.Body;
   hero: string;
   playerSpeed: number;
@@ -35,8 +39,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   jumpSound: Phaser.Sound.BaseSound;
   hitSound: Phaser.Sound.BaseSound;
   deathSound: Phaser.Sound.BaseSound;
+  addCollider: (otherGameobject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
+    | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+    callback?: (()=>void) | ((entity: Player, collectable: Collectable)=>void)
+    | ((enemy: Projectile | MeleeWeapon, player: Player)=>void) |
+    ((entity: Player | Enemy, source: Projectile | MeleeWeapon)=>void),
+    context?: Phaser.Scene) => colliderType;
 
-  constructor(scene:Phaser.Scene, x:number, y:number) {
+  constructor(scene:Play, x:number, y:number) {
     super(scene, x, y, 'player');
 
     scene.add.existing(this);
@@ -246,7 +256,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.play(`${this.hero}-crouch`, true);
   }
 
-  bounceOff(source):void {
+  bounceOff(source: Projectile | MeleeWeapon):void {
     if (this.x < source.x) {
       this.setVelocityX(-this.bounceVelocity);
     } else {
@@ -255,10 +265,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     setTimeout(() => this.setVelocityY(-this.bounceVelocity));
   }
 
-  checkAfterHit(source, status:boolean):void {
+  checkAfterHit(source: Projectile | MeleeWeapon, status:boolean):void {
     this.hasBeenHit = true;
     this.bounceOff(source);
-    let damageAnim:any = null;
+    let damageAnim:Phaser.Tweens.Tween = null;
     if (status === true) {
       damageAnim = this.playDamageTween();
       this.hitSound.play();

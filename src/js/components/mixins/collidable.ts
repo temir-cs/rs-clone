@@ -1,19 +1,27 @@
 import * as Phaser from 'phaser';
 import { colliderType } from '../interfaces/interfaces';
+import Enemy from '../entities/Enemy';
+import Projectile from '../attacks/Projectile';
+import MeleeWeapon from '../attacks/MeleeWeapon';
+import Player from '../entities/Player';
+import Collectable from '../collectables/Collectable';
 
 export default {
   addCollider(otherGameobject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
-              | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
-              callback?: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
-              context?: Phaser.Scene):colliderType {
+    | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
+    callback?: (()=>void) | ((entity: Player, collectable: Collectable)=>void)
+    | ((enemy: Projectile | MeleeWeapon, player: Player)=>void) |
+    ((entity: Player | Enemy, source: Projectile | MeleeWeapon)=>void),
+    context?: Phaser.Scene):colliderType {
     this.scene.physics.add.collider(this, otherGameobject, callback, null, context || this);
     return this;
   },
 
   addOverlap(gameObject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
               | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
-              callback: (()=>void) | ((entity:any, collectable:any)=>void) | ((entity: any, source: any)=>void),
-              context: Phaser.Scene):colliderType {
+              callback?: (()=>void) | ((entity: Player, collectable: Collectable)=>void)
+              | ((entity: Player | Enemy, source: Projectile | MeleeWeapon)=>void),
+              context?: Phaser.Scene) :colliderType {
     this.scene.physics.add.overlap(this, gameObject, callback, null, context || this);
     return this;
   },

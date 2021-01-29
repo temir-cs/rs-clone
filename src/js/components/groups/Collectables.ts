@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import Coin from '../collectables/Coin';
+import { collectablesProperties } from '../interfaces/interfaces';
 
 class Collectables extends Phaser.Physics.Arcade.StaticGroup {
   constructor(scene:Phaser.Scene) {
@@ -10,20 +11,21 @@ class Collectables extends Phaser.Physics.Arcade.StaticGroup {
     });
   }
 
-  mapProperties(propertiesList) {
-    if (!propertiesList || propertiesList.length === 0) { return {}; }
-    return propertiesList.reduce((map, obj) => {
-      map[obj.name] = obj.value;
-      return map;
-    }, {});
-  }
-
   addFromLayer(layer:Phaser.Tilemaps.ObjectLayer):void{
-    const { score: defaultScore, type } = this.mapProperties(layer.properties);
+    function mapProperties(propertiesList: collectablesProperties[]) {
+      if (!propertiesList || propertiesList.length === 0) { return {}; }
+      return propertiesList.reduce((map, obj) => {
+        const mapReassigned = map;
+        mapReassigned[obj.name] = obj.value;
+        return mapReassigned;
+      }, {});
+    }
+
+    const { score: defaultScore, type } = mapProperties(Array.of(layer.properties));
 
     layer.objects.forEach((collectableO) => {
       const collectable = this.get(collectableO.x, collectableO.y, type);
-      const props = this.mapProperties(collectableO.properties);
+      const props = mapProperties(collectableO.properties);
 
       collectable.score = props.score || defaultScore;
    });
