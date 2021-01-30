@@ -55,6 +55,7 @@ type PlayerCollidersType = {
     collectables?: Collectables;
     trap?: Traps;
     collectableKey?: Key;
+    potions?: Collectables;
   }
 }
 
@@ -75,6 +76,7 @@ class Play extends Phaser.Scene {
     collectables: Phaser.Tilemaps.ObjectLayer,
     collectableKey: Phaser.Tilemaps.ObjectLayer,
     trapsSpawns?: Phaser.Tilemaps.ObjectLayer,
+    potions?: Phaser.Tilemaps.ObjectLayer,
   } = {
     platformColliders: null,
     enemiesPlatformColliders: null,
@@ -87,7 +89,7 @@ class Play extends Phaser.Scene {
     collectables: null,
     collectableKey: null,
     trapsSpawns: null,
-
+    potions: null,
   };
 
   // private plotting: boolean;
@@ -96,6 +98,7 @@ class Play extends Phaser.Scene {
   // private tileHits: any;
 
   private collectables: Collectables;
+  private potions: Collectables;
   // private coinCount: number;
   private hud: Hud;
   private collectableKey: Key;
@@ -152,13 +155,13 @@ class Play extends Phaser.Scene {
     const player = this.createPlayer(playerZones.start);
     const enemies = this.createEnemies(this.layers.enemySpawns, this.layers.enemiesPlatformColliders, player);
     this.createKeyCollectable(this.layers.collectableKey);
+    if (this.layers.potions) {
+      this.createPotions(this.layers.potions);
+    }
     this.createTraps(this.layers.trapsSpawns, player);
     console.log('Current hero: ', player.hero);
 
     this.createBg(this);
-    this.hud = new Hud(this);
-    this.hud.renderAvatar(player.hero);
-    this.hud.renderLives(this.livesCount);
 
     this.createEnemyColliders(enemies, {
       colliders: {
@@ -174,8 +177,13 @@ class Play extends Phaser.Scene {
         collectables: this.collectables,
         collectableKey: this.collectableKey,
         trap: this.traps,
+        potions: this.potions,
       }
     });
+
+    this.hud = new Hud(this);
+    this.hud.renderAvatar(player.hero);
+    this.hud.renderLives(this.livesCount);
 
     this.createEndOfLevel(playerZones.end, player);
     this.createHomeButton();
@@ -270,8 +278,13 @@ class Play extends Phaser.Scene {
     this.physics.add.existing(this.collectableKey);
   }
 
+  createPotions(layer: Phaser.Tilemaps.ObjectLayer):void {
+    this.potions = new Collectables(this, 'Potion').setDepth(-1);
+    this.potions.addFromLayer(layer);
+  }
+
   createCollectables(collectableLayer: Phaser.Tilemaps.ObjectLayer):void {
-    this.collectables = new Collectables(this).setDepth(-1);
+    this.collectables = new Collectables(this, 'Coin').setDepth(-1);
     this.collectables.addFromLayer(collectableLayer);
   }
 
@@ -348,6 +361,14 @@ class Play extends Phaser.Scene {
     this.hud.activateKey();
   }
 
+  onPotionCollect(entity: Player, collectable: Collectable):void {
+    if (entity.active) {
+      entity.recover();
+      collectable.pickupSound.play();
+      collectable.disableBody(true, true);
+    }
+  }
+
   createPlayerColliders(player: Player, { colliders }:PlayerCollidersType):void {
     player
       .addCollider(colliders.platformColliders)
@@ -355,7 +376,8 @@ class Play extends Phaser.Scene {
       .addCollider(colliders.meleeWeapons, this.onWeaponHit)
       .addOverlap(colliders.collectables, this.onCollect, this)
       .addOverlap(colliders.trap, this.onWeaponHit, this)
-      .addOverlap(colliders.collectableKey, this.onKeyCollect, this);
+      .addOverlap(colliders.collectableKey, this.onKeyCollect, this)
+      .addOverlap(colliders.potions, this.onPotionCollect, this);
   }
 
   setupFollowupCameraOn(player:Player):void {

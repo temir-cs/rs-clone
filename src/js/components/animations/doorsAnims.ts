@@ -70,4 +70,28 @@ export default (anims) => {
     frameRate: 5,
     repeat: -1
   });
+
+  anims.create({
+    key: 'final-door',
+    frames: anims.generateFrameNames('doors', {
+      start: 1,
+      end: 5,
+      prefix: 'cave-door',
+      suffix: '.png'
+    }),
+    frameRate: 5,
+    repeat: 0
+  });
+
+  anims.create({
+    key: 'final-door-idle',
+    frames: anims.generateFrameNames('doors', {
+      start: 1,
+      end: 1,
+      prefix: 'cave-door',
+      suffix: '.png'
+    }),
+    frameRate: 5,
+    repeat: -1
+  });
 };

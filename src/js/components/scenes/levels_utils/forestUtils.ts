@@ -31,6 +31,7 @@ const createLayersForest = (context:Play):void => {
     context.layers.collectables = context.map.getObjectLayer('collectables');
     context.layers.collectableKey = context.map.getObjectLayer('collectableKey');
     context.layers.trapsSpawns = context.map.getObjectLayer('traps');
+    context.layers.potions = context.map.getObjectLayer('potions') || null;
   };
 
 const createBgForest = (context:Play):void => {

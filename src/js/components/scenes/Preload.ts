@@ -55,8 +55,8 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-final-mist', '../../../assets/img/levels/final/myst.png');
     this.load.image('bg-final-top', '../../../assets/img/levels/final/rock2.png');
     this.load.image('bg-final-bottom', '../../../assets/img/levels/final/rock1.png');
-    this.load.image('bg-final-middle', '../../../assets/img/levels/final/rock3.png');
-    this.load.image('bg-final-middle2', '../../../assets/img/levels/final/rock5.png');
+    // this.load.image('bg-final-middle', '../../../assets/img/levels/final/rock3.png');
+    // this.load.image('bg-final-middle2', '../../../assets/img/levels/final/rock5.png');
 
     // Final level screen
     this.load.image('finish-game', '../../../assets/img/menu/endOfChapter.png');
@@ -103,6 +103,7 @@ class Preload extends Phaser.Scene {
     this.load.audio('jump', '../../../assets/sounds/jump-2.wav');
     this.load.audio('coin-pickup', '../../../assets/sounds/coin.wav');
     this.load.audio('key-pickup', '../../../assets/sounds/key.wav');
+    this.load.audio('hit-point-pickup', '../../../assets/sounds/health-pickup.mp3');
     this.load.audio('door-opening', '../../../assets/sounds/door-opening.wav');
     this.load.audio('player-hit', '../../../assets/sounds/damage.wav');
     this.load.audio('player-dead', '../../../assets/sounds/player-dead.wav');

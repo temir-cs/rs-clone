@@ -5,6 +5,7 @@ class HealthBar {
   public x: number;
   public y: number;
   public health: number;
+  initialValue: number;
   public value: number;
   public size: {width: number, height: number};
   public pixelPerHealth: number;
@@ -16,6 +17,7 @@ class HealthBar {
     this.x = x / scale;
     this.y = y / scale;
     this.value = health;
+    this.initialValue = health;
 
     this.size = {
       width: 140,
@@ -23,7 +25,7 @@ class HealthBar {
     };
 
     this.pixelPerHealth = this.size.width / this.value;
-    scene.add.existing(this.bar);
+    scene.add.existing(this.bar).setDepth(2);
     this.draw(this.x, this.y, this.scale);
   }
 
@@ -33,6 +35,11 @@ class HealthBar {
     } else {
       this.value = amount;
     }
+    this.draw(this.x, this.y, this.scale);
+  }
+
+  recover():void {
+    this.value = this.initialValue;
     this.draw(this.x, this.y, this.scale);
   }
 

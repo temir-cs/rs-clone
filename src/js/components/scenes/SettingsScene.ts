@@ -1,40 +1,25 @@
-import BaseScene from './BaseScene';
-import { DEFAULT_STATS } from './consts';
+import NavigationScene from './NavigationScene';
+
 import { SceneConfig, MenuType } from '../interfaces/interfaces';
 
-class SettingsScene extends BaseScene {
+class SettingsScene extends NavigationScene {
   menu: MenuType[];
   levels: number;
   constructor(config: SceneConfig) {
-    super('SettingsScene', { ...config, canGoBack: true });
-
-    // this.menu = [
-    //   { scene: 'PlayScene', text: 'Level 1' },
-    //   { scene: 'PlayScene', text: 'Level 2' },
-    // ];
+    super(config, 'SettingsScene', true);
+    this.menu = [
+      { text: 'Fullscreen on/off' }
+    ];
   }
 
   create():void {
     super.create();
-
-    this.menu = [
-      { text: 'Fullscreen on/off' }
-    ];
-    this.createMenu(this.menu, (menuItem:MenuType) => this.setupMenuEvents(menuItem));
   }
 
   setupMenuEvents(menuItem:MenuType): void {
+    super.setupMenuEvents(menuItem);
+
     const { textGameObject } = menuItem;
-    textGameObject.setInteractive();
-
-    textGameObject.on('pointerover', () => {
-      textGameObject.setStyle({ fill: '#FFA500' });
-    });
-
-    textGameObject.on('pointerout', () => {
-      textGameObject.setStyle({ fill: '#fff' });
-    });
-
     textGameObject.on('pointerup', () => {
       if (menuItem.text === 'Fullscreen on/off') {
         if (!this.scale.isFullscreen) {

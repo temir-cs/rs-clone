@@ -159,14 +159,110 @@
                 {
                  "gid":2530,
                  "height":32,
-                 "id":5,
+                 "id":16,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":868,
-                 "y":916
+                 "x":544,
+                 "y":836
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":18,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":670.666666666667,
+                 "y":692
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":19,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1340,
+                 "y":697.333333333333
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":20,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":863,
+                 "y":913
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":22,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":903,
+                 "y":913.666666666667
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":23,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1632,
+                 "y":328
                 }],
          "opacity":1,
          "properties":[
@@ -236,8 +332,150 @@
                  "width":0,
                  "x":1262.66666666667,
                  "y":892.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Fire",
+                 "visible":true,
+                 "width":0,
+                 "x":1519,
+                 "y":957
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Fire",
+                 "visible":true,
+                 "width":0,
+                 "x":1073,
+                 "y":414
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Spikes",
+                 "visible":true,
+                 "width":0,
+                 "x":1859.25,
+                 "y":315.75
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Spikes",
+                 "visible":true,
+                 "width":0,
+                 "x":898.909090909091,
+                 "y":958.590909090909
                 }],
          "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":14,
+         "name":"potions",
+         "objects":[
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1834,
+                 "y":294
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":11,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":322,
+                 "y":870
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":12,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1704,
+                 "y":746
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":24,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1058.66666666667,
+                 "y":384
+                }],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"score",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"Potion"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
@@ -266,8 +504,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":14,
- "nextobjectid":8,
+ "nextlayerid":15,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
