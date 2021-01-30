@@ -155,7 +155,115 @@
          "draworder":"topdown",
          "id":10,
          "name":"collectables",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":16,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":544,
+                 "y":836
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":18,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":670.666666666667,
+                 "y":692
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":19,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1340,
+                 "y":697.333333333333
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":20,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":863,
+                 "y":913
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":22,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":903,
+                 "y":913.666666666667
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":23,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1632,
+                 "y":328
+                }],
          "opacity":1,
          "properties":[
                 {
@@ -260,6 +368,42 @@
                  "width":0,
                  "x":1073,
                  "y":414
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Spikes",
+                 "visible":true,
+                 "width":0,
+                 "x":1859.25,
+                 "y":315.75
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"trap-spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"Spikes",
+                 "visible":true,
+                 "width":0,
+                 "x":898.909090909091,
+                 "y":958.590909090909
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -307,6 +451,18 @@
                  "width":32,
                  "x":1704,
                  "y":746
+                }, 
+                {
+                 "gid":2530,
+                 "height":32,
+                 "id":24,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1058.66666666667,
+                 "y":384
                 }],
          "opacity":1,
          "properties":[
@@ -349,7 +505,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":13,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
@@ -471,19 +627,6 @@
                  "imageheight":32,
                  "imagewidth":32
                 }],
-         "tilewidth":32
-        }, 
-        {
-         "columns":4,
-         "firstgid":2532,
-         "image":"..\/img\/levels\/final\/final_bg.png",
-         "imageheight":64,
-         "imagewidth":128,
-         "margin":0,
-         "name":"final_bg",
-         "spacing":0,
-         "tilecount":8,
-         "tileheight":32,
          "tilewidth":32
         }],
  "tilewidth":32,

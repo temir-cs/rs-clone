@@ -25,7 +25,7 @@ class HealthBar {
     };
 
     this.pixelPerHealth = this.size.width / this.value;
-    scene.add.existing(this.bar);
+    scene.add.existing(this.bar).setDepth(2);
     this.draw(this.x, this.y, this.scale);
   }
 

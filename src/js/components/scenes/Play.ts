@@ -13,7 +13,6 @@ import Projectile from '../attacks/Projectile';
 import MeleeWeapon from '../attacks/MeleeWeapon';
 
 import Key from '../collectables/Key';
-import Potion from '../collectables/Potion';
 import Hud from '../hud/Hud';
 import Door from '../helper_objects/Door';
 import { createMapCastle,
@@ -163,9 +162,6 @@ class Play extends Phaser.Scene {
     console.log('Current hero: ', player.hero);
 
     this.createBg(this);
-    this.hud = new Hud(this);
-    this.hud.renderAvatar(player.hero);
-    this.hud.renderLives(this.livesCount);
 
     this.createEnemyColliders(enemies, {
       colliders: {
@@ -184,6 +180,10 @@ class Play extends Phaser.Scene {
         potions: this.potions,
       }
     });
+
+    this.hud = new Hud(this);
+    this.hud.renderAvatar(player.hero);
+    this.hud.renderLives(this.livesCount);
 
     this.createEndOfLevel(playerZones.end, player);
     this.createHomeButton();
