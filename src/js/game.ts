@@ -5,7 +5,8 @@ import PreloadScene from './components/scenes/Preload';
 import MenuScene from './components/scenes/Menu';
 import HeroSelectScene from './components/scenes/HeroSelectScene';
 import LevelsScene from './components/scenes/LevelsScene';
-import GameOverScene from './components/scenes/GameOverScene';
+import GameOverFail from './components/scenes/GameOverFail';
+import GameOverWin from './components/scenes/GameOverWin';
 import Highscore from './components/scenes/Highscore';
 import SettingsScene from './components/scenes/SettingsScene';
 import { SceneConfig } from './components/interfaces/interfaces';
@@ -39,7 +40,7 @@ const SHARED_CONFIG: SceneConfig = {
   },
 };
 
-const Scenes = [PreloadScene, MenuScene, HeroSelectScene, LevelsScene, PlayScene, GameOverScene, Highscore, SettingsScene];
+const Scenes = [PreloadScene, MenuScene, HeroSelectScene, LevelsScene, PlayScene, GameOverFail, GameOverWin, Highscore, SettingsScene];
 interface Constructable<T> {
   new(args: SceneConfig) : T;
 }
@@ -48,7 +49,8 @@ type ScenesType = Constructable<PreloadScene>
                 | Constructable<HeroSelectScene>
                 | Constructable<LevelsScene>
                 | Constructable<PlayScene>
-                | Constructable<GameOverScene>
+                | Constructable<GameOverFail>
+                | Constructable<GameOverWin>
                 | Constructable<Highscore>
                 | Constructable<SettingsScene>;
 
