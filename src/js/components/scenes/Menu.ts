@@ -1,10 +1,11 @@
-import BaseScene from './BaseScene';
+import NavigationScene from './NavigationScene';
+
 import { SceneConfig, MenuType } from '../interfaces/interfaces';
 
-class MenuScene extends BaseScene {
+class MenuScene extends NavigationScene {
   menu: MenuType[];
   constructor(config: SceneConfig, sceneName = 'MenuScene') {
-    super(sceneName, config);
+    super(config, sceneName, true);
 
     this.menu = [
       { scene: 'HeroSelectScene', text: 'Play' },
@@ -20,16 +21,9 @@ class MenuScene extends BaseScene {
   }
 
   setupMenuEvents(menuItem: MenuType):void {
+    super.setupMenuEvents(menuItem);
+
     const { textGameObject } = menuItem;
-    textGameObject.setInteractive();
-
-    textGameObject.on('pointerover', () => {
-      textGameObject.setStyle({ fill: '#FFA500' });
-    });
-
-    textGameObject.on('pointerout', () => {
-      textGameObject.setStyle({ fill: '#fff' });
-    });
 
     textGameObject.on('pointerup', () => {
       if (menuItem.scene) {
