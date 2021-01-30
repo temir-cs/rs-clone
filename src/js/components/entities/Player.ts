@@ -27,6 +27,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   hasBeenHit: boolean;
   bounceVelocity: number;
   health: number;
+  initialHealth: number;
   hp: HealthBar;
   projectiles: Projectiles;
   lastDirection: number;
@@ -64,6 +65,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     const heroData = this.getCurrentHeroStats();
     this.hero = heroData.hero;
     this.health = heroData.health;
+    this.initialHealth = heroData.health;
     this.hp = new HealthBar(
       this.scene,
       this.scene.config.leftTopCorner.x + 65,
@@ -316,6 +318,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     const data = this.scene.registry.get('currentHeroStats');
     if (data) return data;
     return { hero: 'knight', health: 50, speed: 250, bounceVelocity: 120 };
+  }
+
+  recover():void {
+    this.health = this.initialHealth;
+    this.hp.recover();
   }
 }
 

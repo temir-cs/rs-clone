@@ -27,6 +27,7 @@ const createLayersFinal = (context:Play):void => {
   context.layers.collectableKey = context.map.getObjectLayer('collectableKey');
   context.layers.enemySpawns = context.map.getObjectLayer('enemy_spawns');
   context.layers.trapsSpawns = context.map.getObjectLayer('traps');
+  context.layers.potions = context.map.getObjectLayer('potions') || null;
  };
 
 const createBgFinal = (context:Play):void => {

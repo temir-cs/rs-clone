@@ -12,6 +12,8 @@ import MeleeWeapon from '../attacks/MeleeWeapon';
 import Player from '../entities/Player';
 import Enemy from '../entities/Enemy';
 import Collectable from '../collectables/Collectable';
+import Coin from '../collectables/Coin';
+import Potion from '../collectables/Potion';
 
 export interface EnemiesTypesInterface {
   Troll: typeof Troll;
@@ -25,6 +27,19 @@ export interface TrapsTypesInterface {
   FireTrap: typeof FireTrap;
   SpikesTrap: typeof SpikesTrap;
 }
+
+export interface CollectablesTypesInterface {
+  Coin: typeof Coin;
+  Potion: typeof Potion;
+}
+
+export interface collectablesProperties {
+  name?: string;
+  type?: string;
+  value?: string | number;
+  score?: number;
+}
+
 export interface Stats {
   coins: number;
   kills: number;
@@ -74,11 +89,4 @@ export interface colliderType {
   prevHasHit: boolean;
   rayCast: (body: Phaser.Physics.Arcade.Body, rayLength:number, precision:number, steepness:number)
             =>{ray: Phaser.Geom.Line, hasHit: boolean};
-}
-
-export interface collectablesProperties {
-  name?: string;
-  type?: string;
-  value?: string | number;
-  score?: number;
 }
