@@ -2,10 +2,9 @@ import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
 import MainScreen from '../welcome_screen/MainScreen';
 import { requestToServer, getCredentials } from './utils';
-import * as lang from '../../../assets/lang/lang.json';
 import { clearAllBeforeGame,
           mobileToggleMenu,
-          chooseLang } from '../utils/functions';
+          getCurrentLanguageDictionary } from '../utils/functions';
 
 class Routes {
   routes: { login: Login, register: Register; };
@@ -16,11 +15,11 @@ class Routes {
   warn: string;
   mainScreen: MainScreen;
   constructor(gameStart) {
-    const enOrRu = chooseLang(lang);
+    const dictionary = getCurrentLanguageDictionary();
     this.mainScreen = new MainScreen();
     this.gameStart = gameStart;
     this.warnTimeout = 2000;
-    this.warn = `${enOrRu.WelcomeScreen.usernameWarning}`;
+    this.warn = `${dictionary.WelcomeScreen.usernameWarning}`;
   }
 
   init() {
@@ -44,7 +43,7 @@ class Routes {
   }
 
   onRouteChange(event) {
-    const enOrRu = chooseLang(lang);
+    const dictionary = getCurrentLanguageDictionary();
     const hashLocation = window.location.hash.substring(1);
     if (hashLocation === 'game') {
       clearAllBeforeGame();
@@ -96,10 +95,10 @@ class Routes {
           localStorage.setItem('user', credentials.username);
           this.refreshHash('game');
         } else if (hashLocation === 'signup') {
-          message.innerHTML = `${enOrRu.WelcomeScreen.usernameTakenWarning}`;
+          message.innerHTML = `${dictionary.WelcomeScreen.usernameTakenWarning}`;
           setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
         } else {
-          message.innerHTML = `${enOrRu.WelcomeScreen.userDoesNotExistWarning}`;
+          message.innerHTML = `${dictionary.WelcomeScreen.userDoesNotExistWarning}`;
           setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
         }
       })();

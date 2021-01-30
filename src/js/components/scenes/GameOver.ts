@@ -1,8 +1,7 @@
 import Menu from './Menu';
 import { requestToServer } from '../routes/utils';
 import { SceneConfig, FontConfig, MenuType } from '../interfaces/interfaces';
-import * as lang from '../../../assets/lang/lang.json';
-import { chooseLang } from '../utils/functions';
+import { getCurrentLanguageDictionary } from '../utils/functions';
 
 class GameOver extends Menu {
   menu: MenuType[];
@@ -14,11 +13,11 @@ class GameOver extends Menu {
   constructor(config: SceneConfig, sceneName: string) {
     super(config, sceneName);
 
-    const enOrRu = chooseLang(lang);
+    const dictionary = getCurrentLanguageDictionary();
 
     this.menu = [
-      { scene: 'HeroSelectScene', text: `${enOrRu.GameOverScene.newGame}` },
-      { scene: 'MenuScene', text: `${enOrRu.GameOverScene.mainMenu}` },
+      { scene: 'HeroSelectScene', text: `${dictionary.GameOverScene.newGame}` },
+      { scene: 'MenuScene', text: `${dictionary.GameOverScene.mainMenu}` },
     ];
 
     this.music = null;
@@ -38,11 +37,12 @@ class GameOver extends Menu {
   }
 
   displayStats(xOffset:number, yOffset: number):void {
-    const enOrRu = chooseLang(lang);
+    const dict = getCurrentLanguageDictionary();
     const [x, y] = this.screenCenter;
-    this.add.text(x - xOffset, y + yOffset, `${enOrRu.GameOverScene.totalCoins}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
+    this.add.text(x - xOffset, y + yOffset, `${dict.GameOverScene.totalCoins}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
     this.add.text(x + xOffset, y + yOffset, `${this.totalCoins}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
-    this.add.text(x - xOffset, y + yOffset + 40, `${enOrRu.GameOverScene.totalKills}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
+    this.add.text(x - xOffset, y + yOffset + 40, `${dict.GameOverScene.totalKills}`, this.getFontOptions(this.smallFont))
+      .setOrigin(0.5, 0.5);
     this.add.text(x + xOffset, y + yOffset + 40, `${this.totalKills}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
   }
 

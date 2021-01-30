@@ -1,5 +1,4 @@
-import * as lang from '../../../assets/lang/lang.json';
-import { chooseLang } from '../utils/functions';
+import { getCurrentLanguageDictionary } from '../utils/functions';
 
 class MainScreen {
   content: { main: {text:string, form:string}, about: {text:string, form:string}, tutorial: {text:string, form:string},
@@ -8,53 +7,53 @@ class MainScreen {
   textContainer: HTMLElement;
   formContainer: HTMLElement;
   constructor() {
-    const enOrRu = chooseLang(lang);
+    const dictionaty = getCurrentLanguageDictionary();
 
     const tutorial = document.querySelector('.tutorial');
-    tutorial.innerHTML = `${enOrRu.WelcomeScreen.howToPlay}`;
+    tutorial.innerHTML = `${dictionaty.WelcomeScreen.howToPlay}`;
 
     const article = document.querySelector('.article');
-    article.innerHTML = `${enOrRu.WelcomeScreen.article}`;
+    article.innerHTML = `${dictionaty.WelcomeScreen.article}`;
 
     const team = document.querySelector('.about');
-    team.innerHTML = `${enOrRu.WelcomeScreen.team}`;
+    team.innerHTML = `${dictionaty.WelcomeScreen.team}`;
 
     const getLang = document.querySelector('.lang');
-    getLang.innerHTML = `${enOrRu.WelcomeScreen.getLang}`;
+    getLang.innerHTML = `${dictionaty.WelcomeScreen.getLang}`;
 
     this.textContainer = document.querySelector('.content__text');
     this.formContainer = document.querySelector('.form__container');
     this.content = {
       main: {
         text: `
-         ${enOrRu.WelcomeScreen.description}<span class="content__var"></span>
+         ${dictionaty.WelcomeScreen.description}<span class="content__var"></span>
          `,
         form: `
-          <a href="#game" class="form__btn">${enOrRu.WelcomeScreen.letsGo}</a>`
+          <a href="#game" class="form__btn">${dictionaty.WelcomeScreen.letsGo}</a>`
       },
       about: {
         text: `
-        ${enOrRu.WelcomeScreen.teamText} `,
+        ${dictionaty.WelcomeScreen.teamText} `,
         form: `
-          <a href="#main" class="form__btn">${enOrRu.WelcomeScreen.close}</a>`,
+          <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
       },
       tutorial: {
         text: `
-        ${enOrRu.WelcomeScreen.howToPlayText}`,
+        ${dictionaty.WelcomeScreen.howToPlayText}`,
         form: `
-          <a href="#main" class="form__btn">${enOrRu.WelcomeScreen.close}</a>`,
+          <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
       },
       lang: {
         text: `
-        ${enOrRu.WelcomeScreen.switchLang}`,
+        ${dictionaty.WelcomeScreen.switchLang}`,
         form: `
-          <a href="#main" class="form__btn">${enOrRu.WelcomeScreen.close}</a>`,
+          <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
       },
       article: {
         text: `
-          ${enOrRu.WelcomeScreen.articleText}`,
+          ${dictionaty.WelcomeScreen.articleText}`,
         form: `
-          <a href="#main" class="form__btn">${enOrRu.WelcomeScreen.close}</a>`,
+          <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
       }
     };
   }

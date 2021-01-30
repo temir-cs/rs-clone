@@ -1,8 +1,7 @@
 import NavigationScene from './NavigationScene';
 
 import { SceneConfig, MenuType } from '../interfaces/interfaces';
-import * as lang from '../../../assets/lang/lang.json';
-import { chooseLang } from '../utils/functions';
+import { getCurrentLanguageDictionary } from '../utils/functions';
 
 class SettingsScene extends NavigationScene {
   menu: MenuType[];
@@ -10,10 +9,10 @@ class SettingsScene extends NavigationScene {
   constructor(config: SceneConfig) {
     super(config, 'SettingsScene', true);
 
-    const enOrRu = chooseLang(lang);
+    const dictionary = getCurrentLanguageDictionary();
 
     this.menu = [
-      { text: `${enOrRu.SettingsScene.fullScreen}` }
+      { text: `${dictionary.SettingsScene.fullScreen}` }
     ];
   }
 

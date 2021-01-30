@@ -17,8 +17,8 @@
       "autoAndGo": " Авторизуйся и поехали!",
       "haveLogin": "Уже есть аккаунт?",
       "firstTime": "Первый раз здесь? Пожалуйста зарегистрируйтесь.",
-      "getLang": "Англ.",
-      "switchLang": "Смена языка"
+      "getLang": "Рус",
+      "switchLang": "Меняем язык..."
     },
     "Menu": {
       "playBtn": "Начать игру",
@@ -65,7 +65,7 @@
       "teamText": "Team description will soon be here! Or in the article maybe",
       "letsGo": "Let's go!",
       "close": "Close",
-      "description": "Once upon a time a small pixel kingdom happened to face a big mistfortune. It was attacked by a huge pack of monsters led by a mysterious villain. And now it's your task to free the kindgom, defeat all enemies and save the day! Let's go!",
+      "description": "Once upon a time a small pixel kingdom happened to face a big misfortune. It was attacked by a huge pack of monsters led by a mysterious villain. And now it's your task to free the kindgom, defeat all enemies and save the day! Let's go!",
       "usernameWarning": "Username shouldn`t contain any spaces or cyrillic characters",
       "usernameTakenWarning": "This username is already taken. Please try another one",
       "userDoesNotExistWarning": "User with these credentials does not exist",
@@ -73,8 +73,8 @@
       "autoAndGo": " Authorize and let's go!",
       "haveLogin": "Already have a login?",
       "firstTime": "First time here? Register please",
-      "getLang": "RU",
-      "switchLang": "language switched!"
+      "getLang": "Eng",
+      "switchLang": "Changing language..."
     },
     "Menu": {
       "playBtn": "Play game",

@@ -1,13 +1,12 @@
-import * as lang from '../../../assets/lang/lang.json';
-import { chooseLang } from '../utils/functions';
+import { getCurrentLanguageDictionary } from '../utils/functions';
 
 class Register {
   form: string;
   container: HTMLElement;
   mainText: HTMLElement;
-  enOrRu: any;
+  dictionary: any;
   constructor() {
-    this.enOrRu = chooseLang(lang);
+    this.dictionary = getCurrentLanguageDictionary();
     this.form = `
     <form id="reg-form" class="form__form">
       <span id="message" class="form__msg"></span>
@@ -15,13 +14,13 @@ class Register {
       <input class="form__input" type="password" name="password" id="password" required>
       <a href="#signup" class="form__btn">Sign Up</a>
     </form>
-    <a href="#login" id="go-to-login" class="form__link">${this.enOrRu.WelcomeScreen.haveLogin}</a>`;
+    <a href="#login" id="go-to-login" class="form__link">${this.dictionary.WelcomeScreen.haveLogin}</a>`;
   }
 
   init():void {
     this.mainText = document.querySelector('.content__var');
     this.container = document.querySelector('.form__container');
-    this.mainText.innerText = `${this.enOrRu.WelcomeScreen.regAndGo}`;
+    this.mainText.innerText = `${this.dictionary.WelcomeScreen.regAndGo}`;
     this.container.innerHTML = this.form;
   }
 }

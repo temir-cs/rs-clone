@@ -1,26 +1,23 @@
 import BaseScene from './BaseScene';
-import EventEmitter from '../events/Emitter';
 import { SceneConfig, FontConfig } from '../interfaces/interfaces';
+import { getCurrentLanguageDictionary } from '../utils/functions';
 
-import * as lang from '../../../assets/lang/lang.json';
-import { chooseLang } from '../utils/functions';
-
-const enOrRu = chooseLang(lang);
+const dictionary = getCurrentLanguageDictionary();
 
 const KNIGHT_DESC = [
-  `${enOrRu.HeroSelectScene.knightName}`,
-  `${enOrRu.HeroSelectScene.knightClass}`,
-  `${enOrRu.HeroSelectScene.knightCombat}`,
-  `${enOrRu.HeroSelectScene.knightHealth}`,
-  `${enOrRu.HeroSelectScene.knightSpeed}`,
+  `${dictionary.HeroSelectScene.knightName}`,
+  `${dictionary.HeroSelectScene.knightClass}`,
+  `${dictionary.HeroSelectScene.knightCombat}`,
+  `${dictionary.HeroSelectScene.knightHealth}`,
+  `${dictionary.HeroSelectScene.knightSpeed}`,
 ];
 
 const MAGE_DESC = [
-  `${enOrRu.HeroSelectScene.mageName}`,
-  `${enOrRu.HeroSelectScene.mageClass}`,
-  `${enOrRu.HeroSelectScene.mageCombat}`,
-  `${enOrRu.HeroSelectScene.mageHealth}`,
-  `${enOrRu.HeroSelectScene.mageSpeed}`
+  `${dictionary.HeroSelectScene.mageName}`,
+  `${dictionary.HeroSelectScene.mageClass}`,
+  `${dictionary.HeroSelectScene.mageCombat}`,
+  `${dictionary.HeroSelectScene.mageHealth}`,
+  `${dictionary.HeroSelectScene.mageSpeed}`
 ];
 
 const HERO_STATS = {
