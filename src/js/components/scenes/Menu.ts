@@ -5,7 +5,7 @@ import { SceneConfig, MenuType } from '../interfaces/interfaces';
 class MenuScene extends NavigationScene {
   menu: MenuType[];
   constructor(config: SceneConfig, sceneName = 'MenuScene') {
-    super(config, sceneName, true);
+    super(config, sceneName);
 
     this.menu = [
       { scene: 'HeroSelectScene', text: 'Play' },

@@ -4,7 +4,7 @@ import { SceneConfig, MenuType } from '../interfaces/interfaces';
 class NavigationScene extends BaseScene {
   menu?: MenuType[];
   levels: number;
-  constructor(config: SceneConfig, sceneName: string, canGoBack?: boolean) {
+  constructor(config: SceneConfig, sceneName: string, canGoBack = false) {
     super(`${sceneName}`, { ...config, canGoBack });
   }
 
