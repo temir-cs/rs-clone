@@ -1,8 +1,12 @@
+import { getCurrentLanguageDictionary } from '../utils/functions';
+
 class Register {
   form: string;
   container: HTMLElement;
   mainText: HTMLElement;
+  dictionary: any;
   constructor() {
+    this.dictionary = getCurrentLanguageDictionary();
     this.form = `
     <form id="reg-form" class="form__form">
       <span id="message" class="form__msg"></span>
@@ -10,13 +14,13 @@ class Register {
       <input class="form__input" type="password" name="password" id="password" required>
       <a href="#signup" class="form__btn">Sign Up</a>
     </form>
-    <a href="#login" id="go-to-login" class="form__link">Already have a login?</a>`;
+    <a href="#login" id="go-to-login" class="form__link">${this.dictionary.WelcomeScreen.haveLogin}</a>`;
   }
 
   init():void {
     this.mainText = document.querySelector('.content__var');
     this.container = document.querySelector('.form__container');
-    this.mainText.innerText = 'Регистрируйся и поехали!';
+    this.mainText.innerText = `${this.dictionary.WelcomeScreen.regAndGo}`;
     this.container.innerHTML = this.form;
   }
 }

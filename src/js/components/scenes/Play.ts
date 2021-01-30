@@ -256,6 +256,8 @@ class Play extends Phaser.Scene {
         break;
       case 5:
         this.scene.start('GameOverWin');
+        this.setFinalStats();
+        this.registry.set('level', DEFAULT_LEVEL);
         break;
       default:
         break;
@@ -418,6 +420,11 @@ class Play extends Phaser.Scene {
     return stats;
   }
 
+  setFinalStats():void {
+    const finalStats = { ...this.getCurrentStats(), level: this.getCurrentLevel() };
+    this.registry.set('finalStats', { ...finalStats });
+  }
+
   createEndOfLevel(end: Phaser.Types.Tilemaps.TiledObject, player: Player):void {
     const endOfLevel = this.physics.add.sprite(end.x, end.y, 'end')
       .setAlpha(0)
@@ -519,8 +526,7 @@ class Play extends Phaser.Scene {
 
   displayGameOver():void {
     this.scene.start('GameOverFail');
-    const finalStats = { ...this.getCurrentStats(), level: this.getCurrentLevel() };
-    this.registry.set('finalStats', { ...finalStats });
+    this.setFinalStats();
     this.registry.set('level', DEFAULT_LEVEL);
   }
 }

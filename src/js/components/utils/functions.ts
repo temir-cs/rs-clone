@@ -1,3 +1,5 @@
+const lang = require('../../../assets/lang/lang.json');
+
 const getTimestamp = ():number => {
   const d = new Date();
   return d.getTime();
@@ -26,9 +28,15 @@ const stopSpinner = ():void => {
   loaderSpinner.classList.add('loader--hidden');
 };
 
+const getCurrentLanguageDictionary = ():any => {
+  const currentLang = localStorage.getItem('lang');
+  return currentLang === 'RU' ? lang.RU : lang.EN;
+};
+
 export {
   getTimestamp,
   clearAllBeforeGame,
   mobileToggleMenu,
-  stopSpinner
+  stopSpinner,
+  getCurrentLanguageDictionary
 };

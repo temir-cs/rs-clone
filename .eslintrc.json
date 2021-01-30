@@ -24,7 +24,8 @@
     "max-len": [
       "error",
       {
-        "code": 140
+        "code": 140,
+        "ignoreStrings": true
       }
     ],
     "object-curly-newline": 0,
@@ -44,6 +45,7 @@
     // "no-console": "error"
     // "no-magic-numbers": ["error", { "ignore": [0, 1] }],
     "no-inline-comments": "error",
+    "@typescript-eslint/no-var-requires": 0,
     "lines-between-class-members": [
       "error",
       "always",

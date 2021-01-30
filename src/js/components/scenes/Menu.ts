@@ -1,17 +1,20 @@
 import NavigationScene from './NavigationScene';
 
 import { SceneConfig, MenuType } from '../interfaces/interfaces';
+import { getCurrentLanguageDictionary } from '../utils/functions';
 
 class MenuScene extends NavigationScene {
   menu: MenuType[];
   constructor(config: SceneConfig, sceneName = 'MenuScene') {
     super(config, sceneName);
 
+    const dictionary = getCurrentLanguageDictionary();
+
     this.menu = [
-      { scene: 'HeroSelectScene', text: 'Play' },
-      { scene: 'LevelsScene', text: 'Levels' },
-      { scene: 'HighscoreScene', text: 'Highscores' },
-      { scene: 'SettingsScene', text: 'Settings' }
+      { scene: 'HeroSelectScene', text: `${dictionary.Menu.playBtn}` },
+      { scene: 'LevelsScene', text: `${dictionary.Menu.levelsBtn}` },
+      { scene: 'HighscoreScene', text: `${dictionary.Menu.highscoreBtn}` },
+      { scene: 'SettingsScene', text: `${dictionary.Menu.settingBtn}` }
     ];
   }
 

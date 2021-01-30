@@ -1,14 +1,18 @@
 import NavigationScene from './NavigationScene';
 
 import { SceneConfig, MenuType } from '../interfaces/interfaces';
+import { getCurrentLanguageDictionary } from '../utils/functions';
 
 class SettingsScene extends NavigationScene {
   menu: MenuType[];
   levels: number;
   constructor(config: SceneConfig) {
     super(config, 'SettingsScene', true);
+
+    const dictionary = getCurrentLanguageDictionary();
+
     this.menu = [
-      { text: 'Fullscreen on/off' }
+      { text: `${dictionary.SettingsScene.fullScreen}` }
     ];
   }
 
@@ -21,7 +25,7 @@ class SettingsScene extends NavigationScene {
 
     const { textGameObject } = menuItem;
     textGameObject.on('pointerup', () => {
-      if (menuItem.text === 'Fullscreen on/off') {
+      if (menuItem.text === 'Fullscreen (on / off)' || menuItem.text === 'Полный экран (вкл / выкл)') {
         if (!this.scale.isFullscreen) {
           this.scale.startFullscreen();
         } else {

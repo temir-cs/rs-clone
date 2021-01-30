@@ -1,21 +1,23 @@
 import BaseScene from './BaseScene';
-import EventEmitter from '../events/Emitter';
 import { SceneConfig, FontConfig } from '../interfaces/interfaces';
+import { getCurrentLanguageDictionary } from '../utils/functions';
+
+const dictionary = getCurrentLanguageDictionary();
 
 const KNIGHT_DESC = [
-  'Vincent',
-  'Role: Knight',
-  'Combat: Melee',
-  'Health: More',
-  'Speed: Slow',
+  `${dictionary.HeroSelectScene.knightName}`,
+  `${dictionary.HeroSelectScene.knightClass}`,
+  `${dictionary.HeroSelectScene.knightCombat}`,
+  `${dictionary.HeroSelectScene.knightHealth}`,
+  `${dictionary.HeroSelectScene.knightSpeed}`,
 ];
 
 const MAGE_DESC = [
-  'Valerie',
-  'Role: Mage',
-  'Combat: Ranged',
-  'Health: Less',
-  'Speed: Fast',
+  `${dictionary.HeroSelectScene.mageName}`,
+  `${dictionary.HeroSelectScene.mageClass}`,
+  `${dictionary.HeroSelectScene.mageCombat}`,
+  `${dictionary.HeroSelectScene.mageHealth}`,
+  `${dictionary.HeroSelectScene.mageSpeed}`
 ];
 
 const HERO_STATS = {

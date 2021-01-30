@@ -14,7 +14,7 @@ class BaseScene extends Phaser.Scene {
     super(key);
     this.config = config;
     this.screenCenter = [config.width / 2, config.height / 2];
-    this.fontSize = 52;
+    this.fontSize = 36;
     this.fontStyle = 'bold';
     this.fontFamily = '"Press Start 2P"';
     this.lineHeight = 70;
