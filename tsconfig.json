@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "es5",
     "removeComments": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
   },
   "include": [
     "src/js/*"

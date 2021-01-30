@@ -26,9 +26,18 @@ const stopSpinner = ():void => {
   loaderSpinner.classList.add('loader--hidden');
 };
 
+const chooseLang = (lang):any => {
+  let enOrRu = lang.EN;
+  if (localStorage.getItem('lang') !== null) {
+    enOrRu = lang.RU;
+  }
+  return enOrRu;
+};
+
 export {
   getTimestamp,
   clearAllBeforeGame,
   mobileToggleMenu,
-  stopSpinner
+  stopSpinner,
+  chooseLang
 };

@@ -2,8 +2,10 @@ import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
 import MainScreen from '../welcome_screen/MainScreen';
 import { requestToServer, getCredentials } from './utils';
+import * as lang from '../../../assets/lang/lang.json';
 import { clearAllBeforeGame,
-          mobileToggleMenu } from '../utils/functions';
+          mobileToggleMenu,
+          chooseLang } from '../utils/functions';
 
 class Routes {
   routes: { login: Login, register: Register; };
@@ -14,10 +16,11 @@ class Routes {
   warn: string;
   mainScreen: MainScreen;
   constructor(gameStart) {
+    const enOrRu = chooseLang(lang);
     this.mainScreen = new MainScreen();
     this.gameStart = gameStart;
     this.warnTimeout = 2000;
-    this.warn = 'Username shouldn`t contain any kind of spaces or cyrillic characters';
+    this.warn = `${enOrRu.WelcomeScreen.usernameWarning}`;
   }
 
   init() {
@@ -41,6 +44,7 @@ class Routes {
   }
 
   onRouteChange(event) {
+    const enOrRu = chooseLang(lang);
     const hashLocation = window.location.hash.substring(1);
     if (hashLocation === 'game') {
       clearAllBeforeGame();
@@ -51,8 +55,16 @@ class Routes {
       if (!user) {
         this.renderRegForm();
       }
-    } else if (hashLocation === 'tutorial' || hashLocation === 'about') {
+    } else if (hashLocation === 'tutorial' || hashLocation === 'about' || hashLocation === 'article') {
       this.mainScreen.init(hashLocation);
+    } else if (hashLocation === 'lang') {
+      this.mainScreen.init(hashLocation);
+      if (localStorage.getItem('lang') !== null) {
+        localStorage.removeItem('lang');
+      } else {
+        localStorage.setItem('lang', 'RU');
+      }
+      window.location.reload();
     } else if (hashLocation === 'login' || hashLocation === 'register') {
       this.routes[hashLocation].init();
     } else if (hashLocation === 'signup' || hashLocation === 'signin') {
@@ -84,10 +96,10 @@ class Routes {
           localStorage.setItem('user', credentials.username);
           this.refreshHash('game');
         } else if (hashLocation === 'signup') {
-          message.innerHTML = 'This username already taken please try another one';
+          message.innerHTML = `${enOrRu.WelcomeScreen.usernameTakenWarning}`;
           setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
         } else {
-          message.innerHTML = 'User with this credentials doesn`t exists';
+          message.innerHTML = `${enOrRu.WelcomeScreen.userDoesNotExistWarning}`;
           setTimeout(() => { message.innerHTML = ''; }, this.warnTimeout);
         }
       })();
