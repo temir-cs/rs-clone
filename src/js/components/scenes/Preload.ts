@@ -7,7 +7,7 @@ class Preload extends Phaser.Scene {
     super('PreloadScene');
   }
 
-  preload() {
+  preload():void {
     this.load.tilemapTiledJSON('map', '../../../assets/json/01_forest_map.json');
     this.load.image('tiles-1', '../../../assets/img/levels/forest/01_forest_platforms.png');
     this.load.image('tiles-2', '../../../assets/img/levels/forest/01_forest_env.png');
@@ -21,6 +21,10 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-dungeon-tileset', '../../../assets/img/levels/dungeon/dungeon_bg_tiles.png');
 
     this.load.tilemapTiledJSON('map-lvl4', '../../../assets/json/04_final_map.json');
+
+    // Hero select images
+    this.load.image('knight-image', '../../../assets/img/heroes/knight-image.png');
+    this.load.image('mage-image', '../../../assets/img/heroes/mage-image.png');
 
     // Forest Level Background
     this.load.image('bg-forest-sky', '../../../assets/img/levels/forest/sky.png');
@@ -39,10 +43,6 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-castle-down', '../../../assets/img/levels/castle/down.png');
     this.load.image('bg-castle-tileset', '../../../assets/img/levels/castle/castle_bg_tiles.png');
 
-    // Hero select images
-    this.load.image('knight-image', '../../../assets/img/heroes/knight-image.png');
-    this.load.image('mage-image', '../../../assets/img/heroes/mage-image.png');
-
     // dungeon Level Background
     this.load.image('bg-dungeon-back', '../../../assets/img/levels/dungeon/back_ruin_spots.png');
     this.load.image('bg-dungeon-middle', '../../../assets/img/levels/dungeon/ruins_closer.png');
@@ -57,6 +57,10 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-final-bottom', '../../../assets/img/levels/final/rock1.png');
     this.load.image('bg-final-middle', '../../../assets/img/levels/final/rock3.png');
     this.load.image('bg-final-middle2', '../../../assets/img/levels/final/rock5.png');
+
+    // Final level screen
+    this.load.image('finish-game', '../../../assets/img/menu/endOfChapter.png');
+    this.load.image('win-bg', '../../../assets/img/menu/win-bkg.png');
 
     // HUD elements
     this.load.image('coin-static', '../../../assets/img/hud/coin.png');
@@ -110,6 +114,8 @@ class Preload extends Phaser.Scene {
     this.load.audio('boss-death', '../../../assets/sounds/boss-death.wav');
     this.load.audio('fire-trap', '../../../assets/sounds/flamestrike.mp3');
     this.load.audio('spikes-trap', '../../../assets/sounds/spikes-trap.mp3');
+    this.load.audio('game-over', '../../../assets/sounds/game-over.mp3');
+    this.load.audio('game-win', '../../../assets/sounds/game-win.mp3');
 
     this.load.bitmapFont('arcade', '../../../assets/font/highscore/arcade.png', '../../../assets/font/highscore/arcade.xml');
 

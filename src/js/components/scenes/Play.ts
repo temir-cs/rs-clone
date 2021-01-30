@@ -246,6 +246,9 @@ class Play extends Phaser.Scene {
           this.playBgMusic(this.currentMusic);
         }
         break;
+      case 5:
+        this.scene.start('GameOverWin');
+        break;
       default:
         break;
     }
@@ -284,9 +287,7 @@ class Play extends Phaser.Scene {
   }
 
   createGameEvents():void {
-    console.log('ADDED GAME EVENTS!');
     EventEmitter.on('PLAYER_LOSE', () => {
-      console.log('PLAYER_LOSE LAUNCHED!');
       this.stopBgMusic();
       this.livesCount -= 1;
       this.restartLevel();
@@ -495,7 +496,7 @@ class Play extends Phaser.Scene {
   }
 
   displayGameOver():void {
-    this.scene.start('GameOverScene');
+    this.scene.start('GameOverFail');
     const finalStats = { ...this.getCurrentStats(), level: this.getCurrentLevel() };
     this.registry.set('finalStats', { ...finalStats });
     this.registry.set('level', DEFAULT_LEVEL);

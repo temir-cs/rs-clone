@@ -12,11 +12,12 @@ class Collectables extends Phaser.Physics.Arcade.StaticGroup {
   }
 
   addFromLayer(layer:Phaser.Tilemaps.ObjectLayer):void{
-    function mapProperties(propertiesList: collectablesProperties[]) {
+    function mapProperties(propertiesList: any) {
       if (!propertiesList || propertiesList.length === 0) { return {}; }
-      return propertiesList.reduce((map, obj) => {
-        const mapReassigned = map;
-        mapReassigned[obj.name] = obj.value;
+      const [result] = propertiesList;
+      return result.reduce((acc, current) => {
+        const mapReassigned = acc;
+        mapReassigned[current.name] = current.value;
         return mapReassigned;
       }, {});
     }
