@@ -472,6 +472,19 @@
                  "imagewidth":32
                 }],
          "tilewidth":32
+        }, 
+        {
+         "columns":4,
+         "firstgid":2532,
+         "image":"..\/img\/levels\/final\/final_bg.png",
+         "imageheight":64,
+         "imagewidth":128,
+         "margin":0,
+         "name":"final_bg",
+         "spacing":0,
+         "tilecount":8,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",

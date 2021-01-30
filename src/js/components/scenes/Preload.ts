@@ -55,8 +55,8 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-final-mist', '../../../assets/img/levels/final/myst.png');
     this.load.image('bg-final-top', '../../../assets/img/levels/final/rock2.png');
     this.load.image('bg-final-bottom', '../../../assets/img/levels/final/rock1.png');
-    this.load.image('bg-final-middle', '../../../assets/img/levels/final/rock3.png');
-    this.load.image('bg-final-middle2', '../../../assets/img/levels/final/rock5.png');
+    // this.load.image('bg-final-middle', '../../../assets/img/levels/final/rock3.png');
+    // this.load.image('bg-final-middle2', '../../../assets/img/levels/final/rock5.png');
 
     // Final level screen
     this.load.image('finish-game', '../../../assets/img/menu/endOfChapter.png');
