@@ -39,6 +39,7 @@ import { DEFAULT_LEVEL,
 import { SceneConfig,
           Stats } from '../interfaces/interfaces';
 import Enemy from '../entities/Enemy';
+import Boss from '../entities/Boss';
 
 type GameStatusType = {gameStatus: string};
 type EnemyCollidersType = {
@@ -435,6 +436,10 @@ class Play extends Phaser.Scene {
 
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
       if (this.hasKey) {
+        if (this.getCurrentLevel() === 4 && localStorage.getItem('boss') !== 'dead') {
+          return;
+        }
+        localStorage.removeItem('boss');
         this.canGoMenu = false;
         eolOverlap.active = false;
         door.openDoor();

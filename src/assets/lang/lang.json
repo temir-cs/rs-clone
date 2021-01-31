@@ -59,7 +59,8 @@
       "mageSpeed": "Скорость: быстро"
     },
     "SettingsScene": {
-      "fullScreen": "Полный экран (вкл / выкл)"
+      "fullScreen": "Полный экран (вкл / выкл)",
+      "lang": "To Eng"
     },
     "GameOverScene": {
       "gameOver": "Игра окончена",
@@ -128,7 +129,8 @@
       "mageSpeed": "Speed: more"
     },
     "SettingsScene": {
-      "fullScreen": "Fullscreen (on / off)"
+      "fullScreen": "Fullscreen (on / off)",
+      "lang": "На РУС"
     },
     "GameOverScene": {
       "gameOver": "Game Over",

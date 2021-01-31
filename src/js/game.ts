@@ -40,7 +40,8 @@ const SHARED_CONFIG: SceneConfig = {
   },
 };
 
-const Scenes = [PreloadScene, MenuScene, HeroSelectScene, LevelsScene, PlayScene, GameOverFail, GameOverWin, Highscore, SettingsScene];
+export const Scenes = [PreloadScene, MenuScene, HeroSelectScene, LevelsScene, PlayScene,
+  GameOverFail, GameOverWin, Highscore, SettingsScene];
 interface Constructable<T> {
   new(args: SceneConfig) : T;
 }
