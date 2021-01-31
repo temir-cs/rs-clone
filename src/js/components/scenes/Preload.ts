@@ -96,7 +96,8 @@ class Preload extends Phaser.Scene {
     // Audio
     this.load.audio('forest-theme', './assets/sounds/forest-theme.mp3');
     this.load.audio('forest-lvl-theme', './assets/sounds/forest-lvl-theme.mp3');
-    this.load.audio('castle-theme', './assets/sounds/09-BLOODYTEARS.mp3');
+    this.load.audio('castle-theme', './assets/sounds/castle-theme.mp3');
+    this.load.audio('dungeon-theme', './assets/sounds/dungeon-theme.mp3');
     this.load.audio('boss-theme', './assets/sounds/boss-music.mp3');
     this.load.audio('zap', './assets/sounds/zap.wav');
     this.load.audio('sword-swing', './assets/sounds/sword-swing.wav');

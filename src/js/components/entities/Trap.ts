@@ -34,7 +34,7 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   init():void {
     this.sleepTime = Phaser.Math.Between(1500, 4000);
     this.attackTime = 0;
-    this.attackSound = this.scene.sound.add(`${this.key}`, { volume: 0.2 });
+    this.attackSound = this.scene.sound.add(`${this.key}`, { volume: 0.05 });
     // this.attackSound = this.scene.sound.add('fire-trap', { volume: 0.2 });
     this.isAttacking = false;
     this.scene.add.existing(this);

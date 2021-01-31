@@ -238,7 +238,7 @@ class Play extends Phaser.Scene {
         this.createBg = createBgDungeon;
         this.bgParallax = bgParallaxDungeon;
         this.createMap = createMapDungeon;
-        this.currentMusic = 'forest-lvl-theme';
+        this.currentMusic = 'dungeon-theme';
         if (this.musicState === true) {
           this.playBgMusic(this.currentMusic);
         }
@@ -291,7 +291,7 @@ class Play extends Phaser.Scene {
   }
 
   playBgMusic(musicTheme:string):void {
-    this.music = this.sound.add(musicTheme, { loop: true, volume: 0.02 });
+    this.music = this.sound.add(musicTheme, { loop: true, volume: 0.08 });
     this.music.play();
   }
 
