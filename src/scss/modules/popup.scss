@@ -1,0 +1,115 @@
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
+
+.popUp__overlay {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba($background-dark, 0.8);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.popUp {
+  position: relative;
+  width: 54.8rem;
+  height: 29.5rem;
+  background-image: url("./assets/img/welcome_screen/modal_bg.png");
+  background-repeat: no-repeat;
+  background-size: 54.8rem 29.5rem;
+  background-position: center center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popUp__close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 4rem;
+  height: 4rem;
+  outline: none;
+  border: 0;
+  background: none;
+  background-image: url("../../assets/img/welcome_screen/toggle_btn.svg");
+  background-size: 16rem 4rem;
+  background-position: 66.6% 0;
+  background-repeat: no-repeat;
+
+  &:hover {
+    cursor: pointer;
+    background-position: 100% 0;
+  }
+}
+
+.popUp__list {
+  width: 90%;
+  @include list-normalize();
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  // outline: 1px green solid;
+}
+
+.popUp__item {
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 2rem;
+}
+
+.popUp__link {
+  text-decoration: none;
+  color: $text-color;
+
+  &:hover {
+    color: $links-hover;
+  }
+}
+
+.popUp__button {
+  display: block;
+  outline: none;
+  border: 0;
+  min-width: 20rem;
+  height: 4rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-family: 'Press Start 2P', sans-serif;
+
+  background-color: $btn-color;
+  background-image: $btn-gradient;
+
+  color: $input-dark;
+  font-size: 1.6rem;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    background-image: none;
+  }
+}
+
+@media only screen and #{$mobile-width} {
+  .popUp {
+    width: 32rem;
+    height: 48.6rem;
+    background-image: url("./assets/img/welcome_screen/modal_bg_mob.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+}
