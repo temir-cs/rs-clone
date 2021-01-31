@@ -8,18 +8,16 @@ class Preload extends Phaser.Scene {
   }
 
   preload():void {
+    // Level map tiles
     this.load.tilemapTiledJSON('map', './assets/json/01_forest_map.json');
     this.load.image('tiles-1', './assets/img/levels/forest/01_forest_platforms.png');
     this.load.image('tiles-2', './assets/img/levels/forest/01_forest_env.png');
     this.load.image('tiles-3', './assets/img/levels/forest/castle_tiles.png');
-
     this.load.tilemapTiledJSON('map-lvl2', './assets/json/02_castle_map.json');
     this.load.image('tiles-1-lvl2', './assets/img/levels/castle/castle_platforms.png');
-
     this.load.tilemapTiledJSON('map-lvl3', './assets/json/03_dungeon_map.json');
     this.load.image('tiles-1-lvl3', './assets/img/levels/dungeon/dungeon_platforms.png');
     this.load.image('bg-dungeon-tileset', './assets/img/levels/dungeon/dungeon_bg_tiles.png');
-
     this.load.tilemapTiledJSON('map-lvl4', './assets/json/04_final_map.json');
 
     // Hero select images
@@ -55,8 +53,6 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-final-mist', './assets/img/levels/final/myst.png');
     this.load.image('bg-final-top', './assets/img/levels/final/rock2.png');
     this.load.image('bg-final-bottom', './assets/img/levels/final/rock1.png');
-    // this.load.image('bg-final-middle', './assets/img/levels/final/rock3.png');
-    // this.load.image('bg-final-middle2', './assets/img/levels/final/rock5.png');
 
     // Final level screen
     this.load.image('finish-game', './assets/img/menu/endOfChapter.png');
@@ -95,7 +91,6 @@ class Preload extends Phaser.Scene {
 
     // Audio
     this.load.audio('forest-theme', './assets/sounds/forest-theme.mp3');
-    this.load.audio('forest-lvl-theme', './assets/sounds/forest-lvl-theme.mp3');
     this.load.audio('castle-theme', './assets/sounds/castle-theme.mp3');
     this.load.audio('dungeon-theme', './assets/sounds/dungeon-theme.mp3');
     this.load.audio('boss-theme', './assets/sounds/boss-music.mp3');
@@ -132,10 +127,6 @@ class Preload extends Phaser.Scene {
     this.registry.set('unlocked-levels', 4);
     this.scene.start('MenuScene');
   }
-  // create() {
-  //   this.registry.set('level', 1);
-  //   this.scene.start('MenuScene');
-  // }
 }
 
 export default Preload;
