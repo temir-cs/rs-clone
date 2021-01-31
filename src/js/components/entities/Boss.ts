@@ -135,8 +135,9 @@ class Boss extends Enemy {
   takesHit(source: Projectile | MeleeWeapon):void {
     super.takesHit(source);
     this.play('boss-hurt', true);
-
+    console.log('this', this);
     if (this.health <= 0) {
+      localStorage.setItem('boss', 'dead');
       this.play('boss-death', true);
       this.setVelocityX(0);
       this.isDead = true;
