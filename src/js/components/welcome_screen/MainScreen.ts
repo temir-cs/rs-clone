@@ -1,11 +1,21 @@
 import { getCurrentLanguageDictionary } from '../utils/functions';
 
-class MainScreen {
-  content: { main: {text:string, form:string}, about: {text:string, form:string}, tutorial: {text:string, form:string},
-  lang: {text:string, form:string}, article: {text:string, form:string};};
+type textStructureType = {
+  text:string,
+  form:string,
+  addon?: string,
+  popUp?: string
+}
 
+class MainScreen {
+  content: { main: textStructureType, about: textStructureType, tutorial: textStructureType,
+  lang: textStructureType, article: textStructureType};
+
+  addonContainer: HTMLElement;
   textContainer: HTMLElement;
   formContainer: HTMLElement;
+  popUp: HTMLElement;
+  popUpText: HTMLElement;
   constructor() {
     const dictionaty = getCurrentLanguageDictionary();
 
@@ -21,8 +31,11 @@ class MainScreen {
     const getLang = document.querySelector('.lang');
     getLang.innerHTML = `${dictionaty.WelcomeScreen.getLang}`;
 
+    this.addonContainer = document.querySelector('.content__addon');
     this.textContainer = document.querySelector('.content__text');
     this.formContainer = document.querySelector('.form__container');
+    this.popUp = document.querySelector('.popUp__overlay');
+    this.popUpText = document.querySelector('.popUp__list');
     this.content = {
       main: {
         text: `
@@ -36,10 +49,45 @@ class MainScreen {
         ${dictionaty.WelcomeScreen.teamText} `,
         form: `
           <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
+        addon: `
+        <ul class="team__list">
+          <li class="team__item">
+            <img class="team__img" src="./assets/img/welcome_screen/icon1.png">
+            <p class="team__descr">
+              <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName01}</span>
+              ${dictionaty.WelcomeScreen.teamMemberDescr01}
+              </p>
+          </li>
+          <li class="team__item">
+            <img class="team__img" src="./assets/img/welcome_screen/icon2.png">
+            <p class="team__descr">
+              <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName02}</span>
+              <span class="team__strikeout">${dictionaty.WelcomeScreen.teamMemberStriked}</span>
+              ${dictionaty.WelcomeScreen.teamMemberDescr02}
+            </p>
+          </li>
+          <li class="team__item">
+            <img class="team__img" src="./assets/img/welcome_screen/icon3.png">
+            <p class="team__descr">
+              <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName03}</span>
+              ${dictionaty.WelcomeScreen.teamMemberDescr03}
+            </p>
+          </li>
+          <li class="team__item">
+            <img class="team__img" src="./assets/img/welcome_screen/icon4.png">
+            <p class="team__descr">
+              <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName04}</span>
+              ${dictionaty.WelcomeScreen.teamMemberDescr04}
+            </p>
+          </li>
+
+        </ul>
+        `
       },
       tutorial: {
         text: `
-        ${dictionaty.WelcomeScreen.howToPlayText}`,
+        ${dictionaty.WelcomeScreen.howToPlayText}
+        <img class="content__controls" src="./assets/img/welcome_screen/controls.png">`,
         form: `
           <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
       },
@@ -51,16 +99,53 @@ class MainScreen {
       },
       article: {
         text: `
-          ${dictionaty.WelcomeScreen.articleText}`,
+          ${dictionaty.WelcomeScreen.articleText}
+          <a class="content__link" href="#">${dictionaty.WelcomeScreen.articleLink}</a>
+          <span class="content__link  content__link--small">${dictionaty.WelcomeScreen.articleCopyrightLink}</span>`,
         form: `
           <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
+        popUp: `
+          <li class="popUp__item">${dictionaty.WelcomeScreen.articlePopUp01}:
+            <a class="popUp__link" href="https://craftpix.net/" target="blank">Craftpix</a></li>
+          <li class="popUp__item">${dictionaty.WelcomeScreen.articlePopUp02}:
+            <a class="popUp__link" href="https://freesound.org/" target="blank">Freesound</a></li>
+        `,
       }
     };
   }
 
   init(type: string):void {
     this.textContainer.innerHTML = this.content[type].text;
+    this.addonContainer.innerHTML = (this.content[type].addon) ? this.content[type].addon : '';
     this.formContainer.innerHTML = this.content[type].form;
+
+    if (type === 'article') {
+      this.popUpText.innerHTML = this.content[type].popUp;
+      const popUpLink = document.querySelector('.content__link--small');
+      popUpLink.addEventListener('click', () => {
+        this.openPopUp();
+      });
+    }
+  }
+
+  openPopUp():void {
+    this.popUp.classList.remove('popUp__overlay--hidden');
+    document.body.classList.add('stop-scrolling');
+
+    const closeBtn = document.querySelector('.popUp__close');
+    closeBtn.addEventListener('click', () => {
+      this.hidePopUp();
+    });
+
+    const closeBtn2 = document.querySelector('.popUp__button');
+    closeBtn2.addEventListener('click', () => {
+      this.hidePopUp();
+    });
+  }
+
+  hidePopUp():void {
+    this.popUp.classList.add('popUp__overlay--hidden');
+    document.body.classList.remove('stop-scrolling');
   }
 }
 

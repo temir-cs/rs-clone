@@ -21,6 +21,9 @@ class MenuScene extends NavigationScene {
   create():void {
     super.create();
     this.createMenu(this.menu, (menuItem: MenuType) => this.setupMenuEvents(menuItem));
+    this.add.image(290, 120, 'game-name')
+      .setScale(0.6)
+      .setOrigin(0, 0.5);
   }
 
   setupMenuEvents(menuItem: MenuType):void {

@@ -9,8 +9,8 @@
   padding-top: 40rem;
   // background-color: red;
   pointer-events:none;
-  background-image: url("../../assets/img/welcome_screen/bottom.png"),
-    url("../../assets/img/welcome_screen/trees.png");
+  background-image: url("./assets/img/welcome_screen/bottom.png"),
+    url("./assets/img/welcome_screen/trees.png");
   background-repeat: no-repeat;
   background-size: 192rem 47.4rem, 145.5rem 30rem;
   background-position: bottom center, bottom center;
@@ -32,6 +32,7 @@
 }
 
 .page-footer__img {
+  pointer-events: initial;
   width: 13rem;
   height: 4.7rem;
 }
