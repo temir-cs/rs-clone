@@ -27,7 +27,7 @@ class Highscore extends BaseScene {
   }
 
   getScores():void {
-    fetch('https://rscloneapi.herokuapp.com/leaderboard', {
+    fetch('https://rscloneapi.glitch.me/leaderboard', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -35,10 +35,8 @@ class Highscore extends BaseScene {
       })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        
-        this.scores = data.map((item) => {
-           console.log('SERVER SCOREs', item);
+          this.scores = data.map((item) => {
+          console.log('SERVER SCOREs', item);
           const score = item.coins * 10 + item.kills * 20 + item.level * 30;
           return { username: item.username, score };
         });
