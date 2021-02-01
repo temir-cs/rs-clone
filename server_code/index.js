@@ -18,7 +18,7 @@ app.post('/signup', async (req, res) => {
     res.status(201).json({ status: 'ok' });
   } catch (e) {
     logger.error(e);
-    res.status(201).json({ status: 'no' });
+    res.status(200).json({ status: 'no' });
   }
 });
 
@@ -27,13 +27,13 @@ app.post('/signin', async (req, res) => {
     const user = await db.getUser(req.body);
 
     if (user.length) {
-      res.status(201).json({ status: 'ok' });
+      res.status(200).json({ status: 'ok' });
     } else {
-      res.status(201).json({ status: 'no' });
+      res.status(200).json({ status: 'no' });
     }
   } catch (e) {
     logger.error(e);
-    res.status(201).json({ status: 'no' });
+    res.status(200).json({ status: 'no' });
   }
 });
 
@@ -43,7 +43,7 @@ app.get('/leaderboard', async (req, res) => {
     res.status(200).json(scores);
   } catch (e) {
     logger.error(e);
-    res.status(201).json({ status: 'no' });
+    res.status(200).json({ status: 'no' });
   }
 });
 
@@ -53,7 +53,7 @@ app.post('/leaderboard', async (req, res) => {
     res.status(200).json(scores);
   } catch (e) {
     logger.error(e);
-    res.status(201).json({ status: 'no' });
+    res.status(200).json({ status: 'no' });
   }
 });
 
