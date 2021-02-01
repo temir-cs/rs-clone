@@ -1,6 +1,16 @@
 import BaseScene from './BaseScene';
 import { SceneConfig } from '../interfaces/interfaces';
 
+import {
+  HIGHSCORE_HEADER_X,
+  HIGHSCORE_HEADER_Y,
+  HIGHSCORE_LINE_SHIFT,
+  HIGHSCORE_MAX_LINES_COUNT,
+  SCORE_COIN_VALUE,
+  SCORE_KILL_VALUE,
+  SCORE_LVL_VALUE
+} from './consts';
+
 class Highscore extends BaseScene {
   scores: { username: string; score: number }[];
   constructor(config: SceneConfig) {
@@ -11,17 +21,17 @@ class Highscore extends BaseScene {
   create():void {
     super.create();
 
-    this.add.bitmapText(100, 110, 'arcade', 'RANK  SCORE   NAME').setTint(0xffffff);
+    this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y, 'arcade', 'RANK  SCORE   NAME').setTint(0xffffff);
     this.getScores();
   }
 
   createHighscore():void {
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < HIGHSCORE_MAX_LINES_COUNT; i++) {
       if (this.scores[i - 1]) {
-        this.add.bitmapText(100, 160 + 50 * i, 'arcade',
+        this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y + HIGHSCORE_LINE_SHIFT + HIGHSCORE_LINE_SHIFT * i, 'arcade',
                   ` ${i}      ${this.scores[i - 1].score}    ${this.scores[i - 1].username}`).setTint(0xffffff);
       } else {
-        this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      0    ---`).setTint(0xffffff);
+        this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y + HIGHSCORE_LINE_SHIFT + HIGHSCORE_LINE_SHIFT * i, 'arcade', ` ${i}      0    ---`).setTint(0xffffff);
       }
     }
   }
@@ -35,9 +45,9 @@ class Highscore extends BaseScene {
       })
       .then((res) => res.json())
       .then((data) => {
-          this.scores = data.map((item) => {
-          console.log('SERVER SCOREs', item);
-          const score = item.coins * 10 + item.kills * 20 + item.level * 30;
+        this.scores = data.map((item) => {
+           console.log('SERVER SCOREs', item);
+          const score = item.coins * SCORE_COIN_VALUE + item.kills * SCORE_KILL_VALUE + item.level * SCORE_LVL_VALUE;
           return { username: item.username, score };
         });
         this.scores.sort((a, b) => b.score - a.score);

@@ -2,6 +2,15 @@ import Menu from './Menu';
 import { requestToServer } from '../routes/utils';
 import { SceneConfig, FontConfig, MenuType } from '../interfaces/interfaces';
 import { getCurrentLanguageDictionary } from '../utils/functions';
+import {
+  LARGE_FONT,
+  SMALL_FONT,
+  GAMEOVER_TEXT_Y_SHIFT,
+  GAMEOVER_MENU_X_SHIFT,
+  GAMEOVER_MENU_Y_SHIFT,
+  GAMEOVER_MENU_DEPTH,
+  GAMEOVER_MENU_LAST_Y_SHIFT
+  } from './consts';
 
 class GameOver extends Menu {
   menu: MenuType[];
@@ -21,8 +30,8 @@ class GameOver extends Menu {
     ];
 
     this.music = null;
-    this.largeFont = 32;
-    this.smallFont = 24;
+    this.largeFont = LARGE_FONT;
+    this.smallFont = SMALL_FONT;
     this.totalCoins = 0;
     this.totalKills = 0;
   }
@@ -41,9 +50,10 @@ class GameOver extends Menu {
     const [x, y] = this.screenCenter;
     this.add.text(x - xOffset, y + yOffset, `${dict.GameOverScene.totalCoins}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
     this.add.text(x + xOffset, y + yOffset, `${this.totalCoins}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
-    this.add.text(x - xOffset, y + yOffset + 40, `${dict.GameOverScene.totalKills}`, this.getFontOptions(this.smallFont))
-      .setOrigin(0.5, 0.5);
-    this.add.text(x + xOffset, y + yOffset + 40, `${this.totalKills}`, this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
+    this.add.text(x - xOffset, y + yOffset + GAMEOVER_TEXT_Y_SHIFT, `${dict.GameOverScene.totalKills}`,
+          this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
+    this.add.text(x + xOffset, y + yOffset + GAMEOVER_TEXT_Y_SHIFT, `${this.totalKills}`,
+          this.getFontOptions(this.smallFont)).setOrigin(0.5, 0.5);
   }
 
   getFontOptions(fontSize: number):FontConfig {
@@ -59,11 +69,11 @@ class GameOver extends Menu {
     let lastMenuPositionY = 0;
     menu.forEach((item) => {
       const menuItem = item;
-      const menuPosition = [this.screenCenter[0] - 200 + lastMenuPositionY, this.screenCenter[1] + 220];
+      const menuPosition = [this.screenCenter[0] + GAMEOVER_MENU_X_SHIFT + lastMenuPositionY, this.screenCenter[1] + GAMEOVER_MENU_Y_SHIFT];
       menuItem.textGameObject = this.add.text(menuPosition[0], menuPosition[1], menuItem.text, this.getFontOptions(this.largeFont))
         .setOrigin(0.5, 1)
-        .setDepth(2);
-      lastMenuPositionY += 400;
+        .setDepth(GAMEOVER_MENU_DEPTH);
+      lastMenuPositionY += GAMEOVER_MENU_LAST_Y_SHIFT;
       setupMenuEvents(menuItem);
     });
   }

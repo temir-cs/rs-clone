@@ -34,7 +34,21 @@ import { createMapFinal,
 
 import { DEFAULT_LEVEL,
           DEFAULT_STATS,
-          LIVES } from './consts';
+          LIVES,
+          MUSIC_VOLUME_LEVEL,
+          BOSS_LEVEL,
+          BOSS_LVL_WIDTH,
+          BOSS_LVL_HEIGHT,
+          WORLD_Y1,
+          WORLD_Y2_SHIFT,
+          DOOR_Y_SHIFT,
+          END_OF_LEVEL_WIDTH,
+          END_OF_LEVEL_HEIGHT,
+          BG_MUSIC_TIMEOUT,
+          SCENE_RESTART_TIMEOUT,
+          CAMERA_FADEIN_TIMEOUT,
+          HOME_BTN_SHIFT
+        } from './consts';
 
 import { SceneConfig,
           Stats } from '../interfaces/interfaces';
@@ -139,7 +153,7 @@ class Play extends Phaser.Scene {
       EventEmitter.removeAllListeners();
       this.registry.set('stats', { ...DEFAULT_STATS });
     }
-    this.cameras.main.fadeIn(3000);
+    this.cameras.main.fadeIn(CAMERA_FADEIN_TIMEOUT);
     this.checkLevel();
     this.hasKey = false;
     this.livesCount = this.getCurrentLives();
@@ -292,7 +306,7 @@ class Play extends Phaser.Scene {
   }
 
   playBgMusic(musicTheme:string):void {
-    this.music = this.sound.add(musicTheme, { loop: true, volume: 0.08 });
+    this.music = this.sound.add(musicTheme, { loop: true, volume: MUSIC_VOLUME_LEVEL });
     this.music.play();
   }
 
@@ -386,11 +400,11 @@ class Play extends Phaser.Scene {
   setupFollowupCameraOn(player:Player):void {
     const { height, width, mapOffset, heightOffset, zoomFactor } = this.config;
 
-    if (this.getCurrentLevel() === 4) {
-      this.physics.world.setBounds(0, -100, 1920, 1280 + 200);
-      this.cameras.main.setBounds(0, 0, 1920, 1280).setZoom(zoomFactor);
+    if (this.getCurrentLevel() === BOSS_LEVEL) {
+      this.physics.world.setBounds(0, WORLD_Y1, BOSS_LVL_WIDTH, BOSS_LVL_HEIGHT + WORLD_Y2_SHIFT);
+      this.cameras.main.setBounds(0, 0, BOSS_LVL_WIDTH, BOSS_LVL_HEIGHT).setZoom(zoomFactor);
     } else {
-      this.physics.world.setBounds(0, -100, width + mapOffset, height + heightOffset + 200);
+      this.physics.world.setBounds(0, WORLD_Y1, width + mapOffset, height + heightOffset + WORLD_Y2_SHIFT);
       this.cameras.main.setBounds(0, 0, width + mapOffset, height + heightOffset).setZoom(zoomFactor);
     }
 
@@ -430,13 +444,13 @@ class Play extends Phaser.Scene {
     const endOfLevel = this.physics.add.sprite(end.x, end.y, 'end')
       .setAlpha(0)
       .setOrigin(0.5, 1)
-      .setSize(5, 100);
+      .setSize(END_OF_LEVEL_WIDTH, END_OF_LEVEL_HEIGHT);
 
-    const door = new Door(this, end.x, end.y - 30, this.lvlKey).setDepth(-1);
+    const door = new Door(this, end.x, end.y - DOOR_Y_SHIFT, this.lvlKey).setDepth(-1);
 
     const eolOverlap = this.physics.add.overlap(player, endOfLevel, () => {
       if (this.hasKey) {
-        if (this.getCurrentLevel() === 4 && localStorage.getItem('boss') !== 'dead') {
+        if (this.getCurrentLevel() === BOSS_LEVEL && localStorage.getItem('boss') !== 'dead') {
           return;
         }
         localStorage.removeItem('boss');
@@ -447,8 +461,8 @@ class Play extends Phaser.Scene {
         this.registry.inc('level', 1);
         this.cameras.main.fadeOut(3000);
         // this.stopBgMusic();
-        setTimeout(() => this.stopBgMusic(), 3000);
-        setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), 4000);
+        setTimeout(() => this.stopBgMusic(), BG_MUSIC_TIMEOUT);
+        setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), SCENE_RESTART_TIMEOUT);
         this.registry.set('lastLevelStats', { ...this.stats });
         this.registry.set('livesCount', this.livesCount);
       }
@@ -456,7 +470,7 @@ class Play extends Phaser.Scene {
   }
 
   createHomeButton():void {
-    const homeButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 10, 'home')
+    const homeButton = this.add.image(this.config.rightBottomCorner.x - HOME_BTN_SHIFT, this.config.rightBottomCorner.y - HOME_BTN_SHIFT, 'home')
       .setOrigin(1, 1)
       .setScrollFactor(0)
       .setScale(1)

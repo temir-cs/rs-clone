@@ -1,4 +1,20 @@
 import Play from '../Play';
+import {
+  DUNGEON_DISTANCE_DEPTH,
+  DUNGEON_CASTLE_WALL_DEPTH,
+  DUNGEON_BKG_DEPTH,
+  DUNGEON_BKG_SCALE,
+  DUNGEON_MIDDLE_DEPTH,
+  DUNGEON_MIDDLE_SCALE,
+  DUNGEON_TREES_DEPTH,
+  DUNGEON_TREES_SCALE,
+  DUNGEON_TOP_DEPTH,
+  DUNGEON_TOP_SCALE,
+  DUNGEON_BOTTOM_DEPTH,
+  DUNGEON_BOTTOM_SCALE,
+  DUNGEON_TREES_PARALLAX,
+  DUNGEON_WALLS_PARALLAX,
+} from '../consts';
 
 const createMapDungeon = (context:Play):void => {
   context.map = context.make.tilemap({ key: 'map-lvl3' });
@@ -10,9 +26,9 @@ const createLayersDungeon = (context:Play):void => {
   const tileset1 = context.map.getTileset('dungeon_platforms');
   const tilesetBg = context.map.getTileset('dungeon_bg_tiles');
 
-  context.map.createLayer('distance', tilesetBg).setDepth(-20);
+  context.map.createLayer('distance', tilesetBg).setDepth(DUNGEON_DISTANCE_DEPTH);
 
-  context.layers.castleWall = context.map.createLayer('castle_wall', tileset1).setDepth(-2);
+  context.layers.castleWall = context.map.createLayer('castle_wall', tileset1).setDepth(DUNGEON_CASTLE_WALL_DEPTH);
   context.layers.platformColliders = context.map.createLayer('platform_colliders', tileset1);
   context.layers.platformColliders.setCollisionByProperty({ collides: true });
   context.layers.platformColliders.setAlpha(0);
@@ -35,38 +51,38 @@ const createBgDungeon = (context:Play):void => {
 
   context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-dungeon-back')
     .setOrigin(0, 1)
-    .setDepth(-13)
-    .setScale(1.6)
+    .setDepth(DUNGEON_BKG_DEPTH)
+    .setScale(DUNGEON_BKG_SCALE)
     .setScrollFactor(0, 1);
 
   context.wallsImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-dungeon-middle')
     .setOrigin(0, 1)
-    .setDepth(-12)
-    .setScale(1.6)
+    .setDepth(DUNGEON_MIDDLE_DEPTH)
+    .setScale(DUNGEON_MIDDLE_SCALE)
     .setScrollFactor(0, 1);
 
   context.treesImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-dungeon-main')
     .setOrigin(0, 1)
-    .setDepth(-11)
-    .setScale(1.6)
+    .setDepth(DUNGEON_TREES_DEPTH)
+    .setScale(DUNGEON_TREES_SCALE)
     .setScrollFactor(0, 1);
 
   context.add.tileSprite(bgObject.x, 0, context.config.width, bgObject.height, 'bg-dungeon-top')
     .setOrigin(0, 0)
-    .setDepth(-10)
-    .setScale(1.1)
+    .setDepth(DUNGEON_TOP_DEPTH)
+    .setScale(DUNGEON_TOP_SCALE)
     .setScrollFactor(0, 1);
 
   context.add.tileSprite(0, 0, context.config.width, bgObject.height, 'bg-dungeon-bottom')
     .setOrigin(0, 0)
-    .setDepth(-10)
-    .setScale(2)
+    .setDepth(DUNGEON_BOTTOM_DEPTH)
+    .setScale(DUNGEON_BOTTOM_SCALE)
     .setScrollFactor(0, 1);
 };
 
 const bgParallaxDungeon = (context:Play):void => {
-  context.treesImg.tilePositionX = context.cameras.main.scrollX * 0.2;
-  context.wallsImg.tilePositionX = context.cameras.main.scrollX * 0.1;
+  context.treesImg.tilePositionX = context.cameras.main.scrollX * DUNGEON_TREES_PARALLAX;
+  context.wallsImg.tilePositionX = context.cameras.main.scrollX * DUNGEON_WALLS_PARALLAX;
 };
 
  export { createMapDungeon,
