@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import WebFontFile from '../loaders/WebFontLoader';
+import { AVAILABLE_LEVELS } from './consts';
 
 class Preload extends Phaser.Scene {
   text: Phaser.GameObjects.Text;
@@ -124,7 +125,7 @@ class Preload extends Phaser.Scene {
 
   startGame():void {
     this.registry.set('level', 1);
-    this.registry.set('unlocked-levels', 4);
+    this.registry.set('unlocked-levels', AVAILABLE_LEVELS);
     this.scene.start('MenuScene');
   }
 }

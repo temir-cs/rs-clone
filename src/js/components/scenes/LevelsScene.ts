@@ -3,6 +3,13 @@ import NavigationScene from './NavigationScene';
 import { SceneConfig, MenuType } from '../interfaces/interfaces';
 import { getCurrentLanguageDictionary } from '../utils/functions';
 
+import {
+  FOREST_LEVEL,
+  CASTLE_LEVEL,
+  DUNGEON_LEVEL,
+  BOSS_LEVEL
+  } from './consts';
+
 class LevelsScene extends NavigationScene {
   menu: MenuType[];
   levels: number;
@@ -12,10 +19,10 @@ class LevelsScene extends NavigationScene {
     const dictionary = getCurrentLanguageDictionary();
 
     this.menu = [
-        { scene: 'HeroSelectScene', text: `${dictionary.Levels.first}`, level: 1 },
-        { scene: 'HeroSelectScene', text: `${dictionary.Levels.second}`, level: 2 },
-        { scene: 'HeroSelectScene', text: `${dictionary.Levels.third}`, level: 3 },
-        { scene: 'HeroSelectScene', text: `${dictionary.Levels.fourth}`, level: 4 },
+        { scene: 'HeroSelectScene', text: `${dictionary.Levels.first}`, level: FOREST_LEVEL },
+        { scene: 'HeroSelectScene', text: `${dictionary.Levels.second}`, level: CASTLE_LEVEL },
+        { scene: 'HeroSelectScene', text: `${dictionary.Levels.third}`, level: DUNGEON_LEVEL },
+        { scene: 'HeroSelectScene', text: `${dictionary.Levels.fourth}`, level: BOSS_LEVEL },
     ];
   }
 

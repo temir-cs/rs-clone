@@ -3,6 +3,7 @@ import { SceneConfig, MenuType } from '../interfaces/interfaces';
 
 class NavigationScene extends BaseScene {
   menu?: MenuType[];
+  textGameObject: Phaser.GameObjects.Text;
   levels: number;
   constructor(config: SceneConfig, sceneName: string, canGoBack = false) {
     super(`${sceneName}`, { ...config, canGoBack });
@@ -13,6 +14,7 @@ class NavigationScene extends BaseScene {
     this.createMenu(this.menu, (menuItem:MenuType) => this.setupMenuEvents(menuItem));
   }
 
+  // eslint-disable-next-line class-methods-use-this
   setupMenuEvents(menuItem:MenuType): void {
     const { textGameObject } = menuItem;
     textGameObject.setInteractive();

@@ -2,6 +2,22 @@ import BaseScene from './BaseScene';
 import { SceneConfig, FontConfig } from '../interfaces/interfaces';
 import { getCurrentLanguageDictionary } from '../utils/functions';
 
+import {
+  KNIGHT_HEALTH,
+  KNIGHT_SPEED,
+  KNIGHT_BOUNCE_VELOCITY,
+  MAGE_HEALTH,
+  MAGE_SPEED,
+  MAGE_BOUNCE_VELOCITY,
+  KNIGHT_IMAGE_X_SHIFT,
+  MAGE_IMAGE_X_SHIFT,
+  HERO_IMAGE_Y_SHIFT,
+  KNIGHT_DESC_X_OFFSET,
+  MAGE_DESC_X_OFFSET,
+  HERO_DESC_Y_OFFSET,
+  HERO_DESC_LINE_HEIGHT
+} from './consts';
+
 const dictionary = getCurrentLanguageDictionary();
 
 const KNIGHT_DESC = [
@@ -23,15 +39,15 @@ const MAGE_DESC = [
 const HERO_STATS = {
   knight: {
     hero: 'knight',
-    health: 50,
-    speed: 250,
-    bounceVelocity: 120,
+    health: KNIGHT_HEALTH,
+    speed: KNIGHT_SPEED,
+    bounceVelocity: KNIGHT_BOUNCE_VELOCITY,
   },
   mage: {
     hero: 'mage',
-    health: 30,
-    speed: 300,
-    bounceVelocity: 200,
+    health: MAGE_HEALTH,
+    speed: MAGE_SPEED,
+    bounceVelocity: MAGE_BOUNCE_VELOCITY,
   }
 };
 
@@ -52,16 +68,16 @@ class HeroSelectScene extends BaseScene {
       fill: '#fff',
     };
 
-    const knightImage = this.add.image(this.screenCenter[0] - 250, this.screenCenter[1] - 100, 'knight-image')
+    const knightImage = this.add.image(this.screenCenter[0] + KNIGHT_IMAGE_X_SHIFT, this.screenCenter[1] - HERO_IMAGE_Y_SHIFT, 'knight-image')
       .setScale(3);
-    const mageImage = this.add.image(this.screenCenter[0] + 150, this.screenCenter[1] - 100, 'mage-image')
+    const mageImage = this.add.image(this.screenCenter[0] + MAGE_IMAGE_X_SHIFT, this.screenCenter[1] - HERO_IMAGE_Y_SHIFT, 'mage-image')
       .setScale(3);
 
     this.setupMenuEvents(knightImage, 'knight');
     this.setupMenuEvents(mageImage, 'mage');
 
-    this.addText(KNIGHT_DESC, -350, 20, 40);
-    this.addText(MAGE_DESC, 50, 20, 40);
+    this.addText(KNIGHT_DESC, KNIGHT_DESC_X_OFFSET, HERO_DESC_Y_OFFSET, HERO_DESC_LINE_HEIGHT);
+    this.addText(MAGE_DESC, MAGE_DESC_X_OFFSET, HERO_DESC_Y_OFFSET, HERO_DESC_LINE_HEIGHT);
   }
 
   addText(textArr: Array<string>, xOffset:number, yOffset:number, lineHeight:number):void {
@@ -76,7 +92,6 @@ class HeroSelectScene extends BaseScene {
 
     item.on('pointerup', () => {
       this.registry.set('currentHeroStats', HERO_STATS[hero]);
-      // console.log('Hero: ', HERO_STATS[hero]);
       this.scene.start('PlayScene', { gameStatus: 'NEW_GAME' });
     });
 

@@ -6,6 +6,8 @@ import { clearAllBeforeGame,
           mobileToggleMenu,
           getCurrentLanguageDictionary } from '../utils/functions';
 
+const WARN_TIMEOUT = 2000;
+
 class Routes {
   routes: { login: Login, register: Register; };
   startHash: string;
@@ -18,7 +20,7 @@ class Routes {
     const dictionary = getCurrentLanguageDictionary();
     this.mainScreen = new MainScreen();
     this.gameStart = gameStart;
-    this.warnTimeout = 2000;
+    this.warnTimeout = WARN_TIMEOUT;
     this.warn = `${dictionary.WelcomeScreen.usernameWarning}`;
   }
 

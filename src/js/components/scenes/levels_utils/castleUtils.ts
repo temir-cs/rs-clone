@@ -1,4 +1,17 @@
 import Play from '../Play';
+import {
+  CASTLE_CASTLE_WALL_DEPTH,
+  CASTLE_DOWN_DEPTH,
+  CASTLE_DOWN_SCALE,
+  CASTLE_WALLS_DEPTH,
+  CASTLE_WALLS_SCALE,
+  CASTLE_TREES_DEPTH,
+  CASTLE_TREES_SCALE,
+  CASTLE_SKY_DEPTH,
+  CASTLE_SKY_SCALE,
+  CASTLE_TREES_PARALLAX,
+  CASTLE_WALLS_PARALLAX,
+} from '../consts';
 
 const createMapCastle = (context:Play):void => {
   context.map = context.make.tilemap({ key: 'map-lvl2' });
@@ -12,7 +25,7 @@ const createLayersCastle = (context:Play):void => {
 
   context.map.createLayer('distance', tilesetBg).setDepth(-3);
 
-  context.layers.castleWall = context.map.createLayer('castle_wall', tileset1).setDepth(-2);
+  context.layers.castleWall = context.map.createLayer('castle_wall', tileset1).setDepth(CASTLE_CASTLE_WALL_DEPTH);
   context.layers.platformColliders = context.map.createLayer('platform_colliders', tileset1);
   context.layers.platformColliders.setCollisionByProperty({ collides: true });
   context.layers.platformColliders.setAlpha(0);
@@ -35,33 +48,33 @@ const createBgCastle = (context:Play):void => {
 
   context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-castle-down')
     .setOrigin(0, 1)
-    .setDepth(-11)
-    .setScale(1.2)
+    .setDepth(CASTLE_DOWN_DEPTH)
+    .setScale(CASTLE_DOWN_SCALE)
     .setScrollFactor(0, 1);
 
   context.wallsImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-castle-wall')
     .setOrigin(0, 1)
-    .setDepth(-12)
-    .setScale(1.2)
+    .setDepth(CASTLE_WALLS_DEPTH)
+    .setScale(CASTLE_WALLS_SCALE)
     .setScrollFactor(0, 1);
 
   context.treesImg = context.add.tileSprite(bgObject.x, bgObject.y, context.config.width, bgObject.height, 'bg-castle-trees')
     .setOrigin(0, 1)
-    .setDepth(-13)
-    .setScale(1.4)
+    .setDepth(CASTLE_TREES_DEPTH)
+    .setScale(CASTLE_TREES_SCALE)
     .setScrollFactor(0, 1);
 
   context.add.tileSprite(0, 0, context.config.width, bgObject.height, 'bg-castle-sky')
     .setOrigin(0, 0)
-    .setDepth(-14)
-    .setScale(1.5)
+    .setDepth(CASTLE_SKY_DEPTH)
+    .setScale(CASTLE_SKY_SCALE)
     .setScrollFactor(0, 1);
 };
 
 const bgParallaxCastle = (context:Play):void => {
-  context.treesImg.tilePositionX = context.cameras.main.scrollX * 0.2;
-  context.wallsImg.tilePositionX = context.cameras.main.scrollX * 0.15;
-  context.wallsImg.tilePositionY = context.cameras.main.scrollY * 0.15;
+  context.treesImg.tilePositionX = context.cameras.main.scrollX * CASTLE_TREES_PARALLAX;
+  context.wallsImg.tilePositionX = context.cameras.main.scrollX * CASTLE_WALLS_PARALLAX;
+  context.wallsImg.tilePositionY = context.cameras.main.scrollY * CASTLE_WALLS_PARALLAX;
 };
 
  export { createMapCastle,

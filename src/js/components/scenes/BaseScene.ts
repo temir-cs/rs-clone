@@ -1,6 +1,15 @@
 import * as Phaser from 'phaser';
 import { SceneConfig, FontConfig, MenuType } from '../interfaces/interfaces';
 
+import {
+  GAME_MENU_FONT,
+  GAME_MENU_LINE_HEIGHT,
+  CENTER_POSITION_DIVIDER,
+  BACK_BTN_SHIFT,
+  MENU_BG_SCALE,
+  MENU_ORIGIN_Y
+} from './consts';
+
 class BaseScene extends Phaser.Scene {
   config: SceneConfig;
   screenCenter: Array<number>;
@@ -13,11 +22,11 @@ class BaseScene extends Phaser.Scene {
   constructor(key: string, config: SceneConfig) {
     super(key);
     this.config = config;
-    this.screenCenter = [config.width / 2, config.height / 2];
-    this.fontSize = 36;
+    this.screenCenter = [config.width / CENTER_POSITION_DIVIDER, config.height / CENTER_POSITION_DIVIDER];
+    this.fontSize = GAME_MENU_FONT;
     this.fontStyle = 'bold';
     this.fontFamily = '"Press Start 2P"';
-    this.lineHeight = 70;
+    this.lineHeight = GAME_MENU_LINE_HEIGHT;
     this.fontOptions = {
       fontSize: `${this.fontSize}px`,
       fontStyle: this.fontStyle,
@@ -28,11 +37,11 @@ class BaseScene extends Phaser.Scene {
 
   create():void {
     this.add.image(0, 0, 'menu-bg')
-      .setScale(2.5)
-      .setOrigin(0, 0.4);
+      .setScale(MENU_BG_SCALE)
+      .setOrigin(0, MENU_ORIGIN_Y);
 
     if (this.config.canGoBack) {
-      const backButton = this.add.image(this.config.width - 20, this.config.height - 20, 'back')
+      const backButton = this.add.image(this.config.width - BACK_BTN_SHIFT, this.config.height - BACK_BTN_SHIFT, 'back')
         .setInteractive()
         .setOrigin(1, 1);
 
