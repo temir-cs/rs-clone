@@ -1,5 +1,5 @@
 function requestToServer(creds, path) {
-  return fetch(`https://rscloneapi.herokuapp.com/${path}`, {
+  return fetch(`https://rscloneapi.glitch.me/${path}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
