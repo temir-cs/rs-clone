@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import EffectManager from '../effects/EffectManager';
 import Boss from '../entities/Boss';
+import { BOSS_MELEE_WEAPON_DAMAGE, MELEE_WEAPON_ATTACK_SPEED, BOSS_MELEE_WEAPON_ORIGIN_X, BOSS_MELEE_WEAPON_ORIGIN_Y, BOSS_MELEE_WEAPON_WIDTH, BOSS_MELEE_WEAPON_HEIGHT, BOSS_MELEE_WEAPON_DEPTH, BOSS_MELEE_WEAPON_RESET_OFFSET_X } from '../entities/consts';
 import Enemy from '../entities/Enemy';
 import Player from '../entities/Player';
 
@@ -20,28 +21,19 @@ class BossMeleeWeapon extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.damage = 10;
-    this.attackSpeed = 500;
+    this.damage = BOSS_MELEE_WEAPON_DAMAGE;
+    this.attackSpeed = MELEE_WEAPON_ATTACK_SPEED;
     this.weaponName = weaponName;
     this.wielder = wielder;
     this.effectManager = new EffectManager(this.scene);
 
-    this.setOrigin(3, 3);
-    this.setBodySize(160, 90);
-    this.setDepth(10);
+    this.setOrigin(BOSS_MELEE_WEAPON_ORIGIN_X, BOSS_MELEE_WEAPON_ORIGIN_Y);
+    this.setBodySize(BOSS_MELEE_WEAPON_WIDTH, BOSS_MELEE_WEAPON_HEIGHT);
+    this.setDepth(BOSS_MELEE_WEAPON_DEPTH);
 
     this.setActive(false);
     this.setVisible(false);
     this.body.reset(0, 0);
-
-    // this.wielder.on('animationcomplete', (animation) => {
-    //   if (animation.key === 'boss-attack') {
-    //     console.log('Swing finished!');
-    //     this.setActive(false);
-    //     this.body.reset(0, 0);
-    //     this.body.checkCollision.none = false;
-    //   }
-    // });
   }
 
   preUpdate(time: number, delta: number):void {
@@ -50,7 +42,7 @@ class BossMeleeWeapon extends Phaser.Physics.Arcade.Sprite {
 
     if (this.wielder.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
       this.setFlipX(false);
-      this.body.reset(this.wielder.x + 150, this.wielder.y);
+      this.body.reset(this.wielder.x + BOSS_MELEE_WEAPON_RESET_OFFSET_X, this.wielder.y);
     } else {
       this.setFlipX(true);
       this.body.reset(this.wielder.x, this.wielder.y);

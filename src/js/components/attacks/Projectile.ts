@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import EffectManager from '../effects/EffectManager';
+import { PROJECTILE_SPEED, PROJECTILE_MAXDISTANCE, PROJECTILE_DAMAGE, PROJECTILE_COOLDOWN, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_OFFSET_X, PROJECTILE_OFFSET_Y, AIMED_PROJECTILE_SWAY_MULTIPLIER } from '../entities/consts';
 
 class Projectile extends Phaser.Physics.Arcade.Sprite {
   speed: number;
@@ -21,18 +22,18 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.speed = 300;
-    this.maxDistance = 300;
+    this.speed = PROJECTILE_SPEED;
+    this.maxDistance = PROJECTILE_MAXDISTANCE;
     this.traveledDistance = 0;
 
     this.xSpeed = 0;
     this.ySpeed = 0;
     this.direction = 0;
 
-    this.damage = 10;
-    this.cooldown = 700;
-    this.setBodySize(30, 20)
-      .setOffset(15, 32);
+    this.damage = PROJECTILE_DAMAGE;
+    this.cooldown = PROJECTILE_COOLDOWN;
+    this.setBodySize(PROJECTILE_WIDTH, PROJECTILE_HEIGHT)
+      .setOffset(PROJECTILE_OFFSET_X, PROJECTILE_OFFSET_Y);
     this.effectManager = new EffectManager(this.scene);
   }
 
@@ -55,7 +56,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityX(this.speed);
     } else {
       this.direction = Math.atan((target.x - this.x) / (target.y - this.y));
-      this.direction += ((Math.random() / 10)) + (-(Math.random() / 10));
+      this.direction += ((Math.random() / AIMED_PROJECTILE_SWAY_MULTIPLIER)) + (-(Math.random() / AIMED_PROJECTILE_SWAY_MULTIPLIER));
 
       if (target.y >= this.y) {
         this.xSpeed = this.speed * Math.sin(this.direction);

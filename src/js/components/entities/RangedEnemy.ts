@@ -1,9 +1,12 @@
 import Enemy from './Enemy';
 import Projectiles from '../attacks/Projectiles';
-import Projectile from '../attacks/Projectile';
-import MeleeWeapon from '../attacks/MeleeWeapon';
 import Player from './Player';
 import Play from '../scenes/Play';
+import {
+  ENEMY_DESTROY_TIMEOUT,
+  RANGED_ENEMY_ATTACK_DELAY_LOWER_BOUND,
+  RANGED_ENEMY_ATTACK_DELAY_UPPER_BOUND,
+} from './consts';
 
 class RangedEnemy extends Enemy {
   isDead: boolean;
@@ -16,7 +19,6 @@ class RangedEnemy extends Enemy {
   constructor(scene:Play, x:number, y:number, enemyName: string, player: Player) {
     super(scene, x, y, enemyName, player);
     this.enemyName = enemyName;
-    this.isDead = false;
     this.player = player;
   }
 
@@ -30,7 +32,7 @@ class RangedEnemy extends Enemy {
   }
 
   setAttackDelay():void {
-    this.attackDelay = Phaser.Math.Between(1000, 4000);
+    this.attackDelay = Phaser.Math.Between(RANGED_ENEMY_ATTACK_DELAY_LOWER_BOUND, RANGED_ENEMY_ATTACK_DELAY_UPPER_BOUND);
   }
 
   update(time:number, delta:number):void {
@@ -45,7 +47,7 @@ class RangedEnemy extends Enemy {
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();
-      }, 400);
+      }, ENEMY_DESTROY_TIMEOUT);
       return;
     }
 
@@ -66,18 +68,6 @@ class RangedEnemy extends Enemy {
 
     this.setVelocityX(this.speed);
     this.play(`${this.enemyName}-walk`, true);
-  }
-
-  takesHit(source: Projectile | MeleeWeapon):void {
-    super.takesHit(source);
-    this.setVelocityX(this.speed * 0.1);
-    this.play(`${this.enemyName}-hurt`, true);
-
-    if (this.health <= 0) {
-      this.play(`${this.enemyName}-death`, true);
-      this.setVelocityX(0);
-      this.isDead = true;
-    }
   }
 }
 

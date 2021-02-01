@@ -3,6 +3,7 @@ import Projectile from './Projectile';
 import { getTimestamp } from '../utils/functions';
 import Player from '../entities/Player';
 import Enemy from '../entities/Enemy';
+import { PROJECTILES_FRAME_QUANTITY, PROJECTILES_CENTER_OFFSET_X } from '../entities/consts';
 
 class Projectiles extends Phaser.Physics.Arcade.Group {
   timeFromLastProjectile: number;
@@ -10,7 +11,7 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
     super(scene.physics.world, scene);
 
     this.createMultiple({
-      frameQuantity: 5,
+      frameQuantity: PROJECTILES_FRAME_QUANTITY,
       active: false,
       visible: false,
       key,
@@ -36,11 +37,11 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
     if (initiator.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
       projectile.speed = Math.abs(projectile.speed);
       projectile.setFlipX(false);
-      centerX = center.x + 10;
+      centerX = center.x + PROJECTILES_CENTER_OFFSET_X;
     } else {
       projectile.speed = -Math.abs(projectile.speed);
       projectile.setFlipX(true);
-      centerX = center.x - 10;
+      centerX = center.x - PROJECTILES_CENTER_OFFSET_X;
     }
 
     projectile.fire(centerX, center.y, anim, target);

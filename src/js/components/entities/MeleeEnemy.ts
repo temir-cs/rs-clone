@@ -1,8 +1,9 @@
 import Enemy from './Enemy';
 import Player from './Player';
-import Projectile from '../attacks/Projectile';
-import MeleeWeapon from '../attacks/MeleeWeapon';
 import Play from '../scenes/Play';
+import {
+  ENEMY_DESTROY_TIMEOUT,
+} from './consts';
 
 class MeleeEnemy extends Enemy {
   isDead: boolean;
@@ -11,7 +12,6 @@ class MeleeEnemy extends Enemy {
   constructor(scene:Play, x:number, y:number, enemyName: string, player: Player) {
     super(scene, x, y, enemyName, player);
     this.enemyName = enemyName;
-    this.isDead = false;
   }
 
   update(time:number, delta:number):void {
@@ -23,23 +23,11 @@ class MeleeEnemy extends Enemy {
       setTimeout(() => {
         this.rayGraphics.clear();
         this.destroy();
-      }, 400);
+      }, ENEMY_DESTROY_TIMEOUT);
       return;
     }
     this.setVelocityX(this.speed);
     this.play(`${this.enemyName}-walk`, true);
-  }
-
-  takesHit(source: Projectile | MeleeWeapon):void {
-    super.takesHit(source);
-    this.setVelocityX(this.speed * 0.1);
-    this.play(`${this.enemyName}-hurt`, true);
-
-    if (this.health <= 0) {
-      this.play(`${this.enemyName}-death`, true);
-      this.setVelocityX(0);
-      this.isDead = true;
-    }
   }
 }
 

@@ -6,6 +6,7 @@ import MeleeWeapon from '../attacks/MeleeWeapon';
 import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
 import Play from '../scenes/Play';
+import { BOSS_BODY_WIDTH, BOSS_BODY_HEIGHT, BOSS_OFFSET_X, BOSS_OFFSET_Y, BOSS_SCALE, BOSS_HEALTH, BOSS_SPEED, ENEMY_HIT_VOLUME, BOSS_DEATH_VOLUME, RANGED_ENEMY_ATTACK_DELAY_LOWER_BOUND, RANGED_ENEMY_ATTACK_DELAY_UPPER_BOUND, BOSS_CHANGE_ATTACK_DISTANCE, BOSS_MELEE_ATTACK_DELAY, BOSS_MELEE_ATTACK_ENABLE_TIMEOUT, BOSS_MELEE_ATTACK_DISABLE_TIMEOUT } from './consts';
 
 class Boss extends Enemy {
   isDead: boolean;
@@ -25,14 +26,14 @@ class Boss extends Enemy {
 
   init():void {
     super.init();
-    this.setBodySize(50, 110);
-    this.setOffset(55, 95);
-    this.setScale(1.2);
+    this.setBodySize(BOSS_BODY_WIDTH, BOSS_BODY_HEIGHT);
+    this.setOffset(BOSS_OFFSET_X, BOSS_OFFSET_Y);
+    this.setScale(BOSS_SCALE);
     this.name = 'boss';
-    this.health = 200;
-    this.speed = 40;
-    this.hitSound = this.scene.sound.add('boss-hit', { volume: 0.4 });
-    this.deathSound = this.scene.sound.add('boss-death', { volume: 0.6 });
+    this.health = BOSS_HEALTH;
+    this.speed = BOSS_SPEED;
+    this.hitSound = this.scene.sound.add('boss-hit', { volume: ENEMY_HIT_VOLUME });
+    this.deathSound = this.scene.sound.add('boss-death', { volume: BOSS_DEATH_VOLUME });
 
     this.projectiles = new BossProjectiles(this.scene, 'tesla-ball');
     this.meleeWeapon = new BossMeleeWeapon(this.scene, 0, 0, 'boss-attack', this);
@@ -43,7 +44,7 @@ class Boss extends Enemy {
   }
 
   setAttackDelay():void {
-    this.attackDelay = Phaser.Math.Between(1000, 4000);
+    this.attackDelay = Phaser.Math.Between(RANGED_ENEMY_ATTACK_DELAY_LOWER_BOUND, RANGED_ENEMY_ATTACK_DELAY_UPPER_BOUND);
   }
 
   update(time:number):void {
@@ -70,7 +71,7 @@ class Boss extends Enemy {
       this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     }
 
-    if (this.distanceToPlayer > 275) {
+    if (this.distanceToPlayer > BOSS_CHANGE_ATTACK_DISTANCE) {
       if (this.timeFromLastShot + this.attackDelay <= time) {
         this.play('boss-magic-attack', true);
         this.on('animationcomplete', (animation) => {
@@ -83,18 +84,18 @@ class Boss extends Enemy {
         this.setAttackDelay();
       }
     } else {
-      if (this.timeFromLastSwing + 3000 <= time) {
+      if (this.timeFromLastSwing + BOSS_MELEE_ATTACK_DELAY <= time) {
         this.setVelocityX(0);
         this.play('boss-attack', true);
         setTimeout(() => {
           this.meleeWeapon.swing();
-        }, 400);
+        }, BOSS_MELEE_ATTACK_ENABLE_TIMEOUT);
         setTimeout(() => {
           this.meleeWeapon.setActive(false);
           this.meleeWeapon.body.reset(0, 0);
           this.meleeWeapon.body.checkCollision.none = false;
           this.stopThenWalk();
-        }, 700);
+        }, BOSS_MELEE_ATTACK_DISABLE_TIMEOUT);
         this.timeFromLastSwing = time;
       }
     }
