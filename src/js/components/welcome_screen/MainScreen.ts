@@ -51,14 +51,14 @@ class MainScreen {
           <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
         addon: `
         <ul class="team__list">
-          <li class="team__item">
+          <li class="team__item  team__item--01">
             <img class="team__img" src="./assets/img/welcome_screen/icon1.png">
             <p class="team__descr">
               <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName01}</span>
               ${dictionaty.WelcomeScreen.teamMemberDescr01}
               </p>
           </li>
-          <li class="team__item">
+          <li class="team__item  team__item--02">
             <img class="team__img" src="./assets/img/welcome_screen/icon2.png">
             <p class="team__descr">
               <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName02}</span>
@@ -66,14 +66,14 @@ class MainScreen {
               ${dictionaty.WelcomeScreen.teamMemberDescr02}
             </p>
           </li>
-          <li class="team__item">
+          <li class="team__item  team__item--03">
             <img class="team__img" src="./assets/img/welcome_screen/icon3.png">
             <p class="team__descr">
               <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName03}</span>
               ${dictionaty.WelcomeScreen.teamMemberDescr03}
             </p>
           </li>
-          <li class="team__item">
+          <li class="team__item  team__item--04">
             <img class="team__img" src="./assets/img/welcome_screen/icon4.png">
             <p class="team__descr">
               <span class="team__subheader">${dictionaty.WelcomeScreen.teamMemberName04}</span>
@@ -87,7 +87,18 @@ class MainScreen {
       tutorial: {
         text: `
         ${dictionaty.WelcomeScreen.howToPlayText}
-        <img class="content__controls" src="./assets/img/welcome_screen/controls.png">`,
+        <div class="content__controls  controls">
+          <div class="controls__btn  controls__btn--01"></div>
+          <div class="controls__btn  controls__btn--02"></div>
+          <div class="controls__btn  controls__btn--03"></div>
+          <div class="controls__btn  controls__btn--04"></div>
+          <div class="controls__btn  controls__btn--05"></div>
+          <div class="controls__img  controls__img--01"></div>
+          <div class="controls__img  controls__img--02"></div>
+          <div class="controls__img  controls__img--03"></div>
+          <div class="controls__img  controls__img--04"></div>
+          <div class="controls__img  controls__img--05"></div>
+        </div>`,
         form: `
           <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
       },

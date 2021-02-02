@@ -46,6 +46,46 @@
   }
 }
 
+.page-footer__goblin-container {
+  position: relative;
+  margin: 0 auto;
+  margin-top: -15rem;
+  // z-index: -2;
+  left: 2rem;
+  width: 74rem;
+  height: 6.4rem;
+  // top: 300px;
+  // left: ;
+}
+
+@keyframes goblinAnim {
+  0% {
+    left: 0;
+    transform: scaleX(1);
+  }
+  49% {
+    left: 100%;
+    transform: scaleX(1);
+  }
+  50% {
+    left: 100%;
+    transform: scaleX(-1);
+  }
+  100% {
+    left: 0;
+    transform: scaleX(-1);
+  }
+}
+
+.page-footer__goblin {
+  position: absolute;
+  width: 7.8rem;
+  height: 6.3rem;
+  top: 0;
+  left: 0;
+  animation: goblinAnim 14s linear infinite;
+}
+
 
 
 @media only screen and #{$tablet-width} {
@@ -86,6 +126,16 @@
       color: $background-light;
     }
   }
+
+  .page-footer__goblin-container {
+    margin: 0 auto;
+    margin-top: -11rem;
+    // left: 2rem;
+    width: 50rem;
+    height: 6.4rem;
+
+  }
+
 }
 
 
@@ -107,5 +157,9 @@
   .page-footer__img {
     width: 10rem;
     height: 3.6rem;
+  }
+
+  .page-footer__goblin-container {
+    display: none;
   }
 }

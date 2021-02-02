@@ -5,12 +5,35 @@
   flex-direction: column;
 }
 
+@keyframes teamItemAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .team__item {
+  opacity: 0;
   margin-bottom: 3rem;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  // outline: 1px green solid;
+  animation: teamItemAnim 1s forwards;
+
+  &--01 {
+    animation-delay: 0;
+  }
+  &--02 {
+    animation-delay: 0.6s;
+  }
+  &--03 {
+    animation-delay: 1.2s;
+  }
+  &--04 {
+    animation-delay: 1.8s;
+  }
 }
 
 .team__img {
