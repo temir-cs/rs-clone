@@ -58,6 +58,9 @@
   height: 29.5rem;
 }
 
+.hidden {
+  display: none;
+}
 
 @media only screen and #{$tablet-width} {
   .content {
