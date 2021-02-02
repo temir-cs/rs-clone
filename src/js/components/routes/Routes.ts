@@ -18,7 +18,6 @@ class Routes {
   warnTimeout: number;
   warn: string;
   mainScreen: MainScreen;
-  game: any;
   constructor(gameStart:()=>void) {
     const dictionary = getCurrentLanguageDictionary();
     this.mainScreen = new MainScreen();
@@ -35,7 +34,7 @@ class Routes {
       login: new Login(),
       register: new Register()
     };
-    this.game = this.gameStart();
+    this.gameStart();
     mobileToggleMenu();
   }
 
