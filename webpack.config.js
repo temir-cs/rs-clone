@@ -63,7 +63,8 @@ module.exports = {
     plugins: [
       new HtmlWebpackPlugin({
           template: path.resolve(__dirname, 'src', 'html/index.html'),
-          title: 'Game',
+          title: 'Pixel Tale Game',
+          favicon: 'src/assets/img/welcome_screen/favicon.png',
       }),
       new CopyPlugin({
           patterns: [
