@@ -8,8 +8,8 @@ type textStructureType = {
 }
 
 class MainScreen {
-  content: { main: textStructureType, about: textStructureType, tutorial: textStructureType,
-  lang: textStructureType, article: textStructureType};
+  content: { main: textStructureType, team: textStructureType, howtoplay: textStructureType,
+  lang: textStructureType, about: textStructureType};
 
   addonContainer: HTMLElement;
   textContainer: HTMLElement;
@@ -19,13 +19,13 @@ class MainScreen {
   constructor() {
     const dictionaty = getCurrentLanguageDictionary();
 
-    const tutorial = document.querySelector('.tutorial');
+    const tutorial = document.querySelector('.how-to-play');
     tutorial.innerHTML = `${dictionaty.WelcomeScreen.howToPlay}`;
 
-    const article = document.querySelector('.article');
+    const article = document.querySelector('.about');
     article.innerHTML = `${dictionaty.WelcomeScreen.article}`;
 
-    const team = document.querySelector('.about');
+    const team = document.querySelector('.team');
     team.innerHTML = `${dictionaty.WelcomeScreen.team}`;
 
     const getLang = document.querySelector('.lang');
@@ -44,7 +44,7 @@ class MainScreen {
         form: `
           <a href="#game" class="form__btn">${dictionaty.WelcomeScreen.letsGo}</a>`
       },
-      about: {
+      team: {
         text: `
         ${dictionaty.WelcomeScreen.teamText} `,
         form: `
@@ -84,7 +84,7 @@ class MainScreen {
         </ul>
         `
       },
-      tutorial: {
+      howtoplay: {
         text: `
         ${dictionaty.WelcomeScreen.howToPlayText}
         <div class="content__controls  controls">
@@ -108,7 +108,7 @@ class MainScreen {
         form: `
           <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
       },
-      article: {
+      about: {
         text: `
           ${dictionaty.WelcomeScreen.articleText}
           <a class="content__link" href="#">${dictionaty.WelcomeScreen.articleLink}</a>
@@ -130,7 +130,7 @@ class MainScreen {
     this.addonContainer.innerHTML = (this.content[type].addon) ? this.content[type].addon : '';
     this.formContainer.innerHTML = this.content[type].form;
 
-    if (type === 'article') {
+    if (type === 'about') {
       this.popUpText.innerHTML = this.content[type].popUp;
       const popUpLink = document.querySelector('.content__link--small');
       popUpLink.addEventListener('click', () => {

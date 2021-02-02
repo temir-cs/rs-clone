@@ -61,7 +61,7 @@ class Routes {
       if (!user) {
         this.renderRegForm();
       }
-    } else if (hashLocation === 'tutorial' || hashLocation === 'about' || hashLocation === 'article') {
+    } else if (hashLocation === 'howtoplay' || hashLocation === 'team' || hashLocation === 'about') {
       this.mainScreen.init(hashLocation);
     } else if (hashLocation === 'lang') {
       this.mainScreen.init(hashLocation);
