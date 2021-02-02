@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Phaser from 'phaser';
 
 import collidable from '../mixins/collidable';
@@ -99,7 +100,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
   }
 
-  update(time:number, delta:number):void {
+  update(time:number, delta?:number):void {
     this.patrol(time);
   }
 
