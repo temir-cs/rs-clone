@@ -3,6 +3,8 @@ import Login from '../forms/LoginForm';
 import MainScreen from '../welcome_screen/MainScreen';
 import { requestToServer, getCredentials } from './utils';
 import { clearAllBeforeGame,
+          hidContainer,
+          revealContainer,
           mobileToggleMenu,
           getCurrentLanguageDictionary } from '../utils/functions';
 
@@ -16,6 +18,7 @@ class Routes {
   warnTimeout: number;
   warn: string;
   mainScreen: MainScreen;
+  game: any;
   constructor(gameStart:()=>void) {
     const dictionary = getCurrentLanguageDictionary();
     this.mainScreen = new MainScreen();
@@ -32,6 +35,7 @@ class Routes {
       login: new Login(),
       register: new Register()
     };
+    this.game = this.gameStart();
     mobileToggleMenu();
   }
 
@@ -48,9 +52,11 @@ class Routes {
     const dictionary = getCurrentLanguageDictionary();
     const hashLocation = window.location.hash.substring(1);
     if (hashLocation === 'game') {
-      clearAllBeforeGame();
-      this.gameStart();
+      hidContainer('.main-container');
+      revealContainer('#game');
     } else if (hashLocation === 'main') {
+      revealContainer('.main-container');
+      hidContainer('#game');
       this.mainScreen.init(hashLocation);
       const user = localStorage.getItem('user');
       if (!user) {

@@ -11,9 +11,21 @@ const getTimestamp = ():number => {
 };
 
 const clearAllBeforeGame = ():void => {
-  console.log('clear');
-  const { body } = document;
-  body.innerHTML = '<div id="game"></div>';
+  // console.log('clear');
+  // const { body } = document;
+  // body.innerHTML = '<div id="game"></div>';
+};
+
+const hidContainer = (selector: string):void => {
+  const container = document.querySelector(selector);
+  if (!container.classList.contains('hidden')) {
+      container.classList.add('hidden');
+  }
+};
+
+const revealContainer = (selector: string):void => {
+  const container = document.querySelector(selector);
+  container.classList.remove('hidden');
 };
 
 const mobileToggleMenu = ():void => {
@@ -41,6 +53,8 @@ const getCurrentLanguageDictionary = ():JSONRU | JSONEN => {
 export {
   getTimestamp,
   clearAllBeforeGame,
+  hidContainer,
+  revealContainer,
   mobileToggleMenu,
   stopSpinner,
   getCurrentLanguageDictionary
