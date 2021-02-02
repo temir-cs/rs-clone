@@ -1,3 +1,8 @@
+import {
+  JSONRU,
+  JSONEN
+} from '../interfaces/interfaces';
+
 const lang = require('../../../assets/lang/lang.json');
 
 const getTimestamp = ():number => {
@@ -28,7 +33,7 @@ const stopSpinner = ():void => {
   loaderSpinner.classList.add('loader--hidden');
 };
 
-const getCurrentLanguageDictionary = ():any => {
+const getCurrentLanguageDictionary = ():JSONRU | JSONEN => {
   const currentLang = localStorage.getItem('lang');
   return currentLang === 'RU' ? lang.RU : lang.EN;
 };

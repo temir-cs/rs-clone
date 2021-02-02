@@ -79,10 +79,6 @@ const config: Phaser.Types.Core.GameConfig = {
   parent: 'game',
 };
 
-// window.onload = () => {
-//   const game = new Phaser.Game(config);
-// };
-
 export default function startGame():void {
    const game = new Phaser.Game(config);
 }

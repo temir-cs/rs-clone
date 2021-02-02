@@ -142,6 +142,7 @@ export const FIRETRAP_BODY_HEIGHT = 1;
 export const FIRETRAP_OFFSET_X = 50;
 export const FIRETRAP_OFFSET_Y = 130;
 
+export const SPIKETRAP_ORIGIN_X = 0.5;
 export const SPIKETRAP_ORIGIN_Y = 0.75;
 export const SPIKETRAP_BODY_WIDTH = 72;
 export const SPIKETRAP_BODY_HEIGHT = 64;

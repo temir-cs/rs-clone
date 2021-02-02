@@ -11,7 +11,7 @@
     "browser": true
   },
   "rules": {
-    //"@typescript-eslint/rule-name": "error",
+    "@typescript-eslint/rule-name": "error",
     "func-names": [
       "error",
       "never"
@@ -43,7 +43,7 @@
     ],
     "no-console": "off",
     // "no-console": "error"
-    // "no-magic-numbers": ["error", { "ignore": [0, 1] }],
+    "no-magic-numbers": ["error", { "ignore": [0, 1, -1, 0.5] }],
     "no-inline-comments": "error",
     "@typescript-eslint/no-var-requires": 0,
     "lines-between-class-members": [

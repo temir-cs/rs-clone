@@ -2,6 +2,21 @@ import * as Phaser from 'phaser';
 import Play from '../scenes/Play';
 import { Stats, FontConfig } from '../interfaces/interfaces';
 
+import {
+  HUD_KEY_IMAGE_SCALE,
+  HUD_KEY_IMAGE_INIALPHA,
+  HUD_KEY_IMAGE_X_SHIFT,
+  HUD_KEY_IMAGE_Y_SHIFT,
+  HUD_COIN_IMAGE_X_SHIFT,
+  HUD_COIN_IMAGE_Y_SHIFT,
+  HUD_COIN_TXT_Y_SHIFT,
+  HUD_AVA_IMAGE_X_SHIFT,
+  HUD_AVA_IMAGE_Y_SHIFT,
+  HUD_HEART_IMAGE_WIDTH,
+  HUD_HEART_IMAGE_X_SHIFT,
+  HUD_HEART_IMAGE_Y_SHIFT
+} from './consts';
+
 class Hud {
   fontSize?: number;
   containerWidth?: number;
@@ -30,25 +45,26 @@ class Hud {
     };
     this.avatar = null;
     this.lives = [];
-    this.keyImage = this.scene.add.image(this.rightTopCorner.x - 20, this.rightTopCorner.y + 40, 'key-static')
+    this.keyImage = this.scene.add.image(this.rightTopCorner.x + HUD_KEY_IMAGE_X_SHIFT, this.rightTopCorner.y + HUD_KEY_IMAGE_Y_SHIFT, 'key-static')
         .setOrigin(1, 0)
-        .setScale(1.2)
+        .setScale(HUD_KEY_IMAGE_SCALE)
         .setTintFill(0xffffff)
-        .setAlpha(0.6)
+        .setAlpha(HUD_KEY_IMAGE_INIALPHA)
         .setScrollFactor(0);
     this.stats = scene.getCurrentStats();
     this.coinCount = this.stats.coins;
-    this.coinsImage = this.scene.add.image(this.rightTopCorner.x - 80, this.rightTopCorner.y + 4, 'coin-static')
+    this.coinsImage = this.scene.add.image(this.rightTopCorner.x + HUD_COIN_IMAGE_X_SHIFT, this.rightTopCorner.y + HUD_COIN_IMAGE_Y_SHIFT, 'coin-static')
         .setOrigin(0)
         .setScale(1)
         .setScrollFactor(0);
-    const coinsTextPosition = [this.coinsImage.x + this.coinsImage.width, this.coinsImage.y + 7];
+    const coinsTextPosition = [this.coinsImage.x + this.coinsImage.width, this.coinsImage.y + HUD_COIN_TXT_Y_SHIFT];
     this.coinsText = this.scene.add.text(coinsTextPosition[0], coinsTextPosition[1], `${this.coinCount}`, this.hudFont)
       .setScrollFactor(0);
   }
 
   renderAvatar(hero:string):void {
-    this.avatar = this.scene.add.image(this.leftTopCorner.x + 10, this.leftTopCorner.y + 10, `${hero}-avatar`)
+    this.avatar = this.scene.add.image(this.leftTopCorner.x + HUD_AVA_IMAGE_X_SHIFT,
+                                      this.leftTopCorner.y + HUD_AVA_IMAGE_Y_SHIFT, `${hero}-avatar`)
       .setOrigin(0)
       .setScrollFactor(0);
   }
@@ -58,7 +74,7 @@ class Hud {
 
     for (let i = 0; i < lives; i += 1) {
       this.lives
-        .push(this.scene.add.image(this.leftTopCorner.x + this.avatar.width + 10 + (i * 30), this.leftTopCorner.y + 30, 'heart-static')
+        .push(this.scene.add.image(this.leftTopCorner.x + this.avatar.width + HUD_HEART_IMAGE_X_SHIFT + (i * HUD_HEART_IMAGE_WIDTH), this.leftTopCorner.y + HUD_HEART_IMAGE_Y_SHIFT, 'heart-static')
         .setOrigin(0)
         .setScrollFactor(0));
     }
