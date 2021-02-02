@@ -28,6 +28,7 @@ import {
   ENEMY_RAYCAST_PRECISION,
   ENEMY_DEATH_VELOCITY_Y,
   ENEMY_HURT_SPEED_MULTIPLIER,
+  ENEMY_DEATH_TINT_COLOR,
 } from './consts';
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
@@ -145,7 +146,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     if (this.health <= 0) {
       EventEmitter.emit('ENEMY_KILLED');
-      this.setTint(0xff0000);
+      this.setTint(ENEMY_DEATH_TINT_COLOR);
       this.setVelocity(0, ENEMY_DEATH_VELOCITY_Y);
       this.play(`${this.enemyName}-death`, true);
       this.setVelocityX(0);
