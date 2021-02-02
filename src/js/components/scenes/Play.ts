@@ -215,6 +215,11 @@ class Play extends Phaser.Scene {
     if (this.traps) {
       this.traps.update();
     }
+    window.onhashchange = () => {
+      this.registry.set('level', DEFAULT_LEVEL);
+      this.scene.start('MenuScene');
+      this.game.sound.stopAll();
+    };
   }
 
   checkLevel():void {
