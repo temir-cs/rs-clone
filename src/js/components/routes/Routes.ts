@@ -13,13 +13,13 @@ const WARN_TIMEOUT = 2000;
 class Routes {
   routes: { login: Login, register: Register; };
   startHash: string;
-  credentials: any;
-  gameStart: any;
+  credentials: {username:string, password:string};
+  gameStart: ()=>void;
   warnTimeout: number;
   warn: string;
   mainScreen: MainScreen;
   game: any;
-  constructor(gameStart) {
+  constructor(gameStart:()=>void) {
     const dictionary = getCurrentLanguageDictionary();
     this.mainScreen = new MainScreen();
     this.gameStart = gameStart;
@@ -27,7 +27,7 @@ class Routes {
     this.warn = `${dictionary.WelcomeScreen.usernameWarning}`;
   }
 
-  init() {
+  init():void {
     window.addEventListener('hashchange', (event) => this.onRouteChange(event));
     this.refreshHash();
     this.mainScreen.init('main');
@@ -39,15 +39,16 @@ class Routes {
     mobileToggleMenu();
   }
 
-  renderRegForm() {
+  renderRegForm():void {
     this.refreshHash('register');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   refreshHash(path = 'main'):void {
     window.location.hash = `#${path}`;
   }
 
-  onRouteChange(event) {
+  onRouteChange(event:HashChangeEvent):void {
     const dictionary = getCurrentLanguageDictionary();
     const hashLocation = window.location.hash.substring(1);
     if (hashLocation === 'game') {
@@ -98,7 +99,6 @@ class Routes {
       (async () => {
         const responseData = await requestToServer(credentials, hashLocation);
         if (responseData.status === 'ok') {
-          // this.routes[path].removeForm();
           localStorage.setItem('user', credentials.username);
           this.refreshHash('game');
         } else if (hashLocation === 'signup') {

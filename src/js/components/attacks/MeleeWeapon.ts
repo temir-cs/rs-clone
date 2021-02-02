@@ -2,6 +2,7 @@ import * as Phaser from 'phaser';
 import EffectManager from '../effects/EffectManager';
 import Player from '../entities/Player';
 import Enemy from '../entities/Enemy';
+import { MELEE_WEAPON_DAMAGE, MELEE_WEAPON_ATTACK_SPEED, MELEE_WEAPON_ORIGIN_X, MELEE_WEAPON_ORIGIN_Y, MELEE_WEAPON_WIDTH, MELEE_WEAPON_HEIGHT, MELEE_WEAPON_DEPTH, MELEE_WEAPON_RESET_OFFSET_X } from '../entities/consts';
 
 class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
   attackSpeed: number;
@@ -19,15 +20,15 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.damage = 15;
-    this.attackSpeed = 500;
+    this.damage = MELEE_WEAPON_DAMAGE;
+    this.attackSpeed = MELEE_WEAPON_ATTACK_SPEED;
     this.weaponName = weaponName;
     this.wielder = player;
     this.effectManager = new EffectManager(this.scene);
 
-    this.setOrigin(1.2, 1.2);
-    this.setBodySize(80, 45);
-    this.setDepth(10);
+    this.setOrigin(MELEE_WEAPON_ORIGIN_X, MELEE_WEAPON_ORIGIN_Y);
+    this.setBodySize(MELEE_WEAPON_WIDTH, MELEE_WEAPON_HEIGHT);
+    this.setDepth(MELEE_WEAPON_DEPTH);
 
     this.setActive(false);
     this.setVisible(false);
@@ -48,7 +49,7 @@ class MeleeWeapon extends Phaser.Physics.Arcade.Sprite {
 
     if (this.wielder.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
       this.setFlipX(false);
-      this.body.reset(this.wielder.x + 45, this.wielder.y);
+      this.body.reset(this.wielder.x + MELEE_WEAPON_RESET_OFFSET_X, this.wielder.y);
     } else {
       this.setFlipX(true);
       this.body.reset(this.wielder.x, this.wielder.y);

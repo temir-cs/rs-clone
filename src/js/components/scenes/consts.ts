@@ -1,3 +1,21 @@
+export const TEXT_HOVER_COLOR = 0x0FFF00;
+export const SCREEN_CENTER_DIVIDER = 2;
+export const PROGRESS_BOX_WIDTH = 320;
+export const PROGRESS_BOX_HEIGHT = 50;
+export const PROGRESS_BOX_OFFSET_X = 160;
+export const PROGRESS_BOX_COLOR = 0x222222;
+export const PROGRESS_BOX_OPACITY = 0.8;
+export const PROGRESS_BAR_COLOR = 0xFFA500;
+export const PROGRESS_BAR_MARGIN = 10;
+export const PROGRESS_BAR_HEIGHT = 30;
+export const PROGRESS_BAR_VALUE_MULTIPLIER = 300;
+export const LOADING_TEXT_OFFSET_Y = 20;
+export const PERCENT_TEXT_OFFSET_Y = 25;
+export const PERCENT_TEXT_DEPTH = 2;
+export const PERCENT_TEXT_MULTIPLIER = 100;
+export const ASSET_TEXT_OFFSET_X = 160;
+export const ASSET_TEXT_OFFSET_Y = 70;
+
 export const DEFAULT_LEVEL = 1;
 export const FOREST_LEVEL = 1;
 export const CASTLE_LEVEL = 2;
@@ -10,7 +28,7 @@ export const DEFAULT_STATS = {
 };
 
 export const AVAILABLE_LEVELS = 4;
-export const MUSIC_VOLUME_LEVEL = 0.08;
+export const MUSIC_VOLUME_LEVEL = 0.04;
 export const BOSS_LVL_WIDTH = 1920;
 export const BOSS_LVL_HEIGHT = 1280;
 export const WORLD_Y1 = -100;

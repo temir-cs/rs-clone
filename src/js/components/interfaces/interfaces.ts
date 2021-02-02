@@ -90,3 +90,97 @@ export interface colliderType {
   rayCast: (body: Phaser.Physics.Arcade.Body, rayLength:number, precision:number, steepness:number)
             =>{ray: Phaser.Geom.Line, hasHit: boolean};
 }
+
+// json langs file interface:
+export interface JSONWelcomeScreen {
+    howToPlay: string;
+    howToPlayText: string;
+    article: string;
+    articleText: string;
+    articleLink: string;
+    articleCopyrightLink: string;
+    articlePopUp01: string;
+    articlePopUp02: string;
+    team: string;
+    teamText: string;
+    teamMemberName01: string;
+    teamMemberDescr01: string;
+    teamMemberName02: string;
+    teamMemberStriked: string;
+    teamMemberDescr02: string;
+    teamMemberName03: string;
+    teamMemberDescr03: string;
+    teamMemberName04: string;
+    teamMemberDescr04: string;
+    letsGo: string;
+    close: string;
+    description: string;
+    usernameWarning: string;
+    usernameTakenWarning: string;
+    userDoesNotExistWarning: string;
+    regAndGo: string;
+    autoAndGo: string;
+    haveLogin: string;
+    signInBtn: string;
+    signUpBtn: string;
+    firstTime: string;
+    getLang: string;
+    switchLang: string;
+}
+
+export interface JSONMenu {
+    playBtn: string;
+    levelsBtn: string;
+    highscoreBtn: string;
+    settingBtn: string;
+}
+
+export interface JSONLevels {
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
+}
+
+export interface JSONHeroSelectScene {
+    knightName: string;
+    knightClass: string;
+    knightCombat: string;
+    knightHealth: string;
+    knightSpeed: string;
+    mageName: string;
+    mageClass: string;
+    mageCombat: string;
+    mageHealth: string;
+    mageSpeed: string;
+}
+
+export interface JSONSettingsScene {
+    fullScreen: string;
+    lang: string;
+}
+
+export interface JSONGameOverScene {
+    gameOver: string;
+    totalKills: string;
+    totalCoins: string;
+    newGame: string;
+    mainMenu: string;
+}
+
+export interface JSONRU {
+    WelcomeScreen: JSONWelcomeScreen;
+    Menu: JSONMenu;
+    Levels: JSONLevels;
+    HeroSelectScene: JSONHeroSelectScene;
+    SettingsScene: JSONSettingsScene;
+    GameOverScene:JSONGameOverScene;
+}
+export interface JSONEN {
+    WelcomeScreen: JSONWelcomeScreen;
+    Menu: JSONMenu;
+    Levels: JSONLevels;
+    HeroSelectScene: JSONHeroSelectScene;
+    SettingsScene: JSONSettingsScene;
+    GameOverScene: JSONGameOverScene;
+}

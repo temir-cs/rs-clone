@@ -1,4 +1,11 @@
 import * as Phaser from 'phaser';
+import {
+  HEALTH_BAR_WIDTH,
+  HEALTH_BAR_HEIGHT,
+  HEALTH_BAR_DEPTH,
+  HEALTH_BAR_MARGIN,
+  HEALTH_BAR_WIDTH_DIVIDER
+} from './consts';
 
 class HealthBar {
   public bar: Phaser.GameObjects.Graphics;
@@ -20,12 +27,12 @@ class HealthBar {
     this.initialValue = health;
 
     this.size = {
-      width: 140,
-      height: 18
+      width: HEALTH_BAR_WIDTH,
+      height: HEALTH_BAR_HEIGHT
     };
 
     this.pixelPerHealth = this.size.width / this.value;
-    scene.add.existing(this.bar).setDepth(2);
+    scene.add.existing(this.bar).setDepth(HEALTH_BAR_DEPTH);
     this.draw(this.x, this.y, this.scale);
   }
 
@@ -46,7 +53,7 @@ class HealthBar {
   draw(x:number, y:number, scale:number):Phaser.GameObjects.Graphics {
     this.bar.clear();
     const { width, height } = this.size;
-    const margin = 2;
+    const margin = HEALTH_BAR_MARGIN;
 
     this.bar.fillStyle(0x000);
     this.bar.fillRect(x, y, width + margin, height + margin);
@@ -56,7 +63,7 @@ class HealthBar {
 
     const healthWidth:number = Math.floor(this.value * this.pixelPerHealth);
 
-    if (healthWidth <= this.size.width / 3) {
+    if (healthWidth <= this.size.width / HEALTH_BAR_WIDTH_DIVIDER) {
       this.bar.fillStyle(0xFF0000);
     } else {
       this.bar.fillStyle(0x00FF00);

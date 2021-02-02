@@ -7,7 +7,8 @@ import {
   CENTER_POSITION_DIVIDER,
   BACK_BTN_SHIFT,
   MENU_BG_SCALE,
-  MENU_ORIGIN_Y
+  MENU_ORIGIN_Y,
+  TEXT_HOVER_COLOR
 } from './consts';
 
 class BaseScene extends Phaser.Scene {
@@ -50,7 +51,7 @@ class BaseScene extends Phaser.Scene {
         });
 
         backButton.on('pointerover', () => {
-          backButton.setTint(0x0FFF00);
+          backButton.setTint(TEXT_HOVER_COLOR);
         });
 
         backButton.on('pointerout', () => {

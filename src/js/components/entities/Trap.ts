@@ -3,6 +3,16 @@ import initAnims from '../animations/trapsAnims';
 import { getTimestamp } from '../utils/functions';
 import anims from '../mixins/anims';
 import Player from './Player';
+import {
+  TRAP_ACTIVE_BODY_HEIGHT,
+  TRAP_ACTIVE_OFFSET_Y,
+  TRAP_ATTACK_SOUND_VOLUME,
+  TRAP_OFFSET_X,
+  TRAP_SLEEP_BODY_WIDTH,
+  TRAP_SLEEP_OFFSET_Y,
+  TRAP_SLEEP_TIME_LOWER_BOUND,
+  TRAP_SLEEP_TIME_UPPER_BOUND,
+} from './consts';
 
 class Trap extends Phaser.Physics.Arcade.Sprite {
   attackSound: Phaser.Sound.BaseSound;
@@ -32,10 +42,9 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   }
 
   init():void {
-    this.sleepTime = Phaser.Math.Between(1500, 4000);
+    this.sleepTime = Phaser.Math.Between(TRAP_SLEEP_TIME_LOWER_BOUND, TRAP_SLEEP_TIME_UPPER_BOUND);
     this.attackTime = 0;
-    this.attackSound = this.scene.sound.add(`${this.key}`, { volume: 0.05 });
-    // this.attackSound = this.scene.sound.add('fire-trap', { volume: 0.2 });
+    this.attackSound = this.scene.sound.add(`${this.key}`, { volume: TRAP_ATTACK_SOUND_VOLUME });
     this.isAttacking = false;
     this.scene.add.existing(this);
     initAnims(this.scene.anims);
@@ -54,8 +63,8 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   }
 
   sleep():void {
-    this.setBodySize(30, 30);
-    this.setOffset(50, 130);
+    this.setBodySize(TRAP_SLEEP_BODY_WIDTH, TRAP_SLEEP_BODY_WIDTH);
+    this.setOffset(TRAP_OFFSET_X, TRAP_SLEEP_OFFSET_Y);
     this.play(`${this.key}-sleep`, true);
   }
 
@@ -65,8 +74,8 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
   }
 
   activate():void {
-    this.setBodySize(30, 110);
-    this.setOffset(50, 0);
+    this.setBodySize(TRAP_SLEEP_BODY_WIDTH, TRAP_ACTIVE_BODY_HEIGHT);
+    this.setOffset(TRAP_OFFSET_X, TRAP_ACTIVE_OFFSET_Y);
     this.play(`${this.key}`, true);
     if (this.isPlayerComing()) {
       this.attackSound.play();

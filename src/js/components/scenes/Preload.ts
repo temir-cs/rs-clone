@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
 import WebFontFile from '../loaders/WebFontLoader';
-import { AVAILABLE_LEVELS } from './consts';
+import { ASSET_TEXT_OFFSET_X, ASSET_TEXT_OFFSET_Y, AVAILABLE_LEVELS, LOADING_TEXT_OFFSET_Y, PERCENT_TEXT_DEPTH, PERCENT_TEXT_MULTIPLIER, PERCENT_TEXT_OFFSET_Y, PROGRESS_BAR_COLOR, PROGRESS_BAR_HEIGHT, PROGRESS_BAR_MARGIN, PROGRESS_BAR_VALUE_MULTIPLIER, PROGRESS_BOX_COLOR, PROGRESS_BOX_HEIGHT, PROGRESS_BOX_OFFSET_X, PROGRESS_BOX_OPACITY, PROGRESS_BOX_WIDTH, SCREEN_CENTER_DIVIDER } from './consts';
 
 class Preload extends Phaser.Scene {
   text: Phaser.GameObjects.Text;
@@ -9,6 +9,46 @@ class Preload extends Phaser.Scene {
   }
 
   preload():void {
+    // Loading Bar
+    const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / SCREEN_CENTER_DIVIDER;
+    const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / SCREEN_CENTER_DIVIDER;
+
+    const progressBar = this.add.graphics().setDepth(1);
+    const progressBox = this.add.graphics();
+
+    progressBox.fillStyle(PROGRESS_BOX_COLOR, PROGRESS_BOX_OPACITY);
+    progressBox.fillRect(screenCenterX - PROGRESS_BOX_OFFSET_X, screenCenterY, PROGRESS_BOX_WIDTH, PROGRESS_BOX_HEIGHT);
+
+    // Loading text
+    const loadingText = this.add.text(screenCenterX, screenCenterY - LOADING_TEXT_OFFSET_Y, 'Loading...', { font: '20px monospace' });
+    const percentText = this.add.text(screenCenterX - PROGRESS_BAR_MARGIN, screenCenterY + PERCENT_TEXT_OFFSET_Y, '0 %', { font: '20px monospace' });
+    const assetText = this.add.text(screenCenterX - ASSET_TEXT_OFFSET_X, screenCenterY + ASSET_TEXT_OFFSET_Y, '', { font: '20px monospace' });
+
+    loadingText.setOrigin(0.5, 0.5);
+    percentText.setOrigin(0.5, 0.5).setDepth(PERCENT_TEXT_DEPTH);
+    assetText.setOrigin(0, 0.5);
+
+    this.load.on('progress', (value) => {
+      console.log(value);
+      progressBar.clear();
+      progressBar.fillStyle(PROGRESS_BAR_COLOR, 1);
+      progressBar.fillRect(screenCenterX + PROGRESS_BAR_MARGIN - PROGRESS_BOX_OFFSET_X,
+        screenCenterY + PROGRESS_BAR_MARGIN, PROGRESS_BAR_VALUE_MULTIPLIER * value, PROGRESS_BAR_HEIGHT);
+      percentText.setText(`${parseInt(String(value * PERCENT_TEXT_MULTIPLIER), 10)}%`);
+    });
+
+    this.load.on('fileprogress', (file) => {
+      assetText.setText(`Loading asset: ${file.key}`);
+    });
+
+    this.load.on('complete', () => {
+      progressBar.destroy();
+      progressBox.destroy();
+      loadingText.destroy();
+      percentText.destroy();
+      assetText.destroy();
+    });
+
     // Level map tiles
     this.load.tilemapTiledJSON('map', './assets/json/01_forest_map.json');
     this.load.image('tiles-1', './assets/img/levels/forest/01_forest_platforms.png');

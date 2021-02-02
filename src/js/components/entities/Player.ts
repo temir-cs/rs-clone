@@ -12,6 +12,35 @@ import EventEmitter from '../events/Emitter';
 import MeleeWeapon from '../attacks/MeleeWeapon';
 import { getTimestamp } from '../utils/functions';
 import { colliderType, SceneConfig } from '../interfaces/interfaces';
+import {
+  PLAYER_GRAVITY,
+  JUMP_HEIGHT,
+  CONSECUTIVE_JUMPS,
+  STEP_VOLUME,
+  JUMP_VOLUME,
+  ZAP_VOLUME,
+  SWORD_VOLUME,
+  PLAYER_HIT_VOLUME,
+  PLAYER_DEATH_VOLUME,
+  PLAYER_BODY_WIDTH,
+  PLAYER_BODY_HEIGHT,
+  PLAYER_BODY_OFFSET_X,
+  PLAYER_BODY_OFFSET_Y,
+  PLAYER_BODY_RESET_Y,
+  PLAYER_BODY_ORIGIN_X,
+  PLAYER_BODY_ORIGIN_Y,
+  PLAYER_SIT_DOWN_OFFSET_Y,
+  PLAYER_DEATH_EVENT_DELAY,
+  PLAYER_DEATH_EVENT_EMIT_TIMEOUT,
+  RUN_SOUND_DELAY,
+  PLAYER_DAMAGE_TWEEN_DURATION,
+  PLAYER_OFF_WORLD_BOUNDS_HEIGHT
+} from './consts';
+import {
+  KNIGHT_HEALTH,
+  KNIGHT_SPEED,
+  KNIGHT_BOUNCE_VELOCITY,
+} from '../scenes/consts';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
   scene: Play;
@@ -73,22 +102,22 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       1,
       this.health
     );
-    this.gravity = 600;
+    this.gravity = PLAYER_GRAVITY;
 
     this.playerSpeed = heroData.speed;
     this.bounceVelocity = heroData.bounceVelocity;
-    this.jumpHeight = 400;
+    this.jumpHeight = JUMP_HEIGHT;
     this.jumpCount = 0;
     this.hasBeenHit = false;
-    this.consecutiveJumps = 1;
+    this.consecutiveJumps = CONSECUTIVE_JUMPS;
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
-    this.stepSound = this.scene.sound.add('step', { volume: 0.03 });
-    this.jumpSound = this.scene.sound.add('jump', { volume: 0.1 });
-    this.zapSound = this.scene.sound.add('zap', { volume: 0.4 });
-    this.swordSound = this.scene.sound.add('sword-swing', { volume: 0.2 });
-    this.hitSound = this.scene.sound.add('player-hit', { volume: 0.03 });
-    this.deathSound = this.scene.sound.add('player-dead', { volume: 0.05 });
+    this.stepSound = this.scene.sound.add('step', { volume: STEP_VOLUME });
+    this.jumpSound = this.scene.sound.add('jump', { volume: JUMP_VOLUME });
+    this.zapSound = this.scene.sound.add('zap', { volume: ZAP_VOLUME });
+    this.swordSound = this.scene.sound.add('sword-swing', { volume: SWORD_VOLUME });
+    this.hitSound = this.scene.sound.add('player-hit', { volume: PLAYER_HIT_VOLUME });
+    this.deathSound = this.scene.sound.add('player-dead', { volume: PLAYER_DEATH_VOLUME });
 
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
     this.projectiles = new Projectiles(this.scene, 'fire-projectile');
@@ -97,14 +126,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.setGravityY(this.gravity);
     this.setCollideWorldBounds(true);
-    this.setBodySize(30, 56, true);
-    this.setOffset(30, 54);
-    this.setOrigin(0.5, 1);
+    this.setBodySize(PLAYER_BODY_WIDTH, PLAYER_BODY_HEIGHT, true);
+    this.setOffset(PLAYER_BODY_OFFSET_X, PLAYER_BODY_OFFSET_Y);
+    this.setOrigin(PLAYER_BODY_ORIGIN_X, PLAYER_BODY_ORIGIN_Y);
 
     initAnimations(this.scene.anims, this.hero);
 
     this.scene.time.addEvent({
-      delay: 400,
+      delay: RUN_SOUND_DELAY,
       repeat: -1,
       callbackScope: this,
       callback: () => {
@@ -126,7 +155,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.play(`${this.hero}-hurt`);
     return this.scene.tweens.add({
       targets: this,
-      duration: 80,
+      duration: PLAYER_DAMAGE_TWEEN_DURATION,
       repeat: -1,
       tint: 0xffffff,
     });
@@ -136,7 +165,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.play(`${this.hero}-death`);
     return this.scene.tweens.add({
       targets: this,
-      duration: 80,
+      duration: PLAYER_DAMAGE_TWEEN_DURATION,
       repeat: -1,
       tint: 0xffffff,
     });
@@ -144,7 +173,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   update():void {
     if (this.hasBeenHit || !this.body) return;
-    if (this.getBounds().top > this.scene.config.height + 650) {
+    if (this.getBounds().top > this.scene.config.height + PLAYER_OFF_WORLD_BOUNDS_HEIGHT) {
       this.deathSound.play();
       EventEmitter.emit('PLAYER_LOSE');
       return;
@@ -234,9 +263,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   resetMovements():void {
-    this.body.setSize(30, 56);
-    this.setOffset(30, 54);
-    this.setY(this.body.y + 30);
+    this.body.setSize(PLAYER_BODY_WIDTH, PLAYER_BODY_HEIGHT);
+    this.setOffset(PLAYER_BODY_OFFSET_X, PLAYER_BODY_OFFSET_Y);
+    this.setY(this.body.y + PLAYER_BODY_RESET_Y);
   }
 
   handleMovements():void {
@@ -252,8 +281,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   sitDown():void {
     if (!this.body.onFloor()) return;
-    this.body.setSize(30, 28);
-    this.setOffset(30, 82);
+    this.body.setSize(PLAYER_BODY_WIDTH, PLAYER_BODY_HEIGHT / 2);
+    this.setOffset(PLAYER_BODY_OFFSET_X, PLAYER_SIT_DOWN_OFFSET_Y);
     this.setVelocityX(0);
     this.play(`${this.hero}-crouch`, true);
   }
@@ -286,7 +315,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     this.scene.time.addEvent({
-      delay: 1000,
+      delay: PLAYER_DEATH_EVENT_DELAY,
       callback: () => {
           this.hasBeenHit = false;
           damageAnim.stop();
@@ -295,7 +324,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVisible(false);
             this.body.destroy();
             this.setActive(false);
-            setTimeout(() => EventEmitter.emit('PLAYER_LOSE'), 2000);
+            setTimeout(() => EventEmitter.emit('PLAYER_LOSE'), PLAYER_DEATH_EVENT_EMIT_TIMEOUT);
           }
       },
       loop: false,
@@ -317,7 +346,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   getCurrentHeroStats():{ hero: string, health: number, speed: number, bounceVelocity: number } {
     const data = this.scene.registry.get('currentHeroStats');
     if (data) return data;
-    return { hero: 'knight', health: 50, speed: 250, bounceVelocity: 120 };
+    return { hero: 'knight', health: KNIGHT_HEALTH, speed: KNIGHT_SPEED, bounceVelocity: KNIGHT_BOUNCE_VELOCITY };
   }
 
   recover():void {

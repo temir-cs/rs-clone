@@ -25,7 +25,7 @@ const SHARED_CONFIG: SceneConfig = {
   width: WIDTH,
   height: HEIGHT,
   zoomFactor: ZOOM_FACTOR,
-  debug: true,
+  debug: false,
   leftTopCorner: {
     x: (WIDTH - (WIDTH / ZOOM_FACTOR)) / 2,
     y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
@@ -79,11 +79,8 @@ const config: Phaser.Types.Core.GameConfig = {
   parent: 'game',
 };
 
-// window.onload = () => {
-//   const game = new Phaser.Game(config);
-// };
 
-export default function startGame() {
+export default function startGame():void {
    const game = new Phaser.Game(config);
    return game;
 }

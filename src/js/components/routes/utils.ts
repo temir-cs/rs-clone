@@ -1,4 +1,4 @@
-function requestToServer(creds, path) {
+function requestToServer(creds: {username:string, password:string}, path: string): Promise<any> {
   return fetch(`https://rscloneapi.glitch.me/${path}`, {
         method: 'POST',
         headers: {
