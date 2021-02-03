@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+
 import * as Phaser from 'phaser';
 
 import Player from '../entities/Player';
@@ -113,14 +114,8 @@ class Play extends Phaser.Scene {
     potions: null,
   };
 
-  // private plotting: boolean;
-  // private graphics: Phaser.GameObjects.Graphics;
-  // private line: Phaser.Geom.Line;
-  // private tileHits: any;
-
   private collectables: Collectables;
   private potions: Collectables;
-  // private coinCount: number;
   private hud: Hud;
   private collectableKey: Key;
   private hasKey: boolean;
@@ -153,9 +148,7 @@ class Play extends Phaser.Scene {
 
   create({ gameStatus } : GameStatusType):void {
     this.gameStatus = gameStatus;
-    console.log('Gamestatus: ', gameStatus);
     if (gameStatus === 'NEW_GAME') {
-      console.log('Events cleared!');
       EventEmitter.removeAllListeners();
       this.registry.set('stats', { ...DEFAULT_STATS });
     }
@@ -164,9 +157,6 @@ class Play extends Phaser.Scene {
     this.hasKey = false;
     this.livesCount = this.getCurrentLives();
     this.stats = this.getCurrentStats();
-    console.log('coinCount', this.stats.coins);
-    console.log('killCount', this.stats.kills);
-    console.log('livesCount', this.livesCount);
     this.createMap(this);
     effectAnims(this.anims);
     teslaBallAnims(this.anims);
@@ -180,7 +170,6 @@ class Play extends Phaser.Scene {
       this.createPotions(this.layers.potions);
     }
     this.createTraps(this.layers.trapsSpawns, player);
-    console.log('Current hero: ', player.hero);
 
     this.createBg(this);
 
@@ -213,7 +202,6 @@ class Play extends Phaser.Scene {
 
     if (gameStatus === 'PLAYER_LOSE' || gameStatus === 'LEVEL_COMPLETED') return;
     this.createGameEvents();
-    // console.log('Events on: ', EventEmitter.eventNames());
   }
 
   update():void {
@@ -234,7 +222,6 @@ class Play extends Phaser.Scene {
     if (localStorage.getItem('musicState') !== null) {
       this.musicState = false;
     }
-    console.log('Current level: ', this.getCurrentLevel());
     switch (this.getCurrentLevel()) {
       case FOREST_LEVEL:
         this.lvlKey = 'forest';
@@ -337,7 +324,6 @@ class Play extends Phaser.Scene {
     EventEmitter.on('ENEMY_KILLED', () => {
       this.stats.kills += 1;
       this.registry.set('stats', { ...this.stats });
-      console.log('Kills: ', this.registry.get('stats').kills);
     });
   }
 
@@ -379,7 +365,6 @@ class Play extends Phaser.Scene {
     collectable.pickupSound.play();
     this.hud.updateScoreBoard(this.stats.coins);
     collectable.disableBody(true, true);
-    console.log('Coins: ', this.getCurrentStats().coins);
   }
 
   onKeyCollect():void {
@@ -468,7 +453,6 @@ class Play extends Phaser.Scene {
         this.canGoMenu = false;
         eolOverlap.active = false;
         door.openDoor();
-        console.log('You Won!!');
         this.registry.inc('level', 1);
         this.cameras.main.fadeOut(CAMERA_FADEIN_TIMEOUT);
         setTimeout(() => this.stopBgMusic(), BG_MUSIC_TIMEOUT);
@@ -490,7 +474,6 @@ class Play extends Phaser.Scene {
       if (this.canGoMenu === false) { return; }
       this.registry.set('level', DEFAULT_LEVEL);
       this.scene.start('MenuScene');
-      // this.stopBgMusic();
       this.game.sound.stopAll();
     });
 
@@ -521,7 +504,6 @@ class Play extends Phaser.Scene {
       this.playBgMusic(this.currentMusic);
       this.musicState = true;
       localStorage.removeItem('musicState');
-      console.log('THIS IS MUSIC', this.music);
     });
 
     muteButton.on('pointerover', () => {
@@ -546,7 +528,6 @@ class Play extends Phaser.Scene {
 
     if (currentLvl > 1) {
       const lastLevelStats = this.registry.get('lastLevelStats') || { ...DEFAULT_STATS };
-      console.log('lastLevelStats :', lastLevelStats);
       this.registry.set('stats', { ...lastLevelStats });
     } else {
       this.registry.set('stats', { ...DEFAULT_STATS });

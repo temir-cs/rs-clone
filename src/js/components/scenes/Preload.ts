@@ -29,7 +29,6 @@ class Preload extends Phaser.Scene {
     assetText.setOrigin(0, 0.5);
 
     this.load.on('progress', (value) => {
-      console.log(value);
       progressBar.clear();
       progressBar.fillStyle(PROGRESS_BAR_COLOR, 1);
       progressBar.fillRect(screenCenterX + PROGRESS_BAR_MARGIN - PROGRESS_BOX_OFFSET_X,
