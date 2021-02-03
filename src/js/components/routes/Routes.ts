@@ -2,7 +2,8 @@ import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
 import MainScreen from '../welcome_screen/MainScreen';
 import { requestToServer, getCredentials } from './utils';
-import { showGame,
+import { closePopUp,
+          showGame,
           showSite,
           mobileToggleMenu,
           getCurrentLanguageDictionary } from '../utils/functions';
@@ -63,6 +64,7 @@ class Routes {
         this.renderRegForm();
       }
     } else if (hashLocation === 'howtoplay' || hashLocation === 'team' || hashLocation === 'about') {
+      closePopUp();
       this.mainScreen.init(hashLocation);
     } else if (hashLocation === 'lang') {
       this.mainScreen.init(hashLocation);

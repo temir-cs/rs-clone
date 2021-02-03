@@ -28,11 +28,20 @@ const getTimestamp = ():number => {
 //   container.classList.remove('hidden');
 // };
 
+const closePopUp = ():void => {
+  const popUp = document.querySelector('.popUp__overlay');
+  if (!popUp.classList.contains('popUp__overlay--hidden')) {
+    console.log('shown');
+    popUp.classList.add('popUp__overlay--hidden');
+  }
+};
+
 const showGame = ():void => {
   const header = document.querySelector('.page-header');
   const main = document.querySelector('.content');
   const footer = document.querySelector('.page-footer');
   const game = document.querySelector('#game');
+  closePopUp();
   header.classList.add('visually-hidden');
   main.classList.add('visually-hidden');
   footer.classList.add('visually-hidden');
@@ -44,6 +53,7 @@ const showSite = ():void => {
   const main = document.querySelector('.content');
   const footer = document.querySelector('.page-footer');
   const game = document.querySelector('#game');
+  closePopUp();
   if (header.classList.contains('visually-hidden')) {
     header.classList.remove('visually-hidden');
     main.classList.remove('visually-hidden');
@@ -79,6 +89,7 @@ export {
   // clearAllBeforeGame,
   // hidContainer,
   // revealContainer,
+  closePopUp,
   showGame,
   showSite,
   mobileToggleMenu,
