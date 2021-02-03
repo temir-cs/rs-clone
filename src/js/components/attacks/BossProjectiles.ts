@@ -3,6 +3,7 @@ import AimedProjectile from './BossProjectile';
 import { getTimestamp } from '../utils/functions';
 import Player from '../entities/Player';
 import Enemy from '../entities/Enemy';
+import { BOSS_PROJECTILES_CENTER_FLIP_OFFSET, BOSS_PROJECTILES_FIRE_OFFSET_Y } from '../entities/consts';
 
 class BossProjectiles extends Phaser.Physics.Arcade.Group {
   timeFromLastProjectile: number;
@@ -38,14 +39,10 @@ class BossProjectiles extends Phaser.Physics.Arcade.Group {
       centerX = center.x;
     } else {
       projectile.setFlipX(true);
-      centerX = center.x - 100;
+      centerX = center.x - BOSS_PROJECTILES_CENTER_FLIP_OFFSET;
     }
 
-    // projectile.speed = Math.abs(projectile.speed);
-    // projectile.setFlipX(false);
-    // centerX = center.x + 10;
-
-    projectile.fire(centerX, center.y - 50, anim, target);
+    projectile.fire(centerX, center.y - BOSS_PROJECTILES_FIRE_OFFSET_Y, anim, target);
     this.timeFromLastProjectile = getTimestamp();
     return true;
   }

@@ -1,4 +1,5 @@
-export const TEXT_HOVER_COLOR = 0x0FFF00;
+export const ELEMENT_HOVER_COLOR = 0x0FFF00;
+export const HIGHSCORE_TEXT_COLOR = 0xffffff;
 export const SCREEN_CENTER_DIVIDER = 2;
 export const PROGRESS_BOX_WIDTH = 320;
 export const PROGRESS_BOX_HEIGHT = 50;
@@ -21,6 +22,7 @@ export const FOREST_LEVEL = 1;
 export const CASTLE_LEVEL = 2;
 export const DUNGEON_LEVEL = 3;
 export const BOSS_LEVEL = 4;
+export const FINISH_GAME_LEVEL = 5;
 export const LIVES = 3;
 export const DEFAULT_STATS = {
   coins: 0,
@@ -44,6 +46,8 @@ export const HOME_BTN_SHIFT = 10;
 export const MENU_LOGO_IMG_X = 290;
 export const MENU_LOGO_IMG_Y = 120;
 export const MENU_LOGO_IMG_SCALE = 0.6;
+export const MUTE_BUTTON_MARGIN_X = 10;
+export const MUTE_BUTTON_MARGIN_Y = 100;
 
 export const HIGHSCORE_HEADER_X = 100;
 export const HIGHSCORE_HEADER_Y = 110;
@@ -66,6 +70,7 @@ export const KNIGHT_DESC_X_OFFSET = -350;
 export const MAGE_DESC_X_OFFSET = 50;
 export const HERO_DESC_Y_OFFSET = 20;
 export const HERO_DESC_LINE_HEIGHT = 40;
+export const HERO_IMAGE_SCALE = 3;
 
 export const WIN_MUSIC_VOLUME_LEVEL = 0.1;
 export const WIN_BG_SCALE = 1.4;

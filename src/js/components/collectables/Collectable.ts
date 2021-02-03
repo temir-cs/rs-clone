@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import initAnims from '../animations/collectablesAnims';
+import { COLLECTABLE_TWEEN_LOWER_BOUND, COLLECTABLE_TWEEN_OFFSET_Y, COLLECTABLE_TWEEN_UPPER_BOUND } from '../entities/consts';
 
 class Collectable extends Phaser.Physics.Arcade.Sprite {
   score: number;
@@ -13,8 +14,8 @@ class Collectable extends Phaser.Physics.Arcade.Sprite {
 
     scene.tweens.add({
       targets: this,
-      y: this.y - 4,
-      duration: Phaser.Math.Between(1000, 2000),
+      y: this.y - COLLECTABLE_TWEEN_OFFSET_Y,
+      duration: Phaser.Math.Between(COLLECTABLE_TWEEN_LOWER_BOUND, COLLECTABLE_TWEEN_UPPER_BOUND),
       repeat: -1,
       easy: 'linear',
       yoyo: true,

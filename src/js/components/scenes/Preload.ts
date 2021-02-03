@@ -82,20 +82,20 @@ class Preload extends Phaser.Scene {
     this.load.image('bg-castle-down', './assets/img/levels/castle/down.png');
     this.load.image('bg-castle-tileset', './assets/img/levels/castle/castle_bg_tiles.png');
 
-    // dungeon Level Background
+    // Dungeon Level Background
     this.load.image('bg-dungeon-back', './assets/img/levels/dungeon/back_ruin_spots.png');
     this.load.image('bg-dungeon-middle', './assets/img/levels/dungeon/ruins_closer.png');
     this.load.image('bg-dungeon-main', './assets/img/levels/dungeon/ruins_main.png');
     this.load.image('bg-dungeon-bottom', './assets/img/levels/dungeon/ruins_low1.png');
     this.load.image('bg-dungeon-top', './assets/img/levels/dungeon/ruins_top.png');
 
-    // final Level Background
+    // Final Level Background
     this.load.image('bg-final-back', './assets/img/levels/final/bg.png');
     this.load.image('bg-final-mist', './assets/img/levels/final/myst.png');
     this.load.image('bg-final-top', './assets/img/levels/final/rock2.png');
     this.load.image('bg-final-bottom', './assets/img/levels/final/rock1.png');
 
-    // Final level screen
+    // Finish game screen
     this.load.image('finish-game', './assets/img/menu/endOfChapter.png');
     this.load.image('win-bg', './assets/img/menu/win-bkg.png');
 

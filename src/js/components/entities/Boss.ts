@@ -6,7 +6,7 @@ import MeleeWeapon from '../attacks/MeleeWeapon';
 import BossMeleeWeapon from '../attacks/BossMeleeWeapon';
 import Player from './Player';
 import Play from '../scenes/Play';
-import { BOSS_BODY_WIDTH, BOSS_BODY_HEIGHT, BOSS_OFFSET_X, BOSS_OFFSET_Y, BOSS_SCALE, BOSS_HEALTH, BOSS_SPEED, ENEMY_HIT_VOLUME, BOSS_DEATH_VOLUME, RANGED_ENEMY_ATTACK_DELAY_LOWER_BOUND, RANGED_ENEMY_ATTACK_DELAY_UPPER_BOUND, BOSS_CHANGE_ATTACK_DISTANCE, BOSS_MELEE_ATTACK_DELAY, BOSS_MELEE_ATTACK_ENABLE_TIMEOUT, BOSS_MELEE_ATTACK_DISABLE_TIMEOUT } from './consts';
+import { BOSS_BODY_WIDTH, BOSS_BODY_HEIGHT, BOSS_OFFSET_X, BOSS_OFFSET_Y, BOSS_SCALE, BOSS_HEALTH, BOSS_SPEED, ENEMY_HIT_VOLUME, BOSS_DEATH_VOLUME, RANGED_ENEMY_ATTACK_DELAY_LOWER_BOUND, RANGED_ENEMY_ATTACK_DELAY_UPPER_BOUND, BOSS_CHANGE_ATTACK_DISTANCE, BOSS_MELEE_ATTACK_DELAY, BOSS_MELEE_ATTACK_ENABLE_TIMEOUT, BOSS_MELEE_ATTACK_DISABLE_TIMEOUT, BOSS_DESTROY_TIMEOUT } from './consts';
 
 class Boss extends Enemy {
   isDead: boolean;
@@ -59,7 +59,7 @@ class Boss extends Enemy {
       this.setActive(false);
       setTimeout(() => {
         this.destroy();
-      }, 1500);
+      }, BOSS_DESTROY_TIMEOUT);
       return;
     }
 
@@ -136,7 +136,6 @@ class Boss extends Enemy {
   takesHit(source: Projectile | MeleeWeapon):void {
     super.takesHit(source);
     this.play('boss-hurt', true);
-    console.log('this', this);
     if (this.health <= 0) {
       localStorage.setItem('boss', 'dead');
       this.play('boss-death', true);

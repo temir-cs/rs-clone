@@ -34,7 +34,10 @@ import {
   PLAYER_DEATH_EVENT_EMIT_TIMEOUT,
   RUN_SOUND_DELAY,
   PLAYER_DAMAGE_TWEEN_DURATION,
-  PLAYER_OFF_WORLD_BOUNDS_HEIGHT
+  PLAYER_OFF_WORLD_BOUNDS_HEIGHT,
+  PLAYER_HUD_HEALTH_OFFSET_X,
+  PLAYER_HUD_HEALTH_OFFSET_Y,
+  PLAYER_SIT_DOWN_HEIGHT_MULTIPLIER
 } from './consts';
 import {
   KNIGHT_HEALTH,
@@ -97,8 +100,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.initialHealth = heroData.health;
     this.hp = new HealthBar(
       this.scene,
-      this.scene.config.leftTopCorner.x + 65,
-      this.scene.config.leftTopCorner.y + 10,
+      this.scene.config.leftTopCorner.x + PLAYER_HUD_HEALTH_OFFSET_X,
+      this.scene.config.leftTopCorner.y + PLAYER_HUD_HEALTH_OFFSET_Y,
       1,
       this.health
     );
@@ -252,10 +255,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
       }
     });
-
-    this.scene.input.keyboard.on('keydown-E', () => {
-      console.log('Action button pressed!');
-    });
   }
 
   isAttacking():boolean {
@@ -281,7 +280,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   sitDown():void {
     if (!this.body.onFloor()) return;
-    this.body.setSize(PLAYER_BODY_WIDTH, PLAYER_BODY_HEIGHT / 2);
+    this.body.setSize(PLAYER_BODY_WIDTH, PLAYER_BODY_HEIGHT * PLAYER_SIT_DOWN_HEIGHT_MULTIPLIER);
     this.setOffset(PLAYER_BODY_OFFSET_X, PLAYER_SIT_DOWN_OFFSET_Y);
     this.setVelocityX(0);
     this.play(`${this.hero}-crouch`, true);

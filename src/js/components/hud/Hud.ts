@@ -14,7 +14,8 @@ import {
   HUD_AVA_IMAGE_Y_SHIFT,
   HUD_HEART_IMAGE_WIDTH,
   HUD_HEART_IMAGE_X_SHIFT,
-  HUD_HEART_IMAGE_Y_SHIFT
+  HUD_HEART_IMAGE_Y_SHIFT,
+  HEALTH_BAR_COLOR_WHITE
 } from './consts';
 
 class Hud {
@@ -48,7 +49,7 @@ class Hud {
     this.keyImage = this.scene.add.image(this.rightTopCorner.x + HUD_KEY_IMAGE_X_SHIFT, this.rightTopCorner.y + HUD_KEY_IMAGE_Y_SHIFT, 'key-static')
         .setOrigin(1, 0)
         .setScale(HUD_KEY_IMAGE_SCALE)
-        .setTintFill(0xffffff)
+        .setTintFill(HEALTH_BAR_COLOR_WHITE)
         .setAlpha(HUD_KEY_IMAGE_INIALPHA)
         .setScrollFactor(0);
     this.stats = scene.getCurrentStats();

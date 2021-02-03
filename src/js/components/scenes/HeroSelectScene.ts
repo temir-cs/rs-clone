@@ -15,7 +15,9 @@ import {
   KNIGHT_DESC_X_OFFSET,
   MAGE_DESC_X_OFFSET,
   HERO_DESC_Y_OFFSET,
-  HERO_DESC_LINE_HEIGHT
+  HERO_DESC_LINE_HEIGHT,
+  ELEMENT_HOVER_COLOR,
+  HERO_IMAGE_SCALE
 } from './consts';
 
 const dictionary = getCurrentLanguageDictionary();
@@ -69,9 +71,9 @@ class HeroSelectScene extends BaseScene {
     };
 
     const knightImage = this.add.image(this.screenCenter[0] + KNIGHT_IMAGE_X_SHIFT, this.screenCenter[1] - HERO_IMAGE_Y_SHIFT, 'knight-image')
-      .setScale(3);
+      .setScale(HERO_IMAGE_SCALE);
     const mageImage = this.add.image(this.screenCenter[0] + MAGE_IMAGE_X_SHIFT, this.screenCenter[1] - HERO_IMAGE_Y_SHIFT, 'mage-image')
-      .setScale(3);
+      .setScale(HERO_IMAGE_SCALE);
 
     this.setupMenuEvents(knightImage, 'knight');
     this.setupMenuEvents(mageImage, 'mage');
@@ -96,7 +98,7 @@ class HeroSelectScene extends BaseScene {
     });
 
     item.on('pointerover', () => {
-      item.setTint(0x0FFF00);
+      item.setTint(ELEMENT_HOVER_COLOR);
     });
 
     item.on('pointerout', () => {

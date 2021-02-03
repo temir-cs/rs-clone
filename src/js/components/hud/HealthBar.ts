@@ -4,7 +4,10 @@ import {
   HEALTH_BAR_HEIGHT,
   HEALTH_BAR_DEPTH,
   HEALTH_BAR_MARGIN,
-  HEALTH_BAR_WIDTH_DIVIDER
+  HEALTH_BAR_WIDTH_DIVIDER,
+  HEALTH_BAR_COLOR_WHITE,
+  HEALTH_BAR_COLOR_GREEN,
+  HEALTH_BAR_COLOR_RED
 } from './consts';
 
 class HealthBar {
@@ -58,15 +61,15 @@ class HealthBar {
     this.bar.fillStyle(0x000);
     this.bar.fillRect(x, y, width + margin, height + margin);
 
-    this.bar.fillStyle(0xFFFFFF);
+    this.bar.fillStyle(HEALTH_BAR_COLOR_WHITE);
     this.bar.fillRect(x + margin, y + margin, width - margin, height - margin);
 
     const healthWidth:number = Math.floor(this.value * this.pixelPerHealth);
 
     if (healthWidth <= this.size.width / HEALTH_BAR_WIDTH_DIVIDER) {
-      this.bar.fillStyle(0xFF0000);
+      this.bar.fillStyle(HEALTH_BAR_COLOR_RED);
     } else {
-      this.bar.fillStyle(0x00FF00);
+      this.bar.fillStyle(HEALTH_BAR_COLOR_GREEN);
     }
 
     if (healthWidth > 0) {

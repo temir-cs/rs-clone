@@ -16,14 +16,10 @@ import {
 const createMapFinal = (context:Play):void => {
   context.map = context.make.tilemap({ key: 'map-lvl4' });
   context.map.addTilesetImage('dungeon_platforms', 'tiles-1-lvl3');
-  // context.map.addTilesetImage('final_bg_tiles', 'bg-final-tileset');
 };
 
 const createLayersFinal = (context:Play):void => {
   const tileset1 = context.map.getTileset('dungeon_platforms');
-  // const tilesetBg = context.map.getTileset('final_bg_tiles');
-
-  // context.map.createLayer('distance', tilesetBg);
 
   context.layers.castleWall = context.map.createLayer('castle_wall', tileset1).setDepth(FINAL_CASTLE_WALL_DEPTH);
   context.layers.platformColliders = context.map.createLayer('platform_colliders', tileset1);

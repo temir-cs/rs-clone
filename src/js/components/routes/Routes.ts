@@ -52,12 +52,8 @@ class Routes {
     const hashLocation = window.location.hash.substring(1);
     if (hashLocation === 'game') {
       showGame();
-      // hidContainer('.main-container');
-      // revealContainer('#game');
     } else if (hashLocation === 'main') {
       showSite();
-      // revealContainer('.main-container');
-      // hidContainer('#game');
       this.mainScreen.init(hashLocation);
       const user = localStorage.getItem('user');
       if (!user) {

@@ -6,6 +6,7 @@ import {
   HIGHSCORE_HEADER_Y,
   HIGHSCORE_LINE_SHIFT,
   HIGHSCORE_MAX_LINES_COUNT,
+  HIGHSCORE_TEXT_COLOR,
   SCORE_COIN_VALUE,
   SCORE_KILL_VALUE,
   SCORE_LVL_VALUE
@@ -21,7 +22,7 @@ class Highscore extends BaseScene {
   create():void {
     super.create();
 
-    this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y, 'arcade', 'RANK  SCORE   NAME').setTint(0xffffff);
+    this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y, 'arcade', 'RANK  SCORE   NAME').setTint(HIGHSCORE_TEXT_COLOR);
     this.getScores();
   }
 
@@ -29,9 +30,9 @@ class Highscore extends BaseScene {
     for (let i = 1; i < HIGHSCORE_MAX_LINES_COUNT; i++) {
       if (this.scores[i - 1]) {
         this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y + HIGHSCORE_LINE_SHIFT + HIGHSCORE_LINE_SHIFT * i, 'arcade',
-                  ` ${i}      ${this.scores[i - 1].score}    ${this.scores[i - 1].username}`).setTint(0xffffff);
+                  ` ${i}      ${this.scores[i - 1].score}    ${this.scores[i - 1].username}`).setTint(HIGHSCORE_TEXT_COLOR);
       } else {
-        this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y + HIGHSCORE_LINE_SHIFT + HIGHSCORE_LINE_SHIFT * i, 'arcade', ` ${i}      0    ---`).setTint(0xffffff);
+        this.add.bitmapText(HIGHSCORE_HEADER_X, HIGHSCORE_HEADER_Y + HIGHSCORE_LINE_SHIFT + HIGHSCORE_LINE_SHIFT * i, 'arcade', ` ${i}      0    ---`).setTint(HIGHSCORE_TEXT_COLOR);
       }
     }
   }

@@ -6,6 +6,8 @@ import MeleeWeapon from '../attacks/MeleeWeapon';
 import Player from '../entities/Player';
 import Collectable from '../collectables/Collectable';
 
+const RAY_LENGTH = 30;
+
 export default {
   addCollider(otherGameobject: Phaser.Tilemaps.TilemapLayer | Phaser.Physics.Arcade.Sprite
     | Phaser.Physics.Arcade.StaticGroup | Phaser.GameObjects.Group,
@@ -30,7 +32,7 @@ export default {
   prevRay: null,
   prevHasHit: null,
 
-  raycast(body: Phaser.Physics.Arcade.Body, rayLength = 30, precision = 0, steepness = 1):{ray: Phaser.Geom.Line, hasHit: boolean} {
+  raycast(body: Phaser.Physics.Arcade.Body, rayLength = RAY_LENGTH, precision = 0, steepness = 1):{ray: Phaser.Geom.Line, hasHit: boolean} {
     const { x, y, width, height } = body;
 
     this.bodyPositionDifferenceX += body.x - body.prev.x;

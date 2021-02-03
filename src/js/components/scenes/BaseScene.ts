@@ -8,7 +8,7 @@ import {
   BACK_BTN_SHIFT,
   MENU_BG_SCALE,
   MENU_ORIGIN_Y,
-  TEXT_HOVER_COLOR
+  ELEMENT_HOVER_COLOR
 } from './consts';
 
 class BaseScene extends Phaser.Scene {
@@ -51,7 +51,7 @@ class BaseScene extends Phaser.Scene {
         });
 
         backButton.on('pointerover', () => {
-          backButton.setTint(TEXT_HOVER_COLOR);
+          backButton.setTint(ELEMENT_HOVER_COLOR);
         });
 
         backButton.on('pointerout', () => {

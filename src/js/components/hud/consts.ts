@@ -3,6 +3,9 @@ export const HEALTH_BAR_HEIGHT = 18;
 export const HEALTH_BAR_DEPTH = 2;
 export const HEALTH_BAR_MARGIN = 2;
 export const HEALTH_BAR_WIDTH_DIVIDER = 3;
+export const HEALTH_BAR_COLOR_WHITE = 0xFFFFFF;
+export const HEALTH_BAR_COLOR_RED = 0xFF0000;
+export const HEALTH_BAR_COLOR_GREEN = 0x00FF00;
 
 export const HUD_KEY_IMAGE_X_SHIFT = -20;
 export const HUD_KEY_IMAGE_Y_SHIFT = 40;

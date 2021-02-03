@@ -13,11 +13,10 @@ import { SceneConfig } from './components/interfaces/interfaces';
 
 const MAP_WIDTH = 3200;
 const MAP_HEIGHT = 1280;
-// const WIDTH: number = document.body.offsetWidth;
 const WIDTH = 960;
 const HEIGHT = 540;
-// const HEIGHT: number = document.body.offsetHeight;
 const ZOOM_FACTOR = 1;
+const HALF_DIVIDER = 2;
 
 const SHARED_CONFIG: SceneConfig = {
   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
@@ -27,16 +26,16 @@ const SHARED_CONFIG: SceneConfig = {
   zoomFactor: ZOOM_FACTOR,
   debug: false,
   leftTopCorner: {
-    x: (WIDTH - (WIDTH / ZOOM_FACTOR)) / 2,
-    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
+    x: (WIDTH - (WIDTH / ZOOM_FACTOR)) / HALF_DIVIDER,
+    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / HALF_DIVIDER
   },
   rightTopCorner: {
-    x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / 2)),
-    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
+    x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / HALF_DIVIDER)),
+    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / HALF_DIVIDER
   },
   rightBottomCorner: {
-    x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / 2)),
-    y: ((HEIGHT / ZOOM_FACTOR) + ((HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2)),
+    x: ((WIDTH / ZOOM_FACTOR) + ((WIDTH - (WIDTH / ZOOM_FACTOR)) / HALF_DIVIDER)),
+    y: ((HEIGHT / ZOOM_FACTOR) + ((HEIGHT - (HEIGHT / ZOOM_FACTOR)) / HALF_DIVIDER)),
   },
 };
 
@@ -81,5 +80,4 @@ const config: Phaser.Types.Core.GameConfig = {
 
 export default function startGame():void{
    const game = new Phaser.Game(config);
-  //  return game;
 }

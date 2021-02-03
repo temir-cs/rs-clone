@@ -47,13 +47,19 @@ import { DEFAULT_LEVEL,
           BG_MUSIC_TIMEOUT,
           SCENE_RESTART_TIMEOUT,
           CAMERA_FADEIN_TIMEOUT,
-          HOME_BTN_SHIFT
+          HOME_BTN_SHIFT,
+          FOREST_LEVEL,
+          CASTLE_LEVEL,
+          DUNGEON_LEVEL,
+          FINISH_GAME_LEVEL,
+          ELEMENT_HOVER_COLOR,
+          MUTE_BUTTON_MARGIN_X,
+          MUTE_BUTTON_MARGIN_Y
         } from './consts';
 
 import { SceneConfig,
           Stats } from '../interfaces/interfaces';
 import Enemy from '../entities/Enemy';
-import Boss from '../entities/Boss';
 
 type GameStatusType = {gameStatus: string};
 type EnemyCollidersType = {
@@ -230,7 +236,7 @@ class Play extends Phaser.Scene {
     }
     console.log('Current level: ', this.getCurrentLevel());
     switch (this.getCurrentLevel()) {
-      case 1:
+      case FOREST_LEVEL:
         this.lvlKey = 'forest';
         this.createLayers = createLayersForest;
         this.createBg = createBgForest;
@@ -241,7 +247,7 @@ class Play extends Phaser.Scene {
           this.playBgMusic(this.currentMusic);
         }
         break;
-      case 2:
+      case CASTLE_LEVEL:
         this.lvlKey = 'castle';
         this.createLayers = createLayersCastle;
         this.createBg = createBgCastle;
@@ -252,7 +258,7 @@ class Play extends Phaser.Scene {
           this.playBgMusic(this.currentMusic);
         }
         break;
-      case 3:
+      case DUNGEON_LEVEL:
         this.lvlKey = 'dungeon';
         this.createLayers = createLayersDungeon;
         this.createBg = createBgDungeon;
@@ -263,7 +269,7 @@ class Play extends Phaser.Scene {
           this.playBgMusic(this.currentMusic);
         }
         break;
-      case 4:
+      case BOSS_LEVEL:
         this.lvlKey = 'final';
         this.createLayers = createLayersFinal;
         this.createBg = createBgFinal;
@@ -274,7 +280,7 @@ class Play extends Phaser.Scene {
           this.playBgMusic(this.currentMusic);
         }
         break;
-      case 5:
+      case FINISH_GAME_LEVEL:
         this.scene.start('GameOverWin');
         this.setFinalStats();
         this.registry.set('level', DEFAULT_LEVEL);
@@ -464,8 +470,7 @@ class Play extends Phaser.Scene {
         door.openDoor();
         console.log('You Won!!');
         this.registry.inc('level', 1);
-        this.cameras.main.fadeOut(3000);
-        // this.stopBgMusic();
+        this.cameras.main.fadeOut(CAMERA_FADEIN_TIMEOUT);
         setTimeout(() => this.stopBgMusic(), BG_MUSIC_TIMEOUT);
         setTimeout(() => this.scene.restart({ gameStatus: 'LEVEL_COMPLETED' }), SCENE_RESTART_TIMEOUT);
         this.registry.set('lastLevelStats', { ...this.stats });
@@ -490,7 +495,7 @@ class Play extends Phaser.Scene {
     });
 
     homeButton.on('pointerover', () => {
-      homeButton.setTint(0x0FFF00);
+      homeButton.setTint(ELEMENT_HOVER_COLOR);
     });
 
     homeButton.on('pointerout', () => {
@@ -499,7 +504,7 @@ class Play extends Phaser.Scene {
   }
 
   createMuteButton():void {
-    const muteButton = this.add.image(this.config.rightBottomCorner.x - 10, this.config.rightBottomCorner.y - 100, 'mute')
+    const muteButton = this.add.image(this.config.rightBottomCorner.x - MUTE_BUTTON_MARGIN_X, this.config.rightBottomCorner.y - MUTE_BUTTON_MARGIN_Y, 'mute')
       .setOrigin(1, 1)
       .setScrollFactor(0)
       .setScale(1)
@@ -520,7 +525,7 @@ class Play extends Phaser.Scene {
     });
 
     muteButton.on('pointerover', () => {
-      muteButton.setTint(0x0FFF00);
+      muteButton.setTint(ELEMENT_HOVER_COLOR);
     });
 
     muteButton.on('pointerout', () => {

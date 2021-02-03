@@ -91,7 +91,6 @@ export interface colliderType {
             =>{ray: Phaser.Geom.Line, hasHit: boolean};
 }
 
-// json langs file interface:
 export interface JSONWelcomeScreen {
     howToPlay: string;
     howToPlayText: string;

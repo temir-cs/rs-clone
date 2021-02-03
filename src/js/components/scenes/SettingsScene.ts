@@ -3,16 +3,6 @@ import NavigationScene from './NavigationScene';
 import { SceneConfig, MenuType } from '../interfaces/interfaces';
 import { getCurrentLanguageDictionary } from '../utils/functions';
 
-// import PlayScene from './Play';
-// import PreloadScene from './Preload';
-// import MenuScene from './Menu';
-// import HeroSelectScene from './HeroSelectScene';
-// import LevelsScene from './LevelsScene';
-// import StartGame from '../../game';
-
-// Scene
-// import { Scenes } from '../../game';
-
 class SettingsScene extends NavigationScene {
   menu: MenuType[];
   levels: number;
@@ -50,11 +40,6 @@ class SettingsScene extends NavigationScene {
         } else {
           localStorage.setItem('lang', 'RU');
         }
-        // Scenes.map((scene) => {
-        //   scene.restart();
-        // });
-        // this.scene.start('SettingsScene');
-        // this.scene.restart();
         window.location.reload();
       }
     });

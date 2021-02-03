@@ -11,6 +11,7 @@ import {
   CASTLE_SKY_SCALE,
   CASTLE_TREES_PARALLAX,
   CASTLE_WALLS_PARALLAX,
+  FOREST_CASTLE_WALL_DEPTH,
 } from '../consts';
 
 const createMapCastle = (context:Play):void => {
@@ -23,7 +24,7 @@ const createLayersCastle = (context:Play):void => {
   const tileset1 = context.map.getTileset('castle_platforms');
   const tilesetBg = context.map.getTileset('castle_bg_tiles');
 
-  context.map.createLayer('distance', tilesetBg).setDepth(-3);
+  context.map.createLayer('distance', tilesetBg).setDepth(FOREST_CASTLE_WALL_DEPTH);
 
   context.layers.castleWall = context.map.createLayer('castle_wall', tileset1).setDepth(CASTLE_CASTLE_WALL_DEPTH);
   context.layers.platformColliders = context.map.createLayer('platform_colliders', tileset1);

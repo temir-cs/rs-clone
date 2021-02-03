@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { BOSS_TARGET_EFFECT_OFFSET_X } from '../entities/consts';
 
 class SpriteEffect extends Phaser.Physics.Arcade.Sprite {
   scene: Phaser.Scene;
@@ -31,7 +32,7 @@ class SpriteEffect extends Phaser.Physics.Arcade.Sprite {
   placeEffect():void {
     if (!this.target || !this.body) { return; }
     const center = this.target.getCenter();
-    if (this.target.name === 'boss') center.x -= 60;
+    if (this.target.name === 'boss') center.x -= BOSS_TARGET_EFFECT_OFFSET_X;
     this.body.reset(center.x, this.impactPosition.y);
   }
 
