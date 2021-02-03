@@ -1,5 +1,4 @@
 .form__container {
-  // outline: 1px red solid;
   width: 80rem;
   display: flex;
   flex-direction: column;
@@ -37,7 +36,6 @@
 
   &:invalid {
     background-color: $input-dark;
-    // background-color: $form-error;
   }
 }
 

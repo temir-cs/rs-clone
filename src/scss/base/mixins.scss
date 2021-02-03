@@ -1,7 +1,6 @@
 @mixin container() {
   width: 140rem;
   margin: 0 auto;
-  // outline: 1px red solid;
   @media #{$tablet-width} {
     width: 700px;
   }

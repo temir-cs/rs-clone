@@ -12,7 +12,6 @@
 
   width: 100%;
   height: 41.4rem;
-  // background-color: red;
   background-image: url("./assets/img/welcome_screen/top_left.png"),
         url("./assets/img/welcome_screen/top_right.png"),
         url("./assets/img/welcome_screen/clouds.png");
@@ -56,7 +55,6 @@
 }
 
 .nav__list {
-  // outline: 1px green solid;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -110,11 +108,9 @@
 
   .page-header__nav {
     width: 120%;
-    // outline: 1px blue solid;
   }
 
   .nav__list {
-    // outline: 1px green solid;
     padding: 0.5rem 1rem;
     border-top: 2px $text-color solid;
     border-bottom: 2px $text-color solid;
@@ -150,7 +146,6 @@
     margin-top: 1rem;
     width: 20rem;
     height: auto;
-    // outline: 1px green solid;
   }
 
   .page-header__name {
@@ -164,7 +159,6 @@
     width: auto;
     height: 0;
     overflow: hidden;
-    // display: none;
 
     &--open {
       height: auto;
@@ -182,7 +176,6 @@
     background-size: 16rem 4rem;
     background-position: 0 0;
     background-repeat: no-repeat;
-    // margin-bottom: 1rem;
 
     &:hover {
       background-position: 33.3% 0;

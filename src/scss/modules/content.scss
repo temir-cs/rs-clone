@@ -10,7 +10,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  // outline: 1px blue solid;
   margin-bottom: -40rem;
 
   &--open {
@@ -39,7 +38,6 @@
   margin-bottom: 3rem;
   text-decoration: none;
   color: $text-color;
-  // outline: 1px red solid;
 
   &:hover {
     color: $links-hover;
@@ -61,21 +59,12 @@
   height: 29.5rem;
 }
 
-// .hidden {
-//   display: none;
-// }
 
 @media only screen and #{$tablet-width} {
   .content {
     padding: 0;
     min-height: 10rem;
     margin-bottom: -25rem;
-    // margin-bottom: 8rem;
-
-    // &--open {
-    //   margin-top: 0;
-    //   margin-bottom: 8rem;
-    // }
   }
 
   .content__text {

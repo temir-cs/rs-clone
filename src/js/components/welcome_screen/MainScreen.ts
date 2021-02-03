@@ -111,7 +111,9 @@ class MainScreen {
       about: {
         text: `
           ${dictionaty.WelcomeScreen.articleText}
-          <a class="content__link" href="#">${dictionaty.WelcomeScreen.articleLink}</a>
+          <a class="content__link" target="blank"
+          href="https://aitzhan.medium.com/%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B5%D1%80-pixel-tale-%D0%BD%D0%B0-phaser-3-f4c12fc4c065">
+                ${dictionaty.WelcomeScreen.articleLink}</a>
           <span class="content__link  content__link--small">${dictionaty.WelcomeScreen.articleCopyrightLink}</span>`,
         form: `
           <a href="#main" class="form__btn">${dictionaty.WelcomeScreen.close}</a>`,
