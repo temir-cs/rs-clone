@@ -2,9 +2,8 @@ import Register from '../forms/RegisterForm';
 import Login from '../forms/LoginForm';
 import MainScreen from '../welcome_screen/MainScreen';
 import { requestToServer, getCredentials } from './utils';
-import { clearAllBeforeGame,
-          hidContainer,
-          revealContainer,
+import { showGame,
+          showSite,
           mobileToggleMenu,
           getCurrentLanguageDictionary } from '../utils/functions';
 
@@ -51,11 +50,13 @@ class Routes {
     const dictionary = getCurrentLanguageDictionary();
     const hashLocation = window.location.hash.substring(1);
     if (hashLocation === 'game') {
-      hidContainer('.main-container');
-      revealContainer('#game');
+      showGame();
+      // hidContainer('.main-container');
+      // revealContainer('#game');
     } else if (hashLocation === 'main') {
-      revealContainer('.main-container');
-      hidContainer('#game');
+      showSite();
+      // revealContainer('.main-container');
+      // hidContainer('#game');
       this.mainScreen.init(hashLocation);
       const user = localStorage.getItem('user');
       if (!user) {

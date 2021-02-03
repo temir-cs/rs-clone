@@ -10,22 +10,46 @@ const getTimestamp = ():number => {
   return d.getTime();
 };
 
-const clearAllBeforeGame = ():void => {
-  // console.log('clear');
-  // const { body } = document;
-  // body.innerHTML = '<div id="game"></div>';
+// const clearAllBeforeGame = ():void => {
+//   // console.log('clear');
+//   // const { body } = document;
+//   // body.innerHTML = '<div id="game"></div>';
+// };
+
+// const hidContainer = (selector: string):void => {
+//   const container = document.querySelector(selector);
+//   if (!container.classList.contains('hidden')) {
+//       container.classList.add('hidden');
+//   }
+// };
+
+// const revealContainer = (selector: string):void => {
+//   const container = document.querySelector(selector);
+//   container.classList.remove('hidden');
+// };
+
+const showGame = ():void => {
+  const header = document.querySelector('.page-header');
+  const main = document.querySelector('.content');
+  const footer = document.querySelector('.page-footer');
+  const game = document.querySelector('#game');
+  header.classList.add('visually-hidden');
+  main.classList.add('visually-hidden');
+  footer.classList.add('visually-hidden');
+  game.classList.remove('visually-hidden');
 };
 
-const hidContainer = (selector: string):void => {
-  const container = document.querySelector(selector);
-  if (!container.classList.contains('hidden')) {
-      container.classList.add('hidden');
+const showSite = ():void => {
+  const header = document.querySelector('.page-header');
+  const main = document.querySelector('.content');
+  const footer = document.querySelector('.page-footer');
+  const game = document.querySelector('#game');
+  if (header.classList.contains('visually-hidden')) {
+    header.classList.remove('visually-hidden');
+    main.classList.remove('visually-hidden');
+    footer.classList.remove('visually-hidden');
+    game.classList.add('visually-hidden');
   }
-};
-
-const revealContainer = (selector: string):void => {
-  const container = document.querySelector(selector);
-  container.classList.remove('hidden');
 };
 
 const mobileToggleMenu = ():void => {
@@ -52,9 +76,11 @@ const getCurrentLanguageDictionary = ():JSONRU | JSONEN => {
 
 export {
   getTimestamp,
-  clearAllBeforeGame,
-  hidContainer,
-  revealContainer,
+  // clearAllBeforeGame,
+  // hidContainer,
+  // revealContainer,
+  showGame,
+  showSite,
   mobileToggleMenu,
   stopSpinner,
   getCurrentLanguageDictionary

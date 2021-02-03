@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
-<body>
-  <div id="game" class="hidden"></div>
-  <div class="main-container">
+<body class="blue">
+  <!-- <div class="main-container"> -->
     <header class="page-header">
       <div class="page-header__container">
         <img class="page-header__logo" src="./assets/img/welcome_screen/guys.png">
@@ -51,6 +50,10 @@
         <img class="page-footer__goblin" src="./assets/img/welcome_screen/goblin.gif">
       </div>
     </footer>
+
+    <div id="game" class="visually-hidden"></div>
+
+
     <div class="popUp__overlay  popUp__overlay--hidden">
       <div class="popUp">
         <button class="popUp__close"></button>
@@ -58,7 +61,7 @@
         </ul>
         <button class="popUp__button">OK</button>
       </div>
-    </div>
+    <!-- </div> -->
 
 
     <div class="loader">

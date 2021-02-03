@@ -1,4 +1,7 @@
 .content {
+  flex: 1 0 auto;
+  min-height: 45rem;
+
   position: relative;
   z-index: 1;
   @include container();
@@ -8,7 +11,7 @@
   justify-content: flex-start;
   align-items: center;
   // outline: 1px blue solid;
-  margin-bottom: 2rem;
+  margin-bottom: -40rem;
 
   &--open {
     margin-top: 0rem;
@@ -58,19 +61,21 @@
   height: 29.5rem;
 }
 
-.hidden {
-  display: none;
-}
+// .hidden {
+//   display: none;
+// }
 
 @media only screen and #{$tablet-width} {
   .content {
     padding: 0;
-    margin-bottom: 8rem;
+    min-height: 10rem;
+    margin-bottom: -25rem;
+    // margin-bottom: 8rem;
 
-    &--open {
-      margin-top: 0;
-      margin-bottom: 8rem;
-    }
+    // &--open {
+    //   margin-top: 0;
+    //   margin-bottom: 8rem;
+    // }
   }
 
   .content__text {
@@ -83,11 +88,11 @@
   .content {
     margin-top: -4rem;
     padding: 0;
-    margin-bottom: 4rem;
+    margin-bottom: 0;
 
     &--open {
       margin-top: 15rem;
-      margin-bottom: 8rem;
+      margin-bottom: 4rem;
     }
   }
 

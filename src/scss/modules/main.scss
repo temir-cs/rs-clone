@@ -1,5 +1,13 @@
 body {
   padding: 0;
+  flex-direction: column;
+
+}
+
+.blue {
   background-color: $background-light;
 }
 
+.visually-hidden {
+  display: none;
+}

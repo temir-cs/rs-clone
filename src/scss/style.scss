@@ -5,7 +5,6 @@
 @import "base/mixins";
 @import "base/base";
 
-@import "modules/main";
 @import 'modules/page-footer';
 @import 'modules/page-header';
 @import "modules/content";
@@ -16,4 +15,5 @@
 @import "modules/popup";
 @import "modules/loader";
 
+@import "modules/main";
 
