@@ -1,0 +1,147 @@
+{
+  "RU": {
+    "WelcomeScreen": {
+      "howToPlay": "Как играть",
+      "howToPlayText": "Управление стрелками - перемещение, Q - атака",
+      "article": "О проекте",
+      "articleText": "Проект Pixel Tale - классический аркадный 2D платформер, написанный на движке Phaser 3.",
+      "articleLink": "Прочитать статью на Medium",
+      "articleCopyrightLink": "Где что брали",
+      "articlePopUp01": "Визуальные элементы",
+      "articlePopUp02": "Музыка и звуковые эффекты",
+      "team": "Команда",
+      "teamText": "Наша команда мечты:",
+      "teamMemberName01": "Темирлан",
+      "teamMemberDescr01": "Лидер команды, поставщик ассетов, создатель спрайтов и анимашек, а так же разработчик в ночную смену:)",
+      "teamMemberName02": "Айтжан",
+      "teamMemberStriked": "Главный зануда на проекте",
+      "teamMemberDescr02": "Проджект-мененджер, создатель карт и тайпскриптер",
+      "teamMemberName03": "Амир",
+      "teamMemberDescr03": "Основной тестировщик, отловил тысячи багов и исправил их, просто прилежный разработчик",
+      "teamMemberName04": "Ильяс",
+      "teamMemberDescr04": "Главный бек-эндер и создатель роутинга",
+
+      "letsGo": "Погнали!",
+      "close": "На главную",
+      "description": "Когда-то недавно, в одном маленьком пиксельном королевстве случилась беда. Пришествие злобных чудищ во главе с таинственным злодеем нарушило привычную спокойную жизнь, и теперь ваша задача спасти этот мир, пока еще не слишком поздно!",
+      "usernameWarning": "Логин не должен содержать пробелы и кириллические символы",
+      "usernameTakenWarning": "Данный логин уже кем-то занят",
+      "userDoesNotExistWarning": "Такой пользователь не существует!",
+      "regAndGo": " Регистрируйся и поехали!",
+      "autoAndGo": " Авторизуйся и поехали!",
+      "haveLogin": "Уже есть аккаунт?",
+      "signInBtn": "Войти",
+      "signUpBtn": "Регистрация",
+      "firstTime": "Первый раз здесь? Регистрируйся и поехали",
+      "getLang": "To ENG",
+      "switchLang": "Меняем язык..."
+    },
+    "Menu": {
+      "playBtn": "Начать игру",
+      "levelsBtn": "Уровни",
+      "highscoreBtn": "Таблица очков",
+      "settingBtn": "Настройки"
+    },
+    "Levels": {
+      "first": "Лес",
+      "second": "Замок",
+      "third": "Подземелье",
+      "fourth": "Битва с боссом"
+    },
+    "HeroSelectScene": {
+      "knightName": "Винсент",
+      "knightClass": "Класс: рыцарь",
+      "knightCombat": "Тип боя: ближний",
+      "knightHealth": "Здоровье: много",
+      "knightSpeed": "Скорость: медленно",
+      "mageName": "Валери",
+      "mageClass": "Класс: маг",
+      "mageCombat": "Тип боя: дальний",
+      "mageHealth": "Здоровье: мало",
+      "mageSpeed": "Скорость: быстро"
+    },
+    "SettingsScene": {
+      "fullScreen": "Полный экран (вкл / выкл)",
+      "lang": "To Eng"
+    },
+    "GameOverScene": {
+      "gameOver": "Игра окончена",
+      "totalKills": "Монстров убито",
+      "totalCoins": "Монет собрано",
+      "newGame": "Рестарт",
+      "mainMenu": "Главное меню"
+    }
+  },
+  "EN": {
+    "WelcomeScreen": {
+      "howToPlay": "How to play",
+      "howToPlayText": "Arrow keys - movement, Q - attack",
+      "article": "About",
+      "articleText": "Pixel Tale Project is a classical arcade 2D platform game based on Phaser 3 engine.",
+      "articleLink": "Read article on Medium",
+      "articleCopyrightLink": "Copyright Info",
+      "articlePopUp01": "Images and visual assets",
+      "articlePopUp02": "Sounds and effects",
+      "team": "Team",
+      "teamText": "Our dream team:",
+      "teamMemberName01": "Temirlan",
+      "teamMemberDescr01": "Teamlead, assets provider, sprites / animation maker and main night-shift-coding developer :)",
+      "teamMemberName02": "Aitzhan",
+      "teamMemberStriked": "Main Project nitpicker",
+      "teamMemberDescr02": "Project-manager, maps creator and typescripter",
+      "teamMemberName03": "Amir",
+      "teamMemberDescr03": "Main tester, bug reporter and fixer, hard-coding developer",
+      "teamMemberName04": "Ilyas",
+      "teamMemberDescr04": "Back-end developer and routing creator",
+      "letsGo": "Let's go!",
+      "close": "Back to main",
+      "description": "Once upon a time a small pixel kingdom happened to face a big misfortune. It was attacked by a huge pack of monsters led by a mysterious villain. And now it's your task to free the kindgom, defeat all enemies and save the day!",
+      "usernameWarning": "Username shouldn`t contain any spaces or cyrillic characters",
+      "usernameTakenWarning": "This username is already taken. Please try another one",
+      "userDoesNotExistWarning": "User with these credentials does not exist",
+      "regAndGo": " Register and let's go!",
+      "autoAndGo": " Authorize and let's go!",
+      "haveLogin": "Already have a login?",
+      "firstTime": "First time here? Register please",
+      "signInBtn": "Sign In",
+      "signUpBtn": "Sign Up",
+      "getLang": "На РУС",
+      "switchLang": "Changing language..."
+    },
+    "Menu": {
+      "playBtn": "Play game",
+      "levelsBtn": "Levels",
+      "highscoreBtn": "Leaderboards",
+      "settingBtn": "Settings"
+    },
+    "Levels": {
+      "first": "Forest",
+      "second": "Castle",
+      "third": "Dungeon",
+      "fourth": "Boss Level"
+    },
+    "HeroSelectScene": {
+      "knightName": "Vincent",
+      "knightClass": "Class: knight",
+      "knightCombat": "Combat: melee",
+      "knightHealth": "Health: more",
+      "knightSpeed": "Speed: less",
+      "mageName": "Valerie",
+      "mageClass": "Class: mage",
+      "mageCombat": "Combat: ranged",
+      "mageHealth": "Health: less",
+      "mageSpeed": "Speed: more"
+    },
+    "SettingsScene": {
+      "fullScreen": "Fullscreen (on / off)",
+      "lang": "На РУС"
+    },
+    "GameOverScene": {
+      "gameOver": "Game Over",
+      "totalKills": "Total kills",
+      "totalCoins": "Total coins",
+      "newGame": "New Game",
+      "mainMenu": "Main menu"
+    }
+  }
+}

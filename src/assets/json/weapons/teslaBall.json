@@ -1,0 +1,587 @@
+{
+	"textures": [
+		{
+			"image": "teslaBall.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 362,
+				"h": 255
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "tesla_ball7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 15,
+						"w": 99,
+						"h": 96
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 99,
+						"h": 96
+					}
+				},
+				{
+					"filename": "tesla_ball14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 16,
+						"w": 98,
+						"h": 95
+					},
+					"frame": {
+						"x": 1,
+						"y": 99,
+						"w": 98,
+						"h": 95
+					}
+				},
+				{
+					"filename": "tesla_ball19.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 16,
+						"w": 98,
+						"h": 95
+					},
+					"frame": {
+						"x": 1,
+						"y": 99,
+						"w": 98,
+						"h": 95
+					}
+				},
+				{
+					"filename": "tesla_ball9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 16,
+						"w": 98,
+						"h": 95
+					},
+					"frame": {
+						"x": 1,
+						"y": 99,
+						"w": 98,
+						"h": 95
+					}
+				},
+				{
+					"filename": "tesla_ball6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 38,
+						"y": 42,
+						"w": 56,
+						"h": 51
+					},
+					"frame": {
+						"x": 1,
+						"y": 196,
+						"w": 56,
+						"h": 51
+					}
+				},
+				{
+					"filename": "tesla_ball3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 51,
+						"y": 53,
+						"w": 31,
+						"h": 31
+					},
+					"frame": {
+						"x": 59,
+						"y": 196,
+						"w": 31,
+						"h": 31
+					}
+				},
+				{
+					"filename": "tesla_ball2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 58,
+						"y": 62,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 59,
+						"y": 229,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "tesla_ball1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 60,
+						"y": 64,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 77,
+						"y": 229,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "tesla_ball5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 52,
+						"y": 55,
+						"w": 28,
+						"h": 33
+					},
+					"frame": {
+						"x": 92,
+						"y": 196,
+						"w": 28,
+						"h": 33
+					}
+				},
+				{
+					"filename": "tesla_ball25.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 11,
+						"w": 84,
+						"h": 90
+					},
+					"frame": {
+						"x": 101,
+						"y": 99,
+						"w": 84,
+						"h": 90
+					}
+				},
+				{
+					"filename": "tesla_ball24.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 33,
+						"y": 31,
+						"w": 64,
+						"h": 63
+					},
+					"frame": {
+						"x": 122,
+						"y": 191,
+						"w": 64,
+						"h": 63
+					}
+				},
+				{
+					"filename": "tesla_ball8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 22,
+						"y": 18,
+						"w": 83,
+						"h": 90
+					},
+					"frame": {
+						"x": 102,
+						"y": 1,
+						"w": 83,
+						"h": 90
+					}
+				},
+				{
+					"filename": "tesla_ball11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 20,
+						"w": 77,
+						"h": 97
+					},
+					"frame": {
+						"x": 187,
+						"y": 1,
+						"w": 77,
+						"h": 97
+					}
+				},
+				{
+					"filename": "tesla_ball16.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 20,
+						"w": 77,
+						"h": 97
+					},
+					"frame": {
+						"x": 187,
+						"y": 1,
+						"w": 77,
+						"h": 97
+					}
+				},
+				{
+					"filename": "tesla_ball21.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 20,
+						"w": 77,
+						"h": 97
+					},
+					"frame": {
+						"x": 187,
+						"y": 1,
+						"w": 77,
+						"h": 97
+					}
+				},
+				{
+					"filename": "tesla_ball10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 24,
+						"w": 89,
+						"h": 79
+					},
+					"frame": {
+						"x": 187,
+						"y": 100,
+						"w": 89,
+						"h": 79
+					}
+				},
+				{
+					"filename": "tesla_ball15.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 24,
+						"w": 89,
+						"h": 79
+					},
+					"frame": {
+						"x": 187,
+						"y": 100,
+						"w": 89,
+						"h": 79
+					}
+				},
+				{
+					"filename": "tesla_ball20.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 24,
+						"w": 89,
+						"h": 79
+					},
+					"frame": {
+						"x": 187,
+						"y": 100,
+						"w": 89,
+						"h": 79
+					}
+				},
+				{
+					"filename": "tesla_ball13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 21,
+						"y": 27,
+						"w": 85,
+						"h": 75
+					},
+					"frame": {
+						"x": 266,
+						"y": 1,
+						"w": 85,
+						"h": 75
+					}
+				},
+				{
+					"filename": "tesla_ball18.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 21,
+						"y": 27,
+						"w": 85,
+						"h": 75
+					},
+					"frame": {
+						"x": 266,
+						"y": 1,
+						"w": 85,
+						"h": 75
+					}
+				},
+				{
+					"filename": "tesla_ball23.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 21,
+						"y": 27,
+						"w": 85,
+						"h": 75
+					},
+					"frame": {
+						"x": 266,
+						"y": 1,
+						"w": 85,
+						"h": 75
+					}
+				},
+				{
+					"filename": "tesla_ball27.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 17,
+						"w": 68,
+						"h": 71
+					},
+					"frame": {
+						"x": 188,
+						"y": 181,
+						"w": 68,
+						"h": 71
+					}
+				},
+				{
+					"filename": "tesla_ball4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 49,
+						"y": 56,
+						"w": 29,
+						"h": 30
+					},
+					"frame": {
+						"x": 258,
+						"y": 181,
+						"w": 29,
+						"h": 30
+					}
+				},
+				{
+					"filename": "tesla_ball26.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 29,
+						"y": 17,
+						"w": 73,
+						"h": 82
+					},
+					"frame": {
+						"x": 278,
+						"y": 78,
+						"w": 73,
+						"h": 82
+					}
+				},
+				{
+					"filename": "tesla_ball12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 23,
+						"w": 72,
+						"h": 83
+					},
+					"frame": {
+						"x": 289,
+						"y": 162,
+						"w": 72,
+						"h": 83
+					}
+				},
+				{
+					"filename": "tesla_ball17.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 23,
+						"w": 72,
+						"h": 83
+					},
+					"frame": {
+						"x": 289,
+						"y": 162,
+						"w": 72,
+						"h": 83
+					}
+				},
+				{
+					"filename": "tesla_ball22.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 23,
+						"w": 72,
+						"h": 83
+					},
+					"frame": {
+						"x": 289,
+						"y": 162,
+						"w": 72,
+						"h": 83
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:7fb9817f1aa25bf4f92d53e45bf040b0:397429c7233e09029185f287fecb0e49:1e3378b2e8f2fa864cca7c124bd7cac7$"
+	}
+}

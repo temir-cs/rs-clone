@@ -1,0 +1,620 @@
+{
+	"textures": [
+		{
+			"image": "enemyVampire.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 363,
+				"h": 250
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "vampire_idle3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 20,
+						"w": 47,
+						"h": 88
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 47,
+						"h": 88
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_idle2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 22,
+						"w": 47,
+						"h": 86
+					},
+					"frame": {
+						"x": 1,
+						"y": 91,
+						"w": 47,
+						"h": 86
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "Fire/vampire_fire6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 0,
+						"w": 48,
+						"h": 55
+					},
+					"frame": {
+						"x": 1,
+						"y": 179,
+						"w": 48,
+						"h": 55
+					},
+					"anchor": {
+						"x": 0.6,
+						"y": 0.83
+					}
+				},
+				{
+					"filename": "Fire/vampire_fire1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 49,
+						"w": 44,
+						"h": 9
+					},
+					"frame": {
+						"x": 1,
+						"y": 236,
+						"w": 44,
+						"h": 9
+					},
+					"anchor": {
+						"x": 0.6,
+						"y": 0.83
+					}
+				},
+				{
+					"filename": "vampire_walk1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 21,
+						"w": 47,
+						"h": 86
+					},
+					"frame": {
+						"x": 50,
+						"y": 1,
+						"w": 47,
+						"h": 86
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_walk_turn.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 22,
+						"w": 46,
+						"h": 85
+					},
+					"frame": {
+						"x": 50,
+						"y": 89,
+						"w": 46,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_death2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 35,
+						"w": 62,
+						"h": 73
+					},
+					"frame": {
+						"x": 51,
+						"y": 176,
+						"w": 62,
+						"h": 73
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_hurt2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 35,
+						"w": 62,
+						"h": 73
+					},
+					"frame": {
+						"x": 51,
+						"y": 176,
+						"w": 62,
+						"h": 73
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_idle1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 24,
+						"w": 47,
+						"h": 84
+					},
+					"frame": {
+						"x": 98,
+						"y": 89,
+						"w": 47,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_death5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 29,
+						"y": 24,
+						"w": 52,
+						"h": 74
+					},
+					"frame": {
+						"x": 115,
+						"y": 175,
+						"w": 52,
+						"h": 74
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_death1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 28,
+						"w": 51,
+						"h": 80
+					},
+					"frame": {
+						"x": 99,
+						"y": 1,
+						"w": 51,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_hurt1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 28,
+						"w": 51,
+						"h": 80
+					},
+					"frame": {
+						"x": 99,
+						"y": 1,
+						"w": 51,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_attack1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 29,
+						"w": 52,
+						"h": 79
+					},
+					"frame": {
+						"x": 147,
+						"y": 83,
+						"w": 52,
+						"h": 79
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_walk2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 27,
+						"w": 48,
+						"h": 79
+					},
+					"frame": {
+						"x": 152,
+						"y": 1,
+						"w": 48,
+						"h": 79
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_attack4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 29,
+						"w": 49,
+						"h": 78
+					},
+					"frame": {
+						"x": 169,
+						"y": 164,
+						"w": 49,
+						"h": 78
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_attack3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 29,
+						"w": 112,
+						"h": 77
+					},
+					"frame": {
+						"x": 201,
+						"y": 82,
+						"w": 112,
+						"h": 77
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "vampire_attack2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 29,
+						"w": 50,
+						"h": 77
+					},
+					"frame": {
+						"x": 202,
+						"y": 1,
+						"w": 50,
+						"h": 77
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "Fire/vampire_fire5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 8,
+						"w": 47,
+						"h": 54
+					},
+					"frame": {
+						"x": 315,
+						"y": 1,
+						"w": 47,
+						"h": 54
+					},
+					"anchor": {
+						"x": 0.6,
+						"y": 0.83
+					}
+				},
+				{
+					"filename": "vampire_death3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 34,
+						"w": 59,
+						"h": 73
+					},
+					"frame": {
+						"x": 254,
+						"y": 1,
+						"w": 59,
+						"h": 73
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "Fire/vampire_fire4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 12,
+						"w": 45,
+						"h": 52
+					},
+					"frame": {
+						"x": 315,
+						"y": 57,
+						"w": 45,
+						"h": 52
+					},
+					"anchor": {
+						"x": 0.6,
+						"y": 0.83
+					}
+				},
+				{
+					"filename": "vampire_walk3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 30,
+						"w": 54,
+						"h": 76
+					},
+					"frame": {
+						"x": 220,
+						"y": 161,
+						"w": 54,
+						"h": 76
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "Fire/vampire_fire3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 18,
+						"y": 21,
+						"w": 36,
+						"h": 40
+					},
+					"frame": {
+						"x": 315,
+						"y": 111,
+						"w": 36,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.6,
+						"y": 0.83
+					}
+				},
+				{
+					"filename": "vampire_death4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 28,
+						"w": 54,
+						"h": 73
+					},
+					"frame": {
+						"x": 276,
+						"y": 161,
+						"w": 54,
+						"h": 73
+					},
+					"anchor": {
+						"x": 0.33,
+						"y": 0.7999999999999999
+					}
+				},
+				{
+					"filename": "Fire/vampire_fire2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 18,
+						"y": 34,
+						"w": 28,
+						"h": 25
+					},
+					"frame": {
+						"x": 332,
+						"y": 153,
+						"w": 28,
+						"h": 25
+					},
+					"anchor": {
+						"x": 0.6,
+						"y": 0.83
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:39c4aabd3df2a257f49f030ce880c1be:11922dfcda4114681588bf832e7f9a1a:49eddf49737afac4a0ee4c6e0816a04b$"
+	}
+}

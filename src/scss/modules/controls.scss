@@ -1,0 +1,140 @@
+.controls {
+  position: relative;
+  background: url("./assets/img/welcome_screen/controls_bg.png");
+
+}
+
+@keyframes btnAnim {
+  0% {
+    top: 14rem;
+    box-shadow: 0 0.8rem #804f32;
+  }
+  50% {
+    top: 14.6rem;
+    box-shadow: 0 0.2rem #804f32;
+  }
+  100% {
+    top: 14rem;
+    box-shadow: 0 0.8rem #804f32;
+  }
+}
+@keyframes btnTopAnim {
+  0% {
+    top: 8.8rem;
+    box-shadow: 0 0.8rem #804f32;
+  }
+  50% {
+    top: 9.4rem;
+    box-shadow: 0 0.2rem #804f32;
+  }
+  100% {
+    top: 8.8rem;
+    box-shadow: 0 0.8rem #804f32;
+  }
+}
+
+.controls__btn {
+  position: absolute;
+  left: 10.4rem;
+  top: 14rem;
+  width: 4.6rem;
+  height: 4.6rem;
+  border-radius: 1rem;
+  background: #e79611;
+  border: 2px #804f32 solid;
+  box-shadow: 0 0.8rem #804f32;
+  background-size: cover;
+
+  animation: btnAnim 1s ease-in-out;
+
+  &--01 {
+    animation-delay: 0.5s;
+    background-image: url("./assets/img/welcome_screen/controls_btn01.png");
+  }
+
+  &--02 {
+    left:32.3rem;
+    top: 14rem;
+    animation-delay: 1.5s;
+    background-image: url("./assets/img/welcome_screen/controls_btn02.png");
+  }
+  &--03 {
+    left:37rem;
+    top: 8.8rem;
+    animation: btnTopAnim 1s ease-in-out;
+    animation-delay: 2.5s;
+    background-image: url("./assets/img/welcome_screen/controls_btn03.png");
+  }
+  &--04 {
+    left:41.7rem;
+    top: 14rem;
+    animation-delay: 3.5s;
+    background-image: url("./assets/img/welcome_screen/controls_btn04.png");
+  }
+  &--05 {
+    left:37rem;
+    top: 14rem;
+    animation-delay: 4.5s;
+    background-image: url("./assets/img/welcome_screen/controls_btn05.png");
+  }
+}
+
+@keyframes imgAnim {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.controls__img {
+  position: absolute;
+  opacity: 0.5;
+  animation: imgAnim 1s ease-in-out forwards;
+
+  &--01 {
+    width: 20.3rem;
+    height: 21.5rem;
+    left: 2.7rem;
+    top: 4.1rem;
+    animation-delay: 0.5s;
+    background-image: url("./assets/img/welcome_screen/controls01.png");
+  }
+  &--02 {
+    width: 5.1rem;
+    height: 4.8rem;
+    left: 26.9rem;
+    top: 14.6rem;
+    animation-delay: 1.5s;
+    background-image: url("./assets/img/welcome_screen/controls02.png");
+
+  }
+  &--03 {
+    width: 22.2rem;
+    height: 4.9rem;
+    left: 28.9rem;
+    top: 2.9rem;
+    animation-delay: 2.5s;
+    background-image: url("./assets/img/welcome_screen/controls03.png");
+  }
+  &--04 {
+    width: 5.4rem;
+    height: 4.8rem;
+    left: 46.5rem;
+    top: 14.8rem;
+    animation-delay: 3.5s;
+    background-image: url("./assets/img/welcome_screen/controls04.png");
+  }
+  &--05 {
+    width: 5.2rem;
+    height: 3.9rem;
+    left: 37.2rem;
+    top: 21.5rem;
+    animation-delay: 4.5s;
+    background-image: url("./assets/img/welcome_screen/controls05.png");
+  }
+}

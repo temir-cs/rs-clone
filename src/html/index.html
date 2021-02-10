@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body class="blue">
+    <header class="page-header">
+      <div class="page-header__container">
+        <img class="page-header__logo" src="./assets/img/welcome_screen/guys.png">
+        <img class="page-header__name" src="./assets/img/welcome_screen/logo-name.svg">
+        <button class="page-header__toggle-btn"></button>
+        <nav class="page-header__nav  nav">
+          <ul class="nav__list  nav__list--close">
+            <li class="nav__item"><a href="#howtoplay" class="how-to-play">How to play</a></li>
+            <li class="nav__item"><a href="#about" class="about">About</a></li>
+            <li class="nav__item"><a href="#team" class="team">Team</a></li>
+            <li class="nav__item"><a href="#lang" class="lang">RU</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      <p class="content__text">
+        Once upon a time... In a pixel world...
+        Жили были не знаю кто, потом напал злодейский злодей и пришло твое время
+        спасти от него мир! <span class="content__var"></span>
+      </p>
+      <div class="content__addon"></div>
+      <div class="form__container">
+        <a href="#game" class="form__btn">Погнали!</a>
+      </div>
+    </main>
+    <footer class="page-footer">
+      <div class="page-footer__container">
+        <a class="page-footer__logo" href="https://rs.school/js/" target="blank">
+          <img class="page-footer__img" src="./assets/img/welcome_screen/rs_school_js.svg">
+        </a>
+        <span class="page-footer__text">
+          2021 Github
+          <a class="page-footer__link" href="https://github.com/temir-cs" target="blank">temir-cs</a>
+          <a class="page-footer__link" href="https://github.com/aitzhans" target="blank">aitzhans</a>
+          <a class="page-footer__link" href="https://github.com/ilyasbulat" target="blank">ilyasbulat</a>
+          <a class="page-footer__link" href="https://github.com/kadamir24" target="blank">kadamir24</a>
+        </span>
+      </div>
+      <div class="page-footer__goblin-container">
+        <img class="page-footer__goblin" src="./assets/img/welcome_screen/goblin.gif">
+      </div>
+    </footer>
+
+    <div id="game" class="visually-hidden"></div>
+
+
+    <div class="popUp__overlay  popUp__overlay--hidden">
+      <div class="popUp">
+        <button class="popUp__close"></button>
+        <ul class="popUp__list">
+        </ul>
+        <button class="popUp__button">OK</button>
+      </div>
+
+
+    <div class="loader">
+      <div class="loader__spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
