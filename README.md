@@ -1,6 +1,8 @@
 # Pixel Tale
 Pixel Tale — классический аркадный 2D платформер, реализованный на базе Phaser 3 и Typescript на фронте и nodejs с использованием express-js, knex, winston для создания бэкэнда.
 
+Игра: [тыц](https://rolling-scopes-school.github.io/temir-cs-JS2020Q3/rs-clone)
+
 ![screen](https://user-images.githubusercontent.com/70878638/106760559-2645ce00-665e-11eb-81cb-a486bb6864fb.png)
 ### Как установить / How To Install 
 
