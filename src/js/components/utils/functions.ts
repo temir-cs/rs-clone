@@ -13,7 +13,6 @@ const getTimestamp = ():number => {
 const closePopUp = ():void => {
   const popUp = document.querySelector('.popUp__overlay');
   if (!popUp.classList.contains('popUp__overlay--hidden')) {
-    console.log('shown');
     popUp.classList.add('popUp__overlay--hidden');
   }
 };
