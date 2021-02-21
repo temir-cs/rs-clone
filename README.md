@@ -3,6 +3,8 @@ Pixel Tale — классический аркадный 2D платформер
 
 Игра: [тыц](https://rolling-scopes-school.github.io/temir-cs-JS2020Q3/rs-clone)
 
+Статья: [тыц](https://aitzhan.medium.com/%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B5%D1%80-pixel-tale-%D0%BD%D0%B0-phaser-3-f4c12fc4c065)
+
 ![screen](https://user-images.githubusercontent.com/70878638/106760559-2645ce00-665e-11eb-81cb-a486bb6864fb.png)
 ### Как установить / How To Install 
 
